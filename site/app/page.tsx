@@ -2,6 +2,12 @@ import Link from 'next/link';
 import { DiffPreview } from '../components/DiffPreview';
 import { CrossPlatformPreview } from '../components/CrossPlatformPreview';
 import { ScrollReveal } from '../components/ScrollReveal';
+import { readFileSync } from 'fs';
+import { resolve } from 'path';
+
+const pkgVersion = JSON.parse(
+  readFileSync(resolve(process.cwd(), '../package.json'), 'utf-8')
+).version;
 
 export default function LandingPage() {
   return (
@@ -12,7 +18,7 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
           <div className="flex-1 text-center md:text-left">
             <span className="inline-flex items-center rounded-full bg-teal-50 px-3 py-1 text-xs font-semibold text-teal-700 mb-6">
-              Version 1.0 Now Available
+              Version {pkgVersion} Now Available
             </span>
             <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 mb-6">
               Preview what screen readers will say before your users hear it
