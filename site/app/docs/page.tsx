@@ -381,6 +381,60 @@ interface AccessibleNode {
         </div>
       </section>
 
+      {/* Voice Announcer */}
+      <section className="mb-16 scroll-mt-24" id="voice-announcer">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-8 h-8 rounded bg-blue-100 flex items-center justify-center">
+            <span className="material-symbols-outlined text-blue-600 text-[20px]" aria-hidden="true">
+              volume_up
+            </span>
+          </div>
+          <h2 className="text-2xl font-bold text-slate-900">Voice Announcer</h2>
+        </div>
+        <p className="text-slate-600 mb-6 leading-relaxed">
+          The web analyzer and browser extension include built-in speech playback powered by
+          the browser&apos;s native SpeechSynthesis API. Hear what screen readers would say — no
+          assistive technology installation required.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+          <div className="p-4 border border-slate-200 rounded-lg bg-slate-50/50">
+            <h3 className="font-bold text-sm text-slate-900 mb-2">Play All</h3>
+            <p className="text-xs text-slate-500">
+              Reads the full output sequentially with pauses between lines and longer pauses
+              between screen reader sections. Supports pause, resume, and stop.
+            </p>
+          </div>
+          <div className="p-4 border border-slate-200 rounded-lg bg-slate-50/50">
+            <h3 className="font-bold text-sm text-slate-900 mb-2">Line-by-Line</h3>
+            <p className="text-xs text-slate-500">
+              Navigate output one line at a time with ↑/↓ arrow keys. Each line is spoken
+              aloud and highlighted — mimicking how screen reader users actually browse.
+            </p>
+          </div>
+          <div className="p-4 border border-slate-200 rounded-lg bg-slate-50/50">
+            <h3 className="font-bold text-sm text-slate-900 mb-2">Voice &amp; Speed</h3>
+            <p className="text-xs text-slate-500">
+              Choose from available browser voices and adjust playback speed from 0.5x to 2.0x.
+              Zero dependencies — uses the Web Speech API built into all modern browsers.
+            </p>
+          </div>
+          <div className="p-4 border border-slate-200 rounded-lg bg-slate-50/50">
+            <h3 className="font-bold text-sm text-slate-900 mb-2">Extension Support</h3>
+            <p className="text-xs text-slate-500">
+              The Chrome extension includes the same voice controls — play, pause, stop, voice
+              selection, and speed adjustment — directly in the extension popup.
+            </p>
+          </div>
+        </div>
+        <p className="text-slate-600 leading-relaxed">
+          See the{' '}
+          <Link href="/docs/usage-guide" className="text-blue-600 hover:underline">
+            Usage Guide
+          </Link>{' '}
+          for keyboard shortcuts and detailed usage instructions.
+        </p>
+      </section>
+
       {/* CTA */}
       <div className="mt-20 p-8 rounded-2xl bg-teal-700 text-white flex flex-col sm:flex-row items-center justify-between gap-4">
         <div>

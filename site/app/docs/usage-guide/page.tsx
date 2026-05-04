@@ -199,11 +199,82 @@ export default function UsageGuidePage() {
           <li>Optionally enter a CSS selector to focus on specific elements</li>
           <li>Click Analyze to see the predicted output</li>
         </ol>
-        <p className="text-slate-600 leading-relaxed">
+        <p className="text-slate-600 leading-relaxed mb-4">
           Toggle diff mode to compare two HTML snippets side by side. Speakable will show
           you exactly which accessibility tree nodes were added, removed, or changed between
           the two versions.
         </p>
+        <p className="text-slate-600 leading-relaxed">
+          After analyzing, click the 🔊 icon in the output toolbar to hear the results read
+          aloud, or switch to line-by-line mode to navigate the output one announcement at a
+          time using keyboard shortcuts.
+        </p>
+      </section>
+
+      {/* Voice Announcer */}
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold text-slate-900 mb-4">Voice Announcer</h2>
+        <p className="text-slate-600 mb-4 leading-relaxed">
+          The web analyzer and browser extension include a built-in voice announcer that reads
+          analysis output aloud using the browser&apos;s native SpeechSynthesis API. This lets you
+          hear what screen readers would say — useful for auditory review, demos, and building
+          intuition for how assistive technology interprets your markup.
+        </p>
+        <div className="space-y-6">
+          <div className="p-4 border border-slate-200 rounded-lg bg-slate-50/50">
+            <h3 className="font-bold text-sm text-slate-900 mb-2">Play All</h3>
+            <p className="text-sm text-slate-600">
+              Reads the entire output sequentially with pauses between lines and longer pauses
+              between screen reader sections (when using &quot;All&quot; mode). Click the 🔊 icon in the
+              output toolbar and select &quot;Play All&quot;. You can pause, resume, and stop playback at
+              any time.
+            </p>
+          </div>
+          <div className="p-4 border border-slate-200 rounded-lg bg-slate-50/50">
+            <h3 className="font-bold text-sm text-slate-900 mb-2">Line-by-Line Navigation</h3>
+            <p className="text-sm text-slate-600 mb-2">
+              Mimics how screen reader users actually navigate: one element at a time. Select
+              &quot;Line-by-Line&quot; from the voice dropdown, then use keyboard shortcuts to step through
+              the output. Each line is spoken aloud and visually highlighted as you navigate.
+            </p>
+            <div className="mt-3 overflow-x-auto">
+              <table className="w-full text-xs text-left">
+                <thead>
+                  <tr className="border-b border-slate-200">
+                    <th className="py-2 pr-4 font-bold text-slate-900">Key</th>
+                    <th className="py-2 font-bold text-slate-900">Action</th>
+                  </tr>
+                </thead>
+                <tbody className="text-slate-600 font-mono">
+                  <tr className="border-b border-slate-100">
+                    <td className="py-2 pr-4">↓ / j</td>
+                    <td className="py-2 font-sans">Move to next line and speak it</td>
+                  </tr>
+                  <tr className="border-b border-slate-100">
+                    <td className="py-2 pr-4">↑ / k</td>
+                    <td className="py-2 font-sans">Move to previous line and speak it</td>
+                  </tr>
+                  <tr className="border-b border-slate-100">
+                    <td className="py-2 pr-4">Enter / Space</td>
+                    <td className="py-2 font-sans">Play all from current line</td>
+                  </tr>
+                  <tr className="border-b border-slate-100">
+                    <td className="py-2 pr-4">Escape</td>
+                    <td className="py-2 font-sans">Stop speech and exit line-by-line mode</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div className="p-4 border border-slate-200 rounded-lg bg-slate-50/50">
+            <h3 className="font-bold text-sm text-slate-900 mb-2">Voice &amp; Speed Controls</h3>
+            <p className="text-sm text-slate-600">
+              The voice dropdown also includes a voice selector (populated from your browser&apos;s
+              available TTS voices) and a speed slider ranging from 0.5x to 2.0x. These work
+              in both the web tool and the Chrome extension.
+            </p>
+          </div>
+        </div>
       </section>
 
       {/* Best Practices */}

@@ -12,6 +12,7 @@ import { SelectorError } from '@core/extractor/tree-builder';
 import { describeChange } from '@core/diff/diff-algorithm';
 import { SIZE_LIMIT_BYTES } from '@core/../web/src/constants';
 import { PageFadeIn } from '../../components/ScrollReveal';
+import { VoiceControls, type VoiceControlsHandle, type SpeechMode } from '../../components/VoiceControls';
 import { useAuth, useUser } from '@clerk/nextjs';
 import Link from 'next/link';
 
@@ -38,6 +39,12 @@ export default function AnalyzerPage() {
   const { isSignedIn } = useAuth();
   const { user } = useUser();
   const [showProModal, setShowProModal] = useState(false);
+
+  // Voice / line-by-line state
+  const [lineByLineActive, setLineByLineActive] = useState(false);
+  const [currentLine, setCurrentLine] = useState(0);
+  const voiceControlsRef = useRef<VoiceControlsHandle>(null);
+  const listboxRef = useRef<HTMLDivElement>(null);
 
   const metadata = (user?.publicMetadata || {}) as Record<string, unknown>;
   const isPro = metadata.subscriptionStatus === 'active' && metadata.subscriptionTier === 'pro';
@@ -95,6 +102,80 @@ export default function AnalyzerPage() {
 
   // Derive panel content from result + screenReader
   const panelContent = getPanelContent(activeTab, result, screenReader);
+  const lines = panelContent.split('\n').filter(l => l.trim());
+
+  // Reset line-by-line state when result or tab changes
+  useEffect(() => {
+    setLineByLineActive(false);
+    setCurrentLine(0);
+    voiceControlsRef.current?.stop();
+  }, [result, activeTab, screenReader]);
+
+  const handleModeChange = useCallback((mode: SpeechMode | null) => {
+    if (mode === 'line-by-line') {
+      setLineByLineActive(true);
+      setCurrentLine(0);
+      // Focus the listbox after render
+      requestAnimationFrame(() => {
+        listboxRef.current?.focus();
+      });
+    } else {
+      setLineByLineActive(false);
+      setCurrentLine(0);
+    }
+  }, []);
+
+  const handleLineChange = useCallback((index: number) => {
+    setCurrentLine(index);
+  }, []);
+
+  const handleLineClick = useCallback((index: number) => {
+    setCurrentLine(index);
+    voiceControlsRef.current?.speakLine(index);
+  }, []);
+
+  const handleOutputKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (!lineByLineActive) return;
+    const vc = voiceControlsRef.current;
+    if (!vc) return;
+
+    switch (e.key) {
+      case 'ArrowDown':
+      case 'j': {
+        e.preventDefault();
+        const next = Math.min(currentLine + 1, lines.length - 1);
+        if (next !== currentLine) {
+          setCurrentLine(next);
+          vc.speakLine(next);
+        }
+        break;
+      }
+      case 'ArrowUp':
+      case 'k': {
+        e.preventDefault();
+        const prev = Math.max(currentLine - 1, 0);
+        if (prev !== currentLine) {
+          setCurrentLine(prev);
+          vc.speakLine(prev);
+        }
+        break;
+      }
+      case 'Enter':
+      case ' ': {
+        e.preventDefault();
+        // Play all from current line: build text from current line onward
+        const textFromCurrent = lines.slice(currentLine).join('\n');
+        vc.play(textFromCurrent);
+        break;
+      }
+      case 'Escape': {
+        e.preventDefault();
+        vc.stop();
+        setCurrentLine(0);
+        break;
+      }
+    }
+  }, [lineByLineActive, currentLine, lines]);
 
   return (
     <PageFadeIn>
@@ -242,16 +323,16 @@ export default function AnalyzerPage() {
 
             {/* Control Bar */}
             <div className="p-4 border-t border-gray-200 bg-white space-y-4">
-              <div className="flex flex-wrap items-center gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-[auto_auto_1fr_auto] items-center gap-3">
                 <input ref={fileInputRef} type="file" accept=".html,.htm" className="hidden" onChange={handleFileUpload} />
                 <button type="button" onClick={() => fileInputRef.current?.click()}
-                  className="order-1 inline-flex items-center gap-2 px-3 py-2 border border-gray-300 rounded text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-3 h-10 border border-gray-300 rounded text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">
                   <span className="material-symbols-outlined text-[20px]" aria-hidden="true">upload</span>
                   Upload .html file
                 </button>
-                <div className="order-2 flex flex-col">
+                <div>
                   <label htmlFor="sr-select" className="sr-only">Screen reader</label>
-                  <select id="sr-select" className="text-sm border border-gray-300 ring-1 ring-gray-200 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 py-2 pl-3 pr-10"
+                  <select id="sr-select" className="w-full h-10 text-sm border border-gray-300 ring-1 ring-gray-200 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 pl-3 pr-10"
                     value={screenReader} onChange={(e) => setScreenReader(e.target.value as ScreenReaderOption)}>
                     <option value="NVDA">NVDA</option>
                     <option value="JAWS">JAWS</option>
@@ -259,12 +340,12 @@ export default function AnalyzerPage() {
                     <option value="All">All</option>
                   </select>
                 </div>
-                <div className="order-3 flex-grow">
+                <div>
                   <label htmlFor="css-selector" className="sr-only">CSS selector</label>
-                  <input id="css-selector" type="text" className="w-full text-sm border border-gray-300 ring-1 ring-gray-200 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 py-2 px-3"
+                  <input id="css-selector" type="text" className="w-full h-10 text-sm border border-gray-300 ring-1 ring-gray-200 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 px-3"
                     placeholder="e.g. button, .my-class" value={cssSelector} onChange={(e) => setCssSelector(e.target.value)} />
                 </div>
-                <div className="order-4 flex items-center gap-2">
+                <div className="flex items-center gap-2">
                   <span className="text-sm font-medium text-gray-600" id="diff-label">Diff mode</span>
                   <button type="button" role="switch" aria-checked={diffMode} aria-labelledby="diff-label"
                     onClick={() => setDiffMode(!diffMode)}
@@ -337,6 +418,14 @@ export default function AnalyzerPage() {
             <div className="flex justify-between items-center px-4 py-2 bg-white border-b border-gray-100">
               <span className="text-xs font-mono text-gray-500">{activeTab}</span>
               <div className="flex gap-2">
+                <VoiceControls
+                  ref={voiceControlsRef}
+                  text={panelContent}
+                  lines={lines}
+                  disabled={!result}
+                  onLineChange={handleLineChange}
+                  onModeChange={handleModeChange}
+                />
                 <button type="button"
                   className="p-1.5 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded transition-all flex items-center justify-center leading-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
                   style={{ opacity: result ? 1 : 0.4, cursor: result ? 'pointer' : 'not-allowed' }}
@@ -355,13 +444,42 @@ export default function AnalyzerPage() {
             </div>
 
             <div role="tabpanel" id={`panel-${activeTab}`} aria-labelledby={`tab-${activeTab}`}
-              className="bg-gray-900 flex-grow p-6 overflow-auto min-h-[300px]">
-              <pre className="font-mono text-sm leading-relaxed text-green-400 whitespace-pre-wrap">
-                {result
-                  ? panelContent || '(empty)'
-                  : <><span className="text-gray-400 select-none">{'// Awaiting analysis...\n'}</span><span className="text-gray-300">Paste HTML and click Analyze to see results.</span></>
-                }
-              </pre>
+              className="bg-gray-900 flex-grow overflow-auto min-h-[300px]">
+              {result && lineByLineActive ? (
+                <div
+                  ref={listboxRef}
+                  role="listbox"
+                  aria-label="Screen reader output — use arrow keys to navigate"
+                  tabIndex={0}
+                  onKeyDown={handleOutputKeyDown}
+                  className="p-6 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-inset"
+                >
+                  {lines.map((line, i) => (
+                    <div
+                      key={i}
+                      role="option"
+                      aria-selected={i === currentLine}
+                      onClick={() => handleLineClick(i)}
+                      className={`font-mono text-sm py-0.5 cursor-pointer transition-colors ${
+                        i === currentLine
+                          ? 'text-green-300 bg-brand-500/10 border-l-2 border-brand-500 pl-2'
+                          : 'text-green-400/70 pl-3 hover:bg-white/5'
+                      }`}
+                    >
+                      {line}
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="p-6">
+                  <pre className="font-mono text-sm leading-relaxed text-green-400 whitespace-pre-wrap">
+                    {result
+                      ? panelContent || '(empty)'
+                      : <><span className="text-gray-400 select-none">{'// Awaiting analysis...\n'}</span><span className="text-gray-300">Paste HTML and click Analyze to see results.</span></>
+                    }
+                  </pre>
+                </div>
+              )}
             </div>
 
             <div className="p-4 bg-teal-50 border-t border-teal-100">
