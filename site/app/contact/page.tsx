@@ -32,12 +32,14 @@ export default function ContactPage() {
             <span className="material-symbols-outlined text-3xl" aria-hidden="true">bug_report</span>
           </div>
           <h2 className="text-xl font-bold text-slate-900 mb-2">Bug Reports</h2>
-          <p className="text-slate-600 text-sm mb-4">Found an issue with the CLI or web tool? Let us know.</p>
+          <p className="text-slate-600 text-sm mb-4">Found an issue with the CLI or web tool? Open an issue on GitHub.</p>
           <a
-            href="mailto:xreticular@gmail.com?subject=Bug Report"
+            href="https://github.com/R3TICULAR/AnnounceKit/issues/new?labels=bug&template=bug_report.md"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-teal-600 font-semibold hover:underline"
           >
-            Report a Bug
+            Report a Bug →
           </a>
         </div>
 
