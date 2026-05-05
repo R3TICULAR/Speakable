@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { DiffPreview } from '../components/DiffPreview';
 import { CrossPlatformPreview } from '../components/CrossPlatformPreview';
 import { ScrollReveal } from '../components/ScrollReveal';
+import { HeroAnimation } from '../components/HeroAnimation';
+import { RegressionDemo } from '../components/RegressionDemo';
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 
@@ -48,37 +50,7 @@ export default function LandingPage() {
             </div>
           </div>
           <div className="flex-1 w-full relative">
-            <div className="bg-slate-900 rounded-xl shadow-2xl p-4 border border-slate-800 overflow-hidden">
-              <div className="flex items-center gap-2 mb-4 border-b border-slate-800 pb-2">
-                <div className="w-3 h-3 rounded-full bg-red-500" aria-hidden="true" />
-                <div className="w-3 h-3 rounded-full bg-yellow-500" aria-hidden="true" />
-                <div className="w-3 h-3 rounded-full bg-green-500" aria-hidden="true" />
-                <div className="ml-4 text-xs font-mono text-slate-400">analyzer.tsx</div>
-              </div>
-              <div className="space-y-4 py-4 px-2" role="img" aria-label="Code example showing Speakable predicting NVDA will announce a button as Submit Payment, button">
-                <div className="flex gap-4">
-                  <span className="text-slate-500 font-mono text-xs">1</span>
-                  <code className="text-blue-400 font-mono text-xs">
-                    {'<button aria-label="Submit Payment">'}
-                  </code>
-                </div>
-                <div className="flex gap-4 bg-blue-500/10 py-2 border-l-2 border-blue-500">
-                  <span className="text-slate-500 font-mono text-xs">2</span>
-                  <div className="flex flex-col gap-1">
-                    <code className="text-white font-mono text-xs">
-                      {'// Predicted Announcement (NVDA)'}
-                    </code>
-                    <code className="text-green-400 font-mono text-xs">
-                      {'"Submit Payment, button"'}
-                    </code>
-                  </div>
-                </div>
-                <div className="flex gap-4">
-                  <span className="text-slate-500 font-mono text-xs">3</span>
-                  <code className="text-blue-400 font-mono text-xs">{'</button>'}</code>
-                </div>
-              </div>
-            </div>
+            <HeroAnimation />
             <div
               className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-blue-50 rounded-full blur-3xl opacity-50"
               aria-hidden="true"
@@ -280,49 +252,7 @@ export default function LandingPage() {
 
             <div className="relative lg:h-full flex items-center justify-center">
               <div className="absolute inset-0 bg-blue-50 rounded-3xl -rotate-2" aria-hidden="true" />
-              <div className="relative bg-white p-1 rounded-2xl shadow-2xl border border-slate-200 overflow-hidden">
-                <div className="bg-slate-900 px-4 py-2 flex items-center gap-2 border-b border-slate-800">
-                  <div className="flex gap-1.5" aria-hidden="true">
-                    <div className="w-3 h-3 rounded-full bg-rose-500" />
-                    <div className="w-3 h-3 rounded-full bg-amber-500" />
-                    <div className="w-3 h-3 rounded-full bg-emerald-500" />
-                  </div>
-                  <div className="ml-4 text-[10px] text-slate-500 font-mono tracking-tight uppercase">
-                    Team Dashboard — Production Environment
-                  </div>
-                </div>
-                <div className="p-6 bg-slate-950">
-                  <div className="grid grid-cols-2 gap-4 mb-6">
-                    <div className="bg-slate-900 p-4 rounded-xl border border-slate-800">
-                      <div className="text-slate-500 text-[10px] font-bold uppercase mb-1">Pass Rate</div>
-                      <div className="text-2xl font-bold text-emerald-400">98.2%</div>
-                    </div>
-                    <div className="bg-slate-900 p-4 rounded-xl border border-slate-800">
-                      <div className="text-slate-500 text-[10px] font-bold uppercase mb-1">Total Assets</div>
-                      <div className="text-2xl font-bold text-white">4,281</div>
-                    </div>
-                  </div>
-                  <div className="space-y-3" aria-hidden="true">
-                    <div className="h-2 w-full bg-slate-900 rounded-full overflow-hidden">
-                      <div className="h-full bg-blue-600 w-3/4" />
-                    </div>
-                    <div className="h-2 w-2/3 bg-slate-900 rounded-full overflow-hidden">
-                      <div className="h-full bg-teal-500 w-1/2" />
-                    </div>
-                    <div className="h-2 w-full bg-slate-900 rounded-full overflow-hidden">
-                      <div className="h-full bg-blue-600 w-5/6" />
-                    </div>
-                  </div>
-                  <div className="mt-8 pt-6 border-t border-slate-800 flex justify-between items-center">
-                    <div className="flex -space-x-2" aria-hidden="true">
-                      <div className="w-8 h-8 rounded-full border-2 border-slate-950 bg-slate-700 flex items-center justify-center text-[10px] font-bold text-white">JD</div>
-                      <div className="w-8 h-8 rounded-full border-2 border-slate-950 bg-blue-600 flex items-center justify-center text-[10px] font-bold text-white">AS</div>
-                      <div className="w-8 h-8 rounded-full border-2 border-slate-950 bg-emerald-600 flex items-center justify-center text-[10px] font-bold text-white">+8</div>
-                    </div>
-                    <div className="text-slate-400 text-xs font-medium">12 active developers</div>
-                  </div>
-                </div>
-              </div>
+              <RegressionDemo />
             </div>
           </div>
 
