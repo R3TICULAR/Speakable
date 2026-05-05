@@ -178,7 +178,7 @@ export function HeroAnimation() {
       </div>
 
       {/* Content area */}
-      <div className="min-h-[220px] py-2 px-2" aria-hidden="true">
+      <div className="h-[280px] py-2 px-2 overflow-hidden" aria-hidden="true">
         {(phase === 'typing' || phase === 'analyzing') && (
           <div className="space-y-1">
             {typedLines.map((line, i) => (
