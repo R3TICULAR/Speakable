@@ -7,7 +7,6 @@
 
 chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
   if (message.type === 'GET_PAGE_HTML') {
-    const html = document.documentElement.outerHTML;
     const selector = message.selector || null;
 
     if (selector) {
@@ -29,6 +28,17 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
         });
       }
     } else {
+      // Clone the document and strip style/script/noscript elements
+      // to prevent CSS/JS content from leaking into accessibility output
+      const clone = document.documentElement.cloneNode(true);
+      clone.querySelectorAll('style, script, noscript, link[rel="stylesheet"]').forEach(el => el.remove());
+
+      // Also strip any remaining inline style content via regex on the serialized HTML
+      // (catches edge cases where style tags aren't properly removed from cloned DOM)
+      let html = clone.outerHTML;
+      html = html.replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '');
+      html = html.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '');
+
       sendResponse({
         success: true,
         html,

@@ -95,7 +95,7 @@ function getName(el) {
 
   // Text content for buttons, links, headings
   if (['button', 'a', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'summary', 'legend', 'li'].includes(tag)) {
-    return el.textContent?.trim() || '';
+    return getVisibleText(el) || '';
   }
 
   // Title fallback
@@ -209,7 +209,10 @@ function getVisibleText(el) {
   let text = '';
   for (const node of el.childNodes) {
     if (node.nodeType === 3) { // TEXT_NODE
-      text += node.textContent || '';
+      const t = node.textContent || '';
+      // Skip text that looks like leaked CSS (starts with CSS selectors/properties)
+      if (/^\s*[:.*#{@]/.test(t) || /^[a-z-]+\s*:\s*[^;]+;/i.test(t) || /\{[^}]*\}/.test(t)) continue;
+      text += t;
     } else if (node.nodeType === 1) { // ELEMENT_NODE
       const child = node;
       const childTag = child.tagName?.toLowerCase();
