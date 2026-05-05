@@ -240,6 +240,218 @@ jobs:
         </div>
       </section>
 
+      {/* Speakable + Guidepup Together */}
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold text-slate-900 mb-4">Speakable + Guidepup: A Practical Testing Pattern</h2>
+        <p className="text-slate-600 mb-6 leading-relaxed">
+          The most effective accessibility testing strategy uses both tools on the same component.
+          Speakable validates structure instantly (names, roles, hierarchy), then{' '}
+          <a href="https://github.com/guidepup/guidepup" className="text-blue-600 hover:underline font-medium">Guidepup</a>{' '}
+          validates the interaction experience with a real screen reader.
+        </p>
+
+        <h3 className="text-lg font-bold text-slate-900 mb-3">Example: Testing a modal dialog</h3>
+        <p className="text-slate-600 mb-4 text-sm">
+          A modal needs both correct structure (dialog role, label, heading) and correct behavior
+          (focus trap, escape to close, focus return). Speakable catches the first category;
+          Guidepup catches the second.
+        </p>
+
+        <div className="rounded-xl overflow-hidden bg-slate-900 shadow-2xl mb-6">
+          <div className="flex justify-between items-center px-4 py-2 bg-white/5 border-b border-white/10">
+            <span className="text-xs font-mono text-slate-400 uppercase tracking-wider">Step 1 — Speakable: structural validation (runs anywhere, milliseconds)</span>
+          </div>
+          <div className="p-6 overflow-x-auto">
+            <pre className="text-sm font-mono leading-relaxed text-slate-300">
+{`// tests/a11y/modal-structure.test.ts
+import { execSync } from 'child_process';
+
+describe('ConfirmDialog structure', () => {
+  const output = execSync(
+    'npx @reticular/speakable src/components/ConfirmDialog.html -s all -f text'
+  ).toString();
+
+  it('announces as a dialog with a label', () => {
+    expect(output).toContain('Confirm deletion, dialog');
+  });
+
+  it('has a heading inside the dialog', () => {
+    expect(output).toMatch(/heading level [12], Confirm deletion/);
+  });
+
+  it('has labeled action buttons', () => {
+    expect(output).toContain('Cancel, button');
+    expect(output).toContain('Delete, button');
+  });
+
+  it('does not announce the backdrop', () => {
+    // Backdrop should be aria-hidden
+    expect(output).not.toContain('overlay');
+  });
+});`}
+            </pre>
+          </div>
+        </div>
+
+        <div className="rounded-xl overflow-hidden bg-slate-900 shadow-2xl mb-6">
+          <div className="flex justify-between items-center px-4 py-2 bg-white/5 border-b border-white/10">
+            <span className="text-xs font-mono text-slate-400 uppercase tracking-wider">Step 2 — Guidepup: interaction validation (requires macOS runner)</span>
+          </div>
+          <div className="p-6 overflow-x-auto">
+            <pre className="text-sm font-mono leading-relaxed text-slate-300">
+{`// tests/a11y/modal-interaction.test.ts
+import { voiceOver } from '@guidepup/guidepup';
+import { webkit } from '@playwright/test';
+
+describe('ConfirmDialog interaction', () => {
+  it('traps focus inside the dialog', async () => {
+    const browser = await webkit.launch();
+    const page = await browser.newPage();
+    await page.goto('http://localhost:3000/checkout');
+
+    // Open the modal
+    await page.click('[data-testid="delete-btn"]');
+
+    // Start VoiceOver
+    await voiceOver.start();
+
+    // Verify focus moved into the dialog
+    const firstAnnouncement = await voiceOver.lastSpokenPhrase();
+    expect(firstAnnouncement).toContain('Confirm deletion');
+
+    // Tab through — should stay inside dialog
+    await voiceOver.press('Tab');
+    const cancelBtn = await voiceOver.lastSpokenPhrase();
+    expect(cancelBtn).toContain('Cancel');
+
+    await voiceOver.press('Tab');
+    const deleteBtn = await voiceOver.lastSpokenPhrase();
+    expect(deleteBtn).toContain('Delete');
+
+    // Tab again — should wrap back (focus trap)
+    await voiceOver.press('Tab');
+    const wrapped = await voiceOver.lastSpokenPhrase();
+    expect(wrapped).toContain('Cancel'); // wrapped back
+
+    // Escape closes and returns focus
+    await voiceOver.press('Escape');
+    const returned = await voiceOver.lastSpokenPhrase();
+    expect(returned).toContain('Delete item'); // original trigger
+
+    await voiceOver.stop();
+    await browser.close();
+  });
+});`}
+            </pre>
+          </div>
+        </div>
+
+        <div className="bg-slate-50 border border-slate-200 rounded-xl p-6 mb-6">
+          <p className="text-sm font-semibold text-slate-900 mb-2">Why both matter</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-slate-600">
+            <div>
+              <p className="font-medium text-slate-800 mb-1">Speakable catches:</p>
+              <ul className="list-disc list-inside space-y-1 text-xs">
+                <li>Missing dialog role</li>
+                <li>Missing aria-labelledby</li>
+                <li>Unlabeled buttons (icon-only)</li>
+                <li>Backdrop not hidden from AT</li>
+                <li>Heading hierarchy inside modal</li>
+              </ul>
+            </div>
+            <div>
+              <p className="font-medium text-slate-800 mb-1">Guidepup catches:</p>
+              <ul className="list-disc list-inside space-y-1 text-xs">
+                <li>Focus not moving to dialog on open</li>
+                <li>Focus trap not working (Tab escapes)</li>
+                <li>Escape key not closing the dialog</li>
+                <li>Focus not returning to trigger on close</li>
+                <li>Live region not announcing state changes</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <h3 className="text-lg font-bold text-slate-900 mb-3">CI pipeline: layered execution</h3>
+        <p className="text-slate-600 mb-4 text-sm">
+          Run Speakable on every push (cheap, fast, any runner). Run Guidepup only on PRs
+          targeting main (expensive, requires macOS). This gives you fast feedback on structure
+          and thorough validation before merge.
+        </p>
+        <div className="rounded-xl overflow-hidden bg-slate-900 shadow-2xl mb-6">
+          <div className="flex justify-between items-center px-4 py-2 bg-white/5 border-b border-white/10">
+            <span className="text-xs font-mono text-slate-400 uppercase tracking-wider">.github/workflows/a11y-layered.yml</span>
+          </div>
+          <div className="p-6 overflow-x-auto">
+            <pre className="text-sm font-mono leading-relaxed text-slate-300">
+{`name: Accessibility (Layered)
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+    branches: [main]
+
+jobs:
+  # Runs on every push — fast, any runner
+  structure:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm ci
+      - name: Speakable structural checks
+        run: |
+          npx @reticular/speakable dist/**/*.html -f audit
+          npx @reticular/speakable dist/index.html --diff baseline.html
+
+  # Runs only on PRs to main — thorough, macOS runner
+  interaction:
+    if: github.event_name == 'pull_request'
+    needs: structure
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm ci
+      - run: npm run build && npm run start &
+      - name: Guidepup VoiceOver tests
+        run: npx playwright test tests/a11y/*-interaction*`}
+            </pre>
+          </div>
+        </div>
+
+        <h3 className="text-lg font-bold text-slate-900 mb-3">When Speakable alone is enough</h3>
+        <p className="text-slate-600 mb-4 text-sm">
+          Not every component needs Guidepup. For static content, forms, and simple interactive
+          elements, Speakable&apos;s structural validation covers the important cases:
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="p-4 border border-blue-200 rounded-lg bg-blue-50/50">
+            <p className="text-xs font-bold text-blue-700 uppercase mb-2">Speakable only</p>
+            <ul className="text-xs text-slate-600 space-y-1">
+              <li>• Static pages and content</li>
+              <li>• Navigation landmarks</li>
+              <li>• Form labels and error messages</li>
+              <li>• Heading hierarchy</li>
+              <li>• Image alt text</li>
+              <li>• Button and link names</li>
+              <li>• Table structure</li>
+            </ul>
+          </div>
+          <div className="p-4 border border-teal-200 rounded-lg bg-teal-50/50">
+            <p className="text-xs font-bold text-teal-700 uppercase mb-2">Add Guidepup</p>
+            <ul className="text-xs text-slate-600 space-y-1">
+              <li>• Modal focus trapping</li>
+              <li>• Combobox / autocomplete</li>
+              <li>• Drag and drop</li>
+              <li>• Single-page app routing</li>
+              <li>• Toast / notification live regions</li>
+              <li>• Tab panel keyboard switching</li>
+              <li>• Carousel navigation</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <div className="mt-20 p-8 rounded-2xl bg-teal-700 text-white flex flex-col sm:flex-row items-center justify-between gap-4">
         <div>
