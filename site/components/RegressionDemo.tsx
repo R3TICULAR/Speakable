@@ -63,7 +63,7 @@ export function RegressionDemo() {
 
   return (
     <div
-      className="relative bg-white p-1 rounded-2xl shadow-2xl border border-slate-200 overflow-hidden w-full"
+      className="relative bg-white p-1 rounded-2xl shadow-2xl border border-slate-200 overflow-hidden w-full max-w-full"
       role="img"
       aria-label="Demo showing a code change that removes an aria-label from a button, Speakable catching the regression in CI, and the diff output showing the accessibility name was lost"
     >
@@ -93,24 +93,24 @@ export function RegressionDemo() {
         {step === 'change' && (
           <div className="space-y-4">
             <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-3">Code diff</div>
-            <div className="space-y-1 font-mono text-xs">
-              <div className="text-slate-500 pl-4">{'// checkout/Button.tsx'}</div>
-              <div className="bg-rose-500/10 border-l-2 border-rose-500 pl-3 py-0.5 text-rose-300">
+            <div className="space-y-1 font-mono text-xs overflow-hidden">
+              <div className="text-slate-500 pl-4 truncate">{'// checkout/Button.tsx'}</div>
+              <div className="bg-rose-500/10 border-l-2 border-rose-500 pl-3 py-0.5 text-rose-300 truncate">
                 {'- <button aria-label="Complete purchase">'}
               </div>
-              <div className="bg-rose-500/10 border-l-2 border-rose-500 pl-3 py-0.5 text-rose-300">
+              <div className="bg-rose-500/10 border-l-2 border-rose-500 pl-3 py-0.5 text-rose-300 truncate">
                 {'-   <CartIcon /> Pay ${total}'}
               </div>
-              <div className="bg-rose-500/10 border-l-2 border-rose-500 pl-3 py-0.5 text-rose-300">
+              <div className="bg-rose-500/10 border-l-2 border-rose-500 pl-3 py-0.5 text-rose-300 truncate">
                 {'- </button>'}
               </div>
-              <div className="bg-emerald-500/10 border-l-2 border-emerald-500 pl-3 py-0.5 text-emerald-300">
+              <div className="bg-emerald-500/10 border-l-2 border-emerald-500 pl-3 py-0.5 text-emerald-300 truncate">
                 {'+ <button className={styles.payBtn}>'}
               </div>
-              <div className="bg-emerald-500/10 border-l-2 border-emerald-500 pl-3 py-0.5 text-emerald-300">
+              <div className="bg-emerald-500/10 border-l-2 border-emerald-500 pl-3 py-0.5 text-emerald-300 truncate">
                 {'+   <CartIcon />'}
               </div>
-              <div className="bg-emerald-500/10 border-l-2 border-emerald-500 pl-3 py-0.5 text-emerald-300">
+              <div className="bg-emerald-500/10 border-l-2 border-emerald-500 pl-3 py-0.5 text-emerald-300 truncate">
                 {'+ </button>'}
               </div>
             </div>
@@ -124,25 +124,25 @@ export function RegressionDemo() {
         {step === 'ci' && (
           <div className="space-y-3">
             <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-3">CI Pipeline</div>
-            <div className="space-y-2 font-mono text-xs">
+            <div className="space-y-2 font-mono text-xs overflow-hidden">
               <div className="flex items-center gap-2">
-                <span className="text-emerald-400">✓</span>
-                <span className="text-slate-400">Build succeeded</span>
-                <span className="text-slate-600 ml-auto">12s</span>
+                <span className="text-emerald-400 shrink-0">✓</span>
+                <span className="text-slate-400 truncate">Build succeeded</span>
+                <span className="text-slate-600 ml-auto shrink-0">12s</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-emerald-400">✓</span>
-                <span className="text-slate-400">Unit tests passed (142/142)</span>
-                <span className="text-slate-600 ml-auto">8s</span>
+                <span className="text-emerald-400 shrink-0">✓</span>
+                <span className="text-slate-400 truncate">Unit tests passed (142/142)</span>
+                <span className="text-slate-600 ml-auto shrink-0">8s</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-emerald-400">✓</span>
-                <span className="text-slate-400">Lint passed</span>
-                <span className="text-slate-600 ml-auto">3s</span>
+                <span className="text-emerald-400 shrink-0">✓</span>
+                <span className="text-slate-400 truncate">Lint passed</span>
+                <span className="text-slate-600 ml-auto shrink-0">3s</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 border-2 border-amber-400 border-t-transparent rounded-full animate-spin" />
-                <span className="text-amber-400">Running speakable --diff baseline.html...</span>
+                <div className="w-3 h-3 border-2 border-amber-400 border-t-transparent rounded-full animate-spin shrink-0" />
+                <span className="text-amber-400 truncate">Running speakable --diff baseline.html...</span>
               </div>
             </div>
           </div>
@@ -152,26 +152,25 @@ export function RegressionDemo() {
         {step === 'caught' && (
           <div className="space-y-3">
             <div className="text-[10px] font-bold text-rose-400 uppercase tracking-wider mb-3">
-              Regression detected — announcement changed
+              Regression detected
             </div>
-            <div className="bg-slate-900 rounded-lg p-3 border border-slate-800 font-mono text-xs space-y-1.5">
-              <div className="text-slate-500">{'speakable checkout.html --diff baseline.html'}</div>
+            <div className="bg-slate-900 rounded-lg p-3 border border-slate-800 font-mono text-xs space-y-1.5 overflow-hidden">
+              <div className="text-slate-500 truncate">{'speakable checkout.html --diff baseline.html'}</div>
               <div className="text-slate-400 mt-2">{'Changed: button'}</div>
-              <div className="text-rose-400 pl-4">{'- name: "Complete purchase"'}</div>
-              <div className="text-rose-400 pl-4">{'- announcement: "Complete purchase, button"'}</div>
-              <div className="text-emerald-400 pl-4">{'+ name: ""'}</div>
-              <div className="text-emerald-400 pl-4">{'+ announcement: "button"'}</div>
+              <div className="text-rose-400 pl-4 truncate">{'- name: "Complete purchase"'}</div>
+              <div className="text-rose-400 pl-4 truncate">{'- announcement: "Complete purchase, button"'}</div>
+              <div className="text-emerald-400 pl-4 truncate">{'+ name: ""'}</div>
+              <div className="text-emerald-400 pl-4 truncate">{'+ announcement: "button"'}</div>
             </div>
             <div className="bg-rose-500/10 border border-rose-500/30 rounded-lg p-3 mt-3">
               <p className="text-[11px] text-rose-300 font-medium">
                 Screen reader users would hear &quot;button&quot; with no context.
-                The accessible name was lost during refactor.
               </p>
             </div>
             <div className="flex items-center gap-3 mt-3 pt-3 border-t border-slate-800">
               <span className="text-[10px] text-slate-500">Exit code 2</span>
               <span className="text-[10px] text-slate-600">•</span>
-              <span className="text-[10px] text-slate-500">PR blocked until resolved</span>
+              <span className="text-[10px] text-slate-500">PR blocked</span>
             </div>
           </div>
         )}
