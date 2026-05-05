@@ -3,10 +3,12 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { CopyMarkdownButton } from '../../components/CopyMarkdownButton';
 
 const DOCS_SECTIONS = [
   { label: 'API Reference', href: '/docs' },
   { label: 'Usage Guide', href: '/docs/usage-guide' },
+  { label: 'Advanced Guide', href: '/docs/advanced-guide' },
   { label: 'Examples', href: '/docs/examples' },
   { label: 'Common Mistakes', href: '/docs/common-mistakes' },
   { label: 'Framework Guides', href: '/docs/frameworks' },
@@ -134,6 +136,9 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
 
       {/* Content */}
       <div id="docs-content" tabIndex={-1} className="flex-1 px-8 py-12 lg:px-16 max-w-4xl">
+        <div className="flex justify-end mb-4">
+          <CopyMarkdownButton />
+        </div>
         {children}
       </div>
     </div>
