@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import plugin from 'tailwindcss/plugin';
 
 /**
  * Custom color palette enforcing WCAG contrast ratios:
@@ -83,7 +84,24 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    // Logical property utilities for RTL support.
+    // Use these instead of physical left/right when the direction matters:
+    //   ps-4 (padding-inline-start) instead of pl-4
+    //   pe-4 (padding-inline-end) instead of pr-4
+    //   ms-4 (margin-inline-start) instead of ml-4
+    //   me-4 (margin-inline-end) instead of mr-4
+    //   start-0 (inset-inline-start) instead of left-0
+    //   end-0 (inset-inline-end) instead of right-0
+    //   border-s (border-inline-start) instead of border-l
+    //   border-e (border-inline-end) instead of border-r
+    //   rounded-s (border-start-radius) instead of rounded-l
+    //   rounded-e (border-end-radius) instead of rounded-r
+    //   text-start / text-end instead of text-left / text-right
+    //
+    // Tailwind v3.3+ includes these natively. This comment serves as
+    // documentation for the team on when to use logical vs physical properties.
+  ],
 };
 
 export default config;

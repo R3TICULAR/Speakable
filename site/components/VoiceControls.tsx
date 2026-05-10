@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback, forwardRef, useImperativeHandle } from 'react';
 import { useSpeechSynthesis } from '../hooks/useSpeechSynthesis';
+import { useTranslations } from 'next-intl';
 
 export type SpeechMode = 'play-all' | 'line-by-line';
 
@@ -47,6 +48,7 @@ export const VoiceControls = forwardRef<VoiceControlsHandle, VoiceControlsProps>
   const [focusedIndex, setFocusedIndex] = useState(-1);
 
   const speech = useSpeechSynthesis();
+  const t = useTranslations('voice');
 
   // Expose speech methods to parent via ref
   useImperativeHandle(ref, () => ({
@@ -234,7 +236,7 @@ export const VoiceControls = forwardRef<VoiceControlsHandle, VoiceControlsProps>
         <button
           type="button"
           onClick={handlePause}
-          aria-label={speech.state === 'playing' ? 'Pause speech' : 'Resume speech'}
+          aria-label={speech.state === 'playing' ? t('pauseSpeech') : t('resumeSpeech')}
           className="p-1.5 text-gray-500 hover:text-brand-600 hover:bg-brand-50 rounded transition-all flex items-center justify-center leading-none focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-1"
         >
           <span
@@ -247,7 +249,7 @@ export const VoiceControls = forwardRef<VoiceControlsHandle, VoiceControlsProps>
         <button
           type="button"
           onClick={handleStop}
-          aria-label="Stop speech"
+          aria-label={t('stopSpeech')}
           className="p-1.5 text-gray-500 hover:text-brand-600 hover:bg-brand-50 rounded transition-all flex items-center justify-center leading-none focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-1"
         >
           <span
@@ -280,7 +282,7 @@ export const VoiceControls = forwardRef<VoiceControlsHandle, VoiceControlsProps>
         <button
           type="button"
           onClick={handleStop}
-          aria-label="Exit line-by-line mode"
+          aria-label={t('exitLineByLine')}
           className="p-1 text-gray-500 hover:text-brand-600 hover:bg-brand-50 rounded transition-all flex items-center justify-center leading-none focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-1 ml-1"
         >
           <span
@@ -305,8 +307,8 @@ export const VoiceControls = forwardRef<VoiceControlsHandle, VoiceControlsProps>
         disabled={isDisabled}
         aria-haspopup="true"
         aria-expanded={open}
-        aria-label="Voice controls"
-        title={speechUnavailable ? 'Speech not supported in this browser' : undefined}
+        aria-label={t('controls')}
+        title={speechUnavailable ? t('unsupported') : undefined}
         className="p-1.5 text-gray-500 hover:text-brand-600 hover:bg-brand-50 rounded transition-all flex items-center justify-center leading-none focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-1 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:text-gray-500 disabled:hover:bg-transparent"
       >
         <span
@@ -327,7 +329,7 @@ export const VoiceControls = forwardRef<VoiceControlsHandle, VoiceControlsProps>
         <div
           ref={menuRef}
           role="menu"
-          aria-label="Voice playback options"
+          aria-label={t('playbackOptions')}
           onKeyDown={handleMenuKeyDown}
           className="absolute right-0 top-full mt-1 w-64 bg-white border border-gray-200 rounded-lg shadow-lg z-50 py-1 overflow-hidden"
         >
@@ -352,7 +354,7 @@ export const VoiceControls = forwardRef<VoiceControlsHandle, VoiceControlsProps>
             >
               play_arrow
             </span>
-            <span className="flex-1">Play All</span>
+            <span className="flex-1">{t('playAll')}</span>
             {isPlayAllChecked && (
               <span
                 className="material-symbols-outlined text-[18px] text-brand-600"
@@ -384,7 +386,7 @@ export const VoiceControls = forwardRef<VoiceControlsHandle, VoiceControlsProps>
             >
               keyboard
             </span>
-            <span className="flex-1">Line-by-Line</span>
+            <span className="flex-1">{t('lineByLine')}</span>
             {isLineByLineChecked && (
               <span
                 className="material-symbols-outlined text-[18px] text-brand-600"
@@ -404,16 +406,16 @@ export const VoiceControls = forwardRef<VoiceControlsHandle, VoiceControlsProps>
               htmlFor="voice-select"
               className="block text-xs font-medium text-foreground-muted mb-1"
             >
-              Voice
+              {t('voiceLabel')}
             </label>
             <select
               id="voice-select"
-              aria-label="Select voice"
+              aria-label={t('selectVoice')}
               value={speech.selectedVoice?.name ?? ''}
               onChange={handleVoiceChange}
               className="w-full text-sm border border-gray-200 rounded px-2 py-1.5 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 bg-white text-foreground"
             >
-              <option value="">Default</option>
+              <option value="">{t('defaultVoice')}</option>
               {speech.voices.map((v) => (
                 <option key={v.name} value={v.name}>
                   {v.name} ({v.lang})
@@ -428,12 +430,12 @@ export const VoiceControls = forwardRef<VoiceControlsHandle, VoiceControlsProps>
               htmlFor="speed-slider"
               className="block text-xs font-medium text-foreground-muted mb-1"
             >
-              Speed: {speech.rate.toFixed(1)}x
+              {t('speedLabel', { rate: speech.rate.toFixed(1) })}
             </label>
             <input
               id="speed-slider"
               type="range"
-              aria-label="Speech speed"
+              aria-label={t('speechSpeed')}
               min="0.5"
               max="2.0"
               step="0.1"

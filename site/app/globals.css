@@ -2,6 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * RTL Support
+ * When dir="rtl" is set on <html>, these rules flip directional animations
+ * and ensure proper text alignment. Tailwind's built-in rtl: variant handles
+ * most layout concerns (use ps-/pe-/ms-/me- logical properties).
+ */
+[dir="rtl"] {
+  text-align: right;
+}
+
+[dir="rtl"] .text-left {
+  text-align: right;
+}
+
+[dir="rtl"] .text-right {
+  text-align: left;
+}
+
 @keyframes slideDown {
   from {
     opacity: 0;
@@ -21,6 +39,34 @@
   to {
     opacity: 1;
     transform: translateX(0);
+  }
+}
+
+/* RTL: flip horizontal animations */
+[dir="rtl"] .animate-\\[fadeSlideIn_200ms_ease-out_forwards\\],
+[dir="rtl"] .animate-\\[fadeSlideIn_300ms_ease-out_forwards\\] {
+  animation-name: fadeSlideInRTL;
+}
+
+@keyframes fadeSlideInRTL {
+  from {
+    opacity: 0;
+    transform: translateX(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
