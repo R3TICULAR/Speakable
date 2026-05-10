@@ -4,21 +4,23 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useUser, useAuth, useClerk } from '@clerk/nextjs';
+import { useTranslations } from 'next-intl';
+import { trackNavClick, trackCTAClick } from '../lib/analytics';
 
 interface NavRoute {
-  label: string;
+  labelKey: string;
   href: string;
 }
 
 const PUBLIC_NAV_ROUTES: NavRoute[] = [
-  { label: 'Home', href: '/' },
-  { label: 'Pricing', href: '/pricing' },
-  { label: 'Docs', href: '/docs' },
-  { label: 'Analyzer', href: '/tool' },
+  { labelKey: 'home', href: '/' },
+  { labelKey: 'pricing', href: '/pricing' },
+  { labelKey: 'docs', href: '/docs' },
+  { labelKey: 'analyzer', href: '/tool' },
 ];
 
 const AUTH_NAV_ROUTES: NavRoute[] = [
-  { label: 'Settings', href: '/settings' },
+  { labelKey: 'settings', href: '/settings' },
 ];
 
 function isActive(pathname: string, href: string): boolean {
@@ -35,6 +37,7 @@ export function Navigation() {
   const { isSignedIn, isLoaded } = useAuth();
   const { user } = useUser();
   const { signOut } = useClerk();
+  const t = useTranslations('nav');
 
   const navRoutes = isSignedIn
     ? [...PUBLIC_NAV_ROUTES, ...AUTH_NAV_ROUTES]
@@ -60,7 +63,7 @@ export function Navigation() {
 
   return (
     <nav
-      aria-label="Main navigation"
+      aria-label={t('mainNavigation')}
       onKeyDown={handleKeyDown}
       className="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm"
     >
@@ -86,7 +89,7 @@ export function Navigation() {
                       : 'text-slate-600 hover:text-blue-600'
                   }`}
                 >
-                  {route.label}
+                  {t(route.labelKey)}
                 </Link>
               </li>
             ))}
@@ -106,13 +109,13 @@ export function Navigation() {
                 onClick={() => signOut({ redirectUrl: '/' })}
                 className="text-sm font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 px-4 py-2 rounded transition-colors"
               >
-                Sign Out
+                {t('signOut')}
               </button>
               <Link
                 href="/tool"
                 className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded font-medium text-sm transition-all active:scale-95"
               >
-                Analyzer
+                {t('analyzer')}
               </Link>
             </div>
           ) : (
@@ -121,13 +124,13 @@ export function Navigation() {
                 href="/sign-in"
                 className="text-sm font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 px-4 py-2 rounded transition-colors"
               >
-                Log In
+                {t('signIn')}
               </Link>
               <Link
                 href="/sign-up"
                 className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded font-medium text-sm transition-all active:scale-95"
               >
-                Sign Up
+                {t('signUp')}
               </Link>
             </div>
           )}
@@ -136,7 +139,7 @@ export function Navigation() {
           <button
             ref={toggleRef}
             type="button"
-            aria-label="Menu"
+            aria-label={mobileOpen ? t('closeMenu') : t('openMenu')}
             aria-expanded={mobileOpen}
             onClick={() => setMobileOpen((prev) => !prev)}
             onKeyDown={(e) => {
@@ -172,7 +175,7 @@ export function Navigation() {
                     : 'text-slate-600 hover:text-blue-600'
                 }`}
               >
-                {route.label}
+                {t(route.labelKey)}
               </Link>
             </li>
           ))}
@@ -183,7 +186,7 @@ export function Navigation() {
                 onClick={() => signOut({ redirectUrl: '/' })}
                 className="block w-full text-left rounded px-4 py-2 text-sm font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 transition-colors"
               >
-                Sign Out
+                {t('signOut')}
               </button>
             </li>
           ) : (
@@ -192,13 +195,13 @@ export function Navigation() {
                 href="/sign-in"
                 className="block text-center rounded px-4 py-2 text-sm font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 transition-colors"
               >
-                Log In
+                {t('signIn')}
               </Link>
               <Link
                 href="/sign-up"
                 className="block text-center rounded px-4 py-2 text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 transition-colors"
               >
-                Sign Up
+                {t('signUp')}
               </Link>
             </li>
           )}

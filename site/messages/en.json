@@ -1,0 +1,83 @@
+{
+  "nav": {
+    "home": "Home",
+    "pricing": "Pricing",
+    "docs": "Docs",
+    "analyzer": "Analyzer",
+    "settings": "Settings",
+    "signIn": "Log In",
+    "signUp": "Sign Up",
+    "signOut": "Sign Out",
+    "mainNavigation": "Main navigation",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "skipToContent": "Skip to main content"
+  },
+  "footer": {
+    "copyright": "© {year} Speakable. Accessibility-first screen reader prediction.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "security": "Security",
+    "contact": "Contact",
+    "githubLabel": "Speakable on GitHub",
+    "discordLabel": "Speakable Discord community"
+  },
+  "tool": {
+    "title": "Accessibility Analyzer",
+    "subtitle": "Paste or upload HTML to see how screen readers will announce it.",
+    "htmlInput": "HTML Input",
+    "afterHtml": "After (new HTML)",
+    "beforeHtml": "Before (original HTML)",
+    "uploadFile": "Upload .html file",
+    "screenReader": "Screen reader",
+    "cssSelector": "CSS selector",
+    "cssSelectorPlaceholder": "e.g. button, .my-class",
+    "diffMode": "Diff mode",
+    "analyze": "Analyze",
+    "analyzing": "Analyzing…",
+    "htmlRequired": "HTML input is required.",
+    "beforeRequired": "Before HTML is required in diff mode.",
+    "unexpectedError": "An unexpected error occurred. Please try again.",
+    "copyToClipboard": "Copy to clipboard",
+    "downloadOutput": "Download output",
+    "awaitingAnalysis": "Paste HTML and click Analyze to see results.",
+    "empty": "(empty)",
+    "tip": "Tip: Use CSS selectors to focus analysis on specific elements.",
+    "parserStatus": "Parser Status:",
+    "noIssues": "No issues detected. Ready to analyze.",
+    "warnings": "{count} warning(s):"
+  },
+  "voice": {
+    "controls": "Voice controls",
+    "playAll": "Play All",
+    "lineByLine": "Line-by-Line",
+    "pauseSpeech": "Pause speech",
+    "resumeSpeech": "Resume speech",
+    "stopSpeech": "Stop speech",
+    "exitLineByLine": "Exit line-by-line mode",
+    "voiceLabel": "Voice",
+    "speedLabel": "Speed: {rate}x",
+    "selectVoice": "Select voice",
+    "speechSpeed": "Speech speed",
+    "defaultVoice": "Default",
+    "unsupported": "Speech not supported in this browser",
+    "playbackOptions": "Voice playback options",
+    "outputNavigation": "Screen reader output — use arrow keys to navigate"
+  },
+  "a11y": {
+    "skipToContent": "Skip to main content",
+    "skipToDocs": "Skip to docs content",
+    "decorativeImage": "",
+    "loading": "Loading",
+    "copiedToClipboard": "Copied to clipboard",
+    "copyFailed": "Copy failed"
+  },
+  "pricing": {
+    "proPlanActive": "Pro Plan Active",
+    "proDescription": "Batch processing, semantic diff, and CI/CD integration are available via the CLI.",
+    "cicdSetup": "CI/CD Setup",
+    "usageGuide": "Usage Guide",
+    "upgradePrompt": "Upgrade to Pro for batch processing, semantic diff, and CI/CD integration.",
+    "seePlans": "See Plans"
+  }
+}

@@ -2,12 +2,14 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { splitIntoUtterances, type QueuedUtterance } from '../lib/splitIntoUtterances';
+import { getLanguageTag, DEFAULT_LOCALE } from '../lib/locale';
 
 export type PlaybackState = 'idle' | 'playing' | 'paused';
 
 export interface SpeechOptions {
   voice?: SpeechSynthesisVoice | null;
   rate?: number;
+  lang?: string;
   linePauseMs?: number;
   sectionPauseMs?: number;
 }
@@ -49,6 +51,7 @@ export function useSpeechSynthesis(options?: SpeechOptions): UseSpeechSynthesisR
 
   const linePauseMs = options?.linePauseMs ?? 300;
   const sectionPauseMs = options?.sectionPauseMs ?? 600;
+  const lang = options?.lang ?? getLanguageTag(DEFAULT_LOCALE);
 
   // Mutable refs for playback state (avoid re-renders during speech)
   const queueRef = useRef<QueuedUtterance[]>([]);
@@ -105,6 +108,7 @@ export function useSpeechSynthesis(options?: SpeechOptions): UseSpeechSynthesisR
     const utterance = new SpeechSynthesisUtterance(item.text);
     if (voiceRef.current) utterance.voice = voiceRef.current;
     utterance.rate = rateRef.current;
+    utterance.lang = lang;
 
     utterance.onend = () => {
       indexRef.current = idx + 1;
@@ -205,6 +209,7 @@ export function useSpeechSynthesis(options?: SpeechOptions): UseSpeechSynthesisR
     const utterance = new SpeechSynthesisUtterance(currentLines[index]);
     if (voiceRef.current) utterance.voice = voiceRef.current;
     utterance.rate = rateRef.current;
+    utterance.lang = lang;
 
     utterance.onend = () => {
       setState('idle');

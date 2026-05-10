@@ -1,0 +1,83 @@
+{
+  "nav": {
+    "home": "ホーム",
+    "pricing": "料金",
+    "docs": "ドキュメント",
+    "analyzer": "アナライザー",
+    "settings": "設定",
+    "signIn": "ログイン",
+    "signUp": "新規登録",
+    "signOut": "ログアウト",
+    "mainNavigation": "メインナビゲーション",
+    "openMenu": "メニューを開く",
+    "closeMenu": "メニューを閉じる",
+    "skipToContent": "メインコンテンツへスキップ"
+  },
+  "footer": {
+    "copyright": "© {year} Speakable. アクセシビリティファーストのスクリーンリーダー予測ツール。",
+    "privacy": "プライバシーポリシー",
+    "terms": "利用規約",
+    "security": "セキュリティ",
+    "contact": "お問い合わせ",
+    "githubLabel": "SpeakableのGitHub",
+    "discordLabel": "SpeakableのDiscordコミュニティ"
+  },
+  "tool": {
+    "title": "アクセシビリティアナライザー",
+    "subtitle": "HTMLを貼り付けるかアップロードして、スクリーンリーダーがどのように読み上げるか確認できます。",
+    "htmlInput": "HTML入力",
+    "afterHtml": "変更後（新しいHTML）",
+    "beforeHtml": "変更前（元のHTML）",
+    "uploadFile": ".htmlファイルをアップロード",
+    "screenReader": "スクリーンリーダー",
+    "cssSelector": "CSSセレクター",
+    "cssSelectorPlaceholder": "例: button, .my-class",
+    "diffMode": "差分モード",
+    "analyze": "解析",
+    "analyzing": "解析中…",
+    "htmlRequired": "HTMLの入力が必要です。",
+    "beforeRequired": "差分モードでは変更前のHTMLが必要です。",
+    "unexpectedError": "予期しないエラーが発生しました。もう一度お試しください。",
+    "copyToClipboard": "クリップボードにコピー",
+    "downloadOutput": "出力をダウンロード",
+    "awaitingAnalysis": "HTMLを貼り付けて「解析」をクリックすると結果が表示されます。",
+    "empty": "（空）",
+    "tip": "ヒント: CSSセレクターを使用して特定の要素に解析を絞り込めます。",
+    "parserStatus": "パーサーの状態:",
+    "noIssues": "問題は検出されませんでした。解析の準備ができています。",
+    "warnings": "{count}件の警告:"
+  },
+  "voice": {
+    "controls": "音声コントロール",
+    "playAll": "すべて再生",
+    "lineByLine": "1行ずつ",
+    "pauseSpeech": "音声を一時停止",
+    "resumeSpeech": "音声を再開",
+    "stopSpeech": "音声を停止",
+    "exitLineByLine": "1行ずつモードを終了",
+    "voiceLabel": "音声",
+    "speedLabel": "速度: {rate}x",
+    "selectVoice": "音声を選択",
+    "speechSpeed": "読み上げ速度",
+    "defaultVoice": "デフォルト",
+    "unsupported": "このブラウザでは音声合成に対応していません",
+    "playbackOptions": "音声再生オプション",
+    "outputNavigation": "スクリーンリーダー出力 — 矢印キーで移動できます"
+  },
+  "a11y": {
+    "skipToContent": "メインコンテンツへスキップ",
+    "skipToDocs": "ドキュメントコンテンツへスキップ",
+    "decorativeImage": "",
+    "loading": "読み込み中",
+    "copiedToClipboard": "クリップボードにコピーしました",
+    "copyFailed": "コピーに失敗しました"
+  },
+  "pricing": {
+    "proPlanActive": "Proプラン有効",
+    "proDescription": "バッチ処理、セマンティック差分、CI/CD連携がCLIで利用可能です。",
+    "cicdSetup": "CI/CDセットアップ",
+    "usageGuide": "使い方ガイド",
+    "upgradePrompt": "Proにアップグレードしてバッチ処理、セマンティック差分、CI/CD連携を利用しましょう。",
+    "seePlans": "プランを見る"
+  }
+}

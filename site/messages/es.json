@@ -1,0 +1,83 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "pricing": "Precios",
+    "docs": "Documentación",
+    "analyzer": "Analizador",
+    "settings": "Configuración",
+    "signIn": "Iniciar sesión",
+    "signUp": "Registrarse",
+    "signOut": "Cerrar sesión",
+    "mainNavigation": "Navegación principal",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
+    "skipToContent": "Ir al contenido principal"
+  },
+  "footer": {
+    "copyright": "© {year} Speakable. Análisis de accesibilidad para equipos modernos.",
+    "privacy": "Política de privacidad",
+    "terms": "Términos de servicio",
+    "security": "Seguridad",
+    "contact": "Contacto",
+    "githubLabel": "Speakable en GitHub",
+    "discordLabel": "Comunidad de Speakable en Discord"
+  },
+  "tool": {
+    "title": "Analizador de accesibilidad",
+    "subtitle": "Pega o sube HTML para ver cómo lo anunciarán los lectores de pantalla.",
+    "htmlInput": "Entrada HTML",
+    "afterHtml": "Después (HTML nuevo)",
+    "beforeHtml": "Antes (HTML original)",
+    "uploadFile": "Subir archivo .html",
+    "screenReader": "Lector de pantalla",
+    "cssSelector": "Selector CSS",
+    "cssSelectorPlaceholder": "ej. button, .mi-clase",
+    "diffMode": "Modo diff",
+    "analyze": "Analizar",
+    "analyzing": "Analizando…",
+    "htmlRequired": "Se requiere entrada HTML.",
+    "beforeRequired": "Se requiere el HTML anterior en modo diff.",
+    "unexpectedError": "Ocurrió un error inesperado. Inténtalo de nuevo.",
+    "copyToClipboard": "Copiar al portapapeles",
+    "downloadOutput": "Descargar resultado",
+    "awaitingAnalysis": "Pega HTML y haz clic en Analizar para ver los resultados.",
+    "empty": "(vacío)",
+    "tip": "Consejo: Usa selectores CSS para enfocar el análisis en elementos específicos.",
+    "parserStatus": "Estado del parser:",
+    "noIssues": "Sin problemas detectados. Listo para analizar.",
+    "warnings": "{count} advertencia(s):"
+  },
+  "voice": {
+    "controls": "Controles de voz",
+    "playAll": "Reproducir todo",
+    "lineByLine": "Línea por línea",
+    "pauseSpeech": "Pausar voz",
+    "resumeSpeech": "Reanudar voz",
+    "stopSpeech": "Detener voz",
+    "exitLineByLine": "Salir del modo línea por línea",
+    "voiceLabel": "Voz",
+    "speedLabel": "Velocidad: {rate}x",
+    "selectVoice": "Seleccionar voz",
+    "speechSpeed": "Velocidad de voz",
+    "defaultVoice": "Predeterminada",
+    "unsupported": "Voz no compatible en este navegador",
+    "playbackOptions": "Opciones de reproducción de voz",
+    "outputNavigation": "Salida del lector de pantalla — usa las flechas para navegar"
+  },
+  "a11y": {
+    "skipToContent": "Ir al contenido principal",
+    "skipToDocs": "Ir al contenido de documentación",
+    "decorativeImage": "",
+    "loading": "Cargando",
+    "copiedToClipboard": "Copiado al portapapeles",
+    "copyFailed": "Error al copiar"
+  },
+  "pricing": {
+    "proPlanActive": "Plan Pro activo",
+    "proDescription": "Procesamiento por lotes, diff semántico e integración CI/CD disponibles vía CLI.",
+    "cicdSetup": "Configurar CI/CD",
+    "usageGuide": "Guía de uso",
+    "upgradePrompt": "Actualiza a Pro para procesamiento por lotes, diff semántico e integración CI/CD.",
+    "seePlans": "Ver planes"
+  }
+}

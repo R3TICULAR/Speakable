@@ -13,6 +13,7 @@ import { describeChange } from '@core/diff/diff-algorithm';
 import { SIZE_LIMIT_BYTES } from '@core/../web/src/constants';
 import { PageFadeIn } from '../../components/ScrollReveal';
 import { VoiceControls, type VoiceControlsHandle, type SpeechMode } from '../../components/VoiceControls';
+import { trackAnalyze, trackCopy, trackDownload, trackFileUpload, trackDiffToggle, trackVoicePlay } from '../../lib/analytics';
 import { useAuth, useUser } from '@clerk/nextjs';
 import Link from 'next/link';
 
@@ -72,6 +73,7 @@ export default function AnalyzerPage() {
         : runAnalysis({ html, cssSelector: cssSelector || undefined });
       setResult(r);
       setActiveTab(diffMode ? 'diff' : 'announcements');
+      trackAnalyze(screenReader, diffMode ? 'diff' : 'text', !!cssSelector);
     } catch (err) {
       if (err instanceof ParsingError || err instanceof SelectorError) {
         setError(err.message);
@@ -97,7 +99,7 @@ export default function AnalyzerPage() {
       setError('Only .html and .htm files are accepted.');
       return;
     }
-    file.text().then((text) => { setHtml(text); setError(null); });
+    file.text().then((text) => { setHtml(text); setError(null); trackFileUpload(); });
   }, []);
 
   // Derive panel content from result + screenReader
@@ -115,10 +117,15 @@ export default function AnalyzerPage() {
     if (mode === 'line-by-line') {
       setLineByLineActive(true);
       setCurrentLine(0);
+      trackVoicePlay('line_by_line');
       // Focus the listbox after render
       requestAnimationFrame(() => {
         listboxRef.current?.focus();
       });
+    } else if (mode === 'play-all') {
+      setLineByLineActive(false);
+      setCurrentLine(0);
+      trackVoicePlay('play_all');
     } else {
       setLineByLineActive(false);
       setCurrentLine(0);
@@ -430,14 +437,14 @@ export default function AnalyzerPage() {
                   className="p-1.5 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded transition-all flex items-center justify-center leading-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
                   style={{ opacity: result ? 1 : 0.4, cursor: result ? 'pointer' : 'not-allowed' }}
                   aria-label="Copy to clipboard" aria-disabled={!result}
-                  onClick={() => { if (result) navigator.clipboard.writeText(panelContent); }}>
+                  onClick={() => { if (result) { navigator.clipboard.writeText(panelContent); trackCopy(activeTab); } }}>
                   <span className="material-symbols-outlined text-[18px] leading-none block" aria-hidden="true">content_copy</span>
                 </button>
                 <button type="button"
                   className="p-1.5 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded transition-all flex items-center justify-center leading-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
                   style={{ opacity: result ? 1 : 0.4, cursor: result ? 'pointer' : 'not-allowed' }}
                   aria-label="Download output" aria-disabled={!result}
-                  onClick={() => { if (result) downloadText(panelContent, `${activeTab}.txt`); }}>
+                  onClick={() => { if (result) { downloadText(panelContent, `${activeTab}.txt`); trackDownload(activeTab); } }}>
                   <span className="material-symbols-outlined text-[18px] leading-none block" aria-hidden="true">download</span>
                 </button>
               </div>
