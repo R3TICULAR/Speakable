@@ -21,7 +21,6 @@ import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
 import { z } from 'zod';
 import { parseHTML } from './parser/index.js';
 import { buildAccessibilityTree, buildAccessibilityTreeWithSelector } from './extractor/index.js';
-import { serializeModel } from './model/serialization.js';
 import { renderNVDA } from './renderer/nvda-renderer.js';
 import { renderJAWS } from './renderer/jaws-renderer.js';
 import { renderVoiceOver } from './renderer/voiceover-renderer.js';
@@ -62,22 +61,24 @@ function analyzeHTML(html: string, screenReader: ScreenReader, selector?: string
     return { output: '', warnings: ['Document has no body element.'], model: null };
   }
 
-  const warnings = parseWarnings.map(w => w.message);
+  const warnings: string[] = parseWarnings.map((w: { message: string }) => w.message);
 
   if (selector) {
-    const { models, warnings: treeWarnings } = buildAccessibilityTreeWithSelector(body, selector);
-    warnings.push(...treeWarnings.map(w => w.message));
+    const results = buildAccessibilityTreeWithSelector(body, selector);
+    for (const r of results) {
+      warnings.push(...r.warnings.map((w: { message: string }) => w.message));
+    }
 
-    const outputs = models.map((m, i) => {
-      const prefix = models.length > 1 ? `=== Element ${i + 1} ===\n` : '';
-      return prefix + renderOutput(m, screenReader);
+    const outputs = results.map((r, i) => {
+      const prefix = results.length > 1 ? `=== Element ${i + 1} ===\n` : '';
+      return prefix + renderOutput(r.model, screenReader);
     });
 
-    return { output: outputs.join('\n\n'), warnings, model: models[0] || null };
+    return { output: outputs.join('\n\n'), warnings, model: results[0]?.model || null };
   }
 
   const { model, warnings: treeWarnings } = buildAccessibilityTree(body);
-  warnings.push(...treeWarnings.map(w => w.message));
+  warnings.push(...treeWarnings.map((w: { message: string }) => w.message));
 
   return { output: renderOutput(model, screenReader), warnings, model };
 }
@@ -135,20 +136,22 @@ server.tool(
       }
 
       let model: AnnouncementModel;
-      const warnings = parseWarnings.map(w => w.message);
+      const warnings: string[] = parseWarnings.map((w: { message: string }) => w.message);
 
       if (selector) {
-        const { models, warnings: treeWarnings } = buildAccessibilityTreeWithSelector(body, selector);
-        warnings.push(...treeWarnings.map(w => w.message));
-        if (models.length === 0) {
+        const results = buildAccessibilityTreeWithSelector(body, selector);
+        for (const r of results) {
+          warnings.push(...r.warnings.map((w: { message: string }) => w.message));
+        }
+        if (results.length === 0) {
           return {
             content: [{ type: 'text', text: `No elements found matching selector: ${selector}` }],
           };
         }
-        model = models[0];
+        model = results[0].model;
       } else {
         const result = buildAccessibilityTree(body);
-        warnings.push(...result.warnings.map(w => w.message));
+        warnings.push(...result.warnings.map((w: { message: string }) => w.message));
         model = result.model;
       }
 
@@ -192,21 +195,21 @@ server.tool(
       let afterModel: AnnouncementModel;
 
       if (selector) {
-        const beforeResult = buildAccessibilityTreeWithSelector(beforeDoc.document.body, selector);
-        const afterResult = buildAccessibilityTreeWithSelector(afterDoc.document.body, selector);
-        if (beforeResult.models.length === 0 || afterResult.models.length === 0) {
+        const beforeResults = buildAccessibilityTreeWithSelector(beforeDoc.document.body, selector);
+        const afterResults = buildAccessibilityTreeWithSelector(afterDoc.document.body, selector);
+        if (beforeResults.length === 0 || afterResults.length === 0) {
           return {
             content: [{ type: 'text', text: `No elements found matching selector: ${selector}` }],
           };
         }
-        beforeModel = beforeResult.models[0];
-        afterModel = afterResult.models[0];
+        beforeModel = beforeResults[0].model;
+        afterModel = afterResults[0].model;
       } else {
         beforeModel = buildAccessibilityTree(beforeDoc.document.body).model;
         afterModel = buildAccessibilityTree(afterDoc.document.body).model;
       }
 
-      const diff = diffAccessibilityTrees(beforeModel, afterModel);
+      const diff = diffAccessibilityTrees(beforeModel.root, afterModel.root);
 
       if (diff.changes.length === 0) {
         return {
