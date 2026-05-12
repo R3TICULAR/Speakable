@@ -159,6 +159,35 @@ Verify that the accessibility model serializes and deserializes consistently:
 speakable page.html --validate
 ```
 
+## MCP Integration (AI Assistants)
+
+Speakable includes a Model Context Protocol (MCP) server that lets AI coding assistants analyze accessibility in real-time. Ask your assistant "check if this component is accessible" and it calls Speakable automatically.
+
+### Setup
+
+Add to your MCP config (Kiro, VS Code, Cursor, Claude Desktop, Windsurf):
+
+```json
+{
+  "mcpServers": {
+    "speakable": {
+      "command": "npx",
+      "args": ["-y", "@reticular/speakable-mcp"]
+    }
+  }
+}
+```
+
+### Available Tools
+
+| Tool | Description |
+|------|-------------|
+| `analyze_html` | Predict screen reader output for NVDA, JAWS, and VoiceOver |
+| `audit_html` | Generate accessibility audit report with issues and remediation |
+| `diff_html` | Compare two HTML versions for accessibility regressions |
+
+All tools run locally — no network requests, no data leaves your machine. See the [MCP Integration docs](https://getspeakable.dev/docs/mcp-integration) for full setup instructions.
+
 ## CI/CD Integration
 
 ### GitHub Actions
