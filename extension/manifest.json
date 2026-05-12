@@ -1,8 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "Speakable — Screen Reader Simulator",
+  "name": "__MSG_extName__",
   "version": "1.0.0",
-  "description": "Simulate how NVDA, JAWS, and VoiceOver interpret any web page. Catch accessibility issues without leaving your browser.",
+  "description": "__MSG_extDescription__",
+  "default_locale": "en",
   "permissions": ["activeTab"],
   "action": {
     "default_popup": "popup.html",

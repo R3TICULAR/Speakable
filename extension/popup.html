@@ -17,15 +17,15 @@
           <path d="M16 9 L16 19" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
           <path d="M20 11 L20 17" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
         </svg>
-        <span class="brand-name">Speakable</span>
+        <span class="brand-name" data-i18n="brandName">Speakable</span>
       </div>
-      <a href="https://getspeakable.dev/tool" target="_blank" class="web-link">Web Tool ↗</a>
+      <a href="https://getspeakable.dev/tool" target="_blank" class="web-link" data-i18n="webToolLink">Web Tool ↗</a>
     </header>
 
     <!-- Controls -->
     <div class="controls">
       <div class="control-row">
-        <label for="reader-select">Screen Reader</label>
+        <label for="reader-select" data-i18n="labelScreenReader">Screen Reader</label>
         <select id="reader-select">
           <option value="nvda" selected>NVDA</option>
           <option value="jaws">JAWS</option>
@@ -34,22 +34,22 @@
         </select>
       </div>
       <div class="control-row">
-        <label for="format-select">Format</label>
+        <label for="format-select" data-i18n="labelFormat">Format</label>
         <select id="format-select">
-          <option value="text" selected>Text</option>
-          <option value="audit">Audit Report</option>
-          <option value="json">JSON</option>
+          <option value="text" data-i18n="formatText">Text</option>
+          <option value="audit" data-i18n="formatAudit">Audit Report</option>
+          <option value="json" data-i18n="formatJson">JSON</option>
         </select>
       </div>
       <div class="control-row">
-        <label for="selector-input">CSS Selector</label>
-        <input id="selector-input" type="text" placeholder="e.g. main, button, .hero" />
+        <label for="selector-input" data-i18n="labelCssSelector">CSS Selector</label>
+        <input id="selector-input" type="text" data-i18n-placeholder="cssSelectorPlaceholder" placeholder="e.g. main, button, .hero" />
       </div>
     </div>
 
     <button id="analyze-btn" class="analyze-btn">
       <span class="btn-icon">▶</span>
-      Analyze This Page
+      <span data-i18n="analyzeButton">Analyze This Page</span>
     </button>
 
     <!-- Status -->
@@ -58,9 +58,30 @@
     <!-- Results -->
     <div id="results" class="results hidden">
       <div class="results-header">
-        <span id="results-title" class="results-title">Results</span>
-        <button id="copy-btn" class="icon-btn" title="Copy to clipboard">📋</button>
+        <span id="results-title" class="results-title" data-i18n="resultsTitle">Results</span>
+        <button id="copy-btn" class="icon-btn" data-i18n-title="copyToClipboard" title="Copy to clipboard">📋</button>
       </div>
+
+      <!-- Voice controls -->
+      <div id="voice-controls" class="voice-controls hidden">
+        <div class="voice-controls-row">
+          <button id="play-btn" class="voice-btn" data-i18n-title="voicePlay" data-i18n-aria="voicePlay" title="Play" aria-label="Play">▶</button>
+          <button id="stop-btn" class="voice-btn hidden" data-i18n-title="voiceStop" data-i18n-aria="voiceStop" title="Stop" aria-label="Stop">⏹</button>
+          <span id="progress" class="voice-progress hidden" aria-live="polite"></span>
+        </div>
+        <div class="voice-controls-row">
+          <label for="voice-select" class="voice-label" data-i18n="voiceLabel">Voice</label>
+          <select id="voice-select" class="voice-select" data-i18n-aria="voiceLabel" aria-label="Voice">
+            <option value="" data-i18n="voiceDefault">Default</option>
+          </select>
+        </div>
+        <div class="voice-controls-row">
+          <label for="rate-slider" class="voice-label" data-i18n="speedLabel">Speed</label>
+          <input id="rate-slider" class="rate-slider" type="range" min="0.5" max="2.0" step="0.1" value="1.0" data-i18n-aria="speedLabel" aria-label="Speech rate" />
+          <span id="rate-value" class="rate-value">1.0x</span>
+        </div>
+      </div>
+
       <pre id="output" class="output"></pre>
     </div>
 

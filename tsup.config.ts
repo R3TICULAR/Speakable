@@ -15,6 +15,20 @@ export default defineConfig([
       js: '#!/usr/bin/env node',
     },
   },
+  // MCP server entry point with shebang
+  {
+    entry: ['src/mcp.ts'],
+    format: ['esm'],
+    dts: false,
+    clean: false,
+    sourcemap: true,
+    minify: false,
+    target: 'node18',
+    shims: true,
+    banner: {
+      js: '#!/usr/bin/env node',
+    },
+  },
   // Library entry point without shebang
   {
     entry: ['src/index.ts'],

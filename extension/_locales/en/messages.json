@@ -1,0 +1,136 @@
+{
+  "extName": {
+    "message": "Speakable — Screen Reader Simulator",
+    "description": "Extension name shown in Chrome Web Store and extensions page"
+  },
+  "extDescription": {
+    "message": "Simulate how NVDA, JAWS, and VoiceOver interpret any web page. Catch accessibility issues without leaving your browser.",
+    "description": "Extension description shown in Chrome Web Store"
+  },
+  "brandName": {
+    "message": "Speakable",
+    "description": "Brand name displayed in the popup header"
+  },
+  "webToolLink": {
+    "message": "Web Tool ↗",
+    "description": "Link text to the web-based analyzer tool"
+  },
+  "labelScreenReader": {
+    "message": "Screen Reader",
+    "description": "Label for the screen reader selector dropdown"
+  },
+  "labelFormat": {
+    "message": "Format",
+    "description": "Label for the output format selector dropdown"
+  },
+  "labelCssSelector": {
+    "message": "CSS Selector",
+    "description": "Label for the CSS selector input field"
+  },
+  "cssSelectorPlaceholder": {
+    "message": "e.g. main, button, .hero",
+    "description": "Placeholder text for the CSS selector input"
+  },
+  "analyzeButton": {
+    "message": "Analyze This Page",
+    "description": "Text on the main analyze button"
+  },
+  "resultsTitle": {
+    "message": "Results",
+    "description": "Default title for the results section"
+  },
+  "copyToClipboard": {
+    "message": "Copy to clipboard",
+    "description": "Tooltip for the copy button"
+  },
+  "statusAnalyzing": {
+    "message": "Analyzing page…",
+    "description": "Status message shown while analysis is running"
+  },
+  "statusNoTab": {
+    "message": "No active tab found.",
+    "description": "Error when no active browser tab is detected"
+  },
+  "statusFailed": {
+    "message": "Failed to get page HTML.",
+    "description": "Error when content script fails to return HTML"
+  },
+  "statusComplete": {
+    "message": "Analysis complete — $SCOPE$",
+    "description": "Success message after analysis completes",
+    "placeholders": {
+      "scope": {
+        "content": "$1",
+        "example": "Full page"
+      }
+    }
+  },
+  "statusError": {
+    "message": "Error: $MESSAGE$",
+    "description": "Generic error message",
+    "placeholders": {
+      "message": {
+        "content": "$1",
+        "example": "Could not establish connection"
+      }
+    }
+  },
+  "scopeFullPage": {
+    "message": "Full page",
+    "description": "Scope label when no CSS selector is used"
+  },
+  "scopeSelector": {
+    "message": "\"$SELECTOR$\" ($COUNT$ elements)",
+    "description": "Scope label when a CSS selector is used",
+    "placeholders": {
+      "selector": {
+        "content": "$1",
+        "example": "button"
+      },
+      "count": {
+        "content": "$2",
+        "example": "5"
+      }
+    }
+  },
+  "formatText": {
+    "message": "Text",
+    "description": "Text output format option"
+  },
+  "formatAudit": {
+    "message": "Audit Report",
+    "description": "Audit report output format option"
+  },
+  "formatJson": {
+    "message": "JSON",
+    "description": "JSON output format option"
+  },
+  "voicePlay": {
+    "message": "Play",
+    "description": "Aria-label for the play button"
+  },
+  "voicePause": {
+    "message": "Pause",
+    "description": "Aria-label for the pause button"
+  },
+  "voiceResume": {
+    "message": "Resume",
+    "description": "Aria-label for the resume button"
+  },
+  "voiceStop": {
+    "message": "Stop",
+    "description": "Aria-label for the stop button"
+  },
+  "voiceLabel": {
+    "message": "Voice",
+    "description": "Label for the voice selector"
+  },
+  "voiceDefault": {
+    "message": "Default",
+    "description": "Default voice option"
+  },
+  "speedLabel": {
+    "message": "Speed",
+    "description": "Label for the speed slider"
+  }
+}

@@ -8,6 +8,7 @@ import { CopyMarkdownButton } from '../../components/CopyMarkdownButton';
 const DOCS_SECTIONS = [
   { label: 'API Reference', href: '/docs' },
   { label: 'Usage Guide', href: '/docs/usage-guide' },
+  { label: 'MCP Integration', href: '/docs/mcp-integration' },
   { label: 'Advanced Guide', href: '/docs/advanced-guide' },
   { label: 'Examples', href: '/docs/examples' },
   { label: 'Common Mistakes', href: '/docs/common-mistakes' },
