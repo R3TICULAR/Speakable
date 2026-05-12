@@ -2,7 +2,7 @@
  * CLI orchestration - wires all components together.
  */
 
-import { parseHTML } from '../parser/index.js';
+import { parseHTML, ParsingError } from '../parser/index.js';
 import { buildAccessibilityTree, buildAccessibilityTreeWithSelector } from '../extractor/index.js';
 import { serializeModel, deserializeModel, modelsEqual } from '../model/serialization.js';
 import { renderNVDA } from '../renderer/nvda-renderer.js';
@@ -89,10 +89,17 @@ export function processHTML(
     // Normal processing mode
     return processNormal(html, options, warnings, colorize);
   } catch (error) {
+    if (error instanceof ParsingError) {
+      return {
+        output: `Parse error: ${error.message}`,
+        exitCode: 2, // Content error
+        warnings,
+      };
+    }
     if (error instanceof Error) {
       return {
         output: `Error: ${error.message}`,
-        exitCode: 2, // Content error
+        exitCode: 3, // System error
         warnings,
       };
     }

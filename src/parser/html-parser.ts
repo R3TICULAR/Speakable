@@ -37,6 +37,12 @@ export interface ParseResult {
 }
 
 /**
+ * Maximum input size in bytes (10 MB).
+ * Prevents denial-of-service from extremely large inputs.
+ */
+const MAX_INPUT_SIZE = 10 * 1024 * 1024;
+
+/**
  * Parses HTML string into a DOM document.
  * 
  * Uses jsdom with lenient parsing mode to handle malformed HTML.
@@ -44,10 +50,19 @@ export interface ParseResult {
  * 
  * @param html - HTML string to parse
  * @returns Parse result with document and warnings
- * @throws ParsingError if parsing fails completely
+ * @throws ParsingError if parsing fails completely or input exceeds size limit
  */
 export function parseHTML(html: string): ParseResult {
   const warnings: ParsingWarning[] = [];
+
+  // Input size validation
+  const inputSize = Buffer.byteLength(html, 'utf-8');
+  if (inputSize > MAX_INPUT_SIZE) {
+    throw new ParsingError(
+      `Input exceeds maximum size of ${MAX_INPUT_SIZE / (1024 * 1024)} MB (received ${(inputSize / (1024 * 1024)).toFixed(1)} MB). ` +
+      `Use CSS selectors to analyze specific sections of large documents.`
+    );
+  }
 
   try {
     // Create JSDOM instance with lenient parsing
