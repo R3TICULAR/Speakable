@@ -10,18 +10,25 @@ const LOCALE_COOKIE = 'NEXT_LOCALE';
 
 /**
  * Detects the user's preferred locale from:
- * 1. Explicit cookie (user previously chose a locale)
- * 2. Accept-Language header (browser preference)
- * 3. Default fallback
+ * 1. URL query parameter ?lang= (for SEO crawlers and direct links)
+ * 2. Explicit cookie (user previously chose a locale)
+ * 3. Accept-Language header (browser preference)
+ * 4. Default fallback
  */
 function detectLocale(req: NextRequest): string {
-  // 1. Check cookie
+  // 1. Check ?lang= query parameter (SEO crawlers use this)
+  const langParam = req.nextUrl.searchParams.get('lang');
+  if (langParam && SUPPORTED_LOCALES.includes(langParam.toLowerCase())) {
+    return langParam.toLowerCase();
+  }
+
+  // 2. Check cookie
   const cookieLocale = req.cookies.get(LOCALE_COOKIE)?.value;
   if (cookieLocale && SUPPORTED_LOCALES.includes(cookieLocale)) {
     return cookieLocale;
   }
 
-  // 2. Parse Accept-Language header
+  // 3. Parse Accept-Language header
   const acceptLang = req.headers.get('accept-language');
   if (acceptLang) {
     const preferred = acceptLang
@@ -39,7 +46,7 @@ function detectLocale(req: NextRequest): string {
     }
   }
 
-  // 3. Default
+  // 4. Default
   return DEFAULT_LOCALE;
 }
 
@@ -53,11 +60,18 @@ export default clerkMiddleware(async (auth, req) => {
   const locale = detectLocale(req);
   const response = NextResponse.next();
 
-  // Set locale cookie if not already set (persists user's detected preference)
-  if (!req.cookies.get(LOCALE_COOKIE)?.value) {
+  // Set locale cookie when ?lang= param is used or cookie doesn't exist
+  const langParam = req.nextUrl.searchParams.get('lang');
+  if (langParam && SUPPORTED_LOCALES.includes(langParam.toLowerCase())) {
+    response.cookies.set(LOCALE_COOKIE, langParam.toLowerCase(), {
+      path: '/',
+      maxAge: 60 * 60 * 24 * 365,
+      sameSite: 'lax',
+    });
+  } else if (!req.cookies.get(LOCALE_COOKIE)?.value) {
     response.cookies.set(LOCALE_COOKIE, locale, {
       path: '/',
-      maxAge: 60 * 60 * 24 * 365, // 1 year
+      maxAge: 60 * 60 * 24 * 365,
       sameSite: 'lax',
     });
   }

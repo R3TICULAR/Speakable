@@ -4,50 +4,66 @@ import Link from 'next/link';
 import { useAuth } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { ScrollReveal } from '../../components/ScrollReveal';
 
-const TIERS = [
+type TierFeature = {
+  textKey: string;
+  bold?: boolean;
+};
+
+type Tier = {
+  id: string;
+  nameKey: string;
+  priceKey: string;
+  hasPriceSuffix?: boolean;
+  features: TierFeature[];
+  ctaKey: string;
+  recommended: boolean;
+};
+
+const TIERS: Tier[] = [
   {
     id: 'free',
-    name: 'Free',
-    price: 'Free',
+    nameKey: 'tierFreeName',
+    priceKey: 'tierFreePrice',
     features: [
-      { text: 'Unlimited web tool usage' },
-      { text: 'Single-file CLI analysis' },
-      { text: 'All screen readers (NVDA, JAWS, VoiceOver)' },
-      { text: 'Audit report generation' },
+      { textKey: 'featureUnlimitedWeb' },
+      { textKey: 'featureSingleFile' },
+      { textKey: 'featureAllScreenReaders' },
+      { textKey: 'featureAuditReport' },
     ],
-    cta: 'Get Started',
+    ctaKey: 'ctaFree',
     recommended: false,
   },
   {
     id: 'pro',
-    name: 'Pro',
-    price: '$19',
-    priceSuffix: '/mo per seat',
+    nameKey: 'tierProName',
+    priceKey: 'tierProPrice',
+    hasPriceSuffix: true,
     features: [
-      { text: 'Everything in Free', bold: true },
-      { text: 'Batch processing (multiple files)' },
-      { text: 'CI/CD pipeline integration with JSON output' },
-      { text: 'Semantic diff (before/after comparison)' },
-      { text: 'Priority support' },
+      { textKey: 'featureEverythingFree', bold: true },
+      { textKey: 'featureBatch' },
+      { textKey: 'featureCicd' },
+      { textKey: 'featureSemanticDiff' },
+      { textKey: 'featurePrioritySupport' },
     ],
-    cta: 'Start Pro Trial',
+    ctaKey: 'ctaPro',
     recommended: true,
   },
   {
     id: 'team-enterprise',
-    name: 'Team / Enterprise',
-    price: 'Custom pricing',
+    nameKey: 'tierTeamName',
+    priceKey: 'tierTeamPrice',
     features: [
-      { text: 'Everything in Pro', bold: true },
-      { text: 'Shared team dashboards and historical reports' },
-      { text: 'Custom rule configuration' },
-      { text: 'SSO/SAML authentication' },
-      { text: 'SLA and dedicated support' },
-      { text: 'Volume pricing' },
+      { textKey: 'featureEverythingPro', bold: true },
+      { textKey: 'featureTeamDashboards' },
+      { textKey: 'featureCustomRules' },
+      { textKey: 'featureSso' },
+      { textKey: 'featureSla' },
+      { textKey: 'featureVolume' },
     ],
-    cta: 'Contact Sales',
+    ctaKey: 'ctaTeam',
     recommended: false,
   },
 ];
@@ -56,6 +72,7 @@ export default function PricingPage() {
   const { isSignedIn } = useAuth();
   const router = useRouter();
   const [loading, setLoading] = useState<string | null>(null);
+  const t = useTranslations('pricingPage');
 
   const handleCta = async (tierId: string) => {
     if (tierId === 'free') {
@@ -94,9 +111,9 @@ export default function PricingPage() {
     <ScrollReveal>
     <div className="flex-grow pb-24">
       <section className="max-w-4xl mx-auto text-center pt-12 mb-16 px-6">
-        <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900 mb-6">Pricing</h1>
+        <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900 mb-6">{t('title')}</h1>
         <p className="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
-          The analysis tool is free. Pay for workflow automation.
+          {t('subtitle')}
         </p>
       </section>
 
@@ -108,21 +125,21 @@ export default function PricingPage() {
             }`}>
             {tier.recommended && (
               <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-blue-600 text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest">
-                Recommended
+                {t('recommended')}
               </div>
             )}
             <div className="mb-8">
-              <h2 className="text-lg font-bold text-slate-900 mb-2">{tier.name}</h2>
+              <h2 className="text-lg font-bold text-slate-900 mb-2">{t(tier.nameKey)}</h2>
               <div className="flex items-baseline gap-1">
-                <span className="text-4xl font-extrabold tracking-tight text-slate-900">{tier.price}</span>
-                {tier.priceSuffix && <span className="text-slate-500 font-medium">{tier.priceSuffix}</span>}
+                <span className="text-4xl font-extrabold tracking-tight text-slate-900">{t(tier.priceKey)}</span>
+                {tier.hasPriceSuffix && <span className="text-slate-500 font-medium">{t('priceSuffix')}</span>}
               </div>
             </div>
             <ul className="space-y-4 mb-8 flex-grow">
               {tier.features.map((f) => (
-                <li key={f.text} className="flex items-start gap-3">
+                <li key={f.textKey} className="flex items-start gap-3">
                   <span className={`material-symbols-outlined text-teal-600 text-lg ${f.bold ? 'font-bold' : ''}`} aria-hidden="true">check_circle</span>
-                  <span className={`text-sm ${f.bold ? 'text-slate-900 font-semibold' : 'text-slate-600'}`}>{f.text}</span>
+                  <span className={`text-sm ${f.bold ? 'text-slate-900 font-semibold' : 'text-slate-600'}`}>{t(f.textKey)}</span>
                 </li>
               ))}
             </ul>
@@ -134,7 +151,7 @@ export default function PricingPage() {
                   ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-200'
                   : 'border-2 border-slate-200 text-slate-900 hover:bg-slate-50'
               }`}>
-              {loading === tier.id ? 'Loading…' : tier.cta}
+              {loading === tier.id ? t('loading') : t(tier.ctaKey)}
             </button>
           </div>
         ))}
@@ -144,7 +161,7 @@ export default function PricingPage() {
         <div className="inline-flex items-center gap-2 bg-teal-50 px-6 py-4 rounded-xl border border-teal-100">
           <span className="material-symbols-outlined text-teal-600" aria-hidden="true">info</span>
           <p className="text-sm text-slate-700 leading-relaxed text-left">
-            All screen readers are available on every tier — we never gate accessibility features behind a paywall.
+            {t('screenReaderInfo')}
           </p>
         </div>
       </div>

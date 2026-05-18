@@ -15,6 +15,7 @@ import { PageFadeIn } from '../../components/ScrollReveal';
 import { VoiceControls, type VoiceControlsHandle, type SpeechMode } from '../../components/VoiceControls';
 import { trackAnalyze, trackCopy, trackDownload, trackFileUpload, trackDiffToggle, trackVoicePlay } from '../../lib/analytics';
 import { useAuth, useUser } from '@clerk/nextjs';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
 type TabId = 'announcements' | 'audit' | 'json' | 'diff';
@@ -39,6 +40,7 @@ export default function AnalyzerPage() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { isSignedIn } = useAuth();
   const { user } = useUser();
+  const t = useTranslations('tool');
   const [showProModal, setShowProModal] = useState(false);
 
   // Voice / line-by-line state
@@ -194,31 +196,31 @@ export default function AnalyzerPage() {
             <div className="w-16 h-16 rounded-2xl bg-teal-100 text-teal-600 flex items-center justify-center mx-auto mb-4">
               <span className="material-symbols-outlined text-4xl" aria-hidden="true" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
             </div>
-            <h2 id="pro-modal-title" className="text-2xl font-extrabold text-slate-900 mb-2">Welcome to Pro</h2>
+            <h2 id="pro-modal-title" className="text-2xl font-extrabold text-slate-900 mb-2">{t('proModalTitle')}</h2>
             <p className="text-slate-600">
-              Thanks for subscribing. You now have access to the full Speakable toolkit.
+              {t('proModalDescription')}
             </p>
           </div>
           <div className="space-y-3 mb-8">
             <div className="flex items-center gap-3 p-3 rounded-lg bg-slate-50">
               <span className="material-symbols-outlined text-teal-600" aria-hidden="true">stacks</span>
               <div>
-                <p className="text-sm font-semibold text-slate-900">Batch Processing</p>
-                <p className="text-xs text-slate-500">Analyze multiple files in a single CLI run</p>
+                <p className="text-sm font-semibold text-slate-900">{t('proModalBatch')}</p>
+                <p className="text-xs text-slate-500">{t('proModalBatchDesc')}</p>
               </div>
             </div>
             <div className="flex items-center gap-3 p-3 rounded-lg bg-slate-50">
               <span className="material-symbols-outlined text-teal-600" aria-hidden="true">compare_arrows</span>
               <div>
-                <p className="text-sm font-semibold text-slate-900">Semantic Diff</p>
-                <p className="text-xs text-slate-500">Detect accessibility regressions between versions</p>
+                <p className="text-sm font-semibold text-slate-900">{t('proModalDiff')}</p>
+                <p className="text-xs text-slate-500">{t('proModalDiffDesc')}</p>
               </div>
             </div>
             <div className="flex items-center gap-3 p-3 rounded-lg bg-slate-50">
               <span className="material-symbols-outlined text-teal-600" aria-hidden="true">deployed_code</span>
               <div>
-                <p className="text-sm font-semibold text-slate-900">CI/CD Integration</p>
-                <p className="text-xs text-slate-500">Automate checks in GitHub Actions, GitLab CI, and more</p>
+                <p className="text-sm font-semibold text-slate-900">{t('proModalCicd')}</p>
+                <p className="text-xs text-slate-500">{t('proModalCicdDesc')}</p>
               </div>
             </div>
           </div>
@@ -227,19 +229,19 @@ export default function AnalyzerPage() {
               href="/docs/cicd-integration"
               className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg text-center transition-colors"
             >
-              Set Up CI/CD Integration
+              {t('proModalCtaCicd')}
             </Link>
             <Link
               href="/docs/usage-guide"
               className="w-full py-3 bg-teal-50 hover:bg-teal-100 text-teal-700 font-bold rounded-lg text-center transition-colors"
             >
-              View Pro Usage Guide
+              {t('proModalCtaGuide')}
             </Link>
             <button
               onClick={() => setShowProModal(false)}
               className="w-full py-2 text-slate-500 hover:text-slate-700 text-sm font-medium transition-colors"
             >
-              Continue to Analyzer
+              {t('proModalCtaContinue')}
             </button>
           </div>
         </div>
@@ -249,8 +251,8 @@ export default function AnalyzerPage() {
     <div className="pb-12 px-6">
       <div className="max-w-7xl mx-auto">
       <header className="mb-10 pt-12">
-        <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 mb-2">Accessibility Analyzer</h1>
-        <p className="text-lg text-gray-600">Paste or upload HTML to see how screen readers will announce it.</p>
+        <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 mb-2">{t('title')}</h1>
+        <p className="text-lg text-gray-600">{t('subtitle')}</p>
       </header>
 
       {/* Pro features banner */}
@@ -259,16 +261,16 @@ export default function AnalyzerPage() {
           <div className="flex items-center gap-3">
             <span className="material-symbols-outlined text-teal-600" aria-hidden="true" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
             <div>
-              <p className="text-sm font-semibold text-teal-900">Pro Plan Active</p>
-              <p className="text-xs text-teal-700">Batch processing, semantic diff, and CI/CD integration are available via the CLI.</p>
+              <p className="text-sm font-semibold text-teal-900">{t('proBannerTitle')}</p>
+              <p className="text-xs text-teal-700">{t('proBannerDescription')}</p>
             </div>
           </div>
           <div className="flex gap-2 shrink-0">
             <Link href="/docs/cicd-integration" className="text-xs font-semibold text-teal-700 bg-white px-3 py-1.5 rounded-lg border border-teal-200 hover:bg-teal-50 transition-colors">
-              CI/CD Setup
+              {t('proBannerCicd')}
             </Link>
             <Link href="/docs/usage-guide" className="text-xs font-semibold text-teal-700 bg-white px-3 py-1.5 rounded-lg border border-teal-200 hover:bg-teal-50 transition-colors">
-              Usage Guide
+              {t('proBannerGuide')}
             </Link>
           </div>
         </div>
@@ -280,11 +282,11 @@ export default function AnalyzerPage() {
           <div className="flex items-center gap-3">
             <span className="material-symbols-outlined text-blue-600" aria-hidden="true">upgrade</span>
             <p className="text-sm text-blue-800">
-              Upgrade to Pro for batch processing, semantic diff, and CI/CD integration.
+              {t('upgradeNudge')}
             </p>
           </div>
           <Link href="/pricing" className="text-xs font-semibold text-blue-700 bg-white px-3 py-1.5 rounded-lg border border-blue-200 hover:bg-blue-50 transition-colors shrink-0">
-            See Plans
+            {t('upgradeNudgeCta')}
           </Link>
         </div>
       )}
@@ -335,7 +337,7 @@ export default function AnalyzerPage() {
                 <button type="button" onClick={() => fileInputRef.current?.click()}
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-3 h-10 border border-gray-300 rounded text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">
                   <span className="material-symbols-outlined text-[20px]" aria-hidden="true">upload</span>
-                  Upload .html file
+                  {t('uploadFile')}
                 </button>
                 <div>
                   <label htmlFor="sr-select" className="sr-only">Screen reader</label>
@@ -353,7 +355,7 @@ export default function AnalyzerPage() {
                     placeholder="e.g. button, .my-class" value={cssSelector} onChange={(e) => setCssSelector(e.target.value)} />
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-medium text-gray-600" id="diff-label">Diff mode</span>
+                  <span className="text-sm font-medium text-gray-600" id="diff-label">{t('diffMode')}</span>
                   <button type="button" role="switch" aria-checked={diffMode} aria-labelledby="diff-label"
                     onClick={() => setDiffMode(!diffMode)}
                     className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${diffMode ? 'bg-blue-600' : 'bg-gray-200'}`}>
@@ -395,7 +397,7 @@ export default function AnalyzerPage() {
             <div className="border border-amber-200 bg-amber-50 rounded-lg p-4 flex items-start gap-3">
               <span className="material-symbols-outlined text-amber-600" aria-hidden="true">warning</span>
               <div className="text-sm text-amber-800">
-                <span className="font-semibold">Parser Status:</span> No issues detected. Ready to analyze.
+                <span className="font-semibold">{t('parserStatus')}</span> {t('noIssues')}
               </div>
             </div>
           )}
@@ -482,7 +484,7 @@ export default function AnalyzerPage() {
                   <pre className="font-mono text-sm leading-relaxed text-green-400 whitespace-pre-wrap">
                     {result
                       ? panelContent || '(empty)'
-                      : <><span className="text-gray-400 select-none">{'// Awaiting analysis...\n'}</span><span className="text-gray-300">Paste HTML and click Analyze to see results.</span></>
+                      : <><span className="text-gray-400 select-none">{'// '}{t('awaitingAnalysis')}{'\n'}</span><span className="text-gray-300">{t('awaitingAnalysis')}</span></>
                     }
                   </pre>
                 </div>
@@ -492,7 +494,7 @@ export default function AnalyzerPage() {
             <div className="p-4 bg-teal-50 border-t border-teal-100">
               <div className="flex gap-2 items-center text-xs text-teal-700">
                 <span className="material-symbols-outlined text-[16px]" aria-hidden="true">lightbulb</span>
-                <span>Tip: Use CSS selectors to focus analysis on specific elements.</span>
+                <span>{t('tip')}</span>
               </div>
             </div>
           </div>

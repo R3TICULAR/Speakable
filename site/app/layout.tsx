@@ -8,6 +8,7 @@ import { RouteAnnouncer } from '../components/RouteAnnouncer';
 import { LiveRegionProvider } from '../components/LiveRegion';
 import { AxeDevTools } from '../components/AxeDevTools';
 import { CookieConsent } from '../components/CookieConsent';
+import { HreflangTags } from '../components/HreflangTags';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
@@ -17,7 +18,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/',
     languages: {
-      'en': '/',
+      'en': '/?lang=en',
+      'es': '/?lang=es',
+      'ja': '/?lang=ja',
       'x-default': '/',
     },
   },
@@ -53,11 +56,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang={locale} dir={dir} className="scroll-smooth">
       <head>
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        {/* hreflang for international SEO — tells search engines about language versions */}
-        <link rel="alternate" hrefLang="en" href="https://getspeakable.dev" />
-        <link rel="alternate" hrefLang="es" href="https://getspeakable.dev" />
-        <link rel="alternate" hrefLang="ja" href="https://getspeakable.dev" />
-        <link rel="alternate" hrefLang="x-default" href="https://getspeakable.dev" />
+        {/* hreflang for international SEO — dynamic per-page */}
+        <HreflangTags />
         {/* GA is loaded dynamically by CookieConsent component after user accepts */}
         <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"

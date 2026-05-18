@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { useUser, useAuth, useClerk } from '@clerk/nextjs';
 import { useTranslations } from 'next-intl';
 import { trackNavClick, trackCTAClick } from '../lib/analytics';
+import { LocaleSwitcher } from './LocaleSwitcher';
 
 interface NavRoute {
   labelKey: string;
@@ -97,6 +98,9 @@ export function Navigation() {
         </div>
 
         <div className="flex items-center gap-4">
+          <div className="hidden md:block">
+            <LocaleSwitcher />
+          </div>
           {!isLoaded ? (
             <div className="hidden md:flex items-center gap-3">
               <div className="h-8 w-16 bg-slate-200 rounded animate-pulse" />

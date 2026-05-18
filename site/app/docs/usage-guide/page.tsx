@@ -1,24 +1,27 @@
-export default function UsageGuidePage() {
+import { getTranslations } from 'next-intl/server';
+
+export default async function UsageGuidePage() {
+  const t = await getTranslations('usageGuide');
+
   return (
     <>
       <header className="mb-12">
         <nav className="flex items-center gap-2 text-xs text-slate-400 mb-4" aria-label="Breadcrumb">
           <span>Docs</span>
           <span className="material-symbols-outlined text-[14px]" aria-hidden="true">chevron_right</span>
-          <span className="text-slate-600">Usage Guide</span>
+          <span className="text-slate-600">{t('breadcrumb')}</span>
         </nav>
-        <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight mb-4">Usage Guide</h1>
+        <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight mb-4">{t('title')}</h1>
         <p className="text-lg text-slate-600 leading-relaxed">
-          Everything you need to analyze HTML accessibility with Speakable — from installation
-          to CI/CD integration.
+          {t('subtitle')}
         </p>
       </header>
 
       {/* Installation */}
       <section className="mb-16">
-        <h2 className="text-2xl font-bold text-slate-900 mb-4">Installation</h2>
+        <h2 className="text-2xl font-bold text-slate-900 mb-4">{t('installation.heading')}</h2>
         <p className="text-slate-600 mb-6 leading-relaxed">
-          Install as a project dependency for programmatic use and CI pipelines, or globally for CLI access anywhere.
+          {t('installation.description')}
         </p>
         <div className="rounded-xl overflow-hidden bg-slate-900 shadow-2xl mb-4">
           <div className="flex justify-between items-center px-4 py-2 bg-white/5 border-b border-white/10">
@@ -41,10 +44,9 @@ export default function UsageGuidePage() {
 
       {/* CLI Commands */}
       <section className="mb-16">
-        <h2 className="text-2xl font-bold text-slate-900 mb-4">CLI Commands</h2>
+        <h2 className="text-2xl font-bold text-slate-900 mb-4">{t('cliCommands.heading')}</h2>
         <p className="text-slate-600 mb-6 leading-relaxed">
-          The <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm font-mono">speakable</code> binary
-          accepts HTML file paths as arguments. All options are flags — no subcommands.
+          {t('cliCommands.description')}
         </p>
         <div className="rounded-xl overflow-hidden bg-slate-900 shadow-2xl mb-6">
           <div className="flex justify-between items-center px-4 py-2 bg-white/5 border-b border-white/10">
@@ -116,9 +118,9 @@ export default function UsageGuidePage() {
 
       {/* Output Formats */}
       <section className="mb-16">
-        <h2 className="text-2xl font-bold text-slate-900 mb-4">Output Formats</h2>
+        <h2 className="text-2xl font-bold text-slate-900 mb-4">{t('outputFormats.heading')}</h2>
         <p className="text-slate-600 mb-6 leading-relaxed">
-          Speakable supports four output formats, each suited to different workflows.
+          {t('outputFormats.description')}
         </p>
         <div className="overflow-x-auto mb-6">
           <table className="w-full text-sm text-left">
@@ -157,29 +159,26 @@ export default function UsageGuidePage() {
 
       {/* Pro Features */}
       <section className="mb-16">
-        <h2 className="text-2xl font-bold text-slate-900 mb-4">Pro Features</h2>
+        <h2 className="text-2xl font-bold text-slate-900 mb-4">{t('proFeatures.heading')}</h2>
         <div className="space-y-6">
           <div className="p-4 border border-slate-200 rounded-lg bg-slate-50/50">
-            <h3 className="font-bold text-sm text-slate-900 mb-2">Batch Processing</h3>
+            <h3 className="font-bold text-sm text-slate-900 mb-2">{t('proFeatures.batch.title')}</h3>
             <p className="text-sm text-slate-600 mb-2">
-              Analyze multiple files in a single run. Batch mode continues processing even if
-              individual files fail, and reports a summary at the end.
+              {t('proFeatures.batch.description')}
             </p>
             <code className="text-xs font-mono text-slate-500">speakable --batch file1.html file2.html file3.html</code>
           </div>
           <div className="p-4 border border-slate-200 rounded-lg bg-slate-50/50">
-            <h3 className="font-bold text-sm text-slate-900 mb-2">Semantic Diff</h3>
+            <h3 className="font-bold text-sm text-slate-900 mb-2">{t('proFeatures.diff.title')}</h3>
             <p className="text-sm text-slate-600 mb-2">
-              Compare before/after HTML to detect accessibility regressions. The diff identifies
-              added, removed, and changed nodes with property-level detail (name, role, state, focus).
+              {t('proFeatures.diff.description')}
             </p>
             <code className="text-xs font-mono text-slate-500">speakable new.html --diff old.html</code>
           </div>
           <div className="p-4 border border-slate-200 rounded-lg bg-slate-50/50">
-            <h3 className="font-bold text-sm text-slate-900 mb-2">CI/CD Integration</h3>
+            <h3 className="font-bold text-sm text-slate-900 mb-2">{t('proFeatures.cicd.title')}</h3>
             <p className="text-sm text-slate-600 mb-2">
-              Use exit codes and JSON output for automated pipeline checks. Exit 0 = success,
-              exit 1 = user error, exit 2 = content issues or diff changes, exit 3 = system error.
+              {t('proFeatures.cicd.description')}
             </p>
             <code className="text-xs font-mono text-slate-500">npx @reticular/speakable page.html -f audit</code>
           </div>
@@ -188,54 +187,41 @@ export default function UsageGuidePage() {
 
       {/* Web Analyzer */}
       <section className="mb-16">
-        <h2 className="text-2xl font-bold text-slate-900 mb-4">Web Analyzer</h2>
+        <h2 className="text-2xl font-bold text-slate-900 mb-4">{t('webAnalyzer.heading')}</h2>
         <p className="text-slate-600 mb-4 leading-relaxed">
-          The web analyzer at <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm font-mono">/tool</code> lets
-          you paste HTML directly and see results instantly — no installation required.
+          {t('webAnalyzer.description')}
         </p>
         <ol className="list-decimal list-inside space-y-2 text-slate-600 mb-4">
-          <li>Paste your HTML into the textarea</li>
-          <li>Select a screen reader (NVDA, JAWS, VoiceOver, or All)</li>
-          <li>Optionally enter a CSS selector to focus on specific elements</li>
-          <li>Click Analyze to see the predicted output</li>
+          <li>{t('webAnalyzer.steps.0')}</li>
+          <li>{t('webAnalyzer.steps.1')}</li>
+          <li>{t('webAnalyzer.steps.2')}</li>
+          <li>{t('webAnalyzer.steps.3')}</li>
         </ol>
         <p className="text-slate-600 leading-relaxed mb-4">
-          Toggle diff mode to compare two HTML snippets side by side. Speakable will show
-          you exactly which accessibility tree nodes were added, removed, or changed between
-          the two versions.
+          {t('webAnalyzer.diffNote')}
         </p>
         <p className="text-slate-600 leading-relaxed">
-          After analyzing, click the 🔊 icon in the output toolbar to hear the results read
-          aloud, or switch to line-by-line mode to navigate the output one announcement at a
-          time using keyboard shortcuts.
+          {t('webAnalyzer.voiceNote')}
         </p>
       </section>
 
       {/* Voice Announcer */}
       <section className="mb-16">
-        <h2 className="text-2xl font-bold text-slate-900 mb-4">Voice Announcer</h2>
+        <h2 className="text-2xl font-bold text-slate-900 mb-4">{t('voiceAnnouncer.heading')}</h2>
         <p className="text-slate-600 mb-4 leading-relaxed">
-          The web analyzer and browser extension include a built-in voice announcer that reads
-          analysis output aloud using the browser&apos;s native SpeechSynthesis API. This lets you
-          hear what screen readers would say — useful for auditory review, demos, and building
-          intuition for how assistive technology interprets your markup.
+          {t('voiceAnnouncer.description')}
         </p>
         <div className="space-y-6">
           <div className="p-4 border border-slate-200 rounded-lg bg-slate-50/50">
-            <h3 className="font-bold text-sm text-slate-900 mb-2">Play All</h3>
+            <h3 className="font-bold text-sm text-slate-900 mb-2">{t('voiceAnnouncer.playAll.title')}</h3>
             <p className="text-sm text-slate-600">
-              Reads the entire output sequentially with pauses between lines and longer pauses
-              between screen reader sections (when using &quot;All&quot; mode). Click the 🔊 icon in the
-              output toolbar and select &quot;Play All&quot;. You can pause, resume, and stop playback at
-              any time.
+              {t('voiceAnnouncer.playAll.description')}
             </p>
           </div>
           <div className="p-4 border border-slate-200 rounded-lg bg-slate-50/50">
-            <h3 className="font-bold text-sm text-slate-900 mb-2">Line-by-Line Navigation</h3>
+            <h3 className="font-bold text-sm text-slate-900 mb-2">{t('voiceAnnouncer.lineByLine.title')}</h3>
             <p className="text-sm text-slate-600 mb-2">
-              Mimics how screen reader users actually navigate: one element at a time. Select
-              &quot;Line-by-Line&quot; from the voice dropdown, then use keyboard shortcuts to step through
-              the output. Each line is spoken aloud and visually highlighted as you navigate.
+              {t('voiceAnnouncer.lineByLine.description')}
             </p>
             <div className="mt-3 overflow-x-auto">
               <table className="w-full text-xs text-left">
@@ -267,11 +253,9 @@ export default function UsageGuidePage() {
             </div>
           </div>
           <div className="p-4 border border-slate-200 rounded-lg bg-slate-50/50">
-            <h3 className="font-bold text-sm text-slate-900 mb-2">Voice &amp; Speed Controls</h3>
+            <h3 className="font-bold text-sm text-slate-900 mb-2">{t('voiceAnnouncer.voiceSpeed.title')}</h3>
             <p className="text-sm text-slate-600">
-              The voice dropdown also includes a voice selector (populated from your browser&apos;s
-              available TTS voices) and a speed slider ranging from 0.5x to 2.0x. These work
-              in both the web tool and the Chrome extension.
+              {t('voiceAnnouncer.voiceSpeed.description')}
             </p>
           </div>
         </div>
@@ -279,52 +263,48 @@ export default function UsageGuidePage() {
 
       {/* Best Practices */}
       <section className="mb-16">
-        <h2 className="text-2xl font-bold text-slate-900 mb-4">Best Practices</h2>
+        <h2 className="text-2xl font-bold text-slate-900 mb-4">{t('bestPractices.heading')}</h2>
         <div className="space-y-4">
           <div className="flex gap-3">
             <span className="text-emerald-500 font-bold text-lg leading-tight">1.</span>
             <div>
-              <p className="text-slate-900 font-semibold text-sm">Run in CI for regression detection</p>
-              <p className="text-slate-600 text-sm">Add Speakable to your build pipeline so every PR is checked for accessibility changes.</p>
+              <p className="text-slate-900 font-semibold text-sm">{t('bestPractices.0.title')}</p>
+              <p className="text-slate-600 text-sm">{t('bestPractices.0.description')}</p>
             </div>
           </div>
           <div className="flex gap-3">
             <span className="text-emerald-500 font-bold text-lg leading-tight">2.</span>
             <div>
-              <p className="text-slate-900 font-semibold text-sm">Use selectors for component-level analysis</p>
+              <p className="text-slate-900 font-semibold text-sm">{t('bestPractices.1.title')}</p>
               <p className="text-slate-600 text-sm">
-                Focus on specific components with <code className="rounded bg-slate-100 px-1 py-0.5 text-xs font-mono">--selector</code> rather
-                than analyzing entire pages.
+                {t('bestPractices.1.description')}
               </p>
             </div>
           </div>
           <div className="flex gap-3">
             <span className="text-emerald-500 font-bold text-lg leading-tight">3.</span>
             <div>
-              <p className="text-slate-900 font-semibold text-sm">Check all three readers</p>
+              <p className="text-slate-900 font-semibold text-sm">{t('bestPractices.2.title')}</p>
               <p className="text-slate-600 text-sm">
-                Use <code className="rounded bg-slate-100 px-1 py-0.5 text-xs font-mono">-s all</code> to
-                see cross-platform differences. NVDA, JAWS, and VoiceOver each have unique announcement patterns.
+                {t('bestPractices.2.description')}
               </p>
             </div>
           </div>
           <div className="flex gap-3">
             <span className="text-emerald-500 font-bold text-lg leading-tight">4.</span>
             <div>
-              <p className="text-slate-900 font-semibold text-sm">Save JSON baselines for snapshot testing</p>
+              <p className="text-slate-900 font-semibold text-sm">{t('bestPractices.3.title')}</p>
               <p className="text-slate-600 text-sm">
-                Store JSON output as baselines, then use <code className="rounded bg-slate-100 px-1 py-0.5 text-xs font-mono">--diff</code> to
-                detect changes between versions.
+                {t('bestPractices.3.description')}
               </p>
             </div>
           </div>
           <div className="flex gap-3">
             <span className="text-emerald-500 font-bold text-lg leading-tight">5.</span>
             <div>
-              <p className="text-slate-900 font-semibold text-sm">Start with audit reports</p>
+              <p className="text-slate-900 font-semibold text-sm">{t('bestPractices.4.title')}</p>
               <p className="text-slate-600 text-sm">
-                Use <code className="rounded bg-slate-100 px-1 py-0.5 text-xs font-mono">-f audit</code> for
-                a quick overview of accessibility health before diving into specific reader output.
+                {t('bestPractices.4.description')}
               </p>
             </div>
           </div>

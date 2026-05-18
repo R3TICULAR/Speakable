@@ -45,7 +45,24 @@
     "tip": "Consejo: Usa selectores CSS para enfocar el análisis en elementos específicos.",
     "parserStatus": "Estado del parser:",
     "noIssues": "Sin problemas detectados. Listo para analizar.",
-    "warnings": "{count} advertencia(s):"
+    "warnings": "{count} advertencia(s):",
+    "proModalTitle": "Bienvenido a Pro",
+    "proModalDescription": "Gracias por suscribirse. Ahora tiene acceso al kit completo de herramientas de Speakable.",
+    "proModalBatch": "Procesamiento por lotes",
+    "proModalBatchDesc": "Analice múltiples archivos en una sola ejecución de CLI",
+    "proModalDiff": "Diff semántico",
+    "proModalDiffDesc": "Detecte regresiones de accesibilidad entre versiones",
+    "proModalCicd": "Integración CI/CD",
+    "proModalCicdDesc": "Automatice verificaciones en GitHub Actions, GitLab CI y más",
+    "proModalCtaCicd": "Configurar integración CI/CD",
+    "proModalCtaGuide": "Ver guía de uso Pro",
+    "proModalCtaContinue": "Continuar al analizador",
+    "proBannerTitle": "Plan Pro activo",
+    "proBannerDescription": "Procesamiento por lotes, diff semántico e integración CI/CD disponibles vía CLI.",
+    "proBannerCicd": "Configurar CI/CD",
+    "proBannerGuide": "Guía de uso",
+    "upgradeNudge": "Actualice a Pro para procesamiento por lotes, diff semántico e integración CI/CD.",
+    "upgradeNudgeCta": "Ver planes"
   },
   "voice": {
     "controls": "Controles de voz",
@@ -77,7 +94,240 @@
     "proDescription": "Procesamiento por lotes, diff semántico e integración CI/CD disponibles vía CLI.",
     "cicdSetup": "Configurar CI/CD",
     "usageGuide": "Guía de uso",
-    "upgradePrompt": "Actualiza a Pro para procesamiento por lotes, diff semántico e integración CI/CD.",
+    "upgradePrompt": "Actualice a Pro para procesamiento por lotes, diff semántico e integración CI/CD.",
     "seePlans": "Ver planes"
+  },
+  "pricingPage": {
+    "title": "Precios",
+    "subtitle": "La herramienta de análisis es gratuita. Pague por la automatización del flujo de trabajo.",
+    "recommended": "Recomendado",
+    "tierFreeName": "Gratuito",
+    "tierProName": "Pro",
+    "tierTeamName": "Equipo / Empresa",
+    "tierFreePrice": "Gratuito",
+    "tierProPrice": "$19",
+    "tierTeamPrice": "Precio personalizado",
+    "priceSuffix": "/mes por usuario",
+    "featureUnlimitedWeb": "Uso ilimitado de la herramienta web",
+    "featureSingleFile": "Análisis CLI de un solo archivo",
+    "featureAllScreenReaders": "Todos los lectores de pantalla (NVDA, JAWS, VoiceOver)",
+    "featureAuditReport": "Generación de informes de auditoría",
+    "featureEverythingFree": "Todo lo incluido en Gratuito",
+    "featureBatch": "Procesamiento por lotes (múltiples archivos)",
+    "featureCicd": "Integración CI/CD con salida JSON",
+    "featureSemanticDiff": "Diff semántico (comparación antes/después)",
+    "featurePrioritySupport": "Soporte prioritario",
+    "featureEverythingPro": "Todo lo incluido en Pro",
+    "featureTeamDashboards": "Paneles de equipo compartidos e informes históricos",
+    "featureCustomRules": "Configuración de reglas personalizadas",
+    "featureSso": "Autenticación SSO/SAML",
+    "featureSla": "SLA y soporte dedicado",
+    "featureVolume": "Precios por volumen",
+    "ctaFree": "Comenzar",
+    "ctaPro": "Iniciar prueba Pro",
+    "ctaTeam": "Contactar ventas",
+    "loading": "Cargando…",
+    "screenReaderInfo": "Todos los lectores de pantalla están disponibles en cada plan — nunca restringimos las funciones de accesibilidad detrás de un muro de pago."
+  },
+  "landing": {
+    "hero": {
+      "badge": "Versión {version} disponible",
+      "title": "Previsualice lo que dirán los lectores de pantalla antes de que sus usuarios lo escuchen",
+      "description": "Speakable simula cómo NVDA, JAWS y VoiceOver interpretan su HTML, ayudándole a detectar problemas de lector de pantalla en las primeras etapas del desarrollo. Menos pruebas manuales, menos sorpresas en producción.",
+      "ctaTool": "Probar el analizador",
+      "ctaDocs": "Ver documentación"
+    },
+    "features": {
+      "heading": "Herramientas de accesibilidad pensadas para desarrolladores",
+      "subheading": "Vaya más allá del linting basado en reglas. Vea cómo las tecnologías de asistencia realmente interpretan su marcado y detecte problemas antes de que lleguen a los usuarios.",
+      "0": {
+        "title": "Simulación multiplataforma",
+        "description": "Simule la salida de NVDA, JAWS y VoiceOver desde una sola herramienta. Reduzca la dependencia de múltiples sistemas operativos y dispositivos de hardware para las pruebas de lector de pantalla."
+      },
+      "1": {
+        "title": "Informes de auditoría de accesibilidad",
+        "description": "Genere informes de auditoría detallados alineados con las directrices WCAG. Cada informe identifica problemas de landmarks, jerarquía de encabezados y nombres accesibles faltantes con pasos de corrección accionables."
+      },
+      "2": {
+        "title": "Diff semántico",
+        "description": "Compare HTML antes y después para detectar regresiones de accesibilidad tempranamente. Vea cómo los cambios en el DOM afectan la salida del lector de pantalla antes de fusionar."
+      },
+      "3": {
+        "title": "Integración CI/CD",
+        "description": "Ejecute verificaciones automatizadas de simulación de lector de pantalla en su pipeline de compilación. Ayude a detectar problemas de accesibilidad antes de que lleguen a producción."
+      }
+    },
+    "workflow": {
+      "heading": "Cómo Speakable se integra en su flujo de trabajo",
+      "subheading": "Cierre la brecha entre el código y la accesibilidad incorporando la simulación de lector de pantalla directamente en su ciclo de desarrollo existente.",
+      "steps": {
+        "0": {
+          "stage": "Etapa 01",
+          "title": "Desarrollo local",
+          "description": "Ejecute Speakable contra su HTML localmente para previsualizar la salida del lector de pantalla antes de hacer commit. Detecte problemas en el origen."
+        },
+        "1": {
+          "stage": "Etapa 02",
+          "title": "Pull Requests",
+          "description": "Detección de regresiones mediante diff semántico. Detecte cambios de accesibilidad en la revisión de código antes de fusionar."
+        },
+        "2": {
+          "stage": "Etapa 03",
+          "title": "Pipelines CI/CD",
+          "description": "Verificaciones automatizadas ejecutando Speakable en pipelines de compilación, fallando builds en regresiones para mantener la calidad."
+        },
+        "3": {
+          "stage": "Etapa 04",
+          "title": "Monitoreo continuo",
+          "description": "Prevenga regresiones a lo largo del tiempo. Mantenga los estándares de accesibilidad en cada versión de producción."
+        }
+      },
+      "speedUp": {
+        "title": "Acelere las revisiones",
+        "description": "En lugar de inspección manual, deje que Speakable genere un diff semántico. Vea cómo cambia la experiencia del lector de pantalla entre versiones.",
+        "cta": "Leer la documentación"
+      },
+      "disclaimer": "Speakable complementa las pruebas manuales de lector de pantalla — no las reemplaza. Úselo para detectar problemas tempranamente y reducir la carga de pruebas manuales."
+    },
+    "enterprise": {
+      "badge": "Nivel empresarial",
+      "heading": "Diseñado para soportar flujos de accesibilidad a escala",
+      "description": "Los problemas de usabilidad del lector de pantalla son una causa principal de quejas de accesibilidad. La CLI de Speakable se integra directamente en sus flujos de trabajo CI/CD, ayudando a los equipos a identificar estos problemas más temprano en el desarrollo — en toda su aplicación.",
+      "points": {
+        "0": "Motor de simulación local sin latencia",
+        "1": "Procesamiento por lotes en bases de código completas",
+        "2": "Detección de regresiones mediante diffing semántico"
+      },
+      "stat1": {
+        "value": "Alta fidelidad",
+        "label": "Simulación alineada con especificaciones"
+      },
+      "stat2": {
+        "value": "3 lectores",
+        "label": "NVDA · JAWS · VoiceOver"
+      },
+      "imageAlt": "Informe de auditoría CLI de Speakable mostrando análisis de accesibilidad con colores, estructura de landmarks, jerarquía de encabezados e indicadores de severidad de problemas"
+    },
+    "teams": {
+      "0": {
+        "title": "Estándares compartidos",
+        "description": "Todos validan contra la misma simulación. No más discrepancias de accesibilidad \"funciona en mi máquina\" entre diferentes entornos de desarrollo."
+      },
+      "1": {
+        "title": "Validación consistente",
+        "description": "Las mismas verificaciones se ejecutan localmente en la CLI, durante revisiones de PR y dentro de sus pipelines CI/CD para confiabilidad de extremo a extremo."
+      },
+      "2": {
+        "title": "Regresiones reducidas",
+        "description": "Detecte problemas de lector de pantalla antes de que se acumulen en bases de código grandes. Mantenga la salud de accesibilidad a medida que su organización de ingeniería crece."
+      },
+      "3": {
+        "title": "Integración en el flujo de trabajo",
+        "description": "Soporte nativo para revisiones de PR y pipelines de compilación automatizados con paneles de equipo centralizados para visibilidad a nivel organizacional."
+      },
+      "heading": "Diseñado para equipos, no solo para individuos",
+      "subheading": "Establezca estándares de accesibilidad compartidos y asegure una validación consistente en toda su organización de ingeniería.",
+      "cta": "Leer la documentación"
+    },
+    "whyItMatters": {
+      "heading": "Por qué importan los problemas de lector de pantalla",
+      "paragraph1": "Los problemas de usabilidad del lector de pantalla se encuentran entre las fuentes más comunes de fallos de accesibilidad en la web. Estos problemas a menudo pasan desapercibidos hasta las últimas etapas del desarrollo — o hasta que los usuarios los reportan.",
+      "paragraph2": "Las pruebas manuales de lector de pantalla son lentas y difíciles de escalar en aplicaciones grandes. Speakable ayuda a los equipos a identificar estos problemas más temprano en el ciclo de desarrollo, antes de que lleguen a producción.",
+      "legal": "Con las crecientes expectativas de accesibilidad bajo leyes como la ADA, la detección temprana no es solo una buena práctica — es mitigación de riesgos.",
+      "challenge": {
+        "label": "El desafío",
+        "title": "Las pruebas manuales son un cuello de botella.",
+        "description": "Las herramientas de accesibilidad estándar detectan la sintaxis, pero pasan por alto la experiencia del usuario. La simulación automatizada cierra la brecha entre el código sin procesar y la interacción humana real."
+      }
+    },
+    "cta": {
+      "heading": "¿Listo para mejorar su flujo de trabajo de accesibilidad?",
+      "description": "Detecte problemas de lector de pantalla tempranamente, prevenga regresiones y construya mejores experiencias para los usuarios de tecnologías de asistencia.",
+      "pricing": "Ver precios",
+      "docs": "Leer la documentación"
+    }
+  },
+  "usageGuide": {
+    "breadcrumb": "Guía de uso",
+    "title": "Guía de uso",
+    "subtitle": "Todo lo que necesita para analizar la accesibilidad HTML con Speakable — desde la instalación hasta la integración CI/CD.",
+    "installation": {
+      "heading": "Instalación",
+      "description": "Instale como dependencia de proyecto para uso programático y pipelines CI, o globalmente para acceso CLI en cualquier lugar."
+    },
+    "cliCommands": {
+      "heading": "Comandos CLI",
+      "description": "El binario speakable acepta rutas de archivos HTML como argumentos. Todas las opciones son flags — sin subcomandos."
+    },
+    "outputFormats": {
+      "heading": "Formatos de salida",
+      "description": "Speakable admite cuatro formatos de salida, cada uno adecuado para diferentes flujos de trabajo."
+    },
+    "proFeatures": {
+      "heading": "Funciones Pro",
+      "batch": {
+        "title": "Procesamiento por lotes",
+        "description": "Analice múltiples archivos en una sola ejecución. El modo por lotes continúa procesando incluso si archivos individuales fallan, y reporta un resumen al final."
+      },
+      "diff": {
+        "title": "Diff semántico",
+        "description": "Compare HTML antes/después para detectar regresiones de accesibilidad. El diff identifica nodos añadidos, eliminados y modificados con detalle a nivel de propiedad (nombre, rol, estado, foco)."
+      },
+      "cicd": {
+        "title": "Integración CI/CD",
+        "description": "Use códigos de salida y salida JSON para verificaciones automatizadas de pipeline. Exit 0 = éxito, exit 1 = error de usuario, exit 2 = problemas de contenido o cambios en diff, exit 3 = error del sistema."
+      }
+    },
+    "webAnalyzer": {
+      "heading": "Analizador web",
+      "description": "El analizador web en /tool le permite pegar HTML directamente y ver resultados al instante — sin necesidad de instalación.",
+      "steps": {
+        "0": "Pegue su HTML en el área de texto",
+        "1": "Seleccione un lector de pantalla (NVDA, JAWS, VoiceOver o Todos)",
+        "2": "Opcionalmente ingrese un selector CSS para enfocarse en elementos específicos",
+        "3": "Haga clic en Analizar para ver la salida predicha"
+      },
+      "diffNote": "Active el modo diff para comparar dos fragmentos HTML lado a lado. Speakable le mostrará exactamente qué nodos del árbol de accesibilidad fueron añadidos, eliminados o modificados entre las dos versiones.",
+      "voiceNote": "Después de analizar, haga clic en el icono 🔊 en la barra de herramientas de salida para escuchar los resultados en voz alta, o cambie al modo línea por línea para navegar la salida un anuncio a la vez usando atajos de teclado."
+    },
+    "voiceAnnouncer": {
+      "heading": "Anunciador de voz",
+      "description": "El analizador web y la extensión del navegador incluyen un anunciador de voz integrado que lee la salida del análisis en voz alta usando la API nativa SpeechSynthesis del navegador.",
+      "playAll": {
+        "title": "Reproducir todo",
+        "description": "Lee toda la salida secuencialmente con pausas entre líneas y pausas más largas entre secciones de lectores de pantalla."
+      },
+      "lineByLine": {
+        "title": "Navegación línea por línea",
+        "description": "Imita cómo los usuarios de lectores de pantalla realmente navegan: un elemento a la vez."
+      },
+      "voiceSpeed": {
+        "title": "Controles de voz y velocidad",
+        "description": "El menú desplegable de voz incluye un selector de voz y un control deslizante de velocidad que va de 0.5x a 2.0x."
+      }
+    },
+    "bestPractices": {
+      "heading": "Mejores prácticas",
+      "0": {
+        "title": "Ejecute en CI para detección de regresiones",
+        "description": "Agregue Speakable a su pipeline de compilación para que cada PR sea verificado por cambios de accesibilidad."
+      },
+      "1": {
+        "title": "Use selectores para análisis a nivel de componente",
+        "description": "Enfóquese en componentes específicos con --selector en lugar de analizar páginas completas."
+      },
+      "2": {
+        "title": "Verifique los tres lectores",
+        "description": "Use -s all para ver diferencias entre plataformas. NVDA, JAWS y VoiceOver tienen patrones de anuncio únicos."
+      },
+      "3": {
+        "title": "Guarde líneas base JSON para pruebas de snapshot",
+        "description": "Almacene la salida JSON como líneas base, luego use --diff para detectar cambios entre versiones."
+      },
+      "4": {
+        "title": "Comience con informes de auditoría",
+        "description": "Use -f audit para una visión general rápida de la salud de accesibilidad antes de profundizar en la salida de lectores específicos."
+      }
+    }
   }
 }

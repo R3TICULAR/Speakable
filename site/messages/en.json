@@ -45,7 +45,24 @@
     "tip": "Tip: Use CSS selectors to focus analysis on specific elements.",
     "parserStatus": "Parser Status:",
     "noIssues": "No issues detected. Ready to analyze.",
-    "warnings": "{count} warning(s):"
+    "warnings": "{count} warning(s):",
+    "proModalTitle": "Welcome to Pro",
+    "proModalDescription": "Thanks for subscribing. You now have access to the full Speakable toolkit.",
+    "proModalBatch": "Batch Processing",
+    "proModalBatchDesc": "Analyze multiple files in a single CLI run",
+    "proModalDiff": "Semantic Diff",
+    "proModalDiffDesc": "Detect accessibility regressions between versions",
+    "proModalCicd": "CI/CD Integration",
+    "proModalCicdDesc": "Automate checks in GitHub Actions, GitLab CI, and more",
+    "proModalCtaCicd": "Set Up CI/CD Integration",
+    "proModalCtaGuide": "View Pro Usage Guide",
+    "proModalCtaContinue": "Continue to Analyzer",
+    "proBannerTitle": "Pro Plan Active",
+    "proBannerDescription": "Batch processing, semantic diff, and CI/CD integration are available via the CLI.",
+    "proBannerCicd": "CI/CD Setup",
+    "proBannerGuide": "Usage Guide",
+    "upgradeNudge": "Upgrade to Pro for batch processing, semantic diff, and CI/CD integration.",
+    "upgradeNudgeCta": "See Plans"
   },
   "voice": {
     "controls": "Voice controls",
@@ -79,5 +96,238 @@
     "usageGuide": "Usage Guide",
     "upgradePrompt": "Upgrade to Pro for batch processing, semantic diff, and CI/CD integration.",
     "seePlans": "See Plans"
+  },
+  "pricingPage": {
+    "title": "Pricing",
+    "subtitle": "The analysis tool is free. Pay for workflow automation.",
+    "recommended": "Recommended",
+    "tierFreeName": "Free",
+    "tierProName": "Pro",
+    "tierTeamName": "Team / Enterprise",
+    "tierFreePrice": "Free",
+    "tierProPrice": "$19",
+    "tierTeamPrice": "Custom pricing",
+    "priceSuffix": "/mo per seat",
+    "featureUnlimitedWeb": "Unlimited web tool usage",
+    "featureSingleFile": "Single-file CLI analysis",
+    "featureAllScreenReaders": "All screen readers (NVDA, JAWS, VoiceOver)",
+    "featureAuditReport": "Audit report generation",
+    "featureEverythingFree": "Everything in Free",
+    "featureBatch": "Batch processing (multiple files)",
+    "featureCicd": "CI/CD pipeline integration with JSON output",
+    "featureSemanticDiff": "Semantic diff (before/after comparison)",
+    "featurePrioritySupport": "Priority support",
+    "featureEverythingPro": "Everything in Pro",
+    "featureTeamDashboards": "Shared team dashboards and historical reports",
+    "featureCustomRules": "Custom rule configuration",
+    "featureSso": "SSO/SAML authentication",
+    "featureSla": "SLA and dedicated support",
+    "featureVolume": "Volume pricing",
+    "ctaFree": "Get Started",
+    "ctaPro": "Start Pro Trial",
+    "ctaTeam": "Contact Sales",
+    "loading": "Loading…",
+    "screenReaderInfo": "All screen readers are available on every tier — we never gate accessibility features behind a paywall."
+  },
+  "landing": {
+    "hero": {
+      "badge": "Version {version} Now Available",
+      "title": "Preview what screen readers will say before your users hear it",
+      "description": "Speakable simulates how NVDA, JAWS, and VoiceOver interpret your HTML, helping you catch screen reader issues early in development. Less manual testing overhead, fewer surprises in production.",
+      "ctaTool": "Try the Analyzer",
+      "ctaDocs": "View Documentation"
+    },
+    "features": {
+      "heading": "Developer-first accessibility tooling",
+      "subheading": "Go beyond rule-based linting. See how assistive technologies actually interpret your markup, and catch issues before they reach users.",
+      "0": {
+        "title": "Cross-Platform Simulation",
+        "description": "Simulate NVDA, JAWS, and VoiceOver output from a single tool. Reduce reliance on multiple operating systems and hardware devices for screen reader testing."
+      },
+      "1": {
+        "title": "Accessibility Audit Reports",
+        "description": "Generate detailed audit reports aligned with WCAG guidance. Each report surfaces landmark issues, heading hierarchy problems, and missing accessible names with actionable remediation steps."
+      },
+      "2": {
+        "title": "Semantic Diff",
+        "description": "Compare before and after HTML to catch accessibility regressions early. See how DOM changes affect screen reader output before merging."
+      },
+      "3": {
+        "title": "CI/CD Integration",
+        "description": "Run automated screen reader simulation checks in your build pipeline. Help catch accessibility issues before they reach production."
+      }
+    },
+    "workflow": {
+      "heading": "How Speakable fits into your workflow",
+      "subheading": "Bridge the gap between code and accessibility by embedding screen reader simulation directly into your existing development lifecycle.",
+      "steps": {
+        "0": {
+          "stage": "Stage 01",
+          "title": "Local Development",
+          "description": "Run Speakable against your HTML locally to preview screen reader output before committing. Catch issues at the source."
+        },
+        "1": {
+          "stage": "Stage 02",
+          "title": "Pull Requests",
+          "description": "Regression detection via semantic diff. Catch accessibility changes in code review before they merge."
+        },
+        "2": {
+          "stage": "Stage 03",
+          "title": "CI/CD Pipelines",
+          "description": "Automated checks running Speakable in build pipelines, failing builds on regressions to maintain quality."
+        },
+        "3": {
+          "stage": "Stage 04",
+          "title": "Ongoing Monitoring",
+          "description": "Prevent regressions over time. Maintain accessibility standards across every production release."
+        }
+      },
+      "speedUp": {
+        "title": "Speed up Reviews",
+        "description": "Instead of manual inspection, let Speakable generate a semantic diff. See how the screen reader experience changes between versions.",
+        "cta": "Read the Docs"
+      },
+      "disclaimer": "Speakable complements manual screen reader testing — it doesn't replace it. Use it to catch issues early and reduce the manual testing burden."
+    },
+    "enterprise": {
+      "badge": "Enterprise Grade",
+      "heading": "Built to support accessibility workflows at scale",
+      "description": "Screen reader usability issues are a leading cause of accessibility complaints. Speakable's CLI integrates directly into your CI/CD workflows, helping teams identify these issues earlier in development — across your entire application.",
+      "points": {
+        "0": "Zero-latency local simulation engine",
+        "1": "Batch processing across entire codebases",
+        "2": "Regression detection via semantic diffing"
+      },
+      "stat1": {
+        "value": "High-Fidelity",
+        "label": "Spec-Aligned Simulation"
+      },
+      "stat2": {
+        "value": "3 Readers",
+        "label": "NVDA · JAWS · VoiceOver"
+      },
+      "imageAlt": "Speakable CLI audit report showing colorized accessibility analysis with landmark structure, heading hierarchy, and issue severity indicators"
+    },
+    "teams": {
+      "0": {
+        "title": "Shared standards",
+        "description": "Everyone validates against the same simulation. No more \"it works on my machine\" accessibility discrepancies across different developer environments."
+      },
+      "1": {
+        "title": "Consistent validation",
+        "description": "Identical checks run locally in the CLI, during PR reviews, and within your CI/CD pipelines for end-to-end reliability."
+      },
+      "2": {
+        "title": "Reduced regressions",
+        "description": "Catch screen reader issues before they compound in large codebases. Maintain accessibility health as your engineering org scales."
+      },
+      "3": {
+        "title": "Workflow integration",
+        "description": "Native support for PR reviews and automated build pipelines with centralized team dashboards for organization-wide visibility."
+      },
+      "heading": "Built for teams, not just individuals",
+      "subheading": "Establish shared accessibility standards and ensure consistent validation across your entire engineering organization.",
+      "cta": "Read the Docs"
+    },
+    "whyItMatters": {
+      "heading": "Why screen reader issues matter",
+      "paragraph1": "Screen reader usability issues are among the most common sources of accessibility failures on the web. These issues often go undetected until late in development — or until users report them.",
+      "paragraph2": "Manual screen reader testing is time-consuming and difficult to scale across large applications. Speakable helps teams identify these issues earlier in the development cycle, before they reach production.",
+      "legal": "With growing accessibility expectations under laws like the ADA, early detection isn't just good practice — it's risk mitigation.",
+      "challenge": {
+        "label": "The Challenge",
+        "title": "Manual testing is a bottleneck.",
+        "description": "Standard accessibility tools catch syntax, but miss user experience. Automated simulation bridges the gap between raw code and real human interaction."
+      }
+    },
+    "cta": {
+      "heading": "Ready to improve your accessibility workflow?",
+      "description": "Catch screen reader issues early, prevent regressions, and build better experiences for assistive technology users.",
+      "pricing": "See Pricing",
+      "docs": "Read the Docs"
+    }
+  },
+  "usageGuide": {
+    "breadcrumb": "Usage Guide",
+    "title": "Usage Guide",
+    "subtitle": "Everything you need to analyze HTML accessibility with Speakable — from installation to CI/CD integration.",
+    "installation": {
+      "heading": "Installation",
+      "description": "Install as a project dependency for programmatic use and CI pipelines, or globally for CLI access anywhere."
+    },
+    "cliCommands": {
+      "heading": "CLI Commands",
+      "description": "The speakable binary accepts HTML file paths as arguments. All options are flags — no subcommands."
+    },
+    "outputFormats": {
+      "heading": "Output Formats",
+      "description": "Speakable supports four output formats, each suited to different workflows."
+    },
+    "proFeatures": {
+      "heading": "Pro Features",
+      "batch": {
+        "title": "Batch Processing",
+        "description": "Analyze multiple files in a single run. Batch mode continues processing even if individual files fail, and reports a summary at the end."
+      },
+      "diff": {
+        "title": "Semantic Diff",
+        "description": "Compare before/after HTML to detect accessibility regressions. The diff identifies added, removed, and changed nodes with property-level detail (name, role, state, focus)."
+      },
+      "cicd": {
+        "title": "CI/CD Integration",
+        "description": "Use exit codes and JSON output for automated pipeline checks. Exit 0 = success, exit 1 = user error, exit 2 = content issues or diff changes, exit 3 = system error."
+      }
+    },
+    "webAnalyzer": {
+      "heading": "Web Analyzer",
+      "description": "The web analyzer at /tool lets you paste HTML directly and see results instantly — no installation required.",
+      "steps": {
+        "0": "Paste your HTML into the textarea",
+        "1": "Select a screen reader (NVDA, JAWS, VoiceOver, or All)",
+        "2": "Optionally enter a CSS selector to focus on specific elements",
+        "3": "Click Analyze to see the predicted output"
+      },
+      "diffNote": "Toggle diff mode to compare two HTML snippets side by side. Speakable will show you exactly which accessibility tree nodes were added, removed, or changed between the two versions.",
+      "voiceNote": "After analyzing, click the 🔊 icon in the output toolbar to hear the results read aloud, or switch to line-by-line mode to navigate the output one announcement at a time using keyboard shortcuts."
+    },
+    "voiceAnnouncer": {
+      "heading": "Voice Announcer",
+      "description": "The web analyzer and browser extension include a built-in voice announcer that reads analysis output aloud using the browser's native SpeechSynthesis API.",
+      "playAll": {
+        "title": "Play All",
+        "description": "Reads the entire output sequentially with pauses between lines and longer pauses between screen reader sections."
+      },
+      "lineByLine": {
+        "title": "Line-by-Line Navigation",
+        "description": "Mimics how screen reader users actually navigate: one element at a time."
+      },
+      "voiceSpeed": {
+        "title": "Voice & Speed Controls",
+        "description": "The voice dropdown includes a voice selector and a speed slider ranging from 0.5x to 2.0x."
+      }
+    },
+    "bestPractices": {
+      "heading": "Best Practices",
+      "0": {
+        "title": "Run in CI for regression detection",
+        "description": "Add Speakable to your build pipeline so every PR is checked for accessibility changes."
+      },
+      "1": {
+        "title": "Use selectors for component-level analysis",
+        "description": "Focus on specific components with --selector rather than analyzing entire pages."
+      },
+      "2": {
+        "title": "Check all three readers",
+        "description": "Use -s all to see cross-platform differences. NVDA, JAWS, and VoiceOver each have unique announcement patterns."
+      },
+      "3": {
+        "title": "Save JSON baselines for snapshot testing",
+        "description": "Store JSON output as baselines, then use --diff to detect changes between versions."
+      },
+      "4": {
+        "title": "Start with audit reports",
+        "description": "Use -f audit for a quick overview of accessibility health before diving into specific reader output."
+      }
+    }
   }
 }
