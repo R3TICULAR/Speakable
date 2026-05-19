@@ -21,6 +21,22 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
 
+  // Explicitly set headers to ensure production is indexable.
+  // Overrides any Vercel preview protection that might leak to production.
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'X-Robots-Tag',
+            value: 'index, follow',
+          },
+        ],
+      },
+    ];
+  },
+
   webpack: (config, { isServer }) => {
     // @core alias — points to the root src/ directory
     config.resolve.alias['@core'] = resolve(__dirname, '../src');
