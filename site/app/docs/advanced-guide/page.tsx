@@ -350,7 +350,7 @@ describe('Accessibility snapshots', () => {
 
         <h3 className="text-lg font-bold text-slate-900 mb-3">Cross-reader differences</h3>
         <p className="text-slate-600 mb-4 text-sm leading-relaxed">
-          NVDA, JAWS, and VoiceOver each have distinct announcement patterns. Speakable models
+          NVDA, JAWS, VoiceOver, and Narrator each have distinct announcement patterns. Speakable models
           these differences:
         </p>
         <div className="overflow-x-auto mb-6">

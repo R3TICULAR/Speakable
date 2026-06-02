@@ -110,7 +110,7 @@
     "priceSuffix": "/mes por usuario",
     "featureUnlimitedWeb": "Uso ilimitado de la herramienta web",
     "featureSingleFile": "Análisis CLI de un solo archivo",
-    "featureAllScreenReaders": "Todos los lectores de pantalla (NVDA, JAWS, VoiceOver)",
+    "featureAllScreenReaders": "Todos los lectores de pantalla (NVDA, JAWS, VoiceOver, Narrator)",
     "featureAuditReport": "Generación de informes de auditoría",
     "featureEverythingFree": "Todo lo incluido en Gratuito",
     "featureBatch": "Procesamiento por lotes (múltiples archivos)",
@@ -133,7 +133,7 @@
     "hero": {
       "badge": "Versión {version} disponible",
       "title": "Previsualice lo que dirán los lectores de pantalla antes de que sus usuarios lo escuchen",
-      "description": "Speakable simula cómo NVDA, JAWS y VoiceOver interpretan su HTML, ayudándole a detectar problemas de lector de pantalla en las primeras etapas del desarrollo. Menos pruebas manuales, menos sorpresas en producción.",
+      "description": "Speakable simula cómo NVDA, JAWS, VoiceOver y Narrator interpretan su HTML, ayudándole a detectar problemas de lector de pantalla en las primeras etapas del desarrollo. Menos pruebas manuales, menos sorpresas en producción.",
       "ctaTool": "Probar el analizador",
       "ctaDocs": "Ver documentación"
     },
@@ -142,7 +142,7 @@
       "subheading": "Vaya más allá del linting basado en reglas. Vea cómo las tecnologías de asistencia realmente interpretan su marcado y detecte problemas antes de que lleguen a los usuarios.",
       "0": {
         "title": "Simulación multiplataforma",
-        "description": "Simule la salida de NVDA, JAWS y VoiceOver desde una sola herramienta. Reduzca la dependencia de múltiples sistemas operativos y dispositivos de hardware para las pruebas de lector de pantalla."
+        "description": "Simule la salida de NVDA, JAWS, VoiceOver y Narrator desde una sola herramienta. Reduzca la dependencia de múltiples sistemas operativos y dispositivos de hardware para las pruebas de lector de pantalla."
       },
       "1": {
         "title": "Informes de auditoría de accesibilidad",
@@ -203,8 +203,8 @@
         "label": "Simulación alineada con especificaciones"
       },
       "stat2": {
-        "value": "3 lectores",
-        "label": "NVDA · JAWS · VoiceOver"
+        "value": "4 lectores",
+        "label": "NVDA · JAWS · VoiceOver · Narrator"
       },
       "imageAlt": "Informe de auditoría CLI de Speakable mostrando análisis de accesibilidad con colores, estructura de landmarks, jerarquía de encabezados e indicadores de severidad de problemas"
     },
@@ -283,7 +283,7 @@
       "description": "El analizador web en /tool le permite pegar HTML directamente y ver resultados al instante — sin necesidad de instalación.",
       "steps": {
         "0": "Pegue su HTML en el área de texto",
-        "1": "Seleccione un lector de pantalla (NVDA, JAWS, VoiceOver o Todos)",
+        "1": "Seleccione un lector de pantalla (NVDA, JAWS, VoiceOver, Narrator o Todos)",
         "2": "Opcionalmente ingrese un selector CSS para enfocarse en elementos específicos",
         "3": "Haga clic en Analizar para ver la salida predicha"
       },
@@ -317,8 +317,8 @@
         "description": "Enfóquese en componentes específicos con --selector en lugar de analizar páginas completas."
       },
       "2": {
-        "title": "Verifique los tres lectores",
-        "description": "Use -s all para ver diferencias entre plataformas. NVDA, JAWS y VoiceOver tienen patrones de anuncio únicos."
+        "title": "Verifique los cuatro lectores",
+        "description": "Use -s all para ver diferencias entre plataformas. NVDA, JAWS, VoiceOver y Narrator tienen patrones de anuncio únicos."
       },
       "3": {
         "title": "Guarde líneas base JSON para pruebas de snapshot",

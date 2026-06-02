@@ -110,7 +110,7 @@
     "priceSuffix": "/月（1ユーザーあたり）",
     "featureUnlimitedWeb": "Webツールの無制限利用",
     "featureSingleFile": "単一ファイルのCLI分析",
-    "featureAllScreenReaders": "すべてのスクリーンリーダー（NVDA、JAWS、VoiceOver）",
+    "featureAllScreenReaders": "すべてのスクリーンリーダー（NVDA、JAWS、VoiceOver、Narrator）",
     "featureAuditReport": "監査レポートの生成",
     "featureEverythingFree": "無料プランのすべての機能",
     "featureBatch": "バッチ処理（複数ファイル）",
@@ -133,7 +133,7 @@
     "hero": {
       "badge": "バージョン {version} が利用可能です",
       "title": "スクリーンリーダーが何を読み上げるか、ユーザーが聞く前にプレビューできます",
-      "description": "Speakableは、NVDA、JAWS、VoiceOverがHTMLをどのように解釈するかをシミュレートし、開発の早い段階でスクリーンリーダーの問題を検出するのに役立ちます。手動テストの負担を軽減し、本番環境での予期しない問題を減らします。",
+      "description": "Speakableは、NVDA、JAWS、VoiceOver、Narratorがどのように解釈するかをシミュレートし、開発の早い段階でスクリーンリーダーの問題を検出するのに役立ちます。手動テストの負担を軽減し、本番環境での予期しない問題を減らします。",
       "ctaTool": "アナライザーを試す",
       "ctaDocs": "ドキュメントを見る"
     },
@@ -142,7 +142,7 @@
       "subheading": "ルールベースのリンティングを超えましょう。支援技術がマークアップをどのように解釈するかを確認し、ユーザーに届く前に問題を検出できます。",
       "0": {
         "title": "クロスプラットフォームシミュレーション",
-        "description": "単一のツールからNVDA、JAWS、VoiceOverの出力をシミュレートします。スクリーンリーダーテストのために複数のオペレーティングシステムやハードウェアデバイスへの依存を軽減します。"
+        "description": "単一のツールからNVDA、JAWS、VoiceOver、Narratorの出力をシミュレートします。スクリーンリーダーテストのために複数のオペレーティングシステムやハードウェアデバイスへの依存を軽減します。"
       },
       "1": {
         "title": "アクセシビリティ監査レポート",
@@ -203,8 +203,8 @@
         "label": "仕様準拠シミュレーション"
       },
       "stat2": {
-        "value": "3つのリーダー",
-        "label": "NVDA · JAWS · VoiceOver"
+        "value": "4つのリーダー",
+        "label": "NVDA · JAWS · VoiceOver · Narrator"
       },
       "imageAlt": "Speakable CLI監査レポート：ランドマーク構造、見出し階層、問題の重大度インジケーターを含むカラー化されたアクセシビリティ分析を表示"
     },
@@ -283,7 +283,7 @@
       "description": "/toolのWebアナライザーでは、HTMLを直接貼り付けて即座に結果を確認できます — インストールは不要です。",
       "steps": {
         "0": "テキストエリアにHTMLを貼り付けます",
-        "1": "スクリーンリーダーを選択します（NVDA、JAWS、VoiceOver、またはすべて）",
+        "1": "スクリーンリーダーを選択します（NVDA、JAWS、VoiceOver、Narrator、またはすべて）",
         "2": "必要に応じてCSSセレクターを入力して特定の要素に絞り込みます",
         "3": "「解析」をクリックして予測出力を確認します"
       },
@@ -317,8 +317,8 @@
         "description": "ページ全体を分析するのではなく、--selectorで特定のコンポーネントに焦点を当てます。"
       },
       "2": {
-        "title": "3つのリーダーすべてを確認する",
-        "description": "-s allを使用してクロスプラットフォームの違いを確認します。NVDA、JAWS、VoiceOverにはそれぞれ固有のアナウンスパターンがあります。"
+        "title": "4つのリーダーすべてを確認する",
+        "description": "-s allを使用してクロスプラットフォームの違いを確認します。NVDA、JAWS、VoiceOver、Narratorにはそれぞれ固有のアナウンスパターンがあります。"
       },
       "3": {
         "title": "スナップショットテスト用にJSONベースラインを保存する",

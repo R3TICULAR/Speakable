@@ -34,6 +34,16 @@ const READERS = [
       'navigation, Main navigation',
     ],
   },
+  {
+    name: 'Narrator',
+    platform: 'Windows',
+    color: 'amber',
+    announcements: [
+      'Submit Payment, button',
+      'Email, edit, required',
+      'navigation, Main navigation',
+    ],
+  },
 ];
 
 const INPUT_HTML = '<button aria-label="Submit Payment">Pay</button>';
@@ -42,6 +52,7 @@ function cardBorder(color: string): string {
   switch (color) {
     case 'blue': return 'border-blue-200 hover:border-blue-400';
     case 'teal': return 'border-teal-200 hover:border-teal-400';
+    case 'amber': return 'border-amber-200 hover:border-amber-400';
     default: return 'border-slate-200 hover:border-slate-400';
   }
 }
@@ -50,6 +61,7 @@ function badgeBg(color: string): string {
   switch (color) {
     case 'blue': return 'bg-blue-100 text-blue-700';
     case 'teal': return 'bg-teal-100 text-teal-700';
+    case 'amber': return 'bg-amber-100 text-amber-700';
     default: return 'bg-slate-100 text-slate-700';
   }
 }
@@ -58,6 +70,7 @@ function dotColor(color: string): string {
   switch (color) {
     case 'blue': return 'bg-blue-500';
     case 'teal': return 'bg-teal-500';
+    case 'amber': return 'bg-amber-500';
     default: return 'bg-slate-500';
   }
 }
@@ -67,7 +80,7 @@ export function CrossPlatformPreview() {
     <div
       className="rounded-2xl bg-slate-900 border border-slate-800 overflow-hidden shadow-2xl"
       role="img"
-      aria-label="Three screen readers announcing the same HTML differently: NVDA says Submit Payment button, JAWS says Submit Payment button, VoiceOver says button Submit Payment — demonstrating cross-platform differences"
+      aria-label="Four screen readers announcing the same HTML differently: NVDA says Submit Payment button, JAWS says Submit Payment button, VoiceOver says button Submit Payment, Narrator says Submit Payment button — demonstrating cross-platform differences"
     >
       {/* Terminal chrome */}
       <div className="flex items-center gap-2 px-4 py-2.5 bg-slate-800/60 border-b border-slate-800">
@@ -86,7 +99,7 @@ export function CrossPlatformPreview() {
       </div>
 
       {/* Reader cards */}
-      <div className="p-5 grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div className="p-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {READERS.map((reader) => (
           <div
             key={reader.name}
@@ -116,7 +129,7 @@ export function CrossPlatformPreview() {
       {/* Footer */}
       <div className="px-5 py-3 bg-slate-800/40 border-t border-slate-800 text-center">
         <p className="text-[11px] text-slate-500 font-medium">
-          Same markup. Three different screen reader experiences. Speakable shows you all of them.
+          Same markup. Four different screen reader experiences. Speakable shows you all of them.
         </p>
       </div>
     </div>
