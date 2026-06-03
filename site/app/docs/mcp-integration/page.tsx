@@ -40,7 +40,7 @@ export default function McpIntegrationPage() {
               <code className="text-sm font-mono font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded">analyze_html</code>
             </div>
             <p className="text-sm text-slate-600 mb-3">
-              Predict how NVDA, JAWS, and VoiceOver will announce HTML content. Returns the
+              Predict how NVDA, JAWS, VoiceOver, and Narrator will announce HTML content. Returns the
               predicted speech output line by line.
             </p>
             <div className="overflow-x-auto">
@@ -61,7 +61,7 @@ export default function McpIntegrationPage() {
                   <tr className="border-b border-slate-100">
                     <td className="py-2 pr-4">screen_reader</td>
                     <td className="py-2 pr-4 font-sans">enum (optional)</td>
-                    <td className="py-2 font-sans">nvda, jaws, voiceover, or all (default: all)</td>
+                    <td className="py-2 font-sans">nvda, jaws, voiceover, narrator, or all (default: all)</td>
                   </tr>
                   <tr className="border-b border-slate-100">
                     <td className="py-2 pr-4">selector</td>

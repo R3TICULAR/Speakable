@@ -110,7 +110,7 @@
     "priceSuffix": "/mo per seat",
     "featureUnlimitedWeb": "Unlimited web tool usage",
     "featureSingleFile": "Single-file CLI analysis",
-    "featureAllScreenReaders": "All screen readers (NVDA, JAWS, VoiceOver)",
+    "featureAllScreenReaders": "All screen readers (NVDA, JAWS, VoiceOver, Narrator)",
     "featureAuditReport": "Audit report generation",
     "featureEverythingFree": "Everything in Free",
     "featureBatch": "Batch processing (multiple files)",
@@ -133,7 +133,7 @@
     "hero": {
       "badge": "Version {version} Now Available",
       "title": "Preview what screen readers will say before your users hear it",
-      "description": "Speakable simulates how NVDA, JAWS, and VoiceOver interpret your HTML, helping you catch screen reader issues early in development. Less manual testing overhead, fewer surprises in production.",
+      "description": "Speakable simulates how NVDA, JAWS, VoiceOver, and Narrator interpret your HTML, helping you catch screen reader issues early in development. Less manual testing overhead, fewer surprises in production.",
       "ctaTool": "Try the Analyzer",
       "ctaDocs": "View Documentation"
     },
@@ -142,7 +142,7 @@
       "subheading": "Go beyond rule-based linting. See how assistive technologies actually interpret your markup, and catch issues before they reach users.",
       "0": {
         "title": "Cross-Platform Simulation",
-        "description": "Simulate NVDA, JAWS, and VoiceOver output from a single tool. Reduce reliance on multiple operating systems and hardware devices for screen reader testing."
+        "description": "Simulate NVDA, JAWS, VoiceOver, and Narrator output from a single tool. Reduce reliance on multiple operating systems and hardware devices for screen reader testing."
       },
       "1": {
         "title": "Accessibility Audit Reports",
@@ -203,8 +203,8 @@
         "label": "Spec-Aligned Simulation"
       },
       "stat2": {
-        "value": "3 Readers",
-        "label": "NVDA · JAWS · VoiceOver"
+        "value": "4 Readers",
+        "label": "NVDA · JAWS · VoiceOver · Narrator"
       },
       "imageAlt": "Speakable CLI audit report showing colorized accessibility analysis with landmark structure, heading hierarchy, and issue severity indicators"
     },
@@ -283,7 +283,7 @@
       "description": "The web analyzer at /tool lets you paste HTML directly and see results instantly — no installation required.",
       "steps": {
         "0": "Paste your HTML into the textarea",
-        "1": "Select a screen reader (NVDA, JAWS, VoiceOver, or All)",
+        "1": "Select a screen reader (NVDA, JAWS, VoiceOver, Narrator, or All)",
         "2": "Optionally enter a CSS selector to focus on specific elements",
         "3": "Click Analyze to see the predicted output"
       },
@@ -317,8 +317,8 @@
         "description": "Focus on specific components with --selector rather than analyzing entire pages."
       },
       "2": {
-        "title": "Check all three readers",
-        "description": "Use -s all to see cross-platform differences. NVDA, JAWS, and VoiceOver each have unique announcement patterns."
+        "title": "Check all four readers",
+        "description": "Use -s all to see cross-platform differences. NVDA, JAWS, VoiceOver, and Narrator each have unique announcement patterns."
       },
       "3": {
         "title": "Save JSON baselines for snapshot testing",

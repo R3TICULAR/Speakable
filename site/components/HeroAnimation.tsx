@@ -46,6 +46,16 @@ const SR_OUTPUTS: { reader: string; color: string; lines: string[] }[] = [
       '  Upgrade, button, dimmed',
     ],
   },
+  {
+    reader: 'Narrator',
+    color: 'text-amber-400',
+    lines: [
+      'navigation, Docs',
+      '  Heading level 2, Getting Started',
+      '  Speakable, image',
+      '  Upgrade, button, disabled',
+    ],
+  },
 ];
 
 type Phase = 'typing' | 'analyzing' | 'output';
@@ -159,7 +169,7 @@ export function HeroAnimation() {
     <div
       className="bg-slate-900 rounded-xl shadow-2xl p-4 border border-slate-800 overflow-hidden"
       role="img"
-      aria-label="Animation showing Speakable analyzing HTML and predicting output for NVDA, JAWS, and VoiceOver — each with distinct announcement patterns for landmarks, headings, images, and disabled states"
+      aria-label="Animation showing Speakable analyzing HTML and predicting output for NVDA, JAWS, VoiceOver, and Narrator — each with distinct announcement patterns for landmarks, headings, images, and disabled states"
     >
       {/* Window chrome */}
       <div className="flex items-center gap-2 mb-4 border-b border-slate-800 pb-2">
@@ -178,7 +188,7 @@ export function HeroAnimation() {
       </div>
 
       {/* Content area */}
-      <div className="h-[280px] py-2 px-2 overflow-hidden" aria-hidden="true">
+      <div className="h-[340px] py-2 px-2 overflow-hidden" aria-hidden="true">
         {(phase === 'typing' || phase === 'analyzing') && (
           <div className="space-y-1">
             {typedLines.map((line, i) => (

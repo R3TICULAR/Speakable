@@ -293,8 +293,8 @@ describe('SubmitButton accessibility spec', () => {
           <div className="flex gap-3">
             <span className="text-teal-500 font-bold text-lg leading-tight">2.</span>
             <div>
-              <p className="text-slate-900 font-semibold text-sm">Include all three readers</p>
-              <p className="text-slate-600 text-sm">NVDA, JAWS, and VoiceOver announce differently. A spec that only covers one reader misses cross-platform issues.</p>
+              <p className="text-slate-900 font-semibold text-sm">Include all four readers</p>
+              <p className="text-slate-600 text-sm">NVDA, JAWS, VoiceOver, and Narrator announce differently. A spec that only covers one reader misses cross-platform issues.</p>
             </div>
           </div>
           <div className="flex gap-3">

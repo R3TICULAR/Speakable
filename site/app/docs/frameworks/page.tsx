@@ -366,7 +366,7 @@ console.log(renderVoiceOver(model));
           <li>Render your component to HTML (via test harness, build output, or DOM API)</li>
           <li>Pass the HTML string to <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm font-mono">parseHTML()</code></li>
           <li>Build the accessibility tree with <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm font-mono">buildAccessibilityTree()</code></li>
-          <li>Render with your target screen reader (<code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm font-mono">renderNVDA</code>, <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm font-mono">renderJAWS</code>, <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm font-mono">renderVoiceOver</code>)</li>
+          <li>Render with your target screen reader (<code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm font-mono">renderNVDA</code>, <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm font-mono">renderJAWS</code>, <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm font-mono">renderVoiceOver</code>, <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm font-mono">renderNarrator</code>)</li>
           <li>Assert against expected output or save as a baseline for regression detection</li>
         </ol>
         <div className="bg-teal-50 border border-teal-200 rounded-xl p-6">

@@ -346,6 +346,7 @@ export default function AnalyzerPage() {
                     <option value="NVDA">NVDA</option>
                     <option value="JAWS">JAWS</option>
                     <option value="VoiceOver">VoiceOver</option>
+                    <option value="Narrator">Narrator</option>
                     <option value="All">All</option>
                   </select>
                 </div>
@@ -521,12 +522,14 @@ function getPanelContent(tab: TabId, result: AnalysisResult | null, sr: ScreenRe
             `--- NVDA ---\n${e.announcements.nvda}`,
             `--- JAWS ---\n${e.announcements.jaws}`,
             `--- VoiceOver ---\n${e.announcements.voiceover}`,
+            `--- Narrator ---\n${e.announcements.narrator}`,
           ].join('\n\n');
         }
         const map: Record<ScreenReaderOption, string> = {
           NVDA: e.announcements.nvda,
           JAWS: e.announcements.jaws,
           VoiceOver: e.announcements.voiceover,
+          Narrator: e.announcements.narrator,
           All: '',
         };
         return prefix + map[sr];

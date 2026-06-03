@@ -71,7 +71,7 @@ export default async function UsageGuidePage() {
                 <span className="text-blue-400">speakable</span>{' '}
                 <span className="text-emerald-400">page.html</span>{' '}
                 <span className="text-orange-300">-f both</span>{'\n\n'}
-                <span className="text-slate-500"># Choose screen reader: nvda, jaws, voiceover, or all</span>{'\n'}
+                <span className="text-slate-500"># Choose screen reader: nvda, jaws, voiceover, narrator, or all</span>{'\n'}
                 <span className="text-blue-400">speakable</span>{' '}
                 <span className="text-emerald-400">page.html</span>{' '}
                 <span className="text-orange-300">-s nvda</span>{'\n'}
@@ -81,6 +81,9 @@ export default async function UsageGuidePage() {
                 <span className="text-blue-400">speakable</span>{' '}
                 <span className="text-emerald-400">page.html</span>{' '}
                 <span className="text-orange-300">-s voiceover</span>{'\n'}
+                <span className="text-blue-400">speakable</span>{' '}
+                <span className="text-emerald-400">page.html</span>{' '}
+                <span className="text-orange-300">-s narrator</span>{'\n'}
                 <span className="text-blue-400">speakable</span>{' '}
                 <span className="text-emerald-400">page.html</span>{' '}
                 <span className="text-orange-300">-s all</span>{'\n\n'}

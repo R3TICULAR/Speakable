@@ -212,7 +212,7 @@ export default function ApiReferencePage() {
             <pre className="text-sm font-mono leading-relaxed">
               <code>
                 <span className="text-blue-400">import</span>{' '}
-                <span className="text-slate-300">{'{ renderNVDA, renderJAWS, renderVoiceOver, renderAuditReport }'}</span>{'\n'}
+                <span className="text-slate-300">{'{ renderNVDA, renderJAWS, renderVoiceOver, renderNarrator, renderAuditReport }'}</span>{'\n'}
                 <span className="text-blue-400">  from</span>{' '}
                 <span className="text-orange-300">{`'@reticular/speakable'`}</span>
                 <span className="text-slate-300">;</span>{'\n\n'}
@@ -230,6 +230,9 @@ export default function ApiReferencePage() {
                 <span className="text-emerald-400">renderVoiceOver</span>
                 <span className="text-slate-300">(model);     </span>
                 <span className="text-slate-500">// VoiceOver-style output</span>{'\n'}
+                <span className="text-emerald-400">renderNarrator</span>
+                <span className="text-slate-300">(model);      </span>
+                <span className="text-slate-500">// Narrator-style output</span>{'\n'}
                 <span className="text-emerald-400">renderAuditReport</span>
                 <span className="text-slate-300">(model);   </span>
                 <span className="text-slate-500">// structured audit report</span>
@@ -474,6 +477,12 @@ const RENDERERS = [
     borderColor: 'border-slate-300',
     description:
       'Tailored for macOS VoiceOver. Announces role before name for headings and landmarks (e.g. "navigation, Main"). Uses "dimmed" for disabled, "edit text" for textboxes.',
+  },
+  {
+    name: 'Narrator',
+    borderColor: 'border-amber-500',
+    description:
+      'Simulates Windows Narrator patterns. Announces role before name for links and landmarks (e.g. "link, Home", "navigation, Main"). Uses "disabled" for disabled state, "image" for images, "unchecked"/"partially selected" for checkboxes.',
   },
   {
     name: 'Audit Report',
