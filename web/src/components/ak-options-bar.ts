@@ -138,6 +138,7 @@ export class AkOptionsBar extends LitElement {
             <option value="NVDA">NVDA</option>
             <option value="JAWS">JAWS</option>
             <option value="VoiceOver">VoiceOver</option>
+            <option value="Narrator">Narrator</option>
             <option value="All">All</option>
           </select>
         </div>

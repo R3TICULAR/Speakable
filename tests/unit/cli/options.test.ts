@@ -79,7 +79,7 @@ describe('validateOptions', () => {
     };
 
     expect(() => validateOptions(rawOptions)).toThrow(
-      'Invalid screen reader: invalid. Must be one of: nvda, jaws, voiceover, all'
+      'Invalid screen reader: invalid. Must be one of: nvda, jaws, voiceover, narrator, all'
     );
   });
 

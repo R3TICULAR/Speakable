@@ -14,6 +14,7 @@ import {
 import { renderNVDA } from '@core/renderer/nvda-renderer.js';
 import { renderJAWS } from '@core/renderer/jaws-renderer.js';
 import { renderVoiceOver } from '@core/renderer/voiceover-renderer.js';
+import { renderNarrator } from '@core/renderer/narrator-renderer.js';
 import { renderAuditReport } from '@core/renderer/audit-renderer.js';
 import { diffAccessibilityTrees } from '@core/diff/diff-algorithm.js';
 import { serializeModel, deserializeModel, modelsEqual } from '@core/model/serialization.js';
@@ -28,8 +29,8 @@ import { SIZE_LIMIT_BYTES } from './constants.js';
 
 export type { SemanticDiff };
 
-/** One of the four screen reader options available in the UI. */
-export type ScreenReaderOption = 'NVDA' | 'JAWS' | 'VoiceOver' | 'All';
+/** One of the five screen reader options available in the UI. */
+export type ScreenReaderOption = 'NVDA' | 'JAWS' | 'VoiceOver' | 'Narrator' | 'All';
 
 /** Pre-rendered output for a single matched element. */
 export interface AnalysisEntry {
@@ -40,6 +41,7 @@ export interface AnalysisEntry {
     nvda: string;
     jaws: string;
     voiceover: string;
+    narrator: string;
   };
   /** Pre-rendered audit report text. */
   audit: string;
@@ -94,6 +96,7 @@ function buildEntry(model: AnnouncementModel): AnalysisEntry {
       nvda: renderNVDA(model),
       jaws: renderJAWS(model),
       voiceover: renderVoiceOver(model),
+      narrator: renderNarrator(model),
     },
     audit: renderAuditReport(model),
     json: serializeModel(model, { pretty: true }),

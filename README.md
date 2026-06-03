@@ -1,6 +1,6 @@
 # Speakable
 
-Simulate how NVDA, JAWS, and VoiceOver interpret your HTML — from a single CLI tool. Catch screen reader issues early, detect regressions in CI/CD, and reduce manual testing overhead.
+Simulate how NVDA, JAWS, VoiceOver, and Windows Narrator interpret your HTML — from a single CLI tool. Catch screen reader issues early, detect regressions in CI/CD, and reduce manual testing overhead.
 
 **Try it in your browser — no install needed:** [getspeakable.dev/tool](https://getspeakable.dev/tool)
 
@@ -43,7 +43,7 @@ cat page.html | speakable -
 
 ## Web Analyzer
 
-If you want to test HTML quickly without installing anything, paste it directly into the web analyzer at [getspeakable.dev/tool](https://getspeakable.dev/tool). It runs the same simulation engine in the browser — supports NVDA, JAWS, and VoiceOver output, CSS selector filtering, and diff mode. Useful for quick iteration, debugging a specific component, or sharing results with teammates who don't have the CLI installed.
+If you want to test HTML quickly without installing anything, paste it directly into the web analyzer at [getspeakable.dev/tool](https://getspeakable.dev/tool). It runs the same simulation engine in the browser — supports NVDA, JAWS, VoiceOver, and Narrator output, CSS selector filtering, and diff mode. Useful for quick iteration, debugging a specific component, or sharing results with teammates who don't have the CLI installed.
 
 ## CLI Reference
 
@@ -83,9 +83,10 @@ Options:
 | NVDA | `-s nvda` | Windows |
 | JAWS | `-s jaws` | Windows |
 | VoiceOver | `-s voiceover` | macOS |
-| All | `-s all` | All three readers side by side |
+| Narrator | `-s narrator` | Windows |
+| All | `-s all` | All four readers side by side |
 
-Each renderer produces heuristic output approximating the real screen reader's behavior. Key differences are preserved — for example, NVDA says "navigation landmark" while JAWS says "navigation region" and VoiceOver says "navigation".
+Each renderer produces heuristic output approximating the real screen reader's behavior. Key differences are preserved — for example, NVDA says "navigation landmark" while JAWS says "navigation region", VoiceOver says "navigation", and Narrator says "navigation".
 
 ## Features
 
@@ -182,7 +183,7 @@ Add to your MCP config (Kiro, VS Code, Cursor, Claude Desktop, Windsurf):
 
 | Tool | Description |
 |------|-------------|
-| `analyze_html` | Predict screen reader output for NVDA, JAWS, and VoiceOver |
+| `analyze_html` | Predict screen reader output for NVDA, JAWS, VoiceOver, and Narrator |
 | `audit_html` | Generate accessibility audit report with issues and remediation |
 | `diff_html` | Compare two HTML versions for accessibility regressions |
 

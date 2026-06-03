@@ -240,6 +240,17 @@ function renderNode(node, renderer) {
     if (name) parts.push(name);
     parts.push(...jawsRole(node));
     parts.push(...jawsStates(state));
+  } else if (renderer === 'narrator') {
+    // Narrator — role first for links, headings, landmarks, structural containers
+    const roleFirst = ['link', 'heading', 'navigation', 'main', 'banner', 'contentinfo', 'complementary', 'region', 'form', 'search', 'blockquote', 'figure', 'dialog', 'group', 'document'].includes(role);
+    if (roleFirst) {
+      parts.push(...narratorRole(node));
+      if (name) parts.push(name);
+    } else {
+      if (name) parts.push(name);
+      parts.push(...narratorRole(node));
+    }
+    parts.push(...narratorStates(state));
   } else {
     // VoiceOver — role first for some elements
     const roleFirst = ['heading', 'navigation', 'main', 'banner', 'contentinfo', 'complementary', 'region', 'form', 'dialog'].includes(role);
@@ -333,6 +344,43 @@ function voStates(s) {
   if (s.required) r.push('required');
   if (s.busy) r.push('busy');
   if (s.current && s.current !== 'false') r.push(`current ${s.current}`);
+  return r;
+}
+
+function narratorRole(n) {
+  const m = { button: 'button', link: 'link', textbox: 'edit', checkbox: 'check box', radio: 'radio button',
+    combobox: 'combo box', listbox: 'list box', option: 'option', list: 'list', listitem: 'list item',
+    navigation: 'navigation', main: 'main', banner: 'banner',
+    contentinfo: 'content info', region: 'region', complementary: 'complementary',
+    form: 'form', search: 'search', img: 'image', article: 'article', dialog: 'dialog',
+    separator: 'separator', figure: 'figure', meter: 'meter', progressbar: 'progress bar',
+    status: 'status', document: 'document', application: 'application',
+    blockquote: 'block quote', code: 'code', row: 'row', columnheader: 'column header', rowheader: 'row header' };
+  if (n.role === 'heading') return [`Heading level ${n.state.level || 1}`];
+  if (n.role === 'group') return n.name ? ['group'] : [];
+  return m[n.role] ? [m[n.role]] : (n.role === 'staticText' || n.role === 'paragraph' || n.role === 'generic' || n.role === 'cell' || n.role === 'term' || n.role === 'definition' || n.role === 'caption') ? [] : [n.role];
+}
+
+function narratorStates(s) {
+  const r = [];
+  if (s.expanded === true) r.push('expanded'); if (s.expanded === false) r.push('collapsed');
+  if (s.checked === true) r.push('checked'); if (s.checked === false) r.push('unchecked'); if (s.checked === 'mixed') r.push('partially selected');
+  if (s.pressed === true) r.push('pressed'); if (s.pressed === false) r.push('not pressed'); if (s.pressed === 'mixed') r.push('partially pressed');
+  if (s.selected === true) r.push('selected'); if (s.selected === false) r.push('not selected');
+  if (s.disabled) r.push('disabled');
+  if (s.invalid) r.push('invalid');
+  if (s.required) r.push('required');
+  if (s.readonly) r.push('read only');
+  if (s.busy) r.push('busy');
+  if (s.current && s.current !== 'false') {
+    if (s.current === 'page') r.push('current page');
+    else if (s.current === 'step') r.push('current step');
+    else if (s.current === 'location') r.push('current location');
+    else if (s.current === 'date') r.push('current date');
+    else if (s.current === 'time') r.push('current time');
+    else if (s.current === 'true') r.push('current');
+    else r.push(`current ${s.current}`);
+  }
   return r;
 }
 
@@ -484,7 +532,8 @@ window.SpeakableAnalyzer = {
         const nvda = renderNode(root, 'nvda').join('\n');
         const jaws = renderNode(root, 'jaws').join('\n');
         const vo = renderNode(root, 'voiceover').join('\n');
-        output = `=== NVDA ===\n${nvda}\n\n=== JAWS ===\n${jaws}\n\n=== VoiceOver ===\n${vo}`;
+        const narrator = renderNode(root, 'narrator').join('\n');
+        output = `=== NVDA ===\n${nvda}\n\n=== JAWS ===\n${jaws}\n\n=== VoiceOver ===\n${vo}\n\n=== Narrator ===\n${narrator}`;
       } else {
         output = renderNode(root, reader).join('\n');
       }

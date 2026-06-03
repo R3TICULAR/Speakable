@@ -27,12 +27,14 @@ function renderEntry(entry: AnalysisEntry, sr: ScreenReaderOption): string {
       `--- NVDA ---\n${entry.announcements.nvda}`,
       `--- JAWS ---\n${entry.announcements.jaws}`,
       `--- VoiceOver ---\n${entry.announcements.voiceover}`,
+      `--- Narrator ---\n${entry.announcements.narrator}`,
     ].join('\n\n');
   }
   const map: Record<ScreenReaderOption, string> = {
     NVDA: entry.announcements.nvda,
     JAWS: entry.announcements.jaws,
     VoiceOver: entry.announcements.voiceover,
+    Narrator: entry.announcements.narrator,
     All: '',
   };
   return map[sr];

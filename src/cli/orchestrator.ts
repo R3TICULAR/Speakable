@@ -8,6 +8,7 @@ import { serializeModel, deserializeModel, modelsEqual } from '../model/serializ
 import { renderNVDA } from '../renderer/nvda-renderer.js';
 import { renderJAWS } from '../renderer/jaws-renderer.js';
 import { renderVoiceOver } from '../renderer/voiceover-renderer.js';
+import { renderNarrator } from '../renderer/narrator-renderer.js';
 import { renderAuditReport } from '../renderer/audit-renderer.js';
 import { diffAccessibilityTrees, formatDiffAsJSON, formatDiffAsText } from '../diff/index.js';
 import { isColorEnabled, createColors } from './colors.js';
@@ -294,6 +295,7 @@ function formatScreenReaderOutput(
     const nvda = renderNVDA(model, colorize);
     const jaws = renderJAWS(model, colorize);
     const voiceover = renderVoiceOver(model, colorize);
+    const narrator = renderNarrator(model, colorize);
     const c = createColors(colorize);
     
     return [
@@ -305,6 +307,9 @@ function formatScreenReaderOutput(
       '',
       c.sectionHeader('=== VoiceOver ==='),
       voiceover,
+      '',
+      c.sectionHeader('=== Narrator ==='),
+      narrator,
     ].join('\n');
   }
   
@@ -315,6 +320,8 @@ function formatScreenReaderOutput(
       return renderJAWS(model, colorize);
     case 'voiceover':
       return renderVoiceOver(model, colorize);
+    case 'narrator':
+      return renderNarrator(model, colorize);
     default:
       throw new Error(`Unknown screen reader: ${screenReader}`);
   }

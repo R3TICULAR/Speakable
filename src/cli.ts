@@ -45,7 +45,7 @@ program
   )
   .option(
     '-s, --screen-reader <reader>',
-    'Screen reader: nvda, jaws, voiceover, or all (default: nvda)',
+    'Screen reader: nvda, jaws, voiceover, narrator, or all (default: nvda)',
     'nvda'
   )
   .option(
@@ -152,6 +152,7 @@ Screen Readers:
   nvda       - NVDA (Windows)
   jaws       - JAWS (Windows)
   voiceover  - VoiceOver (macOS)
+  narrator   - Narrator (Windows)
   all        - All screen readers
 
 Output Formats:

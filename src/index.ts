@@ -6,3 +6,6 @@
 
 export * from './model/index.js';
 export * from './diff/index.js';
+export * from './renderer/index.js';
+export * from './parser/index.js';
+export * from './extractor/index.js';

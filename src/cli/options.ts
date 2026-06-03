@@ -3,7 +3,7 @@
  */
 
 export type OutputFormat = 'json' | 'text' | 'audit' | 'both';
-export type ScreenReader = 'nvda' | 'jaws' | 'voiceover' | 'all';
+export type ScreenReader = 'nvda' | 'jaws' | 'voiceover' | 'narrator' | 'all';
 
 export interface CLIOptions {
   /** Output file path (undefined = stdout) */
@@ -59,7 +59,7 @@ export function validateOptions(rawOptions: any): CLIOptions {
   }
   
   // Validate screen reader
-  const validReaders: ScreenReader[] = ['nvda', 'jaws', 'voiceover', 'all'];
+  const validReaders: ScreenReader[] = ['nvda', 'jaws', 'voiceover', 'narrator', 'all'];
   if (!validReaders.includes(screenReader as ScreenReader)) {
     throw new Error(
       `Invalid screen reader: ${screenReader}. Must be one of: ${validReaders.join(', ')}`

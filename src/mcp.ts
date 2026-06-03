@@ -24,13 +24,14 @@ import { buildAccessibilityTree, buildAccessibilityTreeWithSelector } from './ex
 import { renderNVDA } from './renderer/nvda-renderer.js';
 import { renderJAWS } from './renderer/jaws-renderer.js';
 import { renderVoiceOver } from './renderer/voiceover-renderer.js';
+import { renderNarrator } from './renderer/narrator-renderer.js';
 import { renderAuditReport } from './renderer/audit-renderer.js';
 import { diffAccessibilityTrees, formatDiffAsText } from './diff/index.js';
 import type { AnnouncementModel } from './model/types.js';
 
 // --- Helpers ---
 
-type ScreenReader = 'nvda' | 'jaws' | 'voiceover' | 'all';
+type ScreenReader = 'nvda' | 'jaws' | 'voiceover' | 'narrator' | 'all';
 
 function renderOutput(model: AnnouncementModel, screenReader: ScreenReader): string {
   if (screenReader === 'all') {
@@ -43,6 +44,9 @@ function renderOutput(model: AnnouncementModel, screenReader: ScreenReader): str
       '',
       '--- VoiceOver ---',
       renderVoiceOver(model),
+      '',
+      '--- Narrator ---',
+      renderNarrator(model),
     ].join('\n');
   }
 
@@ -50,6 +54,7 @@ function renderOutput(model: AnnouncementModel, screenReader: ScreenReader): str
     case 'nvda': return renderNVDA(model);
     case 'jaws': return renderJAWS(model);
     case 'voiceover': return renderVoiceOver(model);
+    case 'narrator': return renderNarrator(model);
   }
 }
 
@@ -93,10 +98,10 @@ const server = new McpServer({
 // Tool: analyze_html
 server.tool(
   'analyze_html',
-  'Predict how screen readers (NVDA, JAWS, VoiceOver) will announce HTML content. Returns the predicted speech output line by line.',
+  'Predict how screen readers (NVDA, JAWS, VoiceOver, Narrator) will announce HTML content. Returns the predicted speech output line by line.',
   {
     html: z.string().describe('The HTML content to analyze'),
-    screen_reader: z.enum(['nvda', 'jaws', 'voiceover', 'all']).default('all').describe('Which screen reader to simulate (default: all)'),
+    screen_reader: z.enum(['nvda', 'jaws', 'voiceover', 'narrator', 'all']).default('all').describe('Which screen reader to simulate (default: all)'),
     selector: z.string().optional().describe('Optional CSS selector to focus analysis on specific elements'),
   },
   async ({ html, screen_reader, selector }) => {
