@@ -361,6 +361,7 @@ describe('Accessibility snapshots', () => {
                 <th className="py-2 pr-4 font-bold text-slate-900">NVDA</th>
                 <th className="py-2 pr-4 font-bold text-slate-900">JAWS</th>
                 <th className="py-2 pr-4 font-bold text-slate-900">VoiceOver</th>
+                <th className="py-2 pr-4 font-bold text-slate-900">Narrator</th>
               </tr>
             </thead>
             <tbody className="text-slate-600 font-mono">
@@ -369,35 +370,41 @@ describe('Accessibility snapshots', () => {
                 <td className="py-2 pr-4">navigation landmark</td>
                 <td className="py-2 pr-4">navigation region</td>
                 <td className="py-2 pr-4">navigation</td>
+                <td className="py-2 pr-4">navigation</td>
               </tr>
               <tr className="border-b border-slate-100">
                 <td className="py-2 pr-4 font-sans font-medium text-slate-900">Headings</td>
                 <td className="py-2 pr-4">Name, heading level N</td>
                 <td className="py-2 pr-4">Name, heading level N</td>
                 <td className="py-2 pr-4">heading level N, Name</td>
+                <td className="py-2 pr-4">Heading level N, Name</td>
               </tr>
               <tr className="border-b border-slate-100">
                 <td className="py-2 pr-4 font-sans font-medium text-slate-900">Disabled</td>
                 <td className="py-2 pr-4">unavailable</td>
                 <td className="py-2 pr-4">unavailable</td>
                 <td className="py-2 pr-4">dimmed</td>
+                <td className="py-2 pr-4">disabled</td>
               </tr>
               <tr className="border-b border-slate-100">
                 <td className="py-2 pr-4 font-sans font-medium text-slate-900">Text input</td>
                 <td className="py-2 pr-4">edit</td>
                 <td className="py-2 pr-4">edit</td>
                 <td className="py-2 pr-4">edit text</td>
+                <td className="py-2 pr-4">edit</td>
               </tr>
               <tr className="border-b border-slate-100">
                 <td className="py-2 pr-4 font-sans font-medium text-slate-900">Mixed checkbox</td>
                 <td className="py-2 pr-4">half checked</td>
                 <td className="py-2 pr-4">partially checked</td>
                 <td className="py-2 pr-4">mixed</td>
+                <td className="py-2 pr-4">partially selected</td>
               </tr>
               <tr className="border-b border-slate-100">
                 <td className="py-2 pr-4 font-sans font-medium text-slate-900">Images</td>
                 <td className="py-2 pr-4">graphic</td>
                 <td className="py-2 pr-4">graphic</td>
+                <td className="py-2 pr-4">image</td>
                 <td className="py-2 pr-4">image</td>
               </tr>
             </tbody>
