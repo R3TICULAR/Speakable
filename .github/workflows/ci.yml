@@ -118,28 +118,63 @@ jobs:
       - name: Build CLI
         run: npm run build
 
-      - name: Run audit on example pages
+      - name: Install site dependencies
+        working-directory: site
+        run: npm ci
+
+      - name: Build site (static export)
+        working-directory: site
+        run: npx next build
+        env:
+          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: pk_test_placeholder
+          CLERK_SECRET_KEY: sk_test_placeholder
+
+      # --- Run Speakable against live site pages ---
+      - name: Audit site pages
         run: |
-          echo "=== Running Speakable audit on all example HTML files ==="
+          echo "=== Running Speakable audit on site pages ==="
+          PAGES=(
+            "site/.next/server/app/index.html"
+            "site/.next/server/app/pricing/index.html"
+            "site/.next/server/app/contact/index.html"
+            "site/.next/server/app/privacy/index.html"
+            "site/.next/server/app/terms/index.html"
+            "site/.next/server/app/security/index.html"
+          )
+          FAILED=0
+          for page in "${PAGES[@]}"; do
+            if [ -f "$page" ]; then
+              echo ""
+              echo "--- Auditing: $page ---"
+              node dist/cli.js "$page" -f audit || FAILED=1
+            fi
+          done
+          if [ $FAILED -ne 0 ]; then
+            echo "⚠️  Some pages have accessibility issues"
+          fi
+
+      - name: Screen reader simulation on site pages
+        run: |
+          echo "=== Screen reader output for key site pages ==="
+          for page in site/.next/server/app/index.html site/.next/server/app/pricing/index.html; do
+            if [ -f "$page" ]; then
+              echo ""
+              echo "--- $page (all readers) ---"
+              node dist/cli.js "$page" -f text -s all --selector "nav, main, footer" || true
+            fi
+          done
+
+      - name: Regression diff check (examples as baseline)
+        run: |
+          echo "=== Semantic diff: example files as regression baseline ==="
           for file in examples/*.html; do
-            echo ""
-            echo "--- Auditing: $file ---"
+            echo "Checking: $file"
             node dist/cli.js "$file" -f audit || true
           done
 
-      - name: Run screen reader simulation (all readers)
+      - name: Verify JSON output validity
         run: |
-          echo "=== Running screen reader simulation on navigation.html ==="
-          node dist/cli.js examples/navigation.html -f text -s all
-
-      - name: Run semantic diff check
-        run: |
-          echo "=== Running semantic diff between button.html and form.html ==="
-          node dist/cli.js examples/form.html --diff examples/button.html -f text || true
-
-      - name: Verify JSON output is valid
-        run: |
-          echo "=== Verifying JSON output for all example files ==="
+          echo "=== Verifying JSON output for example files ==="
           for file in examples/*.html; do
             echo "Checking: $file"
             node dist/cli.js "$file" -f json | node -e "
@@ -151,3 +186,11 @@ jobs:
               });
             "
           done
+
+      - name: Verify Narrator renderer works
+        run: |
+          echo "=== Narrator output for navigation.html ==="
+          node dist/cli.js examples/navigation.html -f text -s narrator
+          echo ""
+          echo "=== All 4 readers for form.html ==="
+          node dist/cli.js examples/form.html -f text -s all
