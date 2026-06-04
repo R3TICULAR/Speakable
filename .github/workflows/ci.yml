@@ -130,39 +130,59 @@ jobs:
           CLERK_SECRET_KEY: sk_test_placeholder
 
       # --- Run Speakable against live site pages ---
-      - name: Audit site pages
+      - name: Start site server and audit pages
         run: |
-          echo "=== Running Speakable audit on site pages ==="
+          cd site
+          npx next start -p 3099 &
+          SERVER_PID=$!
+          sleep 5
+
+          echo "=== Running Speakable audit on rendered site pages ==="
           PAGES=(
-            "site/.next/server/app/index.html"
-            "site/.next/server/app/pricing/index.html"
-            "site/.next/server/app/contact/index.html"
-            "site/.next/server/app/privacy/index.html"
-            "site/.next/server/app/terms/index.html"
-            "site/.next/server/app/security/index.html"
+            "http://localhost:3099/"
+            "http://localhost:3099/pricing"
+            "http://localhost:3099/contact"
+            "http://localhost:3099/privacy"
+            "http://localhost:3099/terms"
+            "http://localhost:3099/security"
+            "http://localhost:3099/docs"
           )
+
           FAILED=0
-          for page in "${PAGES[@]}"; do
-            if [ -f "$page" ]; then
-              echo ""
-              echo "--- Auditing: $page ---"
-              node dist/cli.js "$page" -f audit || FAILED=1
-            fi
+          for url in "${PAGES[@]}"; do
+            echo ""
+            echo "--- Auditing: $url ---"
+            HTML=$(curl -s "$url")
+            echo "$HTML" | node dist/cli.js - -f audit || FAILED=1
           done
+
           if [ $FAILED -ne 0 ]; then
             echo "⚠️  Some pages have accessibility issues"
           fi
 
+          kill $SERVER_PID 2>/dev/null || true
+        env:
+          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: pk_test_placeholder
+          CLERK_SECRET_KEY: sk_test_placeholder
+
       - name: Screen reader simulation on site pages
         run: |
-          echo "=== Screen reader output for key site pages ==="
-          for page in site/.next/server/app/index.html site/.next/server/app/pricing/index.html; do
-            if [ -f "$page" ]; then
-              echo ""
-              echo "--- $page (all readers) ---"
-              node dist/cli.js "$page" -f text -s all --selector "nav, main, footer" || true
-            fi
-          done
+          cd site
+          npx next start -p 3098 &
+          SERVER_PID=$!
+          sleep 5
+
+          echo "=== Screen reader output for homepage (all readers) ==="
+          curl -s http://localhost:3098/ | node dist/cli.js - -f text -s all --selector "nav, main"
+
+          echo ""
+          echo "=== Screen reader output for pricing (all readers) ==="
+          curl -s http://localhost:3098/pricing | node dist/cli.js - -f text -s all --selector "main"
+
+          kill $SERVER_PID 2>/dev/null || true
+        env:
+          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: pk_test_placeholder
+          CLERK_SECRET_KEY: sk_test_placeholder
 
       - name: Regression diff check (examples as baseline)
         run: |
