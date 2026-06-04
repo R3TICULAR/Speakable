@@ -86,7 +86,7 @@ export function Navigation() {
                   aria-current={isActive(pathname, route.href) ? 'page' : undefined}
                   className={`transition-colors focus:outline-none focus:ring-2 focus:ring-blue-600 rounded px-1 ${
                     isActive(pathname, route.href)
-                      ? 'text-blue-600 border-b-2 border-blue-600 pb-1'
+                      ? 'text-blue-600 font-semibold'
                       : 'text-slate-600 hover:text-blue-600'
                   }`}
                 >
@@ -175,7 +175,7 @@ export function Navigation() {
                 aria-current={isActive(pathname, route.href) ? 'page' : undefined}
                 className={`block rounded px-2 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-600 ${
                   isActive(pathname, route.href)
-                    ? 'text-blue-600 border-b-2 border-blue-600'
+                    ? 'text-blue-600 font-semibold'
                     : 'text-slate-600 hover:text-blue-600'
                 }`}
               >
