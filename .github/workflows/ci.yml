@@ -120,7 +120,7 @@ jobs:
 
       - name: Install site dependencies
         working-directory: site
-        run: npm ci
+        run: npm install --legacy-peer-deps
 
       - name: Build site (static export)
         working-directory: site
