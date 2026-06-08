@@ -132,8 +132,8 @@
   "landing": {
     "hero": {
       "badge": "Versión {version} disponible",
-      "title": "Previsualice lo que dirán los lectores de pantalla antes de que sus usuarios lo escuchen",
-      "description": "Speakable simula cómo NVDA, JAWS, VoiceOver y Narrator interpretan su HTML, ayudándole a detectar problemas de lector de pantalla en las primeras etapas del desarrollo. Menos pruebas manuales, menos sorpresas en producción.",
+      "title": "Pruebas de lectores de pantalla sin lanzar cuatro lectores de pantalla",
+      "description": "Speakable predice cómo NVDA, JAWS, VoiceOver y Narrator interpretarán su HTML, ayudando a los equipos a identificar problemas de accesibilidad y regresiones en etapas tempranas del desarrollo.",
       "ctaTool": "Probar el analizador",
       "ctaDocs": "Ver documentación"
     },

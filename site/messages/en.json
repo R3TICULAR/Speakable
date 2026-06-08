@@ -132,8 +132,8 @@
   "landing": {
     "hero": {
       "badge": "Version {version} Now Available",
-      "title": "Preview what screen readers will say before your users hear it",
-      "description": "Speakable simulates how NVDA, JAWS, VoiceOver, and Narrator interpret your HTML, helping you catch screen reader issues early in development. Less manual testing overhead, fewer surprises in production.",
+      "title": "Screen reader testing without launching four screen readers",
+      "description": "Speakable predicts how NVDA, JAWS, VoiceOver, and Narrator will interpret your HTML, helping teams identify accessibility issues and regressions earlier in development.",
       "ctaTool": "Try the Analyzer",
       "ctaDocs": "View Documentation"
     },

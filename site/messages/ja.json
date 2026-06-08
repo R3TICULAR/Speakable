@@ -132,8 +132,8 @@
   "landing": {
     "hero": {
       "badge": "バージョン {version} が利用可能です",
-      "title": "スクリーンリーダーが何を読み上げるか、ユーザーが聞く前にプレビューできます",
-      "description": "Speakableは、NVDA、JAWS、VoiceOver、Narratorがどのように解釈するかをシミュレートし、開発の早い段階でスクリーンリーダーの問題を検出するのに役立ちます。手動テストの負担を軽減し、本番環境での予期しない問題を減らします。",
+      "title": "4つのスクリーンリーダーを起動せずにスクリーンリーダーテスト",
+      "description": "Speakableは、NVDA、JAWS、VoiceOver、NarratorがHTMLをどのように解釈するかを予測し、チームが開発の早い段階でアクセシビリティの問題やリグレッションを特定するのに役立ちます。",
       "ctaTool": "アナライザーを試す",
       "ctaDocs": "ドキュメントを見る"
     },
