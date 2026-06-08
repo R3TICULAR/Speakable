@@ -1,3 +1,6 @@
+import Link from 'next/link';
+import { RelatedPages } from '../../../components/RelatedPages';
+
 export default function SpecIntegrationPage() {
   return (
     <>
@@ -21,9 +24,11 @@ export default function SpecIntegrationPage() {
       <section className="mb-16">
         <h2 className="text-2xl font-bold text-slate-900 mb-4">Why define accessibility in specs?</h2>
         <p className="text-slate-600 mb-6 leading-relaxed">
-          Most accessibility issues are caught late — during QA, audits, or user complaints.
+          Most accessibility issues are caught late: during QA, audits, or user complaints.
           By defining expected screen reader output in your component specs, you shift
-          detection to the earliest possible point: before the code is written.
+          detection to the earliest possible point: before the code is written. This pairs well with an automated{' '}
+          <Link href="/docs/cicd-integration" className="text-blue-600 hover:text-blue-800 underline">CI/CD pipeline</Link>{' '}
+          that validates specs on every commit.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
           <div className="p-4 border border-slate-200 rounded-lg bg-slate-50/50">
@@ -55,7 +60,7 @@ export default function SpecIntegrationPage() {
         <h2 className="text-2xl font-bold text-slate-900 mb-4">The spec-first workflow</h2>
         <p className="text-slate-600 mb-6 leading-relaxed">
           This workflow integrates Speakable into your development process from the
-          beginning — not as an afterthought.
+          beginning, not as an afterthought.
         </p>
         <div className="space-y-6">
           {WORKFLOW_STEPS.map((step, i) => (
@@ -132,7 +137,7 @@ export default function SpecIntegrationPage() {
           </div>
           <div className="p-6 overflow-x-auto">
             <pre className="text-sm font-mono leading-relaxed text-slate-300">
-{`## SubmitButton — Accessibility Spec
+{`## SubmitButton: Accessibility Spec
 
 ### Default state
 | Reader     | Expected Output              |
@@ -162,7 +167,8 @@ export default function SpecIntegrationPage() {
         <h2 className="text-2xl font-bold text-slate-900 mb-4">Validating specs in tests</h2>
         <p className="text-slate-600 mb-6 leading-relaxed">
           Turn your specs into automated tests. Each assertion validates that the
-          rendered component matches the expected screen reader output.
+          rendered component matches the expected screen reader output. This approach integrates naturally with your broader{' '}
+          <Link href="/docs/testing-strategy" className="text-blue-600 hover:text-blue-800 underline">testing strategy</Link>.
         </p>
 
         <h3 className="text-lg font-bold text-slate-900 mb-3">React + Vitest</h3>
@@ -225,7 +231,7 @@ describe('SubmitButton accessibility spec', () => {
                 <span className="text-blue-400">speakable</span>{' '}
                 <span className="text-emerald-400">dist/submit-button.html</span>{' '}
                 <span className="text-orange-300">--diff spec/submit-button.html</span>{'\n\n'}
-                <span className="text-slate-500"># In CI — fail if output doesn&apos;t match spec</span>{'\n'}
+                <span className="text-slate-500"># In CI: fail if output doesn&apos;t match spec</span>{'\n'}
                 <span className="text-blue-400">speakable</span>{' '}
                 <span className="text-emerald-400">dist/submit-button.html</span>{' '}
                 <span className="text-orange-300">--diff spec/submit-button.html</span>{' '}
@@ -287,7 +293,7 @@ describe('SubmitButton accessibility spec', () => {
             <span className="text-teal-500 font-bold text-lg leading-tight">1.</span>
             <div>
               <p className="text-slate-900 font-semibold text-sm">Spec every interactive state</p>
-              <p className="text-slate-600 text-sm">Default, hover, focus, disabled, loading, error — each state may produce different screen reader output.</p>
+              <p className="text-slate-600 text-sm">Default, hover, focus, disabled, loading, error: each state may produce different screen reader output.</p>
             </div>
           </div>
           <div className="flex gap-3">
@@ -318,12 +324,22 @@ describe('SubmitButton accessibility spec', () => {
               <p className="text-slate-600 text-sm">
                 Paste your expected HTML into{' '}
                 <a href="https://getspeakable.dev/tool" className="text-blue-600 hover:underline">getspeakable.dev/tool</a>{' '}
-                to quickly see what each reader would say, then copy the output into your spec.
+                to quickly see what each reader would say, then copy the output into your spec. You can also use the{' '}
+                <Link href="/docs/mcp-integration" className="text-blue-600 hover:text-blue-800 underline">MCP integration</Link>{' '}
+                to get screen reader output directly in your editor. For detailed CLI options, check the{' '}
+                <Link href="/docs/usage-guide" className="text-blue-600 hover:text-blue-800 underline">usage guide</Link>.
               </p>
             </div>
           </div>
         </div>
       </section>
+
+      <RelatedPages pages={[
+        { href: "/docs/cicd-integration", title: "CI/CD Integration", description: "Run Speakable in your build pipeline to catch accessibility regressions on every pull request." },
+        { href: "/docs/mcp-integration", title: "MCP Integration", description: "Give AI coding assistants real-time accessibility analysis via the Model Context Protocol." },
+        { href: "/docs/testing-strategy", title: "Testing Strategy", description: "Plan a layered accessibility testing approach that balances speed and confidence." },
+        { href: "/docs/usage-guide", title: "Usage Guide", description: "CLI options, programmatic API, and output formats for Speakable." },
+      ]} />
     </>
   );
 }

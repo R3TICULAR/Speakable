@@ -1,4 +1,6 @@
 import { getTranslations } from 'next-intl/server';
+import Link from 'next/link';
+import { RelatedPages } from '../../../components/RelatedPages';
 
 export default async function UsageGuidePage() {
   const t = await getTranslations('usageGuide');
@@ -46,7 +48,8 @@ export default async function UsageGuidePage() {
       <section className="mb-16">
         <h2 className="text-2xl font-bold text-slate-900 mb-4">{t('cliCommands.heading')}</h2>
         <p className="text-slate-600 mb-6 leading-relaxed">
-          {t('cliCommands.description')}
+          {t('cliCommands.description')} For the full programmatic API with function signatures and parameters, see the{' '}
+          <Link href="/docs" className="text-blue-600 hover:text-blue-800 underline">API Reference</Link>.
         </p>
         <div className="rounded-xl overflow-hidden bg-slate-900 shadow-2xl mb-6">
           <div className="flex justify-between items-center px-4 py-2 bg-white/5 border-b border-white/10">
@@ -174,14 +177,17 @@ export default async function UsageGuidePage() {
           <div className="p-4 border border-slate-200 rounded-lg bg-slate-50/50">
             <h3 className="font-bold text-sm text-slate-900 mb-2">{t('proFeatures.diff.title')}</h3>
             <p className="text-sm text-slate-600 mb-2">
-              {t('proFeatures.diff.description')}
+              {t('proFeatures.diff.description')} For deeper coverage of diff strategies, selectors, and snapshot testing workflows, explore the{' '}
+              <Link href="/docs/advanced-guide" className="text-blue-600 hover:text-blue-800 underline">Advanced Guide</Link>.
             </p>
             <code className="text-xs font-mono text-slate-500">speakable new.html --diff old.html</code>
           </div>
           <div className="p-4 border border-slate-200 rounded-lg bg-slate-50/50">
             <h3 className="font-bold text-sm text-slate-900 mb-2">{t('proFeatures.cicd.title')}</h3>
             <p className="text-sm text-slate-600 mb-2">
-              {t('proFeatures.cicd.description')}
+              {t('proFeatures.cicd.description')} See{' '}
+              <Link href="/docs/cicd-integration" className="text-blue-600 hover:text-blue-800 underline">CI/CD Integration</Link>{' '}
+              for complete pipeline examples.
             </p>
             <code className="text-xs font-mono text-slate-500">npx @reticular/speakable page.html -f audit</code>
           </div>
@@ -267,6 +273,10 @@ export default async function UsageGuidePage() {
       {/* Best Practices */}
       <section className="mb-16">
         <h2 className="text-2xl font-bold text-slate-900 mb-4">{t('bestPractices.heading')}</h2>
+        <p className="text-slate-600 mb-4 text-sm leading-relaxed">
+          Follow these recommendations to get the most value out of Speakable. For a checklist you can use before shipping, see the{' '}
+          <Link href="/docs/testing-checklist" className="text-blue-600 hover:text-blue-800 underline">Testing Checklist</Link>.
+        </p>
         <div className="space-y-4">
           <div className="flex gap-3">
             <span className="text-emerald-500 font-bold text-lg leading-tight">1.</span>
@@ -313,6 +323,13 @@ export default async function UsageGuidePage() {
           </div>
         </div>
       </section>
+
+      <RelatedPages pages={[
+        { href: "/docs/advanced-guide", title: "Advanced Guide", description: "Deep dives into screen reader behavior, debugging workflows, and integration patterns." },
+        { href: "/docs/testing-checklist", title: "Testing Checklist", description: "Step-by-step checklist to verify accessibility before shipping your components." },
+        { href: "/docs/frameworks", title: "Frameworks", description: "Framework-specific integration guides for React, Vue, Angular, and more." },
+        { href: "/docs/cicd-integration", title: "CI/CD Integration", description: "Automate accessibility checks in your continuous integration pipeline." },
+      ]} />
     </>
   );
 }

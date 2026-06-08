@@ -1,3 +1,6 @@
+import Link from 'next/link';
+import { RelatedPages } from '../../../components/RelatedPages';
+
 export default function FrameworkGuidesPage() {
   return (
     <>
@@ -11,7 +14,8 @@ export default function FrameworkGuidesPage() {
         <p className="text-lg text-slate-600 leading-relaxed">
           Integrate Speakable into your React, Angular, Svelte, or Web Component workflow.
           Each guide shows how to extract rendered HTML from your components and
-          feed it into Speakable for screen reader simulation.
+          feed it into Speakable for screen reader simulation. Once integrated, you can automate checks in your{' '}
+          <Link href="/docs/cicd-integration" className="text-blue-600 hover:text-blue-800 underline">CI/CD pipeline</Link>.
         </p>
       </header>
 
@@ -254,7 +258,7 @@ test('VoiceOver announces role first for landmarks', () => {
 
         <h3 className="text-lg font-bold text-slate-900 mb-3">Svelte 5 with runes</h3>
         <p className="text-slate-600 mb-4 text-sm">
-          The same pattern works with Svelte 5 — the testing library renders the component
+          The same pattern works with Svelte 5. The testing library renders the component
           to DOM regardless of whether you use runes or legacy syntax:
         </p>
         <div className="rounded-xl overflow-hidden bg-slate-900 shadow-2xl mb-6">
@@ -298,7 +302,7 @@ test('dialog announces with title and description', () => {
         </div>
         <p className="text-slate-600 mb-6 leading-relaxed">
           Web Components render to the light DOM or shadow DOM. Speakable analyzes the
-          light DOM output — extract <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm font-mono">innerHTML</code> or
+          light DOM output, so extract <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm font-mono">innerHTML</code> or
           use <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm font-mono">shadowRoot.innerHTML</code> for
           shadow DOM components.
         </p>
@@ -360,7 +364,9 @@ console.log(renderVoiceOver(model));
       <section className="mb-16">
         <h2 className="text-2xl font-bold text-slate-900 mb-4">General Pattern</h2>
         <p className="text-slate-600 mb-6 leading-relaxed">
-          Regardless of framework, the integration pattern is the same:
+          Regardless of framework, the integration pattern is the same. For a deeper look at how this fits into your overall{' '}
+          <Link href="/docs/testing-strategy" className="text-blue-600 hover:text-blue-800 underline">testing strategy</Link> and the broader{' '}
+          <Link href="/docs/testing-ecosystem" className="text-blue-600 hover:text-blue-800 underline">testing ecosystem</Link>, see the dedicated guides.
         </p>
         <ol className="list-decimal list-inside space-y-3 text-slate-600 mb-6">
           <li>Render your component to HTML (via test harness, build output, or DOM API)</li>
@@ -373,10 +379,19 @@ console.log(renderVoiceOver(model));
           <p className="text-sm text-teal-800">
             The CLI works with any static HTML file. If your framework produces HTML output
             (SSG, SSR, or build artifacts), you can analyze it directly without writing any
-            integration code: <code className="font-mono text-xs">speakable dist/index.html -f audit</code>
+            integration code: <code className="font-mono text-xs">speakable dist/index.html -f audit</code>.
+            For reusable accessible UI patterns, see the{' '}
+            <Link href="/docs/component-patterns" className="text-blue-600 hover:text-blue-800 underline">component patterns guide</Link>.
           </p>
         </div>
       </section>
+
+      <RelatedPages pages={[
+        { href: "/docs/cicd-integration", title: "CI/CD Integration", description: "Run Speakable in your build pipeline to catch accessibility regressions on every pull request." },
+        { href: "/docs/testing-ecosystem", title: "Testing Ecosystem", description: "How Speakable fits alongside other accessibility testing tools like Guidepup and axe-core." },
+        { href: "/docs/testing-strategy", title: "Testing Strategy", description: "Plan a layered accessibility testing approach that balances speed and confidence." },
+        { href: "/docs/component-patterns", title: "Component Patterns", description: "Reusable accessible component patterns with expected screen reader output." },
+      ]} />
     </>
   );
 }

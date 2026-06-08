@@ -1,3 +1,6 @@
+import Link from 'next/link';
+import { RelatedPages } from '../../../components/RelatedPages';
+
 export default function McpIntegrationPage() {
   return (
     <>
@@ -10,7 +13,8 @@ export default function McpIntegrationPage() {
         <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight mb-4">MCP Integration</h1>
         <p className="text-lg text-slate-600 leading-relaxed">
           Use Speakable as a Model Context Protocol (MCP) server to give AI coding assistants
-          real-time accessibility analysis capabilities directly in your editor.
+          real-time accessibility analysis capabilities directly in your editor. For CLI and programmatic usage outside an editor, see the{' '}
+          <Link href="/docs/usage-guide" className="text-blue-600 hover:text-blue-800 underline">usage guide</Link>.
         </p>
       </header>
 
@@ -112,7 +116,7 @@ export default function McpIntegrationPage() {
             </div>
             <p className="text-sm text-slate-600 mb-3">
               Compare two HTML versions and report accessibility changes. Shows added, removed,
-              and changed nodes — useful for detecting regressions before merging.
+              and changed nodes, useful for detecting regressions before merging.
             </p>
             <div className="overflow-x-auto">
               <table className="w-full text-xs text-left">
@@ -151,7 +155,7 @@ export default function McpIntegrationPage() {
         <h2 className="text-2xl font-bold text-slate-900 mb-4">Setup</h2>
         <p className="text-slate-600 mb-6 leading-relaxed">
           Add Speakable to your MCP configuration. The server runs locally via{' '}
-          <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm font-mono">npx</code> — no
+          <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm font-mono">npx</code>, with no
           global installation required.
         </p>
 
@@ -278,6 +282,8 @@ export default function McpIntegrationPage() {
         <h2 className="text-2xl font-bold text-slate-900 mb-4">Example Usage</h2>
         <p className="text-slate-600 mb-6 leading-relaxed">
           Once configured, your AI assistant can call Speakable tools naturally during conversation.
+          The tools use the same engine described in the{' '}
+          <Link href="/docs" className="text-blue-600 hover:text-blue-800 underline">API reference</Link>.
         </p>
 
         <div className="space-y-6">
@@ -316,7 +322,7 @@ Button has no accessible name. Add aria-label or visible text.`}</pre>
             </div>
             <div className="p-4">
               <p className="text-sm text-slate-300">
-                &quot;The button has no accessible name — screen readers will just say &apos;button&apos; with no
+                &quot;The button has no accessible name. Screen readers will just say &apos;button&apos; with no
                 context. Add an aria-label to fix it:&quot;
               </p>
               <pre className="text-xs font-mono text-emerald-300 mt-2">{`<button aria-label="Close dialog"><svg>...</svg></button>`}</pre>
@@ -356,24 +362,34 @@ Button has no accessible name. Add aria-label or visible text.`}</pre>
             <span className="material-symbols-outlined text-teal-600 mt-0.5 shrink-0" aria-hidden="true">lightbulb</span>
             <p className="text-sm text-slate-600">
               Use <code className="rounded bg-slate-100 px-1 py-0.5 text-xs font-mono">autoApprove</code> in
-              Kiro to skip confirmation prompts for Speakable tools — they only read HTML and never modify files.
+              Kiro to skip confirmation prompts for Speakable tools. They only read HTML and never modify files.
             </p>
           </div>
           <div className="flex gap-3">
             <span className="material-symbols-outlined text-teal-600 mt-0.5 shrink-0" aria-hidden="true">lightbulb</span>
             <p className="text-sm text-slate-600">
-              The MCP server runs the same engine as the CLI and web tool — identical output, zero network requests, fully local.
+              The MCP server runs the same engine as the CLI and web tool: identical output, zero network requests, fully local.
             </p>
           </div>
           <div className="flex gap-3">
             <span className="material-symbols-outlined text-teal-600 mt-0.5 shrink-0" aria-hidden="true">lightbulb</span>
             <p className="text-sm text-slate-600">
               Use <code className="rounded bg-slate-100 px-1 py-0.5 text-xs font-mono">diff_html</code> to
-              check if a refactor changed screen reader output before committing.
+              check if a refactor changed screen reader output before committing. You can also define expected output in a{' '}
+              <Link href="/docs/spec-integration" className="text-blue-600 hover:text-blue-800 underline">spec file</Link>{' '}
+              and validate against it in your{' '}
+              <Link href="/docs/cicd-integration" className="text-blue-600 hover:text-blue-800 underline">CI/CD pipeline</Link>.
             </p>
           </div>
         </div>
       </section>
+
+      <RelatedPages pages={[
+        { href: "/docs/usage-guide", title: "Usage Guide", description: "CLI options, programmatic API, and output formats for Speakable." },
+        { href: "/docs", title: "API Reference", description: "Full API documentation for Speakable's parsing, tree building, and rendering functions." },
+        { href: "/docs/spec-integration", title: "Spec Integration", description: "Define expected screen reader output in your specs before writing code." },
+        { href: "/docs/cicd-integration", title: "CI/CD Integration", description: "Run Speakable in your build pipeline to catch accessibility regressions on every pull request." },
+      ]} />
     </>
   );
 }

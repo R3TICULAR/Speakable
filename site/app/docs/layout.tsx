@@ -5,17 +5,48 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { CopyMarkdownButton } from '../../components/CopyMarkdownButton';
 
-const DOCS_SECTIONS = [
-  { label: 'API Reference', href: '/docs' },
-  { label: 'Usage Guide', href: '/docs/usage-guide' },
-  { label: 'MCP Integration', href: '/docs/mcp-integration' },
-  { label: 'Advanced Guide', href: '/docs/advanced-guide' },
-  { label: 'Examples', href: '/docs/examples' },
-  { label: 'Common Mistakes', href: '/docs/common-mistakes' },
-  { label: 'Framework Guides', href: '/docs/frameworks' },
-  { label: 'Spec Integration', href: '/docs/spec-integration' },
-  { label: 'Testing Ecosystem', href: '/docs/testing-ecosystem' },
-  { label: 'CI/CD Integration', href: '/docs/cicd-integration' },
+const DOCS_GROUPS: { label: string; sections: { label: string; href: string }[] }[] = [
+  {
+    label: 'Getting Started',
+    sections: [
+      { label: 'Usage Guide', href: '/docs/usage-guide' },
+      { label: 'How Screen Readers Work', href: '/docs/how-screen-readers-work' },
+    ],
+  },
+  {
+    label: 'Guides',
+    sections: [
+      { label: 'Advanced Guide', href: '/docs/advanced-guide' },
+      { label: 'Focus Management', href: '/docs/focus-management' },
+      { label: 'Live Regions', href: '/docs/live-regions' },
+      { label: 'Keyboard Navigation', href: '/docs/keyboard-navigation' },
+      { label: 'Accessible Forms', href: '/docs/accessible-forms' },
+      { label: 'Component Patterns', href: '/docs/component-patterns' },
+      { label: 'Testing Strategy', href: '/docs/testing-strategy' },
+    ],
+  },
+  {
+    label: 'Reference',
+    sections: [
+      { label: 'API Reference', href: '/docs' },
+      { label: 'ARIA Roles', href: '/docs/aria-roles' },
+      { label: 'Screen Reader Comparison', href: '/docs/screen-reader-comparison' },
+      { label: 'Testing Checklist', href: '/docs/testing-checklist' },
+      { label: 'Glossary', href: '/docs/glossary' },
+      { label: 'Common Mistakes', href: '/docs/common-mistakes' },
+      { label: 'Examples', href: '/docs/examples' },
+    ],
+  },
+  {
+    label: 'Integration',
+    sections: [
+      { label: 'CI/CD Integration', href: '/docs/cicd-integration' },
+      { label: 'Framework Guides', href: '/docs/frameworks' },
+      { label: 'MCP Integration', href: '/docs/mcp-integration' },
+      { label: 'Spec Integration', href: '/docs/spec-integration' },
+      { label: 'Testing Ecosystem', href: '/docs/testing-ecosystem' },
+    ],
+  },
 ];
 
 const CORE_MODULES = [
@@ -60,22 +91,31 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
           </span>
         </button>
         {mobileDocsOpen && (
-          <nav aria-label="Documentation navigation" className="px-6 pb-4 space-y-1">
-            {DOCS_SECTIONS.map((section) => (
-              <Link
-                key={section.href}
-                href={section.href}
-                aria-current={isActive(pathname, section.href) ? 'page' : undefined}
-                className={`flex items-center px-3 py-2 text-sm rounded-md transition-colors ${
-                  isActive(pathname, section.href)
-                    ? 'font-semibold bg-blue-50 text-blue-600'
-                    : 'font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900'
-                }`}
-              >
-                {section.label}
-              </Link>
+          <nav aria-label="Documentation navigation" className="px-6 pb-4 space-y-4">
+            {DOCS_GROUPS.map((group) => (
+              <div key={group.label}>
+                <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">
+                  {group.label}
+                </span>
+                <div className="space-y-1 mt-2">
+                  {group.sections.map((section) => (
+                    <Link
+                      key={section.href}
+                      href={section.href}
+                      aria-current={isActive(pathname, section.href) ? 'page' : undefined}
+                      className={`flex items-center px-3 py-2 text-sm rounded-md transition-colors ${
+                        isActive(pathname, section.href)
+                          ? 'font-semibold bg-blue-50 text-blue-600'
+                          : 'font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+                      }`}
+                    >
+                      {section.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
             ))}
-            <div className="mt-4 pt-2 border-t border-slate-200">
+            <div className="pt-2 border-t border-slate-200">
               <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">Core Modules</span>
               <div className="space-y-1 mt-2">
                 {CORE_MODULES.map((mod) => (
@@ -99,20 +139,29 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
           <h2 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-6">
             Documentation
           </h2>
-          <nav aria-label="Documentation navigation" className="space-y-1">
-            {DOCS_SECTIONS.map((section) => (
-              <Link
-                key={section.href}
-                href={section.href}
-                aria-current={isActive(pathname, section.href) ? 'page' : undefined}
-                className={`flex items-center px-3 py-2 text-sm rounded-md transition-colors ${
-                  isActive(pathname, section.href)
-                    ? 'font-semibold bg-blue-50 text-blue-600'
-                    : 'font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900'
-                }`}
-              >
-                {section.label}
-              </Link>
+          <nav aria-label="Documentation navigation" className="space-y-6">
+            {DOCS_GROUPS.map((group) => (
+              <div key={group.label}>
+                <h3 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">
+                  {group.label}
+                </h3>
+                <div className="space-y-1">
+                  {group.sections.map((section) => (
+                    <Link
+                      key={section.href}
+                      href={section.href}
+                      aria-current={isActive(pathname, section.href) ? 'page' : undefined}
+                      className={`flex items-center px-3 py-2 text-sm rounded-md transition-colors ${
+                        isActive(pathname, section.href)
+                          ? 'font-semibold bg-blue-50 text-blue-600'
+                          : 'font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+                      }`}
+                    >
+                      {section.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
             ))}
           </nav>
 

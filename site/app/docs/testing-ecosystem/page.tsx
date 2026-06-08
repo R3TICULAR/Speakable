@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { RelatedPages } from '../../../components/RelatedPages';
 
 export default function TestingEcosystemPage() {
   return (
@@ -13,7 +14,7 @@ export default function TestingEcosystemPage() {
           Testing Ecosystem
         </h1>
         <p className="text-lg text-slate-600 leading-relaxed">
-          How Speakable fits alongside other accessibility testing tools — and when
+          How Speakable fits alongside other accessibility testing tools, and when
           to use each approach.
         </p>
       </header>
@@ -23,7 +24,9 @@ export default function TestingEcosystemPage() {
         <h2 className="text-2xl font-bold text-slate-900 mb-4">Static vs Runtime Testing</h2>
         <p className="text-slate-600 mb-6 leading-relaxed">
           Accessibility testing tools fall into two categories. Understanding the difference
-          helps you build a testing strategy that catches issues early without sacrificing
+          helps you build a{' '}
+          <Link href="/docs/testing-strategy" className="text-blue-600 hover:text-blue-800 underline">testing strategy</Link>{' '}
+          that catches issues early without sacrificing
           confidence in the final product.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -130,7 +133,9 @@ export default function TestingEcosystemPage() {
               <p className="font-semibold text-slate-900 text-sm">Speakable in CI</p>
               <p className="text-sm text-slate-600">
                 Automate regression detection with <code className="text-xs bg-slate-100 px-1 py-0.5 rounded">--diff</code> on
-                every PR. Fail builds when screen reader output changes unexpectedly. Works on any CI runner.
+                every PR. Fail builds when screen reader output changes unexpectedly. Works on any CI runner. See the{' '}
+                <Link href="/docs/cicd-integration" className="text-blue-600 hover:text-blue-800 underline">CI/CD integration guide</Link>{' '}
+                for full pipeline examples.
               </p>
             </div>
           </div>
@@ -139,7 +144,7 @@ export default function TestingEcosystemPage() {
             <div>
               <p className="font-semibold text-slate-900 text-sm">Guidepup for validation</p>
               <p className="text-sm text-slate-600">
-                Use Guidepup to validate critical user flows where dynamic behavior matters — focus
+                Use Guidepup to validate critical user flows where dynamic behavior matters: focus
                 management, live regions, keyboard navigation sequences. Requires macOS (VoiceOver)
                 or Windows (NVDA) runners.
               </p>
@@ -211,7 +216,8 @@ jobs:
               <p className="font-semibold text-slate-900 text-sm">Use Speakable when…</p>
               <p className="text-sm text-slate-600">
                 You&apos;re writing components, reviewing PRs, running CI checks, or need fast
-                feedback on how screen readers will interpret your HTML structure.
+                feedback on how screen readers will interpret your HTML structure. For a pre-merge{' '}
+                <Link href="/docs/testing-checklist" className="text-blue-600 hover:text-blue-800 underline">testing checklist</Link>, see the dedicated page.
               </p>
             </div>
           </div>
@@ -222,7 +228,9 @@ jobs:
               <p className="text-sm text-slate-600">
                 You need to validate focus management, live region announcements, keyboard
                 navigation flows, or any behavior that depends on JavaScript execution and
-                real-time DOM updates.
+                real-time DOM updates. Learn more about{' '}
+                <Link href="/docs/how-screen-readers-work" className="text-blue-600 hover:text-blue-800 underline">how screen readers work</Link>{' '}
+                to understand what they actually perceive.
               </p>
             </div>
           </div>
@@ -259,7 +267,7 @@ jobs:
 
         <div className="rounded-xl overflow-hidden bg-slate-900 shadow-2xl mb-6">
           <div className="flex justify-between items-center px-4 py-2 bg-white/5 border-b border-white/10">
-            <span className="text-xs font-mono text-slate-400 uppercase tracking-wider">Step 1 — Speakable: structural validation (runs anywhere, milliseconds)</span>
+            <span className="text-xs font-mono text-slate-400 uppercase tracking-wider">Step 1 - Speakable: structural validation (runs anywhere, milliseconds)</span>
           </div>
           <div className="p-6 overflow-x-auto">
             <pre className="text-sm font-mono leading-relaxed text-slate-300">
@@ -295,7 +303,7 @@ describe('ConfirmDialog structure', () => {
 
         <div className="rounded-xl overflow-hidden bg-slate-900 shadow-2xl mb-6">
           <div className="flex justify-between items-center px-4 py-2 bg-white/5 border-b border-white/10">
-            <span className="text-xs font-mono text-slate-400 uppercase tracking-wider">Step 2 — Guidepup: interaction validation (requires macOS runner)</span>
+            <span className="text-xs font-mono text-slate-400 uppercase tracking-wider">Step 2 - Guidepup: interaction validation (requires macOS runner)</span>
           </div>
           <div className="p-6 overflow-x-auto">
             <pre className="text-sm font-mono leading-relaxed text-slate-300">
@@ -467,6 +475,13 @@ jobs:
           CI/CD Setup Guide
         </Link>
       </div>
+
+      <RelatedPages pages={[
+        { href: "/docs/cicd-integration", title: "CI/CD Integration", description: "Run Speakable in your build pipeline to catch accessibility regressions on every pull request." },
+        { href: "/docs/testing-strategy", title: "Testing Strategy", description: "Plan a layered accessibility testing approach that balances speed and confidence." },
+        { href: "/docs/testing-checklist", title: "Testing Checklist", description: "A step-by-step checklist for verifying accessibility before merging." },
+        { href: "/docs/frameworks", title: "Frameworks", description: "Integrate Speakable into React, Angular, Svelte, or Web Component workflows." },
+      ]} />
     </>
   );
 }

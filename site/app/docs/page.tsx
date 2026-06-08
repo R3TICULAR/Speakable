@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { RelatedPages } from '../../components/RelatedPages';
 
 export default function ApiReferencePage() {
   return (
@@ -17,6 +18,8 @@ export default function ApiReferencePage() {
           Each stage is available as a standalone programmatic API via{' '}
           <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm font-mono">@reticular/speakable</code>,
           or through the <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm font-mono">speakable</code> CLI.
+          For a practical walkthrough of CLI commands and options, see the{' '}
+          <Link href="/docs/usage-guide" className="text-blue-600 hover:text-blue-800 underline">Usage Guide</Link>.
         </p>
       </header>
 
@@ -33,7 +36,7 @@ export default function ApiReferencePage() {
         <p className="text-slate-600 mb-6 leading-relaxed">
           The Parser is the entry point of the pipeline. It takes a raw HTML string and
           returns a parsed DOM document via jsdom with lenient error recovery. Malformed
-          HTML is handled gracefully — the parser emits warnings but continues processing.
+          HTML is handled gracefully. The parser emits warnings but continues processing.
         </p>
         <div className="relative group rounded-xl overflow-hidden bg-slate-900 shadow-2xl mb-6">
           <div className="flex justify-between items-center px-4 py-2 bg-white/5 border-b border-white/10">
@@ -63,7 +66,7 @@ export default function ApiReferencePage() {
                 <span className="text-blue-400"> from</span>{' '}
                 <span className="text-orange-300">{`'@reticular/speakable'`}</span>
                 <span className="text-slate-300">;</span>{'\n\n'}
-                <span className="text-slate-500">// Parse any HTML string — raw snippets, full pages, file contents</span>{'\n'}
+                <span className="text-slate-500">// Parse any HTML string: raw snippets, full pages, file contents</span>{'\n'}
                 <span className="text-blue-400">const</span>{' '}
                 <span className="text-slate-300">{'{ document, warnings }'} = </span>
                 <span className="text-emerald-400">parseHTML</span>
@@ -93,9 +96,12 @@ export default function ApiReferencePage() {
           </div>
         </div>
         <p className="text-slate-600 mb-4 leading-relaxed">
-          Returns <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm font-mono">{'{ document, warnings }'}</code> —
+          Returns <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm font-mono">{'{ document, warnings }'}</code>:
           a standard DOM Document and an array of parsing warnings. Lenient mode means even
           severely malformed HTML produces a usable document rather than throwing.
+          See the{' '}
+          <Link href="/docs/examples" className="text-blue-600 hover:text-blue-800 underline">Examples</Link>{' '}
+          page for sample HTML inputs and their resulting output.
         </p>
       </section>
 
@@ -112,7 +118,9 @@ export default function ApiReferencePage() {
         <p className="text-slate-600 mb-6 leading-relaxed">
           The Extractor walks the parsed DOM and builds a canonical accessibility tree.
           It computes accessible names, maps roles, extracts states, and determines
-          focusability for every element — following the W3C ARIA specification.
+          focusability for every element, following the W3C ARIA specification.
+          To understand how real screen readers interpret this tree, see{' '}
+          <Link href="/docs/how-screen-readers-work" className="text-blue-600 hover:text-blue-800 underline">How Screen Readers Work</Link>.
         </p>
         <div className="relative group rounded-xl overflow-hidden bg-slate-900 shadow-2xl mb-6">
           <div className="flex justify-between items-center px-4 py-2 bg-white/5 border-b border-white/10">
@@ -263,7 +271,8 @@ export default function ApiReferencePage() {
         <p className="text-slate-600 mb-6 leading-relaxed">
           The canonical <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm font-mono">AnnouncementModel</code> is
           a deterministic, serializable representation of the accessibility tree. It&apos;s designed for
-          snapshot testing, diffing, and CI/CD pipelines.
+          snapshot testing, diffing, and CI/CD pipelines. For more on custom rendering strategies and advanced patterns, see the{' '}
+          <Link href="/docs/advanced-guide" className="text-blue-600 hover:text-blue-800 underline">Advanced Guide</Link>.
         </p>
         <div className="relative group rounded-xl overflow-hidden bg-slate-900 shadow-2xl mb-6">
           <div className="flex justify-between items-center px-4 py-2 bg-white/5 border-b border-white/10">
@@ -396,7 +405,7 @@ interface AccessibleNode {
         </div>
         <p className="text-slate-600 mb-6 leading-relaxed">
           The web analyzer and browser extension include built-in speech playback powered by
-          the browser&apos;s native SpeechSynthesis API. Hear what screen readers would say — no
+          the browser&apos;s native SpeechSynthesis API. Hear what screen readers would say with no
           assistive technology installation required.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
@@ -411,21 +420,21 @@ interface AccessibleNode {
             <h3 className="font-bold text-sm text-slate-900 mb-2">Line-by-Line</h3>
             <p className="text-xs text-slate-500">
               Navigate output one line at a time with ↑/↓ arrow keys. Each line is spoken
-              aloud and highlighted — mimicking how screen reader users actually browse.
+              aloud and highlighted, mimicking how screen reader users actually browse.
             </p>
           </div>
           <div className="p-4 border border-slate-200 rounded-lg bg-slate-50/50">
             <h3 className="font-bold text-sm text-slate-900 mb-2">Voice &amp; Speed</h3>
             <p className="text-xs text-slate-500">
               Choose from available browser voices and adjust playback speed from 0.5x to 2.0x.
-              Zero dependencies — uses the Web Speech API built into all modern browsers.
+              Zero dependencies: uses the Web Speech API built into all modern browsers.
             </p>
           </div>
           <div className="p-4 border border-slate-200 rounded-lg bg-slate-50/50">
             <h3 className="font-bold text-sm text-slate-900 mb-2">Extension Support</h3>
             <p className="text-xs text-slate-500">
-              The Chrome extension includes the same voice controls — play, pause, stop, voice
-              selection, and speed adjustment — directly in the extension popup.
+              The Chrome extension includes the same voice controls (play, pause, stop, voice
+              selection, and speed adjustment) directly in the extension popup.
             </p>
           </div>
         </div>
@@ -455,6 +464,13 @@ interface AccessibleNode {
           Join Discord
         </Link>
       </div>
+
+      <RelatedPages pages={[
+        { href: "/docs/usage-guide", title: "Usage Guide", description: "Practical walkthrough of CLI commands, output formats, and workflow integration." },
+        { href: "/docs/examples", title: "Examples", description: "Common HTML patterns and their predicted screen reader output across NVDA, VoiceOver, and Narrator." },
+        { href: "/docs/how-screen-readers-work", title: "How Screen Readers Work", description: "Understand the underlying mechanics of how assistive technology interprets web content." },
+        { href: "/docs/aria-roles", title: "ARIA Roles", description: "Complete reference for ARIA roles and how they map to screen reader announcements." },
+      ]} />
     </>
   );
 }

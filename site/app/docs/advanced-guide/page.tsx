@@ -1,3 +1,6 @@
+import Link from 'next/link';
+import { RelatedPages } from '../../../components/RelatedPages';
+
 export default function AdvancedGuidePage() {
   return (
     <>
@@ -18,9 +21,11 @@ export default function AdvancedGuidePage() {
       <section className="mb-20" id="blind-spots">
         <h2 className="text-2xl font-bold text-slate-900 mb-4">Why Accessibility Audits Pass But Users Still Struggle</h2>
         <p className="text-slate-600 mb-6 leading-relaxed">
-          Rule-based tools like Axe and Lighthouse check for WCAG violations — missing alt text,
+          Rule-based tools like Axe and Lighthouse check for WCAG violations: missing alt text,
           low contrast, missing form labels. But passing those checks doesn&apos;t mean the experience
           is good. These examples all pass automated audits yet produce confusing screen reader output.
+          For more concrete examples of bad markup and fixes, see{' '}
+          <Link href="/docs/common-mistakes" className="text-blue-600 hover:text-blue-800 underline">Common Mistakes</Link>.
         </p>
 
         {BLIND_SPOTS.map((spot) => (
@@ -54,7 +59,7 @@ export default function AdvancedGuidePage() {
       <section className="mb-20" id="debugging">
         <h2 className="text-2xl font-bold text-slate-900 mb-4">Debugging Accessibility Like a User Hears It</h2>
         <p className="text-slate-600 mb-6 leading-relaxed">
-          Step-by-step breakdowns of real accessibility bugs — diagnosed using Speakable output
+          Step-by-step breakdowns of real accessibility bugs, diagnosed using Speakable output
           the same way you&apos;d use browser DevTools to debug a visual bug.
         </p>
 
@@ -113,7 +118,7 @@ export default function AdvancedGuidePage() {
             <tbody className="text-slate-600">
               <tr className="border-b border-slate-100">
                 <td className="py-3 pr-4 font-medium text-slate-900">Time per component</td>
-                <td className="py-3 pr-4">2–10 minutes</td>
+                <td className="py-3 pr-4">2-10 minutes</td>
                 <td className="py-3 pr-4">Under 1 second</td>
               </tr>
               <tr className="border-b border-slate-100">
@@ -293,7 +298,11 @@ describe('Accessibility snapshots', () => {
       <section className="mb-20" id="screen-reader-behavior">
         <h2 className="text-2xl font-bold text-slate-900 mb-4">How Screen Readers Actually Interpret Your UI</h2>
         <p className="text-slate-600 mb-6 leading-relaxed">
-          Key behaviors that affect what users hear — and that often surprise developers.
+          Key behaviors that affect what users hear, and that often surprise developers.
+          For a full comparison of how different screen readers handle the same markup, see the{' '}
+          <Link href="/docs/screen-reader-comparison" className="text-blue-600 hover:text-blue-800 underline">Screen Reader Comparison</Link>.
+          For foundational concepts, start with{' '}
+          <Link href="/docs/how-screen-readers-work" className="text-blue-600 hover:text-blue-800 underline">How Screen Readers Work</Link>.
         </p>
 
         {BEHAVIORS.map((b) => (
@@ -340,9 +349,9 @@ describe('Accessibility snapshots', () => {
 
         <h3 className="text-lg font-bold text-slate-900 mb-3">Known limitations</h3>
         <ul className="text-sm text-slate-600 space-y-2 list-disc list-inside mb-6">
-          <li>Static HTML only — no JavaScript execution, no dynamic content, no live regions</li>
+          <li>Static HTML only: no JavaScript execution, no dynamic content, no live regions</li>
           <li>No CSS visibility computation (relies on ARIA and HTML semantics for hidden detection)</li>
-          <li>Screen reader heuristics vary by version — Speakable targets current stable releases</li>
+          <li>Screen reader heuristics vary by version. Speakable targets current stable releases.</li>
           <li>Some screen readers have undocumented behaviors that differ from the ARIA spec</li>
           <li>Complex widget patterns (combobox, treegrid) may have simplified output</li>
           <li>Browser-specific rendering differences are not modeled</li>
@@ -416,13 +425,22 @@ describe('Accessibility snapshots', () => {
           <p className="text-sm text-slate-700 leading-relaxed">
             Speakable is a fast feedback layer for catching structural accessibility issues
             during development and CI. It catches the majority of problems that would affect
-            screen reader users — missing names, broken hierarchy, incorrect roles, state
+            screen reader users: missing names, broken hierarchy, incorrect roles, state
             mismatches. For final validation of complex interactions, dynamic content, and
             edge-case screen reader behavior, complement with manual testing or runtime tools
-            like Guidepup.
+            like Guidepup. Review the{' '}
+            <Link href="/docs/component-patterns" className="text-blue-600 hover:text-blue-800 underline">Component Patterns</Link>{' '}
+            guide for accessible widget implementations you can test against.
           </p>
         </div>
       </section>
+
+      <RelatedPages pages={[
+        { href: "/docs/common-mistakes", title: "Common Mistakes", description: "Real-world HTML patterns that break screen reader experiences and how to fix them." },
+        { href: "/docs/screen-reader-comparison", title: "Screen Reader Comparison", description: "Side-by-side comparison of how NVDA, JAWS, VoiceOver, and Narrator announce the same markup." },
+        { href: "/docs/component-patterns", title: "Component Patterns", description: "Accessible implementations of common UI patterns like modals, tabs, and comboboxes." },
+        { href: "/docs/glossary", title: "Glossary", description: "Definitions of accessibility terms, ARIA attributes, and screen reader concepts." },
+      ]} />
     </>
   );
 }
@@ -485,7 +503,7 @@ const DEBUG_WALKTHROUGHS = [
     title: 'Search results count announced as static text',
     badHtml: `<div class="search-results">\n  <span class="count">24 results found</span>\n  <ul>\n    <li><a href="/r/1">Result one</a></li>\n    <!-- ... -->\n  </ul>\n</div>`,
     badOutput: `24 results found\nlist\n  Result one, link`,
-    rootCause: 'The results count is static text with no live region. When search results update dynamically, screen reader users won\'t hear the count change. They have to manually navigate back to find it. For the static HTML case, the output is technically correct — but the pattern signals a likely dynamic content issue.',
+    rootCause: 'The results count is static text with no live region. When search results update dynamically, screen reader users won\'t hear the count change. They have to manually navigate back to find it. For the static HTML case, the output is technically correct, but the pattern signals a likely dynamic content issue.',
     goodHtml: `<div class="search-results">\n  <span class="count" role="status" aria-live="polite"\n    aria-atomic="true">24 results found</span>\n  <ul>\n    <li><a href="/r/1">Result one</a></li>\n    <!-- ... -->\n  </ul>\n</div>`,
     goodOutput: `24 results found\nlist\n  Result one, link`,
   },
@@ -493,7 +511,7 @@ const DEBUG_WALKTHROUGHS = [
     title: 'Data table missing headers',
     badHtml: `<table>\n  <tr>\n    <td><strong>Name</strong></td>\n    <td><strong>Email</strong></td>\n    <td><strong>Role</strong></td>\n  </tr>\n  <tr>\n    <td>Alice</td>\n    <td>alice@co.com</td>\n    <td>Admin</td>\n  </tr>\n</table>`,
     badOutput: `table\n  row\n    Name\n    Email\n    Role\n  row\n    Alice\n    alice@co.com\n    Admin`,
-    rootCause: 'The first row uses <td> with <strong> instead of <th>. Screen readers can\'t identify column headers, so when users navigate cells, they won\'t hear "Name: Alice" — just "Alice" with no column context.',
+    rootCause: 'The first row uses <td> with <strong> instead of <th>. Screen readers can\'t identify column headers, so when users navigate cells, they won\'t hear "Name: Alice", just "Alice" with no column context.',
     goodHtml: `<table>\n  <tr>\n    <th>Name</th>\n    <th>Email</th>\n    <th>Role</th>\n  </tr>\n  <tr>\n    <td>Alice</td>\n    <td>alice@co.com</td>\n    <td>Admin</td>\n  </tr>\n</table>`,
     goodOutput: `table\n  row\n    Name, column header\n    Email, column header\n    Role, column header\n  row\n    Alice\n    alice@co.com\n    Admin`,
   },
@@ -509,14 +527,14 @@ const BEHAVIORS = [
   },
   {
     title: 'aria-hidden removes entire subtrees',
-    explanation: 'Setting aria-hidden="true" on an element removes it AND all its children from the accessibility tree — even if children have their own roles and names. This is irreversible within that subtree.',
+    explanation: 'Setting aria-hidden="true" on an element removes it AND all its children from the accessibility tree, even if children have their own roles and names. This is irreversible within that subtree.',
     html: `<div aria-hidden="true">\n  <button>Important action</button>\n  <a href="/help">Help</a>\n</div>`,
     nvda: '(nothing announced)',
     voiceover: '(nothing announced)',
   },
   {
     title: 'Role overrides native semantics',
-    explanation: 'An explicit role attribute completely replaces the element\'s native semantics. A button with role="link" is announced as a link, not a button — even though it still behaves like a button for keyboard interaction.',
+    explanation: 'An explicit role attribute completely replaces the element\'s native semantics. A button with role="link" is announced as a link, not a button, even though it still behaves like a button for keyboard interaction.',
     html: `<button role="link">Read more</button>`,
     nvda: 'Read more, link',
     voiceover: 'Read more, link',
@@ -544,7 +562,7 @@ const BEHAVIORS = [
   },
   {
     title: 'Disabled vs aria-disabled behavior',
-    explanation: 'Native disabled attribute removes the element from tab order AND announces as disabled. aria-disabled="true" announces as disabled but keeps the element focusable — useful when you want users to discover disabled controls and understand why they\'re inactive.',
+    explanation: 'Native disabled attribute removes the element from tab order AND announces as disabled. aria-disabled="true" announces as disabled but keeps the element focusable, which is useful when you want users to discover disabled controls and understand why they\'re inactive.',
     html: `<!-- Native disabled (not focusable) -->\n<button disabled>Submit</button>\n\n<!-- ARIA disabled (still focusable) -->\n<button aria-disabled="true">Submit</button>`,
     nvda: 'Submit, button, unavailable\nSubmit, button, unavailable',
     voiceover: 'Submit, button, dimmed\nSubmit, button, dimmed',

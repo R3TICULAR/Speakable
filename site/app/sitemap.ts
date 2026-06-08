@@ -30,6 +30,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/docs/spec-integration', priority: 0.6, changeFrequency: 'monthly' as const },
     { path: '/docs/testing-ecosystem', priority: 0.7, changeFrequency: 'monthly' as const },
     { path: '/docs/cicd-integration', priority: 0.8, changeFrequency: 'monthly' as const },
+    { path: '/docs/aria-roles', priority: 0.8, changeFrequency: 'monthly' as const },
+    { path: '/docs/testing-checklist', priority: 0.8, changeFrequency: 'monthly' as const },
+    { path: '/docs/how-screen-readers-work', priority: 0.8, changeFrequency: 'monthly' as const },
+    { path: '/docs/component-patterns', priority: 0.7, changeFrequency: 'monthly' as const },
+    { path: '/docs/live-regions', priority: 0.7, changeFrequency: 'monthly' as const },
+    { path: '/docs/focus-management', priority: 0.7, changeFrequency: 'monthly' as const },
+    { path: '/docs/testing-strategy', priority: 0.7, changeFrequency: 'monthly' as const },
+    { path: '/docs/glossary', priority: 0.6, changeFrequency: 'monthly' as const },
+    { path: '/docs/screen-reader-comparison', priority: 0.7, changeFrequency: 'monthly' as const },
+    { path: '/docs/keyboard-navigation', priority: 0.7, changeFrequency: 'monthly' as const },
+    { path: '/docs/accessible-forms', priority: 0.7, changeFrequency: 'monthly' as const },
   ];
 
   const allPages = [...corePages, ...docsPages];

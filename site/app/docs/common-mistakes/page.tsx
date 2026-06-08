@@ -1,3 +1,6 @@
+import Link from 'next/link';
+import { RelatedPages } from '../../../components/RelatedPages';
+
 export default function CommonMistakesPage() {
   return (
     <>
@@ -9,9 +12,10 @@ export default function CommonMistakesPage() {
         </nav>
         <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight mb-4">Common Mistakes</h1>
         <p className="text-lg text-slate-600 leading-relaxed">
-          Real-world HTML patterns that break screen reader experiences — and how to fix them.
+          Real-world HTML patterns that break screen reader experiences, and how to fix them.
           Each example shows the bad markup, what screen readers actually announce, and the
-          corrected version.
+          corrected version. For working code samples showing the correct approach, see the{' '}
+          <Link href="/docs/examples" className="text-blue-600 hover:text-blue-800 underline">Examples</Link> page.
         </p>
       </header>
 
@@ -32,7 +36,7 @@ export default function CommonMistakesPage() {
             </div>
             <div className="rounded-xl overflow-hidden bg-slate-900 shadow-2xl">
               <div className="px-4 py-2 bg-red-900/20 border-b border-red-800/30">
-                <span className="text-xs font-mono text-red-400 uppercase tracking-wider">HTML — Don&apos;t do this</span>
+                <span className="text-xs font-mono text-red-400 uppercase tracking-wider">HTML: Don&apos;t do this</span>
               </div>
               <div className="p-6 overflow-x-auto">
                 <pre className="text-sm font-mono leading-relaxed text-red-300">{m.badHtml}</pre>
@@ -75,7 +79,7 @@ export default function CommonMistakesPage() {
             </div>
             <div className="rounded-xl overflow-hidden bg-slate-900 shadow-2xl">
               <div className="px-4 py-2 bg-emerald-900/20 border-b border-emerald-800/30">
-                <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider">HTML — Do this instead</span>
+                <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider">HTML: Do this instead</span>
               </div>
               <div className="p-6 overflow-x-auto">
                 <pre className="text-sm font-mono leading-relaxed text-emerald-300">{m.goodHtml}</pre>
@@ -115,13 +119,35 @@ export default function CommonMistakesPage() {
               <p className="text-sm text-teal-800">
                 Run <code className="font-mono text-xs bg-teal-100 px-1 py-0.5 rounded">speakable page.html -f audit</code> to
                 detect many of these issues automatically. The audit report flags missing names,
-                heading hierarchy violations, unnamed landmarks, and more — with specific
+                heading hierarchy violations, unnamed landmarks, and more, with specific
                 remediation suggestions for each.
               </p>
             </div>
           </div>
         </div>
       </section>
+
+      {/* Additional context */}
+      <section className="mb-16">
+        <div className="bg-slate-50 border border-slate-200 rounded-xl p-6">
+          <p className="text-sm text-slate-700 leading-relaxed">
+            Many of these mistakes involve incorrect use of{' '}
+            <Link href="/docs/aria-roles" className="text-blue-600 hover:text-blue-800 underline">ARIA roles</Link>{' '}
+            and attributes. For form-specific guidance on labels, fieldsets, and error messages, see{' '}
+            <Link href="/docs/accessible-forms" className="text-blue-600 hover:text-blue-800 underline">Accessible Forms</Link>.
+            To learn reusable patterns that avoid these pitfalls, explore the{' '}
+            <Link href="/docs/component-patterns" className="text-blue-600 hover:text-blue-800 underline">Component Patterns</Link>{' '}
+            library.
+          </p>
+        </div>
+      </section>
+
+      <RelatedPages pages={[
+        { href: "/docs/examples", title: "Examples", description: "Correct HTML patterns and their predicted screen reader output across multiple readers." },
+        { href: "/docs/aria-roles", title: "ARIA Roles", description: "Complete reference for ARIA roles and how they map to screen reader announcements." },
+        { href: "/docs/testing-checklist", title: "Testing Checklist", description: "Step-by-step checklist to verify accessibility before shipping your components." },
+        { href: "/docs/accessible-forms", title: "Accessible Forms", description: "Guide to building forms that work well with screen readers and assistive technology." },
+      ]} />
     </>
   );
 }
@@ -139,7 +165,7 @@ const MISTAKES: {
 }[] = [
   {
     title: 'Button with no accessible name',
-    description: 'Icon-only buttons without text or aria-label are announced as just "button" — users have no idea what it does.',
+    description: 'Icon-only buttons without text or aria-label are announced as just "button". Users have no idea what it does.',
     badHtml: `<button>\n  <svg viewBox="0 0 24 24"><!-- icon --></svg>\n</button>`,
     badNvda: `"button"`,
     badVoiceover: `"button"`,
@@ -172,7 +198,7 @@ const MISTAKES: {
   },
   {
     title: 'Image without alt text',
-    description: 'Images without alt attributes are announced with their filename or as just "image" — meaningless to screen reader users.',
+    description: 'Images without alt attributes are announced with their filename or as just "image", meaningless to screen reader users.',
     badHtml: `<img src="/images/team-photo.jpg" />`,
     badNvda: `"graphic"`,
     badVoiceover: `"image"`,
@@ -183,7 +209,7 @@ const MISTAKES: {
   },
   {
     title: 'Form input without label',
-    description: 'Inputs without associated labels are announced as just "edit" — users don\'t know what to type.',
+    description: 'Inputs without associated labels are announced as just "edit". Users don\'t know what to type.',
     badHtml: `<input type="email" placeholder="Enter your email" />`,
     badNvda: `"edit"`,
     badVoiceover: `"edit text"`,
@@ -205,7 +231,7 @@ const MISTAKES: {
   },
   {
     title: 'Link with no text',
-    description: 'Links wrapping only an icon or image with no accessible name are announced as just "link" — users can\'t tell where it goes.',
+    description: 'Links wrapping only an icon or image with no accessible name are announced as just "link". Users can\'t tell where it goes.',
     badHtml: `<a href="/settings">\n  <svg viewBox="0 0 24 24"><!-- gear icon --></svg>\n</a>`,
     badNvda: `"link"`,
     badVoiceover: `"link"`,
@@ -220,7 +246,7 @@ const MISTAKES: {
     badHtml: `<a href="/pricing" aria-label="Click here to see pricing">\n  See Pricing\n</a>`,
     badNvda: `"Click here to see pricing, link"`,
     badVoiceover: `"Click here to see pricing, link"`,
-    whyBad: 'The aria-label overrides the visible text. Sighted users see "See Pricing" but screen reader users hear "Click here to see pricing" — a mismatch that breaks the shared experience. Also, "click here" is not descriptive.',
+    whyBad: 'The aria-label overrides the visible text. Sighted users see "See Pricing" but screen reader users hear "Click here to see pricing", a mismatch that breaks the shared experience. Also, "click here" is not descriptive.',
     goodHtml: `<a href="/pricing">\n  See Pricing\n</a>`,
     goodNvda: `"See Pricing, link"`,
     goodVoiceover: `"See Pricing, link"`,
@@ -242,7 +268,7 @@ const MISTAKES: {
     badHtml: `<button class="opacity-50 cursor-not-allowed">\n  Submit\n</button>`,
     badNvda: `"Submit, button"`,
     badVoiceover: `"Submit, button"`,
-    whyBad: 'The button looks disabled visually but screen readers announce it as a normal, active button. Users will try to activate it and nothing will happen — with no explanation why.',
+    whyBad: 'The button looks disabled visually but screen readers announce it as a normal, active button. Users will try to activate it and nothing will happen, with no explanation why.',
     goodHtml: `<button disabled>\n  Submit\n</button>`,
     goodNvda: `"Submit, button, unavailable"`,
     goodVoiceover: `"Submit, button, dimmed"`,

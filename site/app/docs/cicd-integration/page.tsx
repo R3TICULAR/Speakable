@@ -1,3 +1,6 @@
+import Link from 'next/link';
+import { RelatedPages } from '../../../components/RelatedPages';
+
 export default function CiCdIntegrationPage() {
   return (
     <>
@@ -10,6 +13,9 @@ export default function CiCdIntegrationPage() {
         <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight mb-4">CI/CD Integration</h1>
         <p className="text-lg text-slate-600 leading-relaxed">
           Run Speakable in your build pipeline to catch accessibility regressions on every pull request.
+          Works with any{' '}
+          <Link href="/docs/frameworks" className="text-blue-600 hover:text-blue-800 underline">framework</Link>{' '}
+          that produces HTML output.
         </p>
       </header>
 
@@ -37,7 +43,8 @@ export default function CiCdIntegrationPage() {
         <h2 className="text-2xl font-bold text-slate-900 mb-4">GitHub Actions</h2>
         <p className="text-slate-600 mb-6 leading-relaxed">
           Add this workflow to run accessibility checks on every push. The audit step catches
-          issues, and the diff step detects regressions against a baseline.
+          issues, and the diff step detects regressions against a baseline. For a broader view of where CI fits in your{' '}
+          <Link href="/docs/testing-strategy" className="text-blue-600 hover:text-blue-800 underline">testing strategy</Link>, see the dedicated guide.
         </p>
         <div className="rounded-xl overflow-hidden bg-slate-900 shadow-2xl">
           <div className="flex justify-between items-center px-4 py-2 bg-white/5 border-b border-white/10">
@@ -111,15 +118,15 @@ jobs:
               </tr>
               <tr className="border-b border-slate-100">
                 <td className="py-3 pr-4 font-mono">1</td>
-                <td className="py-3">User error — invalid arguments or options</td>
+                <td className="py-3">User error: invalid arguments or options</td>
               </tr>
               <tr className="border-b border-slate-100">
                 <td className="py-3 pr-4 font-mono">2</td>
-                <td className="py-3">Content error — accessibility issues found, or diff detected changes</td>
+                <td className="py-3">Content error: accessibility issues found, or diff detected changes</td>
               </tr>
               <tr className="border-b border-slate-100">
                 <td className="py-3 pr-4 font-mono">3</td>
-                <td className="py-3">System error — file not found, I/O failure</td>
+                <td className="py-3">System error: file not found, I/O failure</td>
               </tr>
             </tbody>
           </table>
@@ -164,7 +171,7 @@ jobs:
         </p>
         <div className="rounded-xl overflow-hidden bg-slate-900 shadow-2xl mb-6">
           <div className="flex justify-between items-center px-4 py-2 bg-white/5 border-b border-white/10">
-            <span className="text-xs font-mono text-slate-400 uppercase tracking-wider">Step 1 — Save baseline</span>
+            <span className="text-xs font-mono text-slate-400 uppercase tracking-wider">Step 1 - Save baseline</span>
           </div>
           <div className="p-6 overflow-x-auto">
             <pre className="text-sm font-mono leading-relaxed">
@@ -179,7 +186,7 @@ jobs:
         </div>
         <div className="rounded-xl overflow-hidden bg-slate-900 shadow-2xl mb-6">
           <div className="flex justify-between items-center px-4 py-2 bg-white/5 border-b border-white/10">
-            <span className="text-xs font-mono text-slate-400 uppercase tracking-wider">Step 2 — Make changes and compare</span>
+            <span className="text-xs font-mono text-slate-400 uppercase tracking-wider">Step 2 - Make changes and compare</span>
           </div>
           <div className="p-6 overflow-x-auto">
             <pre className="text-sm font-mono leading-relaxed">
@@ -198,7 +205,7 @@ jobs:
         </div>
         <div className="rounded-xl overflow-hidden bg-slate-900 shadow-2xl">
           <div className="flex justify-between items-center px-4 py-2 bg-white/5 border-b border-white/10">
-            <span className="text-xs font-mono text-slate-400 uppercase tracking-wider">Step 3 — Automate in CI</span>
+            <span className="text-xs font-mono text-slate-400 uppercase tracking-wider">Step 3 - Automate in CI</span>
           </div>
           <div className="p-6 overflow-x-auto">
             <pre className="text-sm font-mono leading-relaxed">
@@ -218,8 +225,19 @@ jobs:
           Commit <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm font-mono">baseline.html</code> to
           your repository. When the diff detects changes, the CLI exits with code 2, which
           fails the CI step. Update the baseline intentionally when accessibility changes are expected.
+          See the{' '}
+          <Link href="/docs/testing-ecosystem" className="text-blue-600 hover:text-blue-800 underline">testing ecosystem</Link>{' '}
+          page to learn how Speakable CI checks complement runtime tools like Guidepup. For CLI options and programmatic usage, check the{' '}
+          <Link href="/docs/usage-guide" className="text-blue-600 hover:text-blue-800 underline">usage guide</Link>.
         </p>
       </section>
+
+      <RelatedPages pages={[
+        { href: "/docs/frameworks", title: "Frameworks", description: "Integrate Speakable into React, Angular, Svelte, or Web Component workflows." },
+        { href: "/docs/testing-ecosystem", title: "Testing Ecosystem", description: "How Speakable fits alongside Guidepup, axe-core, and manual testing." },
+        { href: "/docs/testing-strategy", title: "Testing Strategy", description: "Plan a layered accessibility testing approach that balances speed and confidence." },
+        { href: "/docs/usage-guide", title: "Usage Guide", description: "CLI options, programmatic API, and output formats for Speakable." },
+      ]} />
     </>
   );
 }

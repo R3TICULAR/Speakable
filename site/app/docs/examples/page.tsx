@@ -1,3 +1,6 @@
+import Link from 'next/link';
+import { RelatedPages } from '../../../components/RelatedPages';
+
 export default function ExamplesPage() {
   return (
     <>
@@ -10,7 +13,9 @@ export default function ExamplesPage() {
         <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight mb-4">Examples</h1>
         <p className="text-lg text-slate-600 leading-relaxed">
           Common HTML patterns and their predicted screen reader output. Each example shows
-          the HTML input and what NVDA, VoiceOver, and Narrator would announce.
+          the HTML input and what NVDA, VoiceOver, and Narrator would announce. For the full
+          programmatic API behind these predictions, see the{' '}
+          <Link href="/docs" className="text-blue-600 hover:text-blue-800 underline">API Reference</Link>.
         </p>
       </header>
 
@@ -56,6 +61,32 @@ export default function ExamplesPage() {
           )}
         </section>
       ))}
+
+      {/* Additional context links */}
+      <section className="mb-16">
+        <div className="bg-slate-50 border border-slate-200 rounded-xl p-6">
+          <p className="text-sm text-slate-700 leading-relaxed">
+            These examples show correct usage patterns. To see what goes wrong when markup is incorrect,
+            check the{' '}
+            <Link href="/docs/common-mistakes" className="text-blue-600 hover:text-blue-800 underline">Common Mistakes</Link>{' '}
+            page which pairs bad patterns with their fixes. For details on how roles like{' '}
+            <code className="text-xs bg-slate-100 px-1 py-0.5 rounded">navigation</code>,{' '}
+            <code className="text-xs bg-slate-100 px-1 py-0.5 rounded">button</code>, and{' '}
+            <code className="text-xs bg-slate-100 px-1 py-0.5 rounded">heading</code> are resolved, see{' '}
+            <Link href="/docs/aria-roles" className="text-blue-600 hover:text-blue-800 underline">ARIA Roles</Link>.
+            The{' '}
+            <Link href="/docs/usage-guide" className="text-blue-600 hover:text-blue-800 underline">Usage Guide</Link>{' '}
+            covers how to reproduce these outputs locally with the CLI.
+          </p>
+        </div>
+      </section>
+
+      <RelatedPages pages={[
+        { href: "/docs", title: "API Reference", description: "Full programmatic API for parsing HTML and rendering screen reader output." },
+        { href: "/docs/common-mistakes", title: "Common Mistakes", description: "Real-world HTML patterns that break screen reader experiences and how to fix them." },
+        { href: "/docs/component-patterns", title: "Component Patterns", description: "Accessible implementations of common UI widgets like tabs, modals, and menus." },
+        { href: "/docs/usage-guide", title: "Usage Guide", description: "Practical walkthrough of CLI commands, output formats, and workflow integration." },
+      ]} />
     </>
   );
 }
