@@ -9,3 +9,4 @@ export * from './diff/index.js';
 export * from './renderer/index.js';
 export * from './parser/index.js';
 export * from './extractor/index.js';
+export * as runtime from './runtime/index.js';
