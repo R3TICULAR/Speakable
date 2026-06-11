@@ -14,6 +14,53 @@ export default function SignInPage() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [oauthLoading, setOauthLoading] = useState<string | null>(null);
+  const [forgotMode, setForgotMode] = useState(false);
+  const [resetCode, setResetCode] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [resetStep, setResetStep] = useState<'email' | 'code'>('email');
+
+  const handleForgotPassword = async () => {
+    if (!isLoaded || !signIn || !email) {
+      setError('Please enter your email address first.');
+      return;
+    }
+    setError(null);
+    setLoading(true);
+    try {
+      await signIn.create({
+        strategy: 'reset_password_email_code',
+        identifier: email,
+      });
+      setForgotMode(true);
+      setResetStep('code');
+    } catch {
+      setError('Could not send reset code. Check your email and try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleResetPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!isLoaded || !signIn) return;
+    setError(null);
+    setLoading(true);
+    try {
+      const result = await signIn.attemptFirstFactor({
+        strategy: 'reset_password_email_code',
+        code: resetCode,
+        password: newPassword,
+      });
+      if (result.status === 'complete') {
+        await setActive({ session: result.createdSessionId });
+        router.push('/tool');
+      }
+    } catch {
+      setError('Invalid code or password does not meet requirements.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -62,6 +109,34 @@ export default function SignInPage() {
           <p className="text-slate-500 mt-2">Sign in to your Speakable account.</p>
         </div>
         <div className="bg-white rounded-xl shadow-xl shadow-slate-200/50 border border-slate-200 p-8">
+          {forgotMode && resetStep === 'code' ? (
+            <form onSubmit={handleResetPassword} className="space-y-5" noValidate>
+              {error && <div className="p-3 rounded-lg bg-red-50 border border-red-200 text-sm text-red-700" role="alert">{error}</div>}
+              <div className="p-3 rounded-lg bg-blue-50 border border-blue-200 text-sm text-blue-700">
+                A reset code has been sent to <strong>{email}</strong>. Enter it below with your new password.
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="reset-code" className="block text-sm font-medium text-slate-700">Reset code</label>
+                <input id="reset-code" type="text" required value={resetCode} onChange={(e) => setResetCode(e.target.value)}
+                  placeholder="Enter code from email" autoComplete="one-time-code"
+                  className="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-all text-slate-900 placeholder:text-slate-400" />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="new-password" className="block text-sm font-medium text-slate-700">New password</label>
+                <input id="new-password" type="password" required value={newPassword} onChange={(e) => setNewPassword(e.target.value)}
+                  placeholder="Enter new password" autoComplete="new-password"
+                  className="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-all text-slate-900 placeholder:text-slate-400" />
+              </div>
+              <button type="submit" disabled={loading}
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors shadow-lg shadow-blue-600/20 active:scale-[0.98] disabled:opacity-60">
+                {loading ? 'Resetting…' : 'Reset Password'}
+              </button>
+              <button type="button" onClick={() => { setForgotMode(false); setResetStep('email'); setError(null); }}
+                className="w-full text-sm text-slate-600 hover:text-slate-800 font-medium py-2">
+                Back to sign in
+              </button>
+            </form>
+          ) : (
           <form onSubmit={handleSubmit} className="space-y-5" noValidate>
             {error && <div className="p-3 rounded-lg bg-red-50 border border-red-200 text-sm text-red-700" role="alert">{error}</div>}
             <div className="space-y-2">
@@ -72,7 +147,7 @@ export default function SignInPage() {
             <div className="space-y-2">
               <div className="flex justify-between items-center">
                 <label htmlFor="password" className="block text-sm font-medium text-slate-700">Password</label>
-                <button type="button" className="text-xs font-semibold text-blue-600 hover:underline underline-offset-4">Forgot password?</button>
+                <button type="button" onClick={handleForgotPassword} className="text-xs font-semibold text-blue-600 hover:underline underline-offset-4">Forgot password?</button>
               </div>
               <input id="password" type="password" required value={password} onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••" className="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-all text-slate-900 placeholder:text-slate-400" />
@@ -82,6 +157,7 @@ export default function SignInPage() {
               {loading ? 'Signing in…' : 'Sign In'}
             </button>
           </form>
+          )}
           <div className="relative my-8">
             <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-slate-200" /></div>
             <div className="relative flex justify-center text-xs uppercase"><span className="bg-white px-2 text-slate-500">Or continue with</span></div>
