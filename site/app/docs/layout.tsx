@@ -23,6 +23,7 @@ const DOCS_GROUPS: { label: string; sections: { label: string; href: string }[] 
       { label: 'Accessible Forms', href: '/docs/accessible-forms' },
       { label: 'Component Patterns', href: '/docs/component-patterns' },
       { label: 'Testing Strategy', href: '/docs/testing-strategy' },
+      { label: 'Runtime Analysis', href: '/docs/runtime-analysis' },
     ],
   },
   {
