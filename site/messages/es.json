@@ -112,14 +112,25 @@
     "featureSingleFile": "Análisis CLI de un solo archivo",
     "featureAllScreenReaders": "Todos los lectores de pantalla (NVDA, JAWS, VoiceOver, Narrator)",
     "featureAuditReport": "Generación de informes de auditoría",
+    "featureExtension": "Extensión de navegador",
+    "featureRuntimePlayground": "Playground de accesibilidad en tiempo de ejecución",
+    "featureTimelineViewer": "Visor de línea de tiempo de accesibilidad",
     "featureEverythingFree": "Todo lo incluido en Gratuito",
     "featureBatch": "Procesamiento por lotes (múltiples archivos)",
+    "featureSemanticDiff": "Comparación semántica de accesibilidad",
     "featureCicd": "Integración CI/CD con salida JSON",
-    "featureSemanticDiff": "Diff semántico (comparación antes/después)",
+    "featureStorybook": "Integración con Storybook",
+    "featureRuntimeAnalysis": "Análisis de accesibilidad en tiempo de ejecución",
+    "featureBaselines": "Líneas base de comportamiento de accesibilidad",
+    "featureTimelineHistory": "Historial y exportación de línea de tiempo",
     "featurePrioritySupport": "Soporte prioritario",
     "featureEverythingPro": "Todo lo incluido en Pro",
-    "featureTeamDashboards": "Paneles de equipo compartidos e informes históricos",
+    "featureTeamDashboards": "Paneles de equipo compartidos e informes",
     "featureCustomRules": "Configuración de reglas personalizadas",
+    "featureRuntimeRegression": "Detección de regresiones en tiempo de ejecución",
+    "featureAutoBaselines": "Gestión automatizada de líneas base",
+    "featurePrEnforcement": "Aplicación en pull requests",
+    "featureOrgStorybook": "Análisis de Storybook a nivel organizacional",
     "featureSso": "Autenticación SSO/SAML",
     "featureSla": "SLA y soporte dedicado",
     "featureVolume": "Precios por volumen",
@@ -127,7 +138,7 @@
     "ctaPro": "Iniciar prueba Pro",
     "ctaTeam": "Contactar ventas",
     "loading": "Cargando…",
-    "screenReaderInfo": "Todos los lectores de pantalla están disponibles en cada plan — nunca restringimos las funciones de accesibilidad detrás de un muro de pago."
+    "screenReaderInfo": "El análisis de accesibilidad está disponible para todos. Los planes de pago desbloquean automatización de flujos de trabajo, integración con Storybook, herramientas CI/CD y prevención de regresiones."
   },
   "landing": {
     "hero": {
@@ -153,8 +164,8 @@
         "description": "Compare HTML antes y después para detectar regresiones de accesibilidad tempranamente. Vea cómo los cambios en el DOM afectan la salida del lector de pantalla antes de fusionar."
       },
       "3": {
-        "title": "Integración CI/CD",
-        "description": "Ejecute verificaciones automatizadas de simulación de lector de pantalla en su pipeline de compilación. Ayude a detectar problemas de accesibilidad antes de que lleguen a producción."
+        "title": "Análisis de accesibilidad en tiempo de ejecución",
+        "description": "Vaya más allá del marcado estático. Rastree el movimiento del foco, los anuncios y los cambios de estado durante la interacción con componentes. Detecte regresiones en el comportamiento de accesibilidad entre compilaciones con integración de Storybook."
       }
     },
     "workflow": {

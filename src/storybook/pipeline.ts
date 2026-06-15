@@ -14,6 +14,9 @@ export interface StorybookPipelineOptions {
   interactionFile?: string;
   heuristics?: boolean;
   settlePeriod?: number;
+  authHeader?: string;
+  headers?: Record<string, string>;
+  insecure?: boolean;
 }
 
 export interface StoryResult {
@@ -31,9 +34,18 @@ export interface PipelineResult {
 }
 
 export async function runStorybookPipeline(options: StorybookPipelineOptions): Promise<PipelineResult> {
+  // Build auth headers from options
+  const authHeaders: Record<string, string> = { ...options.headers };
+  if (options.authHeader) {
+    authHeaders['Authorization'] = options.authHeader;
+  }
+
   const adapter = createStorybookAdapter({
     url: options.storybookUrl,
     componentFilter: options.componentFilter,
+    authHeader: options.authHeader,
+    headers: options.headers,
+    insecure: options.insecure,
   });
 
   await adapter.connect();
@@ -42,6 +54,7 @@ export async function runStorybookPipeline(options: StorybookPipelineOptions): P
   const loader = createStoryLoader({
     storybookUrl: options.storybookUrl,
     viewport: options.viewport,
+    headers: Object.keys(authHeaders).length > 0 ? authHeaders : undefined,
   });
 
   const sequence = await resolveInteraction(options);

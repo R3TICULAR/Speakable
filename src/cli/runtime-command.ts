@@ -20,6 +20,9 @@ export interface RuntimeCommandOptions {
   updateRuntimeSnapshot?: boolean;
   runtimeCi?: boolean;
   runtimeFailOn?: SeverityLevel;
+  storybookAuthHeader?: string;
+  storybookHeaders?: Record<string, string>;
+  storybookInsecure?: boolean;
 }
 
 export async function executeRuntimeCommand(options: RuntimeCommandOptions): Promise<number> {
@@ -94,6 +97,9 @@ async function handleStorybookMode(options: RuntimeCommandOptions): Promise<numb
     componentFilter: options.story,
     interactionPattern: options.interaction,
     interactionFile: options.interactionFile,
+    authHeader: options.storybookAuthHeader,
+    headers: options.storybookHeaders,
+    insecure: options.storybookInsecure,
   });
 
   if (options.runtimeCi) {

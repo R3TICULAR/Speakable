@@ -219,6 +219,130 @@ export default function RuntimeAnalysisPage() {
         <RuntimeDemo />
       </section>
 
+      {/* Section: Usage Examples */}
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold text-slate-900 mb-4">Usage Examples</h2>
+        <p className="text-slate-600 mb-8 leading-relaxed">
+          The runtime engine can be used programmatically, via the CLI, or through Storybook integration.
+          Below are practical examples for each approach.
+        </p>
+
+        <h3 className="text-xl font-bold text-slate-900 mb-4">Programmatic API</h3>
+        <p className="text-slate-600 mb-4 leading-relaxed">
+          Import the runtime module to create timeline generators, execute interaction patterns, and inspect
+          the resulting accessibility events directly in your code.
+        </p>
+        <div className="rounded-xl border border-slate-200 bg-slate-950 p-5 mb-8 overflow-x-auto">
+          <pre className="text-sm text-slate-100 leading-relaxed">
+            <code>{`import { runtime } from '@reticular/speakable';
+
+// Create a timeline generator for your component
+const generator = runtime.createTimelineGenerator({
+  document: myDocument,
+  componentName: 'ConfirmDialog',
+});
+
+// Use a built-in interaction pattern
+const sequence = runtime.getBuiltinPattern('modal-dialog', {
+  trigger: 'button.open-dialog',
+});
+
+// Capture the accessibility timeline
+const timeline = await generator.capture(sequence);
+
+// Inspect events
+for (const event of timeline.events) {
+  console.log(\`\${event.type}: \${event.target.accessibleName}\`);
+}
+
+// Check for warnings
+if (timeline.warnings.length > 0) {
+  console.warn('Accessibility issues detected:');
+  timeline.warnings.forEach(w => console.warn(\` - \${w.payload.message}\`));
+}`}</code>
+          </pre>
+        </div>
+
+        <h3 className="text-xl font-bold text-slate-900 mb-4">CLI Usage</h3>
+        <p className="text-slate-600 mb-4 leading-relaxed">
+          Run runtime analysis from the command line against any URL or a local Storybook instance.
+          The CLI supports built-in interaction patterns, snapshot baselines, and CI mode for regression detection.
+        </p>
+        <div className="rounded-xl border border-slate-200 bg-slate-950 p-5 mb-8 overflow-x-auto">
+          <pre className="text-sm text-slate-100 leading-relaxed">
+            <code>{`# Analyze a URL with default keyboard exploration
+speakable runtime https://localhost:3000/settings
+
+# Use a built-in interaction pattern
+speakable runtime https://localhost:3000 --interaction modal-dialog
+
+# Analyze Storybook components
+speakable runtime http://localhost:6006 --storybook --story "Dialog*"
+
+# Save baselines for regression detection
+speakable runtime http://localhost:6006 --storybook --runtime-snapshot ./baselines
+
+# CI mode: fail on regressions
+speakable runtime http://localhost:6006 --storybook --runtime-snapshot ./baselines --runtime-ci
+
+# Authenticate with a protected Storybook instance
+speakable runtime https://storybook.internal.company.com --storybook \\
+  --storybook-auth-header "Bearer eyJhbGciOi..."
+
+# Skip TLS verification for self-signed certificates
+speakable runtime https://storybook.local --storybook --storybook-insecure`}</code>
+          </pre>
+        </div>
+
+        <h3 className="text-xl font-bold text-slate-900 mb-4">Storybook Integration</h3>
+        <p className="text-slate-600 mb-4 leading-relaxed">
+          Speakable connects to a running Storybook instance, discovers stories matching your filter, and
+          runs the runtime engine against each one. The pipeline produces an accessibility timeline per story
+          that can be baselined and compared across builds.
+        </p>
+        <div className="rounded-xl border border-blue-200 bg-blue-50 p-5 mb-6">
+          <div className="flex gap-3">
+            <span className="material-symbols-outlined text-blue-600 mt-0.5 shrink-0" aria-hidden="true">info</span>
+            <div>
+              <p className="text-sm font-bold text-slate-900 mb-1">How the Storybook pipeline works</p>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                When you pass <code className="bg-blue-100 px-1.5 py-0.5 rounded text-blue-800 text-xs">--storybook</code>, Speakable
+                queries the Storybook index API, resolves matching stories, loads each in an isolated browser context,
+                and executes the appropriate interaction pattern based on the component type. Each story produces a
+                self-contained timeline. Use <code className="bg-blue-100 px-1.5 py-0.5 rounded text-blue-800 text-xs">--runtime-snapshot</code> to
+                persist these timelines as baselines, then compare on subsequent runs to catch regressions automatically.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <h3 className="text-xl font-bold text-slate-900 mb-4">Protected and Internal Storybook Instances</h3>
+        <p className="text-slate-600 mb-4 leading-relaxed">
+          Since Speakable runs locally (on your machine or CI runner), it works naturally with VPN-protected
+          Storybook instances. As long as the machine running Speakable can reach the Storybook URL, no
+          special configuration is needed. For Storybook instances behind authentication, use the auth flags:
+        </p>
+        <div className="rounded-xl border border-slate-200 bg-slate-950 p-5 mb-4 overflow-x-auto">
+          <pre className="text-sm text-slate-100 leading-relaxed">
+            <code>{`# Bearer token authentication
+speakable runtime https://storybook.internal.company.com --storybook \\
+  --storybook-auth-header "Bearer your-token-here"
+
+# Custom headers (cookies, API keys)
+speakable runtime https://storybook.internal.company.com --storybook \\
+  --storybook-header "Cookie: session=abc123"
+
+# Self-signed TLS certificates
+speakable runtime https://storybook.local:6006 --storybook --storybook-insecure`}</code>
+          </pre>
+        </div>
+        <div className="space-y-2 text-sm text-slate-600">
+          <p><strong className="text-slate-900">VPN access:</strong> No configuration needed. The CLI fetches from your machine, which is already on the VPN.</p>
+          <p><strong className="text-slate-900">Cloud CI runners:</strong> Use self-hosted runners with VPN access, or run <code className="bg-slate-100 px-1 py-0.5 rounded text-xs">npx storybook build</code> in CI and analyze the static output.</p>
+          <p><strong className="text-slate-900">Environment variables:</strong> Set <code className="bg-slate-100 px-1 py-0.5 rounded text-xs">SPEAKABLE_STORYBOOK_AUTH</code> to avoid passing tokens on the command line.</p>
+        </div>
+      </section>
+
       <RelatedPages
         pages={[
           {

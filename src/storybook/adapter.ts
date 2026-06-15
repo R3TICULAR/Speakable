@@ -13,6 +13,12 @@ export interface StorybookAdapterOptions {
   url: string;
   /** Glob pattern to filter stories by component name (supports * and ? wildcards) */
   componentFilter?: string;
+  /** Authorization header value for protected Storybook instances (e.g., "Bearer <token>") */
+  authHeader?: string;
+  /** Custom headers to include with all requests (for cookie-based auth, API keys, etc.) */
+  headers?: Record<string, string>;
+  /** Skip TLS certificate verification for self-signed certs (default: false) */
+  insecure?: boolean;
 }
 
 export interface StoryInfo {
@@ -149,14 +155,25 @@ function globToRegex(pattern: string): RegExp {
 // --- Adapter Factory ---
 
 export function createStorybookAdapter(options: StorybookAdapterOptions): StorybookAdapter {
-  const { url, componentFilter } = options;
+  const { url, componentFilter, authHeader, headers: customHeaders, insecure } = options;
   const normalizedUrl = url.replace(/\/$/, '');
+
+  // Build request headers from options
+  const requestHeaders: Record<string, string> = { ...customHeaders };
+  if (authHeader) {
+    requestHeaders['Authorization'] = authHeader;
+  }
+
+  // Set NODE_TLS_REJECT_UNAUTHORIZED for insecure mode
+  if (insecure && typeof process !== 'undefined') {
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+  }
 
   let indexData: StorybookIndexV4 | StorybookStoriesJson | null = null;
 
   return {
     async connect(): Promise<void> {
-      indexData = await fetchStoriesIndex(normalizedUrl);
+      indexData = await fetchStoriesIndex(normalizedUrl, requestHeaders);
     },
 
     async discoverStories(): Promise<StoryInfo[]> {
@@ -189,12 +206,17 @@ export function createStorybookAdapter(options: StorybookAdapterOptions): Storyb
  * Tries index.json (Storybook 7+) first, falls back to stories.json.
  */
 async function fetchStoriesIndex(
-  baseUrl: string
+  baseUrl: string,
+  headers?: Record<string, string>
 ): Promise<StorybookIndexV4 | StorybookStoriesJson> {
+  const fetchOptions: RequestInit = headers && Object.keys(headers).length > 0
+    ? { headers }
+    : {};
+
   // Try Storybook 7+/8.x index.json first
   const indexUrl = `${baseUrl}/index.json`;
   try {
-    const response = await fetch(indexUrl);
+    const response = await fetch(indexUrl, fetchOptions);
     if (response.ok) {
       const data = (await response.json()) as StorybookIndexV4 | StorybookStoriesJson;
       return data;
@@ -211,7 +233,7 @@ async function fetchStoriesIndex(
   // Fallback: try stories.json (older Storybook format)
   const storiesUrl = `${baseUrl}/stories.json`;
   try {
-    const response = await fetch(storiesUrl);
+    const response = await fetch(storiesUrl, fetchOptions);
     if (response.ok) {
       const data = (await response.json()) as StorybookStoriesJson;
       return data;

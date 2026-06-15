@@ -17,6 +17,8 @@ export interface StoryLoaderOptions {
   viewport?: { width: number; height: number };
   /** Load timeout in ms (default: 10000) */
   loadTimeout?: number;
+  /** Custom headers for authenticated Storybook instances */
+  headers?: Record<string, string>;
 }
 
 export interface LoadedStory {
@@ -62,7 +64,7 @@ const DEFAULT_LOAD_TIMEOUT = 10000;
 // --- Factory ---
 
 export function createStoryLoader(options: StoryLoaderOptions): StoryLoader {
-  const { storybookUrl, viewport = DEFAULT_VIEWPORT, loadTimeout = DEFAULT_LOAD_TIMEOUT } =
+  const { storybookUrl, viewport = DEFAULT_VIEWPORT, loadTimeout = DEFAULT_LOAD_TIMEOUT, headers } =
     options;
   const normalizedUrl = storybookUrl.replace(/\/$/, '');
 
@@ -75,7 +77,7 @@ export function createStoryLoader(options: StoryLoaderOptions): StoryLoader {
       }
 
       const iframeUrl = buildStoryIframeUrl(normalizedUrl, storyId);
-      const html = await fetchStoryHtml(iframeUrl, storyId, loadTimeout);
+      const html = await fetchStoryHtml(iframeUrl, storyId, loadTimeout, headers);
       const document = parseStoryHtml(html, iframeUrl, viewport);
 
       await waitForStoryReady(document, storyId, loadTimeout);
@@ -109,13 +111,19 @@ function buildStoryIframeUrl(baseUrl: string, storyId: string): string {
 async function fetchStoryHtml(
   url: string,
   storyId: string,
-  timeoutMs: number
+  timeoutMs: number,
+  headers?: Record<string, string>
 ): Promise<string> {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
 
+  const fetchOptions: RequestInit = { signal: controller.signal };
+  if (headers && Object.keys(headers).length > 0) {
+    fetchOptions.headers = headers;
+  }
+
   try {
-    const response = await fetch(url, { signal: controller.signal });
+    const response = await fetch(url, fetchOptions);
 
     if (!response.ok) {
       throw new StoryLoadError(

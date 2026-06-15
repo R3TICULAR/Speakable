@@ -17,6 +17,7 @@ import { trackAnalyze, trackCopy, trackDownload, trackFileUpload, trackDiffToggl
 import { useAuth, useUser } from '@clerk/nextjs';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
+import { RuntimeSandbox } from '../../components/RuntimeSandbox';
 
 type TabId = 'announcements' | 'audit' | 'json' | 'diff';
 
@@ -28,6 +29,7 @@ const TABS: Array<{ id: TabId; label: string }> = [
 ];
 
 export default function AnalyzerPage() {
+  const [toolMode, setToolMode] = useState<'static' | 'runtime'>('static');
   const [html, setHtml] = useState('');
   const [htmlBefore, setHtmlBefore] = useState('');
   const [screenReader, setScreenReader] = useState<ScreenReaderOption>('NVDA');
@@ -254,6 +256,37 @@ export default function AnalyzerPage() {
         <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 mb-2">{t('title')}</h1>
         <p className="text-lg text-gray-600">{t('subtitle')}</p>
       </header>
+
+      {/* Mode toggle: Static / Runtime */}
+      <div className="flex items-center gap-1 bg-slate-100 rounded-lg p-1 w-fit mb-8">
+        <button
+          onClick={() => setToolMode('static')}
+          className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+            toolMode === 'static'
+              ? 'bg-white text-slate-900 shadow-sm'
+              : 'text-slate-500 hover:text-slate-700'
+          }`}
+          aria-pressed={toolMode === 'static'}
+        >
+          Static Analysis
+        </button>
+        <button
+          onClick={() => setToolMode('runtime')}
+          className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+            toolMode === 'runtime'
+              ? 'bg-white text-slate-900 shadow-sm'
+              : 'text-slate-500 hover:text-slate-700'
+          }`}
+          aria-pressed={toolMode === 'runtime'}
+        >
+          Runtime Analysis
+        </button>
+      </div>
+
+      {toolMode === 'runtime' ? (
+        <RuntimeSandbox />
+      ) : (
+      <>
 
       {/* Pro features banner */}
       {isPro && (
@@ -501,6 +534,8 @@ export default function AnalyzerPage() {
           </div>
         </section>
       </div>
+      </>
+      )}
       </div>
     </div>
     </PageFadeIn>

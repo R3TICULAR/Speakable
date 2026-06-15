@@ -112,14 +112,25 @@
     "featureSingleFile": "単一ファイルのCLI分析",
     "featureAllScreenReaders": "すべてのスクリーンリーダー（NVDA、JAWS、VoiceOver、Narrator）",
     "featureAuditReport": "監査レポートの生成",
+    "featureExtension": "ブラウザ拡張機能",
+    "featureRuntimePlayground": "ランタイムアクセシビリティプレイグラウンド",
+    "featureTimelineViewer": "アクセシビリティタイムラインビューア",
     "featureEverythingFree": "無料プランのすべての機能",
     "featureBatch": "バッチ処理（複数ファイル）",
-    "featureCicd": "JSON出力によるCI/CDパイプライン連携",
-    "featureSemanticDiff": "セマンティック差分（変更前後の比較）",
+    "featureSemanticDiff": "セマンティックアクセシビリティ差分",
+    "featureCicd": "JSON出力によるCI/CD連携",
+    "featureStorybook": "Storybook連携",
+    "featureRuntimeAnalysis": "ランタイムアクセシビリティ分析",
+    "featureBaselines": "アクセシビリティ動作ベースライン",
+    "featureTimelineHistory": "タイムライン履歴とエクスポート",
     "featurePrioritySupport": "優先サポート",
     "featureEverythingPro": "Proプランのすべての機能",
-    "featureTeamDashboards": "チーム共有ダッシュボードと履歴レポート",
+    "featureTeamDashboards": "チーム共有ダッシュボードとレポート",
     "featureCustomRules": "カスタムルール設定",
+    "featureRuntimeRegression": "ランタイム回帰検出",
+    "featureAutoBaselines": "自動ベースライン管理",
+    "featurePrEnforcement": "プルリクエスト強制チェック",
+    "featureOrgStorybook": "組織全体のStorybook分析",
     "featureSso": "SSO/SAML認証",
     "featureSla": "SLAおよび専任サポート",
     "featureVolume": "ボリュームディスカウント",
@@ -127,7 +138,7 @@
     "ctaPro": "Proトライアルを開始",
     "ctaTeam": "営業に問い合わせる",
     "loading": "読み込み中…",
-    "screenReaderInfo": "すべてのスクリーンリーダーはどのプランでもご利用いただけます — アクセシビリティ機能を有料プランの制限にすることはありません。"
+    "screenReaderInfo": "アクセシビリティ分析はすべての方にご利用いただけます。有料プランではワークフロー自動化、Storybook連携、CI/CDツール、回帰防止機能がアンロックされます。"
   },
   "landing": {
     "hero": {
@@ -153,8 +164,8 @@
         "description": "変更前後のHTMLを比較して、アクセシビリティの回帰を早期に検出します。マージ前にDOMの変更がスクリーンリーダー出力にどのように影響するかを確認できます。"
       },
       "3": {
-        "title": "CI/CD連携",
-        "description": "ビルドパイプラインで自動化されたスクリーンリーダーシミュレーションチェックを実行します。アクセシビリティの問題が本番環境に到達する前に検出するのに役立ちます。"
+        "title": "ランタイムアクセシビリティ分析",
+        "description": "静的マークアップを超えましょう。コンポーネント操作中のフォーカス移動、アナウンス、状態変化を追跡します。Storybook連携により、ビルド間のアクセシビリティ動作のリグレッションを検出します。"
       }
     },
     "workflow": {

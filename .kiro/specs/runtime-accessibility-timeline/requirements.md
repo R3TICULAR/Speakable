@@ -237,3 +237,37 @@ Then build (in this order):
    The enterprise monetization layer. Behavior diffing, baseline storage, severity classification, and CI/CD pipeline integration with exit codes and JSON reports.
 
 Each phase produces value independently and validates the next one. Phase 1 can ship as a standalone tool or web demo. Phase 2 drives awareness and adoption. Phase 3 unlocks design system teams. Phase 4 unlocks enterprise budgets.
+
+
+## Future Enhancement: Framework Component Support (URL Mode)
+
+The web tool's runtime sandbox works well for self-contained HTML with inline scripts, but modern development primarily uses React, Vue, Svelte, and other compiled frameworks. These components cannot be pasted as raw HTML.
+
+**Solution: URL input mode for the web tool**
+
+Add a second input mode ("Enter URL") alongside "Paste HTML" in the runtime analyzer. The user enters a URL to their locally running dev server (e.g., `http://localhost:3000/settings`). The tool loads it in an iframe with same-origin permissions and observes accessibility events as the user interacts.
+
+**Why this works:**
+- React/Vue/Svelte apps are already compiled and running on localhost during development
+- External CSS, fonts, and API calls work naturally since it's the real running app
+- No build step or compilation needed from the user
+- Same timeline output, same event capture, same visualization
+
+**Technical considerations:**
+- The iframe must load the URL directly (no `srcdoc`)
+- Same-origin policy: the analyzer tool at `getspeakable.dev` cannot access `localhost` iframe content due to CORS
+- **Solution**: Provide a lightweight local proxy script (`npx speakable-proxy`) that:
+  1. Starts a local server on a random port
+  2. Embeds the user's app URL in a page that includes the Speakable event collector script
+  3. The collector script posts events back to the parent window via postMessage
+  4. Opens the browser to the Speakable web tool with a `?proxy=localhost:XXXX` parameter
+- Alternative: Ship a browser extension that injects the collector into any page (already have the extension infrastructure)
+- Alternative: CLI-only mode (`speakable runtime http://localhost:3000`) which already works
+
+**Priority:** This should follow the paste-sandbox release. Ship the sandbox first (works for demos and quick tests), then add URL mode for real-world framework testing.
+
+**Phases:**
+1. (Current) Paste HTML sandbox in web tool
+2. (Next) `speakable runtime <url>` CLI command (already built)
+3. (Future) Browser extension with runtime overlay that shows timeline on any page
+4. (Future) Web tool URL mode with local proxy for framework components
