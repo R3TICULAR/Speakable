@@ -1,10 +1,10 @@
 # Speakable
 
-Simulate how NVDA, JAWS, VoiceOver, and Windows Narrator interpret your HTML — from a single CLI tool. Catch screen reader issues early, detect regressions in CI/CD, and reduce manual testing overhead.
+Predict how NVDA, JAWS, VoiceOver, and Windows Narrator interpret your HTML, and detect accessibility behavior regressions during component interaction. Catch screen reader issues early, analyze runtime focus management, and prevent regressions in CI/CD.
 
-**Try it in your browser — no install needed:** [getspeakable.dev/tool](https://getspeakable.dev/tool)
+**Try it in your browser:** [getspeakable.dev/tool](https://getspeakable.dev/tool)
 
-Speakable bridges the gap between rule-based linting tools (like axe) and manual screen reader testing. It gives you scalable, automated insight into how assistive technologies will interpret your UI.
+Speakable bridges the gap between rule-based linting tools (like axe) and manual screen reader testing. It provides both static HTML analysis and runtime accessibility behavior tracking, giving you automated insight into how assistive technologies interpret your UI throughout the development lifecycle.
 
 > Screen reader output is heuristic and may differ from actual behavior. Speakable complements manual testing — it doesn't replace it.
 
@@ -160,6 +160,123 @@ Verify that the accessibility model serializes and deserializes consistently:
 speakable page.html --validate
 ```
 
+## Runtime Accessibility Analysis
+
+Beyond static HTML analysis, Speakable tracks accessibility behavior during component interaction: focus transitions, ARIA state changes, live region announcements, and dialog lifecycle events.
+
+### CLI Usage
+
+```bash
+# Analyze runtime behavior of a URL
+speakable runtime https://localhost:3000/settings
+
+# Use a built-in interaction pattern
+speakable runtime https://localhost:3000 --interaction modal-dialog
+
+# Analyze all Storybook stories
+speakable runtime http://localhost:6006 --storybook
+
+# Filter to specific components
+speakable runtime http://localhost:6006 --storybook --story "Dialog*"
+
+# Save baselines for regression detection
+speakable runtime http://localhost:6006 --storybook --runtime-snapshot ./baselines
+
+# CI mode: fail on behavior regressions
+speakable runtime http://localhost:6006 --storybook --runtime-snapshot ./baselines --runtime-ci
+
+# Authenticate with protected Storybook instances
+speakable runtime https://storybook.internal.co --storybook \
+  --storybook-auth-header "Bearer your-token"
+```
+
+### Programmatic API
+
+```typescript
+import { runtime } from '@reticular/speakable';
+
+const generator = runtime.createTimelineGenerator({
+  document: myDocument,
+  componentName: 'SettingsDialog',
+});
+
+const sequence = runtime.getBuiltinPattern('modal-dialog', {
+  trigger: 'button.open-settings',
+});
+
+const timeline = await generator.capture(sequence);
+
+// Inspect events
+timeline.events.forEach(event => {
+  console.log(`${event.type}: ${event.target.accessibleName}`);
+});
+
+// Check for warnings (focus escape, missing announcements, etc.)
+timeline.warnings.forEach(w => {
+  console.warn(w.payload.message);
+});
+```
+
+### Built-in Interaction Patterns
+
+| Pattern | What it tests |
+|---------|---------------|
+| `modal-dialog` | Focus moves to dialog, stays trapped, returns on close |
+| `combobox` | Options announced on arrow navigation, selection confirmed |
+| `tabs` | Arrow keys switch tabs, panel content communicated |
+| `accordion` | Expanded/collapsed state announced on toggle |
+
+### Heuristic Warnings
+
+The runtime engine automatically detects common anti-patterns without needing a baseline:
+
+- Focus not moved into modal dialog on open
+- Focus escaped modal dialog (broken focus trap)
+- Rapid announcements (aria-live flooding)
+- Keyboard action with no accessibility response
+- Focused element removed without focus management
+
+### Behavior Diffing and Regression Detection
+
+Compare accessibility timelines across builds to catch regressions:
+
+```typescript
+import { runtime } from '@reticular/speakable';
+
+const diff = runtime.diffTimelines(baselineTimeline, currentTimeline);
+// diff.added, diff.removed, diff.modified
+
+const classified = runtime.classifyDiff(diff);
+// classified.highestSeverity: 'critical' | 'high' | 'medium' | 'low'
+```
+
+Severity levels:
+- **Critical**: Focus loss, modal focus escape, missing required announcements
+- **High**: Incorrect focus restoration, keyboard navigation regression
+- **Medium**: Additional announcements, accessible name changes
+- **Low**: Timing differences, non-breaking behavior changes
+
+### Storybook Integration
+
+Connect to a running Storybook instance to analyze accessibility behavior across your component library:
+
+```typescript
+import { createStorybookAdapter, createStoryLoader } from '@reticular/speakable/storybook';
+
+const adapter = createStorybookAdapter({
+  url: 'http://localhost:6006',
+  componentFilter: 'Dialog*',
+  authHeader: 'Bearer token',  // for protected instances
+});
+
+await adapter.connect();
+const stories = await adapter.discoverStories();
+```
+
+The Storybook pipeline discovers stories, loads them in isolation, runs interaction patterns, and produces timelines that can be baselined and compared. Works with Storybook 7.x and 8.x.
+
+> See the [Runtime Analysis docs](https://getspeakable.dev/docs/runtime-analysis) for interactive demos and full API reference.
+
 ## MCP Integration (AI Assistants)
 
 Speakable includes a Model Context Protocol (MCP) server that lets AI coding assistants analyze accessibility in real-time. Ask your assistant "check if this component is accessible" and it calls Speakable automatically.
@@ -186,6 +303,8 @@ Add to your MCP config (Kiro, VS Code, Cursor, Claude Desktop, Windsurf):
 | `analyze_html` | Predict screen reader output for NVDA, JAWS, VoiceOver, and Narrator |
 | `audit_html` | Generate accessibility audit report with issues and remediation |
 | `diff_html` | Compare two HTML versions for accessibility regressions |
+| `analyze_runtime` | Run runtime accessibility analysis with interaction sequences |
+| `diff_runtime` | Compare two accessibility timelines for behavior regressions |
 
 All tools run locally — no network requests, no data leaves your machine. See the [MCP Integration docs](https://getspeakable.dev/docs/mcp-integration) for full setup instructions.
 
@@ -270,10 +389,10 @@ Speakable processes HTML through a four-stage pipeline:
 
 - Replace manual screen reader testing with real assistive technology
 - Guarantee WCAG compliance
-- Test dynamic/JavaScript-driven content (it analyzes static HTML)
 - Perfectly replicate screen reader behavior (output is heuristic)
+- Execute JavaScript in static analysis mode (use runtime mode for dynamic content)
 
-Use Speakable to catch issues early and reduce the manual testing burden — then validate critical flows with real screen readers.
+Use Speakable to catch issues early and reduce the manual testing burden. Validate critical flows with real screen readers.
 
 ## Best Practices
 

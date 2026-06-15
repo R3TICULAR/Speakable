@@ -85,9 +85,11 @@ export function Navigation() {
                   href={route.href}
                   aria-current={isActive(pathname, route.href) ? 'page' : undefined}
                   className={`transition-colors focus:outline-none focus:ring-2 focus:ring-blue-600 rounded px-1 ${
-                    isActive(pathname, route.href)
-                      ? 'text-blue-600 font-semibold'
-                      : 'text-slate-600 hover:text-blue-600'
+                    route.labelKey === 'analyzer'
+                      ? 'bg-gradient-to-r from-blue-600 via-violet-600 to-purple-600 bg-clip-text text-transparent font-semibold'
+                      : isActive(pathname, route.href)
+                        ? 'text-blue-600 font-semibold'
+                        : 'text-slate-600 hover:text-blue-600'
                   }`}
                 >
                   {t(route.labelKey)}

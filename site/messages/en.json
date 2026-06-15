@@ -112,14 +112,25 @@
     "featureSingleFile": "Single-file CLI analysis",
     "featureAllScreenReaders": "All screen readers (NVDA, JAWS, VoiceOver, Narrator)",
     "featureAuditReport": "Audit report generation",
+    "featureExtension": "Browser extension",
+    "featureRuntimePlayground": "Runtime accessibility playground",
+    "featureTimelineViewer": "Accessibility timeline viewer",
     "featureEverythingFree": "Everything in Free",
     "featureBatch": "Batch processing (multiple files)",
-    "featureCicd": "CI/CD pipeline integration with JSON output",
-    "featureSemanticDiff": "Semantic diff (before/after comparison)",
+    "featureSemanticDiff": "Semantic accessibility diffing",
+    "featureCicd": "CI/CD integration with JSON output",
+    "featureStorybook": "Storybook integration",
+    "featureRuntimeAnalysis": "Runtime accessibility analysis",
+    "featureBaselines": "Accessibility behavior baselines",
+    "featureTimelineHistory": "Timeline history and export",
     "featurePrioritySupport": "Priority support",
     "featureEverythingPro": "Everything in Pro",
-    "featureTeamDashboards": "Shared team dashboards and historical reports",
+    "featureTeamDashboards": "Shared team dashboards and reporting",
     "featureCustomRules": "Custom rule configuration",
+    "featureRuntimeRegression": "Runtime regression detection",
+    "featureAutoBaselines": "Automated baseline management",
+    "featurePrEnforcement": "Pull request enforcement",
+    "featureOrgStorybook": "Organization-wide Storybook analysis",
     "featureSso": "SSO/SAML authentication",
     "featureSla": "SLA and dedicated support",
     "featureVolume": "Volume pricing",
@@ -127,7 +138,7 @@
     "ctaPro": "Start Pro Trial",
     "ctaTeam": "Contact Sales",
     "loading": "Loading…",
-    "screenReaderInfo": "All screen readers are available on every tier — we never gate accessibility features behind a paywall."
+    "screenReaderInfo": "Accessibility analysis is available to everyone. Paid plans unlock workflow automation, Storybook integration, CI/CD tooling, and regression prevention."
   },
   "landing": {
     "hero": {
@@ -153,8 +164,8 @@
         "description": "Compare before and after HTML to catch accessibility regressions early. See how DOM changes affect screen reader output before merging."
       },
       "3": {
-        "title": "CI/CD Integration",
-        "description": "Run automated screen reader simulation checks in your build pipeline. Help catch accessibility issues before they reach production."
+        "title": "Runtime Accessibility Analysis",
+        "description": "Go beyond static markup. Track focus movement, announcements, and state changes during component interaction. Detect regressions in accessibility behavior across builds with Storybook integration."
       }
     },
     "workflow": {
