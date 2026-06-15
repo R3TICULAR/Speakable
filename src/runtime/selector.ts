@@ -66,7 +66,7 @@ export function generateSelector(element: Element): string {
  * Build a selector segment for a single element in the path.
  * Tries strategies in order of preference: tag alone, tag+classes, tag:nth-child.
  */
-function buildSegment(element: Element, document: Document): string {
+function buildSegment(element: Element, _document: Document): string {
   const tag = getTagName(element);
   const parent = element.parentElement;
 

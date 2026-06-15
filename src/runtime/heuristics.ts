@@ -491,15 +491,7 @@ export function createHeuristicAnalyzer(
   // ---------------------------------------------------------------------------
 
   function cleanupResolvedChecks(): void {
-    // Remove resolved pending checks older than the largest timeout window
-    const maxWindow = Math.max(
-      cfg.dialogFocusTimeout,
-      cfg.keyboardResponseTimeout,
-      cfg.rapidAnnouncementWindow
-    );
-
-    // Keep only unresolved checks and recently resolved ones
-    // (in case we need to avoid duplicate warnings)
+    // Remove resolved pending checks
     for (let i = pendingDialogFocusChecks.length - 1; i >= 0; i--) {
       if (pendingDialogFocusChecks[i].resolved) {
         pendingDialogFocusChecks.splice(i, 1);
