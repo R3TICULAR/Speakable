@@ -132,7 +132,7 @@ describe('Storybook Adapter', () => {
       const adapter = createStorybookAdapter({ url: 'http://localhost:6006' });
       await adapter.connect();
 
-      expect(mockFetch).toHaveBeenCalledWith('http://localhost:6006/index.json');
+      expect(mockFetch).toHaveBeenCalledWith('http://localhost:6006/index.json', {});
     });
 
     it('should normalize trailing slash from URL', async () => {
@@ -141,7 +141,7 @@ describe('Storybook Adapter', () => {
       const adapter = createStorybookAdapter({ url: 'http://localhost:6006/' });
       await adapter.connect();
 
-      expect(mockFetch).toHaveBeenCalledWith('http://localhost:6006/index.json');
+      expect(mockFetch).toHaveBeenCalledWith('http://localhost:6006/index.json', {});
     });
 
     it('should fall back to stories.json when index.json returns non-OK', async () => {
@@ -152,8 +152,8 @@ describe('Storybook Adapter', () => {
       await adapter.connect();
 
       expect(mockFetch).toHaveBeenCalledTimes(2);
-      expect(mockFetch).toHaveBeenCalledWith('http://localhost:6006/index.json');
-      expect(mockFetch).toHaveBeenCalledWith('http://localhost:6006/stories.json');
+      expect(mockFetch).toHaveBeenCalledWith('http://localhost:6006/index.json', {});
+      expect(mockFetch).toHaveBeenCalledWith('http://localhost:6006/stories.json', {});
     });
 
     it('should throw StorybookConnectionError when URL is unreachable', async () => {
