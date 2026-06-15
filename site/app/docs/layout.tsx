@@ -24,6 +24,7 @@ const DOCS_GROUPS: { label: string; sections: { label: string; href: string }[] 
       { label: 'Component Patterns', href: '/docs/component-patterns' },
       { label: 'Testing Strategy', href: '/docs/testing-strategy' },
       { label: 'Runtime Analysis', href: '/docs/runtime-analysis' },
+      { label: 'Design Systems', href: '/docs/design-systems' },
     ],
   },
   {

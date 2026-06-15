@@ -42,6 +42,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/docs/keyboard-navigation', priority: 0.7, changeFrequency: 'monthly' as const },
     { path: '/docs/accessible-forms', priority: 0.7, changeFrequency: 'monthly' as const },
     { path: '/docs/runtime-analysis', priority: 0.8, changeFrequency: 'monthly' as const },
+    { path: '/docs/design-systems', priority: 0.7, changeFrequency: 'monthly' as const },
   ];
 
   const allPages = [...corePages, ...docsPages];
