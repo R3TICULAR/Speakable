@@ -5,6 +5,27 @@ All notable changes to [@reticular/speakable](https://www.npmjs.com/package/@ret
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+- Verbosity Analyzer module (`src/runtime/verbosity-analyzer.ts`) detecting 6 patterns of redundant/duplicate screen reader announcements
+- MCP tool `analyze_verbosity` for detecting duplicate announcement patterns in event timelines
+- Storybook environment (HTML renderer) with accessible multi-select component and 4 stories
+- Multi-select accessibility test suite (13 tests) verifying cross-renderer output
+- Storybook a11y addon integration
+- Live region content change detection in RuntimeSandbox (watches `childList`/`characterData` on live region containers)
+- Dynamic live region discovery (auto-observes regions added at runtime)
+- Default sample HTML now includes a `role="status"` live region for visible announcement events
+
+### Changed
+- RuntimeSandbox announcement capture: now observes text content changes inside live regions instead of only `aria-live` attribute mutations
+- Multi-select component refactored based on verbosity analyzer feedback (summary-only live region, no activedescendant re-set on same element, microtask-deferred activedescendant on open, 200ms live region debounce)
+- Removed runtime analysis promotional section from pricing page
+
+### Fixed
+- RuntimeSandbox not showing any announcement events (was observing wrong signal)
+- Multi-select VoiceOver triple-read on selection (redundant state + live region + activedescendant collision)
+
 ## [1.4.0] - 2026-06-15
 
 ### Added

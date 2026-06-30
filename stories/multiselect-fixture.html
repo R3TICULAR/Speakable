@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Multi-Select Component - Speakable Test Fixture</title>
+</head>
+<body>
+  <!-- 
+    Multi-Select: Expanded state with mixed selection
+    This fixture represents the most complex state of the component
+    for cross-renderer analysis.
+  -->
+  <div class="multi-select-container">
+    <label id="multi-select-label-languages">Programming Languages</label>
+    
+    <!-- Trigger button: expanded state -->
+    <button
+      type="button"
+      class="multi-select-trigger"
+      aria-haspopup="listbox"
+      aria-expanded="true"
+      aria-labelledby="multi-select-label-languages"
+    >
+      <span>2 selected</span>
+      <span aria-hidden="true">&#x25BC;</span>
+    </button>
+
+    <!-- Listbox: multiselectable with mixed states -->
+    <ul
+      role="listbox"
+      aria-multiselectable="true"
+      aria-labelledby="multi-select-label-languages"
+      aria-activedescendant="option-ts"
+      tabindex="-1"
+    >
+      <li role="option" id="option-js" aria-selected="true">
+        <span aria-hidden="true">&#x2611;</span>
+        <span>JavaScript</span>
+      </li>
+      <li role="option" id="option-ts" aria-selected="true">
+        <span aria-hidden="true">&#x2611;</span>
+        <span>TypeScript</span>
+      </li>
+      <li role="option" id="option-py" aria-selected="false">
+        <span aria-hidden="true">&#x2610;</span>
+        <span>Python</span>
+      </li>
+      <li role="option" id="option-rs" aria-selected="false">
+        <span aria-hidden="true">&#x2610;</span>
+        <span>Rust</span>
+      </li>
+      <li role="option" id="option-go" aria-selected="false" aria-disabled="true">
+        <span aria-hidden="true">&#x2610;</span>
+        <span>Go (unavailable)</span>
+      </li>
+      <li role="option" id="option-rb" aria-selected="false">
+        <span aria-hidden="true">&#x2610;</span>
+        <span>Ruby</span>
+      </li>
+    </ul>
+
+    <!-- Live region: announces selection changes -->
+    <div role="status" aria-live="polite" aria-atomic="true" class="sr-only">
+      TypeScript selected. 2 of 6 selected.
+    </div>
+  </div>
+</body>
+</html>

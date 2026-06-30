@@ -153,25 +153,6 @@ export default function PricingPage() {
         </p>
       </section>
 
-      {/* Runtime analysis intro */}
-      <section className="max-w-4xl mx-auto mb-16 px-6">
-        <div className="bg-gradient-to-br from-slate-50 to-blue-50 border border-slate-200 rounded-2xl p-8 md:p-10">
-          <div className="flex items-start gap-4 mb-4">
-            <span className="material-symbols-outlined text-blue-600 text-2xl mt-0.5" aria-hidden="true">speed</span>
-            <h2 className="text-2xl font-bold text-slate-900">
-              Accessibility Doesn&apos;t Stop at Static HTML
-            </h2>
-          </div>
-          <p className="text-slate-600 leading-relaxed max-w-3xl ml-10">
-            Modern web apps change state, move focus, and update content dynamically.
-            Runtime accessibility analysis tracks how your components behave in a live
-            browser: focus shifts, ARIA attribute changes, live region announcements,
-            and interaction sequences. Combined with static analysis, it gives you a
-            fuller picture of the assistive technology experience.
-          </p>
-        </div>
-      </section>
-
       {/* Pricing cards */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch px-6">
         {TIERS.map((tier) => (

@@ -61,3 +61,13 @@ export type { SeverityLevel, ClassifiedDiffEntry, ClassifiedDiffReport } from '.
 // Baseline Storage
 export { createBaselineStorage } from './baseline-storage.js';
 export type { BaselineFile, BaselineStorage } from './baseline-storage.js';
+
+// Verbosity Analyzer
+export { analyzeVerbosity, formatVerbosityReport } from './verbosity-analyzer.js';
+export type {
+  VerbositySeverity,
+  VerbosityPattern,
+  VerbosityFinding,
+  VerbosityReport,
+  VerbosityConfig,
+} from './verbosity-analyzer.js';

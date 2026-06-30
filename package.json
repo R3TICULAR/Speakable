@@ -17,7 +17,11 @@
     "dev": "tsup --watch",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "test:a11y": "node --loader ts-node/esm stories/speakable-test.ts",
+    "test:a11y:ci": "vitest run tests/multiselect-a11y.test.ts"
   },
   "keywords": [
     "accessibility",
@@ -39,10 +43,15 @@
     "url": "https://github.com/R3TICULAR/AnnounceKit/issues"
   },
   "devDependencies": {
+    "@storybook/addon-a11y": "^8.6.18",
+    "@storybook/addon-essentials": "^8.6.14",
+    "@storybook/html": "^8.6.18",
+    "@storybook/html-vite": "^8.6.18",
     "@types/jsdom": "^28.0.1",
     "@types/node": "^20.0.0",
     "@vitest/coverage-v8": "^3.1.0",
     "fast-check": "^3.15.0",
+    "storybook": "^8.6.18",
     "tsup": "^8.5.0",
     "typescript": "^5.3.0",
     "vitest": "^3.1.0"

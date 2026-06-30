@@ -30,3 +30,6 @@ yarn-error.log*
 
 # Testing
 .vitest/
+
+# Storybook
+storybook-static/

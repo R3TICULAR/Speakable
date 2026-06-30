@@ -14,21 +14,28 @@ const PLACEHOLDER_HTML = `<button id="trigger" aria-expanded="false" aria-haspop
   <button id="close">Close</button>
 </div>
 
+<div id="status" role="status" aria-live="polite" aria-atomic="true"
+     style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">
+</div>
+
 <script>
   const trigger = document.getElementById('trigger');
   const dialog = document.getElementById('dialog');
   const closeBtn = document.getElementById('close');
+  const status = document.getElementById('status');
 
   trigger.addEventListener('click', () => {
     dialog.hidden = false;
     trigger.setAttribute('aria-expanded', 'true');
     closeBtn.focus();
+    status.textContent = 'Settings dialog opened.';
   });
 
   closeBtn.addEventListener('click', () => {
     dialog.hidden = true;
     trigger.setAttribute('aria-expanded', 'false');
     trigger.focus();
+    status.textContent = 'Settings dialog closed.';
   });
 
   document.addEventListener('keydown', (e) => {
@@ -131,7 +138,57 @@ export function RuntimeSandbox() {
       doc.addEventListener('focusin', onFocusIn);
       focusListenerRef.current = onFocusIn;
 
-      // Mutation observer
+      // ─── Live Region Observer ─────────────────────────────────────────────
+      // Watch for text content changes INSIDE elements with aria-live or role="status"/"alert".
+      // This is what actually triggers screen reader announcements (not the aria-live attr changing).
+      const liveRegionObserver = new MutationObserver((mutations) => {
+        for (const mutation of mutations) {
+          const target = mutation.target as Element;
+          // Walk up to find the live region container
+          let liveContainer: Element | null = null;
+          let el: Element | null = target.nodeType === Node.ELEMENT_NODE ? target : target.parentElement;
+          while (el) {
+            const liveAttr = el.getAttribute('aria-live');
+            const role = el.getAttribute('role');
+            if (liveAttr || role === 'status' || role === 'alert' || role === 'log') {
+              liveContainer = el;
+              break;
+            }
+            el = el.parentElement;
+          }
+
+          if (!liveContainer) continue;
+
+          const text = liveContainer.textContent?.trim();
+          if (!text) continue; // Ignore clears (debounce pattern clears then sets)
+
+          const politeness = liveContainer.getAttribute('aria-live') ||
+            (liveContainer.getAttribute('role') === 'alert' ? 'assertive' : 'polite');
+
+          pushEvent({
+            type: 'ANNOUNCEMENT',
+            timestamp: getTimestamp(),
+            target: buildTarget(liveContainer),
+            payload: {
+              kind: 'announcement',
+              politeness: politeness as 'polite' | 'assertive',
+              text,
+            },
+          });
+        }
+      });
+
+      // Observe text changes in live regions
+      const liveRegions = doc.querySelectorAll('[aria-live], [role="status"], [role="alert"], [role="log"]');
+      liveRegions.forEach((region) => {
+        liveRegionObserver.observe(region, {
+          childList: true,
+          characterData: true,
+          subtree: true,
+        });
+      });
+
+      // Mutation observer for attribute changes
       const observer = new MutationObserver((mutations) => {
         for (const mutation of mutations) {
           if (mutation.type !== 'attributes' || !mutation.target) continue;
@@ -216,17 +273,13 @@ export function RuntimeSandbox() {
             continue;
           }
 
-          // aria-live announcements
-          if (attr === 'aria-live') {
-            pushEvent({
-              type: 'ANNOUNCEMENT',
-              timestamp,
-              target,
-              payload: {
-                kind: 'announcement',
-                politeness: (newValue as 'polite' | 'assertive') || 'polite',
-                text: el.textContent?.trim() || '',
-              },
+          // New live region added dynamically (attr aria-live just appeared)
+          if (attr === 'aria-live' && newValue) {
+            // Start observing this new live region for content changes
+            liveRegionObserver.observe(el, {
+              childList: true,
+              characterData: true,
+              subtree: true,
             });
           }
         }
@@ -239,7 +292,30 @@ export function RuntimeSandbox() {
         subtree: true,
       });
 
+      // Also watch for dynamically added live regions via childList on body
+      const bodyObserver = new MutationObserver((mutations) => {
+        for (const mutation of mutations) {
+          for (const node of mutation.addedNodes) {
+            if (node.nodeType !== Node.ELEMENT_NODE) continue;
+            const el = node as Element;
+            // Check if the added element is a live region
+            if (el.getAttribute('aria-live') || el.getAttribute('role') === 'status' ||
+                el.getAttribute('role') === 'alert' || el.getAttribute('role') === 'log') {
+              liveRegionObserver.observe(el, { childList: true, characterData: true, subtree: true });
+            }
+            // Also check descendants
+            el.querySelectorAll('[aria-live], [role="status"], [role="alert"], [role="log"]').forEach((region) => {
+              liveRegionObserver.observe(region, { childList: true, characterData: true, subtree: true });
+            });
+          }
+        }
+      });
+      bodyObserver.observe(doc.body, { childList: true, subtree: true });
+
       observerRef.current = observer;
+      // Store extra observers for cleanup
+      (observerRef as any)._liveRegionObserver = liveRegionObserver;
+      (observerRef as any)._bodyObserver = bodyObserver;
     },
     [pushEvent]
   );
@@ -276,6 +352,15 @@ export function RuntimeSandbox() {
   const handleStop = useCallback(() => {
     if (observerRef.current) {
       observerRef.current.disconnect();
+      // Disconnect additional observers stored on the ref
+      if ((observerRef as any)._liveRegionObserver) {
+        (observerRef as any)._liveRegionObserver.disconnect();
+        (observerRef as any)._liveRegionObserver = null;
+      }
+      if ((observerRef as any)._bodyObserver) {
+        (observerRef as any)._bodyObserver.disconnect();
+        (observerRef as any)._bodyObserver = null;
+      }
       observerRef.current = null;
     }
 

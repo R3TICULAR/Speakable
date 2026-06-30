@@ -27,7 +27,9 @@ import { renderVoiceOver } from './renderer/voiceover-renderer.js';
 import { renderNarrator } from './renderer/narrator-renderer.js';
 import { renderAuditReport } from './renderer/audit-renderer.js';
 import { diffAccessibilityTrees, formatDiffAsText } from './diff/index.js';
+import { analyzeVerbosity, formatVerbosityReport } from './runtime/verbosity-analyzer.js';
 import type { AnnouncementModel } from './model/types.js';
+import type { AccessibilityEvent } from './runtime/types.js';
 
 // --- Helpers ---
 
@@ -227,6 +229,40 @@ server.tool(
 
       return {
         content: [{ type: 'text', text: summary + diffText }],
+      };
+    } catch (error) {
+      return {
+        content: [{ type: 'text', text: `Error: ${error instanceof Error ? error.message : 'Unknown error'}` }],
+        isError: true,
+      };
+    }
+  }
+);
+
+// Tool: analyze_verbosity
+server.tool(
+  'analyze_verbosity',
+  'Detect redundant and duplicate screen reader announcements in a sequence of accessibility events. Identifies patterns like simultaneous aria-selected + live region updates that cause VoiceOver to read the same content 2-3 times. Provides specific remediation steps and affected screen readers.',
+  {
+    events: z.array(z.object({
+      type: z.string().describe('Event type: STATE_CHANGED, ANNOUNCEMENT, FOCUS_CHANGED, ACCESSIBLE_NAME_CHANGED, etc.'),
+      timestamp: z.number().describe('Milliseconds since session start'),
+      target: z.object({
+        role: z.string().describe('ARIA role of the target element'),
+        accessibleName: z.string().describe('Computed accessible name'),
+        selector: z.string().describe('CSS selector for the element'),
+      }),
+      payload: z.record(z.unknown()).describe('Event payload (kind field discriminates type)'),
+    })).describe('Chronologically ordered accessibility events (from runtime engine or manual capture)'),
+    interaction_frame_window: z.number().optional().describe('Time window (ms) to group related events into a single interaction (default: 150)'),
+  },
+  async ({ events, interaction_frame_window }) => {
+    try {
+      const config = interaction_frame_window ? { interactionFrameWindow: interaction_frame_window } : undefined;
+      const report = analyzeVerbosity(events as AccessibilityEvent[], config);
+      const output = formatVerbosityReport(report);
+      return {
+        content: [{ type: 'text', text: output }],
       };
     } catch (error) {
       return {
