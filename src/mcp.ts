@@ -259,7 +259,7 @@ server.tool(
   async ({ events, interaction_frame_window }) => {
     try {
       const config = interaction_frame_window ? { interactionFrameWindow: interaction_frame_window } : undefined;
-      const report = analyzeVerbosity(events as AccessibilityEvent[], config);
+      const report = analyzeVerbosity(events as unknown as AccessibilityEvent[], config);
       const output = formatVerbosityReport(report);
       return {
         content: [{ type: 'text', text: output }],
