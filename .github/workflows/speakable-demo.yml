@@ -1,0 +1,263 @@
+name: Speakable CI Demo
+
+# This workflow demonstrates how to integrate @reticular/speakable into
+# a CI pipeline for automated accessibility regression testing.
+#
+# It runs on every push and PR, showcasing:
+# 1. Static audit on example HTML files
+# 2. Cross-screen-reader output comparison
+# 3. Semantic diff between two HTML versions (regression detection)
+# 4. Live site page analysis (fetches rendered pages from a dev server)
+# 5. JSON baseline generation for future comparisons
+#
+# Docs: https://getspeakable.dev/docs/cicd-integration
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  speakable-analysis:
+    name: Accessibility Analysis
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Speakable CLI
+        run: npm run build
+
+      # ─────────────────────────────────────────────────────────────────────
+      # STEP 1: Audit static HTML for accessibility issues
+      # Produces a structured report with landmark structure, heading
+      # hierarchy, interactive elements, and issue severity levels.
+      # Exit code 0 = pass, 1 = warnings, 2 = errors
+      # ─────────────────────────────────────────────────────────────────────
+      - name: "Step 1: Audit HTML files"
+        run: |
+          echo "╔══════════════════════════════════════════════════════════╗"
+          echo "║  SPEAKABLE AUDIT: Static HTML Accessibility Check       ║"
+          echo "╚══════════════════════════════════════════════════════════╝"
+          echo ""
+
+          FAILED=0
+          for file in examples/*.html; do
+            echo "━━━ Auditing: $file ━━━"
+            node dist/cli.js "$file" -f audit || FAILED=1
+            echo ""
+          done
+
+          if [ $FAILED -ne 0 ]; then
+            echo "::warning::Some files have accessibility issues"
+          else
+            echo "✓ All files pass audit"
+          fi
+
+      # ─────────────────────────────────────────────────────────────────────
+      # STEP 2: Predict screen reader output across all 4 readers
+      # Shows exactly how NVDA, JAWS, VoiceOver, and Narrator would
+      # announce the same component differently.
+      # ─────────────────────────────────────────────────────────────────────
+      - name: "Step 2: Cross-screen-reader comparison"
+        run: |
+          echo "╔══════════════════════════════════════════════════════════╗"
+          echo "║  SPEAKABLE: Cross-Screen-Reader Output                  ║"
+          echo "╚══════════════════════════════════════════════════════════╝"
+          echo ""
+
+          echo "━━━ Button component (examples/button.html) ━━━"
+          node dist/cli.js examples/button.html -f text -s all
+          echo ""
+
+          echo "━━━ Form component (examples/form.html) ━━━"
+          node dist/cli.js examples/form.html -f text -s all
+          echo ""
+
+          echo "━━━ Navigation (examples/navigation.html) ━━━"
+          node dist/cli.js examples/navigation.html -f text -s all
+
+      # ─────────────────────────────────────────────────────────────────────
+      # STEP 3: Semantic diff between two HTML versions
+      # Detects accessibility regressions: removed nodes, lost names,
+      # changed roles, modified states. Outputs added/removed/changed
+      # with property-level detail.
+      # ─────────────────────────────────────────────────────────────────────
+      - name: "Step 3: Regression diff (before vs after)"
+        run: |
+          echo "╔══════════════════════════════════════════════════════════╗"
+          echo "║  SPEAKABLE DIFF: Accessibility Regression Detection     ║"
+          echo "╚══════════════════════════════════════════════════════════╝"
+          echo ""
+
+          echo "━━━ Text diff output ━━━"
+          node dist/cli.js examples/diff-before.html --diff examples/diff-after.html -f text
+          echo ""
+
+          echo "━━━ JSON diff output (for programmatic consumption) ━━━"
+          node dist/cli.js examples/diff-before.html --diff examples/diff-after.html -f json | head -40
+          echo "  ... (truncated)"
+
+      # ─────────────────────────────────────────────────────────────────────
+      # STEP 4: CSS selector targeting
+      # Focus analysis on a specific component within a larger page.
+      # Useful for component-level testing in a full page context.
+      # ─────────────────────────────────────────────────────────────────────
+      - name: "Step 4: Targeted selector analysis"
+        run: |
+          echo "╔══════════════════════════════════════════════════════════╗"
+          echo "║  SPEAKABLE: Selector-Targeted Analysis                  ║"
+          echo "╚══════════════════════════════════════════════════════════╝"
+          echo ""
+
+          echo "━━━ Only buttons in navigation.html ━━━"
+          node dist/cli.js examples/navigation.html -f text -s all --selector "a" || true
+          echo ""
+
+          echo "━━━ Only form controls in form.html ━━━"
+          node dist/cli.js examples/form.html -f text -s nvda --selector "input, select, textarea" || true
+
+      # ─────────────────────────────────────────────────────────────────────
+      # STEP 5: JSON baseline generation
+      # Generates machine-readable accessibility tree JSON that can be
+      # stored as a baseline for future regression comparisons.
+      # ─────────────────────────────────────────────────────────────────────
+      - name: "Step 5: Generate JSON baselines"
+        run: |
+          echo "╔══════════════════════════════════════════════════════════╗"
+          echo "║  SPEAKABLE: JSON Baseline Generation                    ║"
+          echo "╚══════════════════════════════════════════════════════════╝"
+          echo ""
+
+          mkdir -p .speakable-baselines
+
+          for file in examples/button.html examples/form.html examples/navigation.html; do
+            BASENAME=$(basename "$file" .html)
+            echo "Generating baseline: $BASENAME"
+            node dist/cli.js "$file" -f json > ".speakable-baselines/${BASENAME}.json"
+            echo "  ✓ .speakable-baselines/${BASENAME}.json"
+          done
+
+          echo ""
+          echo "Baselines generated. In a real workflow, commit these and"
+          echo "diff against them on subsequent PRs to detect regressions."
+
+      - name: Upload baselines as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: speakable-baselines
+          path: .speakable-baselines/
+          retention-days: 30
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # Live Site Analysis
+  # Builds the Next.js site, starts a server, fetches rendered pages,
+  # and runs Speakable against them. This catches issues that only
+  # appear in the fully rendered app (dynamic content, auth states, etc.)
+  # ═══════════════════════════════════════════════════════════════════════════
+  live-site-analysis:
+    name: Live Site Accessibility
+    runs-on: ubuntu-latest
+    needs: speakable-analysis
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+
+      - name: Install CLI dependencies
+        run: npm ci
+
+      - name: Build Speakable CLI
+        run: npm run build
+
+      - name: Install site dependencies
+        working-directory: site
+        run: npm install --legacy-peer-deps
+
+      - name: Build Next.js site
+        working-directory: site
+        run: npx next build
+        env:
+          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: pk_test_Y2xlcmsudGVzdC5sb2NhbGhvc3Qk
+          CLERK_SECRET_KEY: sk_test_placeholder_not_used_in_build
+
+      - name: "Audit rendered site pages"
+        run: |
+          cd site
+          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_Y2xlcmsudGVzdC5sb2NhbGhvc3Qk \
+          CLERK_SECRET_KEY=sk_test_placeholder \
+          npx next start -p 3099 &
+          SERVER_PID=$!
+          sleep 5
+
+          echo "╔══════════════════════════════════════════════════════════╗"
+          echo "║  SPEAKABLE: Live Site Accessibility Audit               ║"
+          echo "╚══════════════════════════════════════════════════════════╝"
+          echo ""
+
+          PAGES=(
+            "/"
+            "/pricing"
+            "/contact"
+            "/docs"
+            "/docs/getting-started"
+          )
+
+          PASS=0
+          WARN=0
+          for path in "${PAGES[@]}"; do
+            echo "━━━ Auditing: $path ━━━"
+            HTML=$(curl -s "http://localhost:3099${path}" || echo "")
+            if [ -n "$HTML" ]; then
+              echo "$HTML" | node ../dist/cli.js - -f audit
+              EXIT=$?
+              if [ $EXIT -eq 0 ]; then PASS=$((PASS+1)); else WARN=$((WARN+1)); fi
+            else
+              echo "  Could not fetch page"
+              WARN=$((WARN+1))
+            fi
+            echo ""
+          done
+
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "Results: $PASS passed, $WARN with warnings"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+          kill $SERVER_PID 2>/dev/null || true
+
+      - name: "Screen reader simulation on homepage"
+        run: |
+          cd site
+          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_Y2xlcmsudGVzdC5sb2NhbGhvc3Qk \
+          CLERK_SECRET_KEY=sk_test_placeholder \
+          npx next start -p 3098 &
+          SERVER_PID=$!
+          sleep 5
+
+          echo "╔══════════════════════════════════════════════════════════╗"
+          echo "║  SPEAKABLE: Screen Reader Simulation (Homepage)         ║"
+          echo "╚══════════════════════════════════════════════════════════╝"
+          echo ""
+
+          echo "What each screen reader announces for the site navigation:"
+          echo ""
+          curl -s http://localhost:3098/ | node ../dist/cli.js - -f text -s all --selector "nav" || true
+
+          kill $SERVER_PID 2>/dev/null || true

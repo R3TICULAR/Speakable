@@ -1,0 +1,94 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Example: Using @reticular/speakable in a GitHub Action
+#
+# Copy this into your project at .github/workflows/accessibility.yml
+# No configuration needed. Works with any HTML files in your repo.
+#
+# What it does:
+#   1. Audits HTML files for accessibility issues
+#   2. Predicts screen reader output (NVDA, JAWS, VoiceOver, Narrator)
+#   3. Detects accessibility regressions via semantic diff
+#   4. Fails the build if critical regressions are found
+#
+# Docs: https://getspeakable.dev/docs/cicd-integration
+# ─────────────────────────────────────────────────────────────────────────────
+
+name: Accessibility Check
+
+on:
+  pull_request:
+    paths:
+      - '**/*.html'
+      - 'src/**/*.tsx'
+      - 'src/**/*.jsx'
+
+jobs:
+  accessibility:
+    name: Screen Reader Regression Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2  # Need previous commit for diff
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+
+      # Install Speakable (no other config needed)
+      - name: Install Speakable
+        run: npm install -g @reticular/speakable
+
+      # Audit all HTML files in your project
+      - name: Audit HTML files
+        run: |
+          echo "Running accessibility audit..."
+          find . -name "*.html" -not -path "./node_modules/*" | while read file; do
+            echo ""
+            echo "--- $file ---"
+            speakable "$file" -f audit
+          done
+
+      # Show predicted screen reader output
+      - name: Preview screen reader announcements
+        run: |
+          echo "Predicted screen reader output for changed files:"
+          find . -name "*.html" -not -path "./node_modules/*" | head -5 | while read file; do
+            echo ""
+            echo "=== $file ==="
+            speakable "$file" -f text -s all
+          done
+
+      # Diff against baseline (if baselines exist)
+      - name: Check for regressions
+        run: |
+          if [ -d ".speakable-baselines" ]; then
+            echo "Checking for accessibility regressions..."
+            REGRESSION=0
+
+            for baseline in .speakable-baselines/*.html; do
+              BASENAME=$(basename "$baseline")
+              CURRENT="src/components/$BASENAME"  # Adjust path to your source
+
+              if [ -f "$CURRENT" ]; then
+                echo "Diffing: $CURRENT vs baseline"
+                OUTPUT=$(speakable "$baseline" --diff "$CURRENT" -f text)
+                echo "$OUTPUT"
+
+                if echo "$OUTPUT" | grep -q "Removed"; then
+                  echo "::error::Accessibility regression detected in $CURRENT"
+                  REGRESSION=1
+                fi
+              fi
+            done
+
+            if [ $REGRESSION -ne 0 ]; then
+              echo "::error::Accessibility regressions found. Review the diff output above."
+              exit 1
+            fi
+
+            echo "No regressions detected."
+          else
+            echo "No baselines found. Run 'speakable file.html -f json > .speakable-baselines/file.json' to create them."
+          fi
