@@ -22,6 +22,7 @@ const DOCS_GROUPS: { label: string; sections: { label: string; href: string }[] 
       { label: 'Keyboard Navigation', href: '/docs/keyboard-navigation' },
       { label: 'Accessible Forms', href: '/docs/accessible-forms' },
       { label: 'Component Patterns', href: '/docs/component-patterns' },
+      { label: 'Dynamic Content Pitfalls', href: '/docs/dynamic-content-pitfalls' },
       { label: 'Testing Strategy', href: '/docs/testing-strategy' },
       { label: 'Runtime Analysis', href: '/docs/runtime-analysis' },
       { label: 'Design Systems', href: '/docs/design-systems' },
