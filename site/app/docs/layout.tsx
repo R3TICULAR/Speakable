@@ -11,12 +11,18 @@ const DOCS_GROUPS: { label: string; sections: { label: string; href: string }[] 
     sections: [
       { label: 'Usage Guide', href: '/docs/usage-guide' },
       { label: 'How Screen Readers Work', href: '/docs/how-screen-readers-work' },
+      { label: 'How to Test with a Screen Reader', href: '/docs/how-to-test-with-screen-reader' },
     ],
   },
   {
     label: 'Guides',
     sections: [
       { label: 'Advanced Guide', href: '/docs/advanced-guide' },
+      { label: 'Screen Reader Testing Tool', href: '/docs/screen-reader-testing-tool' },
+      { label: 'Automated Screen Reader Testing', href: '/docs/automated-screen-reader-testing' },
+      { label: 'Testing Without a Screen Reader', href: '/docs/screen-reader-testing-without-screen-reader' },
+      { label: 'Beyond Axe', href: '/docs/beyond-axe' },
+      { label: 'Regression Testing', href: '/docs/screen-reader-regression-testing' },
       { label: 'Focus Management', href: '/docs/focus-management' },
       { label: 'Live Regions', href: '/docs/live-regions' },
       { label: 'Keyboard Navigation', href: '/docs/keyboard-navigation' },
@@ -33,6 +39,7 @@ const DOCS_GROUPS: { label: string; sections: { label: string; href: string }[] 
     sections: [
       { label: 'API Reference', href: '/docs' },
       { label: 'ARIA Roles', href: '/docs/aria-roles' },
+      { label: 'ARIA Labels Guide', href: '/docs/aria-labels-guide' },
       { label: 'Screen Reader Comparison', href: '/docs/screen-reader-comparison' },
       { label: 'Testing Checklist', href: '/docs/testing-checklist' },
       { label: 'Glossary', href: '/docs/glossary' },

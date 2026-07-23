@@ -670,10 +670,10 @@ export default function AriaRolesPage() {
           <span className="text-slate-600">ARIA Roles</span>
         </nav>
         <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
-          ARIA Roles Quick Reference
+          ARIA Roles Testing and Validation
         </h1>
         <p className="text-lg text-slate-600 leading-relaxed mb-6">
-          A comprehensive reference for all WAI-ARIA roles with details on how Speakable handles each one.
+          Speakable functions as an ARIA testing tool by validating how screen readers interpret each role in your HTML.
           Use this guide to understand how different screen readers announce role semantics, what HTML
           elements map implicitly to each role, and which ARIA states are required or supported.
         </p>

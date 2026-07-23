@@ -1,6 +1,12 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { RelatedPages } from "../../../components/RelatedPages";
 import { SeeAlso } from "../../../components/SeeAlso";
+
+export const metadata: Metadata = {
+  title: "Screen Reader Compatibility Testing Comparison",
+  description: "Compare how NVDA, JAWS, VoiceOver, and Narrator announce the same HTML differently. Understand compatibility issues across screen readers.",
+};
 
 export default function ScreenReaderComparisonPage() {
   return (
@@ -11,14 +17,13 @@ export default function ScreenReaderComparisonPage() {
           <span className="material-symbols-outlined text-[14px]" aria-hidden="true">chevron_right</span>
           <span className="text-slate-600">Screen Reader Comparison</span>
         </nav>
-        <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight mb-4">Screen Reader Comparison</h1>
+        <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight mb-4">Screen Reader Compatibility Testing: NVDA vs JAWS vs VoiceOver vs Narrator</h1>
         <p className="text-lg text-slate-600 leading-relaxed">
-          A side-by-side comparison of the four major screen readers used today: NVDA, JAWS, VoiceOver, and Narrator.
-          Each has its own announcement patterns, terminology preferences, and interaction quirks. This guide documents
+          Screen reader compatibility testing requires understanding how each major screen reader announces the same HTML differently. NVDA, JAWS, VoiceOver, and Narrator each have their own announcement patterns, terminology preferences, and interaction quirks. This guide documents
           those differences so you can understand what users actually hear when they navigate your interfaces. Keep in
           mind that this is approximate: actual behavior varies by screen reader version, browser pairing, operating
           system build, and individual user settings. No two setups produce identical output, but the patterns described
-          here reflect default configurations as of mid-2024.
+          here reflect default configurations as observed through Speakable's heuristic renderers.
         </p>
       </header>
 

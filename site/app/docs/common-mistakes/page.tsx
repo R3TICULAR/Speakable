@@ -1,18 +1,25 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { RelatedPages } from '../../../components/RelatedPages';
+
+export const metadata: Metadata = {
+  title: "Common Accessibility Mistakes and ARIA Misuse",
+  description: "Real-world HTML patterns that break screen readers. Includes incorrect ARIA usage examples with before/after Speakable diff output.",
+};
 
 export default function CommonMistakesPage() {
   return (
     <>
       <header className="mb-12">
         <nav className="flex items-center gap-2 text-xs text-slate-400 mb-4" aria-label="Breadcrumb">
-          <span>Docs</span>
+          <Link href="/docs" className="hover:text-slate-600 transition-colors">Docs</Link>
           <span className="material-symbols-outlined text-[14px]" aria-hidden="true">chevron_right</span>
           <span className="text-slate-600">Common Mistakes</span>
         </nav>
-        <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight mb-4">Common Mistakes</h1>
+        <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight mb-4">Common Accessibility Mistakes and Incorrect ARIA Usage Examples</h1>
         <p className="text-lg text-slate-600 leading-relaxed">
-          Real-world HTML patterns that break screen reader experiences, and how to fix them.
+          Incorrect ARIA usage examples are among the most common accessibility mistakes in production web applications.
+          This page shows real-world HTML patterns that break screen reader experiences, and how to fix them.
           Each example shows the bad markup, what screen readers actually announce, and the
           corrected version. For working code samples showing the correct approach, see the{' '}
           <Link href="/docs/examples" className="text-blue-600 hover:text-blue-800 underline">Examples</Link> page.

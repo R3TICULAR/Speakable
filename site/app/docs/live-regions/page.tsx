@@ -1,6 +1,12 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { RelatedPages } from "../../../components/RelatedPages";
 import { SeeAlso } from "../../../components/SeeAlso";
+
+export const metadata: Metadata = {
+  title: "ARIA Live Region Testing and Dynamic Content",
+  description: "Test ARIA live regions with Speakable. Learn aria-live, aria-atomic, and aria-relevant patterns and detect misconfigured live regions.",
+};
 
 export default function LiveRegionsPage() {
   return (
@@ -11,8 +17,9 @@ export default function LiveRegionsPage() {
           <span className="material-symbols-outlined text-[14px]" aria-hidden="true">chevron_right</span>
           <span className="text-slate-600">Live Regions</span>
         </nav>
-        <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight mb-4">Live Regions &amp; Dynamic Content</h1>
+        <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight mb-4">ARIA Live Region Testing and Dynamic Content</h1>
         <p className="text-lg text-slate-600 leading-relaxed">
+          ARIA live region testing is essential for any application that updates content dynamically.
           Modern web applications constantly update the screen: notifications appear, counters change,
           new messages arrive, spinners resolve into content. Sighted users notice these changes instantly
           because they can see the whole viewport. Screen reader users, however, only hear what the

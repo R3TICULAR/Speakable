@@ -1,6 +1,12 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { RelatedPages } from "../../../components/RelatedPages";
 import { SeeAlso } from "../../../components/SeeAlso";
+
+export const metadata: Metadata = {
+  title: "Screen Reader Accessibility Testing Strategy",
+  description: "Build a screen reader testing strategy combining automated prediction with manual verification. Plan coverage across NVDA, JAWS, and VoiceOver.",
+};
 
 export default function TestingStrategyPage() {
   return (
@@ -11,9 +17,9 @@ export default function TestingStrategyPage() {
           <span className="material-symbols-outlined text-[14px]" aria-hidden="true">chevron_right</span>
           <span className="text-slate-600">Testing Strategy</span>
         </nav>
-        <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight mb-4">Accessibility Testing Strategy</h1>
+        <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight mb-4">Screen Reader Accessibility Testing Strategy</h1>
         <p className="text-lg text-slate-600 leading-relaxed">
-          Building accessible software requires more than good intentions. It requires a structured testing program
+          A screen reader accessibility testing strategy requires more than good intentions. It requires a structured program
           that catches issues early, measures progress over time, and balances automation with human judgment.
           This guide helps teams build a comprehensive accessibility testing strategy. It covers what to automate,
           what requires manual testing, and how to measure progress. Whether you are starting from scratch or
@@ -544,8 +550,18 @@ export default function TestingStrategyPage() {
       <RelatedPages
         pages={[
           {
+            href: "/docs/automated-screen-reader-testing",
+            title: "Automated Screen Reader Testing",
+            description: "Set up automated testing with CLI, Node API, and CI integration using Speakable.",
+          },
+          {
+            href: "/docs/screen-reader-testing-without-screen-reader",
+            title: "Testing Without a Screen Reader",
+            description: "How predictive testing fills the gap when you cannot run a real screen reader.",
+          },
+          {
             href: "/docs/testing-checklist",
-            title: "Testing Checklist",
+            title: "Screen Reader Testing Checklist",
             description: "A step-by-step checklist for verifying accessibility in components and pages during development and code review.",
           },
           {

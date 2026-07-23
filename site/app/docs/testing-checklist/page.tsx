@@ -1,5 +1,17 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { RelatedPages } from "../../../components/RelatedPages";
+
+export const metadata: Metadata = {
+  title: "Screen Reader Testing Checklist",
+  description:
+    "Step-by-step screen reader testing checklist for web developers. Covers NVDA, JAWS, VoiceOver, and Narrator with actionable verification items.",
+  openGraph: {
+    title: "Screen Reader Testing Checklist",
+    description: "Step-by-step screen reader testing checklist for web developers.",
+    url: "https://getspeakable.dev/docs/testing-checklist",
+  },
+};
 
 interface ChecklistItem {
   what: string;
