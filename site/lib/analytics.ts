@@ -1,16 +1,23 @@
 /**
  * Google Analytics event tracking utilities.
  *
- * All tracking is conditional on user consent (cookie_consent=accepted).
- * Events only fire if GA is loaded and consent was granted.
+ * GA4 is enabled by default for all users. A cookie notice informs users
+ * that analytics are active. The consent check is kept in place but defaults
+ * to true, making it easy to revert to opt-in later by changing
+ * `hasAnalyticsConsent()` to check for an explicit acceptance cookie.
  */
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
-/** Check if user has granted analytics consent */
+/**
+ * Check if user has granted analytics consent.
+ * Currently defaults to true (enabled by default).
+ * To revert to opt-in: change this to check for cookie_consent=accepted.
+ */
 export function hasAnalyticsConsent(): boolean {
-  if (typeof document === 'undefined') return false;
-  return document.cookie.includes('cookie_consent=accepted');
+  // GA enabled by default. To revert to opt-in, uncomment the line below:
+  // return typeof document !== 'undefined' && document.cookie.includes('cookie_consent=accepted');
+  return true;
 }
 
 /** Check if gtag is available */
