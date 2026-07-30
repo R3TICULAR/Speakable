@@ -101,7 +101,7 @@
     "title": "料金プラン",
     "subtitle": "分析ツールは無料です。ワークフロー自動化に対してお支払いいただきます。",
     "recommended": "おすすめ",
-    "tierFreeName": "無料",
+    "tierFreeName": "ベーシック",
     "tierProName": "Pro",
     "tierTeamName": "チーム / エンタープライズ",
     "tierFreePrice": "無料",
