@@ -1,0 +1,52 @@
+{
+  "name": "@reticular/storybook-addon-speakable",
+  "version": "0.1.0",
+  "description": "Storybook addon that predicts screen reader output for your components using Speakable",
+  "type": "module",
+  "main": "./dist/preset.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./preset": "./dist/preset.js",
+    "./manager": "./dist/manager.js",
+    "./preview": "./dist/preview.js"
+  },
+  "files": ["dist", "README.md"],
+  "keywords": [
+    "storybook",
+    "storybook-addon",
+    "addon",
+    "accessibility",
+    "screen-reader",
+    "a11y",
+    "speakable",
+    "nvda",
+    "jaws",
+    "voiceover",
+    "narrator"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/R3TICULAR/AnnounceKit.git",
+    "directory": "addon-speakable"
+  },
+  "homepage": "https://getspeakable.dev",
+  "bugs": {
+    "url": "https://github.com/R3TICULAR/AnnounceKit/issues"
+  },
+  "peerDependencies": {
+    "storybook": "^8.0.0"
+  },
+  "devDependencies": {
+    "@storybook/manager-api": "^8.6.14",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "storybook": "^8.6.14",
+    "tsup": "^8.5.0",
+    "typescript": "^5.3.0"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch"
+  }
+}

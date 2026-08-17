@@ -33,3 +33,7 @@ yarn-error.log*
 
 # Storybook
 storybook-static/
+
+# Addon build output
+addon-speakable/dist/
+addon-speakable/node_modules/
