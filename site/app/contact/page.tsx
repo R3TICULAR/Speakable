@@ -20,10 +20,10 @@ export default function ContactPage() {
           <h2 className="text-xl font-bold text-slate-900 mb-2">General Inquiries</h2>
           <p className="text-slate-600 text-sm mb-4">Questions about Speakable, partnerships, or anything else.</p>
           <a
-            href="mailto:xreticular@gmail.com"
+            href="mailto:support@getspeakable.dev"
             className="text-blue-600 font-semibold hover:underline"
           >
-            xreticular@gmail.com
+            support@getspeakable.dev
           </a>
         </div>
 
@@ -50,7 +50,7 @@ export default function ContactPage() {
           <h2 className="text-xl font-bold text-slate-900 mb-2">Security</h2>
           <p className="text-slate-600 text-sm mb-4">Report a vulnerability responsibly.</p>
           <a
-            href="mailto:xreticular@gmail.com?subject=Security Report"
+            href="mailto:support@getspeakable.dev?subject=Security Report"
             className="text-blue-600 font-semibold hover:underline"
           >
             Security Report
@@ -64,7 +64,7 @@ export default function ContactPage() {
           <h2 className="text-xl font-bold text-slate-900 mb-2">Feature Requests</h2>
           <p className="text-slate-600 text-sm mb-4">Have an idea for improving Speakable?</p>
           <a
-            href="mailto:xreticular@gmail.com?subject=Feature Request"
+            href="mailto:support@getspeakable.dev?subject=Feature Request"
             className="text-teal-600 font-semibold hover:underline"
           >
             Suggest a Feature

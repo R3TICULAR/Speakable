@@ -88,8 +88,8 @@ export default function SecurityPage() {
           <h2 className="text-2xl font-bold text-slate-900 mb-4">Reporting Vulnerabilities</h2>
           <p className="text-slate-600 leading-relaxed">
             If you discover a security vulnerability, please report it responsibly by emailing{' '}
-            <a href="mailto:xreticular@gmail.com" className="text-blue-600 font-medium hover:underline">
-              xreticular@gmail.com
+            <a href="mailto:support@getspeakable.dev" className="text-blue-600 font-medium hover:underline">
+              support@getspeakable.dev
             </a>{' '}
             with the subject line &quot;Security Report&quot;. We will acknowledge receipt within 48 hours
             and work to address the issue promptly.

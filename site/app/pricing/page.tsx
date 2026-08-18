@@ -116,7 +116,7 @@ export default function PricingPage() {
     }
 
     if (tierId === 'team-enterprise') {
-      window.location.href = 'mailto:xreticular@gmail.com';
+      window.location.href = 'mailto:support@getspeakable.dev';
       return;
     }
 

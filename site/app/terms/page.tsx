@@ -101,8 +101,8 @@ export default function TermsPage() {
           <h2 className="text-2xl font-bold text-slate-900 mb-4">Contact</h2>
           <p className="text-slate-600 leading-relaxed">
             Questions about these terms? Contact us at{' '}
-            <a href="mailto:xreticular@gmail.com" className="text-blue-600 font-medium hover:underline">
-              xreticular@gmail.com
+            <a href="mailto:support@getspeakable.dev" className="text-blue-600 font-medium hover:underline">
+              support@getspeakable.dev
             </a>.
           </p>
         </section>
