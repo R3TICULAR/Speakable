@@ -220,6 +220,60 @@ function showPageInfo(title, url) {
   pageInfoEl.classList.remove('hidden');
 }
 
+// --- Format a structured AnalysisResult (from the shared bundle) for display ---
+function formatAnalysis(analysis, reader, format) {
+  if (format === 'json') {
+    return JSON.stringify(analysis, null, 2);
+  }
+
+  if (format === 'audit') {
+    const lines = [];
+    const errors = analysis.audit.filter((f) => f.severity === 'error');
+    const warnings = analysis.audit.filter((f) => f.severity === 'warning');
+    const info = analysis.audit.filter((f) => f.severity === 'info');
+    if (errors.length) {
+      lines.push(`✗ ${errors.length} error(s):`);
+      errors.forEach((f) => lines.push(`  • ${f.message}${f.selector ? ` (${f.selector})` : ''}`));
+    }
+    if (warnings.length) {
+      lines.push(`⚠ ${warnings.length} warning(s):`);
+      warnings.forEach((f) => lines.push(`  • ${f.message}${f.selector ? ` (${f.selector})` : ''}`));
+    }
+    if (info.length) {
+      lines.push(`ℹ ${info.length} note(s):`);
+      info.forEach((f) => lines.push(`  • ${f.message}`));
+    }
+    if (!analysis.audit.length) {
+      lines.push('✓ No issues found.');
+    }
+    const s = analysis.stats;
+    lines.push('');
+    lines.push(
+      `━━ SUMMARY: ${s.totalElements} elements, ${s.landmarks} landmarks, ${s.headings} headings, ${s.interactiveElements} interactive ━━`
+    );
+    return lines.join('\n');
+  }
+
+  // Text format
+  const byReader = {
+    nvda: analysis.nvda,
+    jaws: analysis.jaws,
+    voiceover: analysis.voiceover,
+    narrator: analysis.narrator,
+  };
+
+  if (reader === 'all') {
+    return [
+      `=== NVDA ===\n${byReader.nvda.join('\n')}`,
+      `=== JAWS ===\n${byReader.jaws.join('\n')}`,
+      `=== VoiceOver ===\n${byReader.voiceover.join('\n')}`,
+      `=== Narrator ===\n${byReader.narrator.join('\n')}`,
+    ].join('\n\n');
+  }
+
+  return (byReader[reader] || byReader.nvda).join('\n');
+}
+
 // Copy to clipboard
 copyBtn.addEventListener('click', () => {
   navigator.clipboard.writeText(outputEl.textContent).then(() => {
@@ -247,7 +301,7 @@ analyzeBtn.addEventListener('click', async () => {
     }
 
     const response = await chrome.tabs.sendMessage(tab.id, {
-      type: 'GET_PAGE_HTML',
+      type: 'ANALYZE',
       selector,
     });
 
@@ -258,24 +312,21 @@ analyzeBtn.addEventListener('click', async () => {
 
     showPageInfo(response.title, response.url);
 
-    const result = window.SpeakableAnalyzer.analyze(
-      response.html,
-      reader,
-      format,
-      selector
-    );
+    const analysis = response.result;
 
-    if (result.warnings.length > 0) {
-      console.warn('Speakable warnings:', result.warnings);
+    if (analysis.warnings && analysis.warnings.length > 0) {
+      console.warn('Speakable warnings:', analysis.warnings);
     }
 
     hideStatus();
 
     const scope = selector
-      ? msg('scopeSelector', [selector, String(result.elementCount)])
+      ? msg('scopeSelector', [selector, String(response.elementCount)])
       : msg('scopeFullPage');
     showStatus(msg('statusComplete', [scope]), 'success');
-    showResults(result.output, `${reader.toUpperCase()} — ${format}`);
+
+    const output = formatAnalysis(analysis, reader, format);
+    showResults(output, `${reader.toUpperCase()} — ${format}`);
 
   } catch (err) {
     showStatus(msg('statusError', [err.message]), 'error');

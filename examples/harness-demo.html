@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Speakable Iframe Harness — Demo</title>
+  <style>
+    body { font-family: -apple-system, system-ui, sans-serif; margin: 2rem; color: #1e293b; max-width: 900px; }
+    h1 { font-size: 1.4rem; }
+    section { border: 1px solid #e2e8f0; border-radius: 8px; padding: 1rem 1.25rem; margin: 1.25rem 0; }
+    h2 { font-size: 1.05rem; margin-top: 0; }
+    button { background: #0d9488; color: #fff; border: 0; border-radius: 6px; padding: 6px 12px; cursor: pointer; font-weight: 600; }
+    pre { background: #0f172a; color: #e2e8f0; padding: 12px; border-radius: 6px; overflow: auto; font-size: 12px; max-height: 320px; }
+    .muted { color: #64748b; font-size: 13px; }
+    code { background: #f1f5f9; padding: 1px 5px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h1>Speakable Iframe Harness — Demo</h1>
+  <p class="muted">
+    Serve the repo root over HTTP (e.g. <code>npx serve .</code>) and open this file at
+    <code>/examples/harness-demo.html</code>. Run <code>npm run build</code> first so
+    <code>dist/</code> exists. The harness mounts each example into an iframe via
+    <code>srcdoc</code> (same-origin), injects the shared bundle, and reads results over
+    <code>postMessage</code>.
+  </p>
+
+  <!-- SIMPLE EXAMPLE -->
+  <section>
+    <h2>Simple: static markup</h2>
+    <p class="muted">Analyzes a small chunk of plain HTML. No web components, no interaction.</p>
+    <button id="run-simple">Run simple analysis</button>
+    <pre id="out-simple">Click "Run simple analysis"…</pre>
+  </section>
+
+  <!-- COMPLEX EXAMPLE -->
+  <section>
+    <h2>Complex: Lit-style web component + interaction timeline</h2>
+    <p class="muted">
+      Loads a custom element that renders its content in an <em>open shadow root</em> with a
+      <code>&lt;slot&gt;</code>, exposes a Lit-style <code>updateComplete</code> promise, and
+      toggles <code>aria-expanded</code> on click. The harness awaits upgrade, runs a click
+      sequence, and returns the interaction timeline.
+    </p>
+    <button id="run-complex">Run complex capture</button>
+    <pre id="out-complex">Click "Run complex capture"…</pre>
+  </section>
+
+  <script type="module">
+    import { createHarness } from '../dist/harness/index.js';
+
+    // The injectable IIFE bundle, resolved relative to this page.
+    const BUNDLE_URL = new URL('../dist/speakable-browser.global.js', window.location.href).href;
+
+    function show(id, value) {
+      document.getElementById(id).textContent =
+        typeof value === 'string' ? value : JSON.stringify(value, null, 2);
+    }
+
+    // ── Simple ────────────────────────────────────────────────────────────────
+    document.getElementById('run-simple').addEventListener('click', async () => {
+      show('out-simple', 'Loading…');
+      const harness = createHarness({
+        target: { container: document.body }, // harness creates + removes its own iframe
+        bundleUrl: BUNDLE_URL,
+      });
+      try {
+        await harness.load({
+          html: `
+            <main>
+              <h1>Checkout</h1>
+              <nav aria-label="Steps"><a href="#cart">Cart</a> <a href="#pay">Payment</a></nav>
+              <button aria-expanded="false">Order summary</button>
+            </main>
+          `,
+        });
+        const result = await harness.analyze();
+        show('out-simple', {
+          nvda: result.nvda,
+          stats: result.stats,
+          warnings: result.warnings,
+        });
+      } catch (err) {
+        show('out-simple', 'Error: ' + err.message);
+      } finally {
+        harness.destroy();
+      }
+    });
+
+    // ── Complex ─────────────────────────────────────────────────────────────
+    // A custom element defined inside the iframe document. We inline its
+    // definition into the srcdoc so it registers before the bundle awaits upgrade.
+    const COMPLEX_HTML = `
+      <script>
+        class ExpandoCard extends HTMLElement {
+          constructor() {
+            super();
+            const root = this.attachShadow({ mode: 'open' });
+            root.innerHTML =
+              '<h2>' + (this.getAttribute('heading') || 'Card') + '</h2>' +
+              '<button id="toggle" aria-expanded="false">Details</button>' +
+              '<div id="body" hidden><slot></slot></div>';
+            const btn = root.getElementById('toggle');
+            const body = root.getElementById('body');
+            btn.addEventListener('click', () => {
+              const open = btn.getAttribute('aria-expanded') === 'true';
+              btn.setAttribute('aria-expanded', String(!open));
+              body.hidden = open;
+            });
+          }
+          // Lit-style hydration signal the harness awaits before analyzing.
+          get updateComplete() { return Promise.resolve(true); }
+        }
+        customElements.define('expando-card', ExpandoCard);
+      <\/script>
+      <expando-card heading="Warranty">
+        <p>Two year limited warranty. Slotted light-DOM content.</p>
+      </expando-card>
+    `;
+
+    document.getElementById('run-complex').addEventListener('click', async () => {
+      show('out-complex', 'Loading…');
+      const harness = createHarness({
+        target: { container: document.body },
+        bundleUrl: BUNDLE_URL,
+      });
+      try {
+        await harness.load({ html: COMPLEX_HTML });
+
+        // Static analysis first — confirms slot projection + shadow content.
+        const analysis = await harness.analyze('expando-card');
+
+        // Then capture an interaction timeline: click the shadow toggle button.
+        const timeline = await harness.captureTimeline({
+          componentName: 'ExpandoCard',
+          storyName: 'Warranty',
+          sequence: {
+            description: 'Open the card details',
+            actions: [
+              { type: 'click', selector: 'expando-card' },
+              { type: 'wait', ms: 50 },
+            ],
+          },
+        });
+
+        show('out-complex', {
+          staticNvda: analysis.nvda,
+          warnings: analysis.warnings,
+          timelineEvents: timeline.events.map(e => ({
+            t: e.timestamp,
+            type: e.type,
+            target: e.target.role + (e.target.accessibleName ? ` "${e.target.accessibleName}"` : ''),
+          })),
+        });
+      } catch (err) {
+        show('out-complex', 'Error: ' + err.message);
+      } finally {
+        harness.destroy();
+      }
+    });
+  </script>
+</body>
+</html>
