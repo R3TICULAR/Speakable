@@ -3,14 +3,19 @@
  * Registers the "Screen Readers" panel and renders the analysis UI.
  */
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { addons, types } from '@storybook/manager-api';
-import { ADDON_ID, PANEL_ID, EVENT_RESULT } from './index';
+import { ADDON_ID, PANEL_ID, EVENT_RESULT, EVENT_TIMELINE } from './index';
 import type { AnalysisResult, AuditFinding } from './analyzer';
+import { diffTimelines } from '../../src/runtime/diff-engine';
+import { classifyDiff } from '../../src/runtime/severity';
+import type { ClassifiedDiffReport, SeverityLevel } from '../../src/runtime/severity';
+import type { AccessibilityEvent, AccessibilityTimeline } from '../../src/runtime/types';
+import { createPanelBaselineStore } from './baseline-store';
 
 // ─── Panel Component ─────────────────────────────────────────────────────────
 
-type ReaderTab = 'nvda' | 'jaws' | 'voiceover' | 'narrator' | 'audit';
+type ReaderTab = 'nvda' | 'jaws' | 'voiceover' | 'narrator' | 'audit' | 'timeline' | 'diff';
 
 const READER_TABS: { key: ReaderTab; label: string; color: string }[] = [
   { key: 'nvda', label: 'NVDA', color: '#3b82f6' },
@@ -18,10 +23,41 @@ const READER_TABS: { key: ReaderTab; label: string; color: string }[] = [
   { key: 'voiceover', label: 'VoiceOver', color: '#06b6d4' },
   { key: 'narrator', label: 'Narrator', color: '#f59e0b' },
   { key: 'audit', label: 'Audit', color: '#ef4444' },
+  { key: 'timeline', label: 'Timeline', color: '#10b981' },
+  { key: 'diff', label: 'Diff', color: '#ec4899' },
 ];
+
+const baselineStore = createPanelBaselineStore();
+
+const SEVERITY_COLORS: Record<SeverityLevel, string> = {
+  critical: '#ef4444',
+  high: '#f97316',
+  medium: '#f59e0b',
+  low: '#6b7280',
+};
+
+/** Summarize an event's payload for a one-line timeline display. */
+function summarizePayload(event: AccessibilityEvent): string {
+  const p = event.payload as Record<string, unknown>;
+  switch (p.kind) {
+    case 'focus_changed': return 'focus moved here';
+    case 'announcement': return `announce (${p.politeness}): "${p.text}"`;
+    case 'role_changed': return `role ${p.previousRole} → ${p.newRole}`;
+    case 'accessible_name_changed': return `name "${p.previousName}" → "${p.newName}"`;
+    case 'state_changed': return `${p.attribute}: ${String(p.previousValue)} → ${String(p.newValue)}`;
+    case 'dialog_opened': return `dialog opened: ${p.dialogName}${p.isModal ? ' (modal)' : ''}`;
+    case 'dialog_closed': return `dialog closed: ${p.dialogName}`;
+    case 'keyboard_action': return `key ${[...(p.modifiers as string[] || []), p.key].join('+')}`;
+    case 'warning': return `⚠ ${p.message}`;
+    default: return '';
+  }
+}
 
 function SpeakablePanel() {
   const [result, setResult] = useState<AnalysisResult | null>(null);
+  const [timeline, setTimeline] = useState<AccessibilityTimeline | null>(null);
+  const [diff, setDiff] = useState<ClassifiedDiffReport | null>(null);
+  const [hasBaseline, setHasBaseline] = useState(false);
   const [activeTab, setActiveTab] = useState<ReaderTab>('nvda');
 
   useEffect(() => {
@@ -29,9 +65,35 @@ function SpeakablePanel() {
     const handleResult = (data: AnalysisResult) => {
       setResult(data);
     };
+    const handleTimeline = async (data: AccessibilityTimeline) => {
+      setTimeline(data);
+      // Diff against a stored baseline for this story, if present.
+      const baseline = await baselineStore.load(data.component, data.story || 'Story');
+      if (baseline) {
+        setHasBaseline(true);
+        const report = diffTimelines(baseline, data);
+        setDiff(classifyDiff(report));
+      } else {
+        setHasBaseline(false);
+        setDiff(null);
+      }
+    };
     channel.on(EVENT_RESULT, handleResult);
-    return () => channel.off(EVENT_RESULT, handleResult);
+    channel.on(EVENT_TIMELINE, handleTimeline);
+    return () => {
+      channel.off(EVENT_RESULT, handleResult);
+      channel.off(EVENT_TIMELINE, handleTimeline);
+    };
   }, []);
+
+  const handleSetBaseline = async () => {
+    if (!timeline) return;
+    await baselineStore.save(timeline.component, timeline.story || 'Story', timeline);
+    setHasBaseline(true);
+    // Re-diff against the freshly-saved baseline (identity → no differences).
+    const report = diffTimelines(timeline, timeline);
+    setDiff(classifyDiff(report));
+  };
 
   if (!result) {
     return (
@@ -43,7 +105,9 @@ function SpeakablePanel() {
     );
   }
 
-  const activeLines = activeTab === 'audit' ? [] : result[activeTab];
+  const READER_KEYS = ['nvda', 'jaws', 'voiceover', 'narrator'] as const;
+  const isReaderTab = (READER_KEYS as readonly string[]).includes(activeTab);
+  const activeLines = isReaderTab ? result[activeTab as (typeof READER_KEYS)[number]] : [];
   const auditFindings = result.audit;
 
   return (
@@ -81,6 +145,10 @@ function SpeakablePanel() {
       <div style={styles.content}>
         {activeTab === 'audit' ? (
           <AuditView findings={auditFindings} />
+        ) : activeTab === 'timeline' ? (
+          <TimelineView timeline={timeline} hasBaseline={hasBaseline} onSetBaseline={handleSetBaseline} />
+        ) : activeTab === 'diff' ? (
+          <DiffView diff={diff} hasBaseline={hasBaseline} hasTimeline={!!timeline} onSetBaseline={handleSetBaseline} />
         ) : (
           <AnnouncementView lines={activeLines} readerKey={activeTab} />
         )}
@@ -146,6 +214,116 @@ function AuditView({ findings }: { findings: AuditFinding[] }) {
   );
 }
 
+function TimelineView({
+  timeline,
+  hasBaseline,
+  onSetBaseline,
+}: {
+  timeline: AccessibilityTimeline | null;
+  hasBaseline: boolean;
+  onSetBaseline: () => void;
+}) {
+  if (!timeline) {
+    return (
+      <p style={styles.emptyContent}>
+        No interaction timeline for this story. Add{' '}
+        <code>parameters.speakable.sequence</code> or{' '}
+        <code>parameters.speakable.pattern</code> to capture one.
+      </p>
+    );
+  }
+
+  return (
+    <div>
+      <div style={styles.baselineBar}>
+        <span style={styles.stat}>
+          {timeline.events.length} events · {timeline.duration}ms
+        </span>
+        <span style={styles.baselineHint}>
+          {hasBaseline ? '✓ baseline set' : 'No baseline yet'}
+        </span>
+        <button style={styles.baselineButton} onClick={onSetBaseline}>
+          Set baseline
+        </button>
+      </div>
+      <div style={styles.lineList}>
+        {timeline.events.map((event, i) => (
+          <div key={i} style={styles.line}>
+            <span style={styles.lineNumber}>{event.timestamp}ms</span>
+            <span style={styles.lineText}>
+              <strong>{event.type}</strong>
+              {event.target.role ? ` · ${event.target.role}` : ''}
+              {event.target.accessibleName ? ` "${event.target.accessibleName}"` : ''}
+              {summarizePayload(event) ? ` — ${summarizePayload(event)}` : ''}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function DiffView({
+  diff,
+  hasBaseline,
+  hasTimeline,
+  onSetBaseline,
+}: {
+  diff: ClassifiedDiffReport | null;
+  hasBaseline: boolean;
+  hasTimeline: boolean;
+  onSetBaseline: () => void;
+}) {
+  if (!hasBaseline) {
+    return (
+      <div style={styles.emptyState}>
+        <p style={styles.emptyText}>No baseline to compare against</p>
+        <p style={styles.emptySubtext}>
+          Capture a timeline, then set it as the baseline to detect regressions.
+        </p>
+        {hasTimeline && (
+          <button style={styles.baselineButton} onClick={onSetBaseline}>
+            Set baseline
+          </button>
+        )}
+      </div>
+    );
+  }
+
+  if (!diff || diff.entries.length === 0) {
+    return (
+      <div style={styles.auditPass}>
+        <span style={{ fontSize: 24 }}>✓</span>
+        <p style={{ margin: 0, fontWeight: 600, color: '#059669' }}>No behavioral changes</p>
+        <p style={{ margin: 0, fontSize: 12, color: '#6b7280' }}>
+          The current timeline matches the baseline.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div style={styles.lineList}>
+      {diff.entries.map((entry, i) => (
+        <div
+          key={i}
+          style={{ ...styles.finding, background: '#fff7fb', borderLeftWidth: 3, borderLeftStyle: 'solid', borderLeftColor: SEVERITY_COLORS[entry.severity] }}
+        >
+          <div style={{ ...styles.findingSeverity, color: SEVERITY_COLORS[entry.severity] }}>
+            {entry.severity.toUpperCase()}
+          </div>
+          <div>
+            <p style={styles.findingMessage}>{entry.message}</p>
+            <p style={styles.findingSelector}>
+              {entry.event.type} · {entry.event.target.selector}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 // ─── Styles ──────────────────────────────────────────────────────────────────
 
 const styles: Record<string, React.CSSProperties> = {
@@ -203,6 +381,29 @@ const styles: Record<string, React.CSSProperties> = {
     padding: '8px 16px',
     borderBottom: '1px solid #f1f5f9',
     background: '#f8fafc',
+  },
+  baselineBar: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 12,
+    padding: '8px 16px',
+    borderBottom: '1px solid #f1f5f9',
+    background: '#f8fafc',
+  },
+  baselineHint: {
+    fontSize: 11,
+    color: '#64748b',
+    marginLeft: 'auto',
+  },
+  baselineButton: {
+    fontSize: 11,
+    fontWeight: 600,
+    color: '#fff',
+    background: '#10b981',
+    border: 'none',
+    borderRadius: 4,
+    padding: '4px 10px',
+    cursor: 'pointer',
   },
   stat: {
     fontSize: 11,

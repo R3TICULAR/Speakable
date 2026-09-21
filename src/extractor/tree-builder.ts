@@ -126,18 +126,109 @@ function collectChildrenFromRolelessElement(
   element: Element,
   warnings: TreeBuildWarning[]
 ): AccessibleNode[] {
+  return collectAccessibleChildren(element, warnings);
+}
+
+/**
+ * Centralized, slot-aware child collection for an element.
+ *
+ * Behavior:
+ * - If the element has an open shadow root, traverse the shadow tree. When a
+ *   `<slot>` is encountered, resolve its assigned (projected light-DOM) nodes
+ *   via `assignedNodes({ flatten: true })` and process them in place, so
+ *   slotted content appears in shadow-tree order. If a slot has no assigned
+ *   nodes, its default content is used. Slotted light-DOM nodes are therefore
+ *   emitted exactly once (at the slot position), never again from the host's
+ *   light DOM.
+ * - If the element has no shadow root, traverse the light-DOM childNodes as
+ *   before.
+ *
+ * `assignedNodes`/`shadowRoot` are feature-detected so environments with
+ * limited shadow DOM support (e.g. jsdom) degrade gracefully.
+ *
+ * @param element - Element whose accessible children to collect
+ * @param warnings - Array to collect warnings
+ * @returns Flat array of AccessibleNodes
+ */
+function collectAccessibleChildren(
+  element: Element,
+  warnings: TreeBuildWarning[]
+): AccessibleNode[] {
   const children: AccessibleNode[] = [];
-  // Traverse shadow DOM first if present
+
+  // Open shadow root present: traverse the shadow tree only. Slots pull in the
+  // projected light-DOM nodes, so we must NOT also walk the host's light DOM.
   if (element.shadowRoot) {
     for (const child of Array.from(element.shadowRoot.childNodes)) {
-      processChildNode(child, children, warnings);
+      processShadowNode(child, children, warnings);
     }
+    return children;
   }
-  // Then light DOM
+
+  // No shadow root. If this is a custom element (tag contains a hyphen) with
+  // no light-DOM children, it likely has a *closed* shadow root whose content
+  // we cannot traverse. Emit a warning so partial coverage is not mistaken for
+  // full coverage, then continue (never throw).
+  if (
+    element.localName &&
+    element.localName.includes('-') &&
+    element.childNodes.length === 0
+  ) {
+    warnings.push({
+      message: `Custom element <${element.localName}> has no accessible children and may have a closed shadow root; its content could not be analyzed.`,
+      element,
+    });
+  }
+
+  // Plain light-DOM traversal.
   for (const child of Array.from(element.childNodes)) {
     processChildNode(child, children, warnings);
   }
   return children;
+}
+
+/**
+ * Processes a node encountered while traversing a shadow tree.
+ *
+ * Behaves like `processChildNode`, except that `<slot>` elements are expanded
+ * into their assigned (projected) light-DOM nodes, or their default content
+ * when nothing is assigned.
+ */
+function processShadowNode(
+  node: Node,
+  children: AccessibleNode[],
+  warnings: TreeBuildWarning[]
+): void {
+  if (node.nodeType === 1) {
+    const element = node as Element;
+    if (element.localName === 'slot') {
+      const slot = element as HTMLSlotElement;
+      let assigned: Node[] = [];
+      // Feature-detect assignedNodes (unavailable in some DOM implementations).
+      if (typeof slot.assignedNodes === 'function') {
+        try {
+          assigned = Array.from(slot.assignedNodes({ flatten: true }));
+        } catch {
+          assigned = [];
+        }
+      }
+      if (assigned.length > 0) {
+        // Projected light-DOM content: process at the slot's position.
+        for (const assignedNode of assigned) {
+          processChildNode(assignedNode, children, warnings);
+        }
+      } else {
+        // No assigned nodes: fall back to the slot's default content.
+        for (const child of Array.from(slot.childNodes)) {
+          processShadowNode(child, children, warnings);
+        }
+      }
+      return;
+    }
+  }
+  // Non-slot nodes traverse normally (including nested shadow roots via
+  // processChildNode -> buildNodeRecursive/collectAccessibleChildren).
+  processChildNode(node, children, warnings);
 }
 
 /**
@@ -314,18 +405,8 @@ function buildNodeRecursive(
   // Extract focus info
   const focusInfo = extractFocusInfo(element);
   
-  // Build children from childNodes (includes Text nodes)
-  const children: AccessibleNode[] = [];
-  // Shadow DOM first
-  if (element.shadowRoot) {
-    for (const child of Array.from(element.shadowRoot.childNodes)) {
-      processChildNode(child, children, warnings);
-    }
-  }
-  // Light DOM
-  for (const child of Array.from(element.childNodes)) {
-    processChildNode(child, children, warnings);
-  }
+  // Build children (slot-aware; shadow DOM handled centrally)
+  const children = collectAccessibleChildren(element, warnings);
   
   // Create the accessible node
   const node: AccessibleNode = {
@@ -356,18 +437,8 @@ function createGenericContainer(
   rootElement: Element,
   warnings: TreeBuildWarning[]
 ): AccessibleNode {
-  // Build children from root element using childNodes
-  const children: AccessibleNode[] = [];
-  // Shadow DOM first
-  if (rootElement.shadowRoot) {
-    for (const child of Array.from(rootElement.shadowRoot.childNodes)) {
-      processChildNode(child, children, warnings);
-    }
-  }
-  // Light DOM
-  for (const child of Array.from(rootElement.childNodes)) {
-    processChildNode(child, children, warnings);
-  }
+  // Build children from root element (slot-aware; shadow DOM handled centrally)
+  const children = collectAccessibleChildren(rootElement, warnings);
   
   // Create a generic container
   return {

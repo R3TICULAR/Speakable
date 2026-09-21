@@ -16,3 +16,5 @@ export const ADDON_ID = 'speakable';
 export const PANEL_ID = `${ADDON_ID}/panel`;
 export const EVENT_RENDER = `${ADDON_ID}/render`;
 export const EVENT_RESULT = `${ADDON_ID}/result`;
+export const EVENT_TIMELINE = `${ADDON_ID}/timeline`;
+export const EVENT_DIFF = `${ADDON_ID}/diff`;
