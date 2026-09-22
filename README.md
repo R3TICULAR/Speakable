@@ -258,7 +258,47 @@ Severity levels:
 
 ### Storybook Integration
 
-Connect to a running Storybook instance to analyze accessibility behavior across your component library:
+There are two ways to use Speakable with Storybook: the **in-editor addon** (see timelines while you develop) and the **CLI adapter** (analyze the whole library headlessly in CI).
+
+**In-editor addon** — adds a "Screen Readers" panel with per-reader tabs, an Audit tab, plus **Timeline** and **Diff** tabs for interaction testing:
+
+```typescript
+// .storybook/main.ts
+const config = {
+  addons: ['@reticular/storybook-addon-speakable'],
+};
+export default config;
+```
+
+Static tabs work with zero config. To capture an interaction timeline for a story, add `parameters.speakable` with either a named built-in `pattern` or a full `sequence`:
+
+```typescript
+export const Dialog = {
+  render: () => renderDialog(),
+  parameters: {
+    speakable: {
+      pattern: 'modal-dialog', // 'modal-dialog' | 'combobox' | 'tabs' | 'accordion'
+      selectors: { trigger: 'button.open', container: '[role="dialog"]' },
+    },
+  },
+};
+
+export const Disclosure = {
+  render: () => renderDisclosure(),
+  parameters: {
+    speakable: {
+      sequence: {
+        description: 'Tab to the toggle and open it',
+        actions: [{ type: 'tab' }, { type: 'enter' }],
+      },
+    },
+  },
+};
+```
+
+The sequence runs automatically after the story renders; the Timeline tab shows the resulting focus moves, ARIA state changes, live-region announcements, and dialog events. Click **Set baseline** on the Timeline tab, and the Diff tab will flag behavioral regressions (severity-classified) on subsequent renders. See the [addon README](./addon-speakable/README.md) for the full `parameters.speakable` reference.
+
+**CLI adapter** — connect to a running Storybook instance to analyze behavior across your library headlessly:
 
 ```typescript
 import { createStorybookAdapter, createStoryLoader } from '@reticular/speakable/storybook';
@@ -276,6 +316,50 @@ const stories = await adapter.discoverStories();
 The Storybook pipeline discovers stories, loads them in isolation, runs interaction patterns, and produces timelines that can be baselined and compared. Works with Storybook 7.x and 8.x.
 
 > See the [Runtime Analysis docs](https://getspeakable.dev/docs/runtime-analysis) for interactive demos and full API reference.
+
+### Browser Bundle and Iframe Harness
+
+For runtime testing outside Storybook — including web components (Lit, shadow DOM) that need a real browser — Speakable ships two transport-agnostic entry points.
+
+**`@reticular/speakable/browser`** runs analysis and capture directly against live DOM in the current page:
+
+```typescript
+import { analyzeElement, captureTimeline } from '@reticular/speakable/browser';
+
+// Static analysis of a live element (per-reader output + audit + stats + warnings)
+const result = analyzeElement(document.querySelector('#widget'));
+console.log(result.nvda);
+
+// Capture an interaction timeline against the live document
+const timeline = await captureTimeline(document, {
+  componentName: 'Menu',
+  sequence: {
+    description: 'open and arrow down',
+    actions: [{ type: 'click', selector: '#menu-btn' }, { type: 'arrowDown' }],
+  },
+});
+```
+
+**`@reticular/speakable/harness`** mounts a component into an iframe (via a URL or an HTML string), injects the bundle, and drives analysis over `postMessage` — so you can test any component in isolation in a real browser. Custom elements are awaited (`whenDefined` / Lit `updateComplete`) before analysis, and open shadow roots with `<slot>` projection are handled:
+
+```typescript
+import { createHarness } from '@reticular/speakable/harness';
+
+const harness = createHarness({
+  target: { container: document.body },      // harness creates + owns the iframe
+  bundleUrl: '/speakable-browser.global.js', // the injectable IIFE bundle
+});
+
+await harness.load({ html: '<my-widget>Content</my-widget>' });
+const result = await harness.analyze('my-widget');
+const timeline = await harness.captureTimeline({
+  componentName: 'MyWidget',
+  sequence: { description: 'toggle', actions: [{ type: 'click', selector: 'my-widget' }] },
+});
+harness.destroy();
+```
+
+The harness supports same-origin content only (`srcdoc` HTML or a same-origin URL); cross-origin URLs are rejected with a descriptive error, since a script can't be injected across origins. See [`examples/harness-demo.html`](./examples/harness-demo.html) for a runnable simple + complex (Lit-style shadow DOM) example.
 
 ## MCP Integration (AI Assistants)
 
@@ -390,7 +474,7 @@ Speakable processes HTML through a four-stage pipeline:
 - Replace manual screen reader testing with real assistive technology
 - Guarantee WCAG compliance
 - Perfectly replicate screen reader behavior (output is heuristic)
-- Execute JavaScript in static analysis mode (use runtime mode for dynamic content)
+- Execute JavaScript in static analysis mode (use the CLI `runtime` command, the Storybook addon's Timeline, or the browser/harness entry points for dynamic content)
 
 Use Speakable to catch issues early and reduce the manual testing burden. Validate critical flows with real screen readers.
 

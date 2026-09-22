@@ -14,6 +14,7 @@ export function useAppLocale() {
     en: 'en-US',
     es: 'es-ES',
     ja: 'ja-JP',
+    zh: 'zh-CN',
   };
 
   const bcp47 = LOCALE_TO_BCP47[locale] ?? `${locale}-${locale.toUpperCase()}`;

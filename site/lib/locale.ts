@@ -8,7 +8,7 @@
  */
 
 /** Supported locales (expand as translations are added) */
-export const SUPPORTED_LOCALES = ['en', 'es', 'ja'] as const;
+export const SUPPORTED_LOCALES = ['en', 'es', 'ja', 'zh'] as const;
 export type SupportedLocale = (typeof SUPPORTED_LOCALES)[number];
 
 /** Default locale */
@@ -51,6 +51,7 @@ export function getLanguageTag(locale: SupportedLocale): string {
     en: 'en-US',
     es: 'es-ES',
     ja: 'ja-JP',
+    zh: 'zh-CN',
   };
   return LOCALE_TO_BCP47[locale] ?? 'en-US';
 }

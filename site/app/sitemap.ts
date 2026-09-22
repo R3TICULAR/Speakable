@@ -52,6 +52,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/docs/screen-reader-regression-testing', priority: 0.8, changeFrequency: 'monthly' as const },
     { path: '/docs/aria-labels-guide', priority: 0.7, changeFrequency: 'monthly' as const },
     { path: '/docs/storybook-addon', priority: 0.8, changeFrequency: 'monthly' as const },
+    { path: '/docs/runtime-testing', priority: 0.8, changeFrequency: 'monthly' as const },
     { path: '/docs/screen-reader-testing-tool', priority: 0.8, changeFrequency: 'monthly' as const },
     { path: '/docs/automated-screen-reader-testing', priority: 0.8, changeFrequency: 'monthly' as const },
     { path: '/docs/how-to-test-with-screen-reader', priority: 0.8, changeFrequency: 'monthly' as const },
@@ -61,7 +62,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const allPages = [...corePages, ...docsPages];
 
   // Generate entries for each locale
-  const locales = ['en', 'es', 'ja'];
+  const locales = ['en', 'es', 'ja', 'zh'];
 
   return allPages.flatMap((page) => {
     // Default entry (no lang param — x-default)

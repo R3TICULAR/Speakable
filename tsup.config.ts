@@ -15,6 +15,7 @@ export default defineConfig([
     minify: false,
     target: 'node18',
     shims: true,
+    define: versionDefine,
     banner: {
       js: '#!/usr/bin/env node',
     },
@@ -29,6 +30,7 @@ export default defineConfig([
     minify: false,
     target: 'node18',
     shims: true,
+    define: versionDefine,
     banner: {
       js: '#!/usr/bin/env node',
     },
@@ -43,6 +45,7 @@ export default defineConfig([
     minify: false,
     target: 'node18',
     shims: true,
+    define: versionDefine,
   },
   // Browser bundle — ESM module for bundler consumers (addon, harness importers)
   {

@@ -1,6 +1,6 @@
 {
   "name": "@reticular/storybook-addon-speakable",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Storybook addon that predicts screen reader output for your components using Speakable",
   "type": "module",
   "main": "./dist/preset.js",

@@ -18,12 +18,12 @@ import type {
 import { createEngine, type RuntimeAccessibilityEngine } from './engine';
 import { executeSequence } from './interactions';
 import { createHeuristicAnalyzer, type HeuristicAnalyzer } from './heuristics';
+import { SPEAKABLE_VERSION } from '../version.js';
 
 // ---------------------------------------------------------------------------
 // Constants
 // ---------------------------------------------------------------------------
 
-const SPEAKABLE_VERSION = '1.3.0';
 const TIMELINE_FORMAT_VERSION = '1.0';
 const DEFAULT_SETTLE_PERIOD = 500;
 const DEFAULT_LOAD_TIMEOUT = 10000;

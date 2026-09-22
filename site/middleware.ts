@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 const isProtectedRoute = createRouteMatcher(['/settings(.*)']);
 
 // Supported locales — expand as translations are added
-const SUPPORTED_LOCALES = ['en', 'es', 'ja'];
+const SUPPORTED_LOCALES = ['en', 'es', 'ja', 'zh'];
 const DEFAULT_LOCALE = 'en';
 const LOCALE_COOKIE = 'NEXT_LOCALE';
 

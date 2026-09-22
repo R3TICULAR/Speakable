@@ -1,8 +1,7 @@
 import { readFile, writeFile, mkdir, access } from 'fs/promises';
 import { join, dirname } from 'path';
 import type { AccessibilityTimeline } from './types.js';
-
-const SPEAKABLE_VERSION = '1.3.0';
+import { SPEAKABLE_VERSION } from '../version.js';
 
 export interface BaselineFile {
   baseline: {

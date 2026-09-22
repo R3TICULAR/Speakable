@@ -11,18 +11,14 @@ import { analyzeElement, analyzeElementWithUpgrade } from './analyze.js';
 import { captureTimeline } from './capture.js';
 import { awaitCustomElementsReady } from './upgrade.js';
 import { installAgent } from '../harness/agent.js';
-
-declare const __SPEAKABLE_VERSION__: string | undefined;
-
-const version =
-  typeof __SPEAKABLE_VERSION__ !== 'undefined' ? __SPEAKABLE_VERSION__ : 'dev';
+import { SPEAKABLE_VERSION } from '../version.js';
 
 const api = {
   analyzeElement,
   analyzeElementWithUpgrade,
   captureTimeline,
   awaitCustomElementsReady,
-  version,
+  version: SPEAKABLE_VERSION,
 };
 
 // Expose the API for direct invocation (extension content script, manual use).
