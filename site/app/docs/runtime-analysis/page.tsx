@@ -346,9 +346,14 @@ speakable runtime https://storybook.local:6006 --storybook --storybook-insecure`
       <RelatedPages
         pages={[
           {
-            href: "/docs/testing-strategy",
-            title: "Testing Strategy",
-            description: "Build a comprehensive accessibility testing program that catches issues early and measures progress over time.",
+            href: "/docs/runtime-testing",
+            title: "Runtime Testing in the Browser",
+            description: "Test any component in a real browser without Storybook using the browser bundle and iframe harness.",
+          },
+          {
+            href: "/docs/storybook-addon",
+            title: "Storybook Addon",
+            description: "Capture interaction timelines and diff regressions per story with the Timeline and Diff tabs.",
           },
           {
             href: "/docs/component-patterns",
@@ -359,11 +364,6 @@ speakable runtime https://storybook.local:6006 --storybook --storybook-insecure`
             href: "/docs/focus-management",
             title: "Focus Management",
             description: "Control keyboard focus during dynamic interactions to keep assistive technology users oriented.",
-          },
-          {
-            href: "/docs/testing-checklist",
-            title: "Testing Checklist",
-            description: "A practical checklist for verifying accessibility across components, pages, and user flows.",
           },
         ]}
       />

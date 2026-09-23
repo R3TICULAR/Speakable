@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation';
 
 const BASE_URL = 'https://getspeakable.dev';
-const SUPPORTED_LOCALES = ['en', 'es', 'ja'];
+const SUPPORTED_LOCALES = ['en', 'es', 'ja', 'zh'];
 
 /**
  * Generates hreflang link tags for the current page.

@@ -53,6 +53,7 @@ const DOCS_GROUPS: { label: string; sections: { label: string; href: string }[] 
       { label: 'CI/CD Integration', href: '/docs/cicd-integration' },
       { label: 'Framework Guides', href: '/docs/frameworks' },
       { label: 'Storybook Addon', href: '/docs/storybook-addon' },
+      { label: 'Runtime Testing in the Browser', href: '/docs/runtime-testing' },
       { label: 'MCP Integration', href: '/docs/mcp-integration' },
       { label: 'Spec Integration', href: '/docs/spec-integration' },
       { label: 'Testing Ecosystem', href: '/docs/testing-ecosystem' },

@@ -7,6 +7,7 @@ const LOCALE_LABELS: Record<string, string> = {
   en: 'English',
   es: 'Español',
   ja: '日本語',
+  zh: '中文',
 };
 
 const SUPPORTED_LOCALES = Object.keys(LOCALE_LABELS);

@@ -7,7 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.7.0] - 2026-09-02
+
 ### Added
+- Storybook addon **Timeline** and **Diff** tabs: capture an interaction timeline per story via `parameters.speakable.sequence` or `parameters.speakable.pattern`, set a per-story baseline, and see severity-classified behavior regressions
+- `parameters.speakable` story configuration: `sequence`, `pattern` (`modal-dialog` | `combobox` | `tabs` | `accordion`), `selectors`, and `timeline: false` opt-out
+- Transport-agnostic browser bundle exported at `@reticular/speakable/browser` (`analyzeElement`, `analyzeElementWithUpgrade`, `captureTimeline`, `awaitCustomElementsReady`) plus an injectable IIFE build (`speakable-browser.global.js`)
+- Iframe harness exported at `@reticular/speakable/harness` (`createHarness`) for testing any component — including web components — in an isolated real-browser iframe over `postMessage`
+- Shadow-DOM `<slot>` projection support and custom-element upgrade awaiting (`whenDefined` / Lit `updateComplete`) so web components are analyzed post-hydration; closed shadow roots surface a warning
+- Browser extension now analyzes the live page DOM via the shared bundle (captures JS-set state and open shadow-root content)
+- `captureTimeline` unit tests covering sequence event capture, missing-selector warnings, and upgrade-timeout handling
 - Verbosity Analyzer module (`src/runtime/verbosity-analyzer.ts`) detecting 6 patterns of redundant/duplicate screen reader announcements
 - MCP tool `analyze_verbosity` for detecting duplicate announcement patterns in event timelines
 - Storybook environment (HTML renderer) with accessible multi-select component and 4 stories
@@ -18,6 +27,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Default sample HTML now includes a `role="status"` live region for visible announcement events
 
 ### Changed
+- Storybook addon and browser extension now consume a single shared analysis engine (via the browser bundle) instead of separate implementations, so per-reader output is consistent across the CLI, addon, harness, and extension
+- Extension content script analyzes live DOM instead of a serialized HTML string; the standalone `analyzer-bridge.js` was removed
 - RuntimeSandbox announcement capture: now observes text content changes inside live regions instead of only `aria-live` attribute mutations
 - Multi-select component refactored based on verbosity analyzer feedback (summary-only live region, no activedescendant re-set on same element, microtask-deferred activedescendant on open, 200ms live region debounce)
 - Removed runtime analysis promotional section from pricing page
@@ -25,6 +36,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - RuntimeSandbox not showing any announcement events (was observing wrong signal)
 - Multi-select VoiceOver triple-read on selection (redundant state + live region + activedescendant collision)
+- Runtime timeline metadata and baseline files reported a stale hardcoded version (`1.3.0`); `speakableVersion` now derives from `package.json` at build time via a single shared `SPEAKABLE_VERSION` and can no longer drift
 
 ## [1.4.0] - 2026-06-15
 

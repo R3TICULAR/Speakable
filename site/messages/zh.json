@@ -1,0 +1,344 @@
+{
+  "nav": {
+    "home": "首页",
+    "pricing": "价格",
+    "docs": "文档",
+    "analyzer": "分析器",
+    "settings": "设置",
+    "signIn": "登录",
+    "signUp": "注册",
+    "signOut": "退出登录",
+    "mainNavigation": "主导航",
+    "openMenu": "打开菜单",
+    "closeMenu": "关闭菜单",
+    "skipToContent": "跳转到主要内容"
+  },
+  "footer": {
+    "copyright": "© {year} Speakable。以无障碍为先的屏幕阅读器预测工具。",
+    "privacy": "隐私政策",
+    "terms": "服务条款",
+    "security": "安全",
+    "contact": "联系我们",
+    "githubLabel": "在 GitHub 上查看 Speakable",
+    "discordLabel": "Speakable Discord 社区"
+  },
+  "tool": {
+    "title": "无障碍分析器",
+    "subtitle": "粘贴或上传 HTML，查看屏幕阅读器将如何朗读它。",
+    "htmlInput": "HTML 输入",
+    "afterHtml": "修改后（新 HTML）",
+    "beforeHtml": "修改前（原始 HTML）",
+    "uploadFile": "上传 .html 文件",
+    "screenReader": "屏幕阅读器",
+    "cssSelector": "CSS 选择器",
+    "cssSelectorPlaceholder": "例如 button、.my-class",
+    "diffMode": "对比模式",
+    "analyze": "分析",
+    "analyzing": "正在分析…",
+    "htmlRequired": "必须提供 HTML 输入。",
+    "beforeRequired": "对比模式下必须提供修改前的 HTML。",
+    "unexpectedError": "发生意外错误，请重试。",
+    "copyToClipboard": "复制到剪贴板",
+    "downloadOutput": "下载输出",
+    "awaitingAnalysis": "粘贴 HTML 并点击“分析”以查看结果。",
+    "empty": "（空）",
+    "tip": "提示：使用 CSS 选择器可将分析聚焦到特定元素。",
+    "parserStatus": "解析器状态：",
+    "noIssues": "未检测到问题，可以开始分析。",
+    "warnings": "{count} 条警告：",
+    "proModalTitle": "欢迎使用 Pro",
+    "proModalDescription": "感谢订阅。您现在可以使用完整的 Speakable 工具集。",
+    "proModalBatch": "批量处理",
+    "proModalBatchDesc": "在一次 CLI 运行中分析多个文件",
+    "proModalDiff": "语义对比",
+    "proModalDiffDesc": "检测不同版本之间的无障碍回归",
+    "proModalCicd": "CI/CD 集成",
+    "proModalCicdDesc": "在 GitHub Actions、GitLab CI 等中自动执行检查",
+    "proModalCtaCicd": "设置 CI/CD 集成",
+    "proModalCtaGuide": "查看 Pro 使用指南",
+    "proModalCtaContinue": "继续前往分析器",
+    "proBannerTitle": "Pro 套餐已启用",
+    "proBannerDescription": "批量处理、语义对比和 CI/CD 集成均可通过 CLI 使用。",
+    "proBannerCicd": "CI/CD 设置",
+    "proBannerGuide": "使用指南",
+    "upgradeNudge": "升级到 Pro，即可使用批量处理、语义对比和 CI/CD 集成。",
+    "upgradeNudgeCta": "查看套餐"
+  },
+  "voice": {
+    "controls": "语音控制",
+    "playAll": "全部播放",
+    "lineByLine": "逐行播放",
+    "pauseSpeech": "暂停朗读",
+    "resumeSpeech": "继续朗读",
+    "stopSpeech": "停止朗读",
+    "exitLineByLine": "退出逐行模式",
+    "voiceLabel": "语音",
+    "speedLabel": "速度：{rate}x",
+    "selectVoice": "选择语音",
+    "speechSpeed": "朗读速度",
+    "defaultVoice": "默认",
+    "unsupported": "此浏览器不支持语音朗读",
+    "playbackOptions": "语音播放选项",
+    "outputNavigation": "屏幕阅读器输出 — 使用方向键浏览"
+  },
+  "a11y": {
+    "skipToContent": "跳转到主要内容",
+    "skipToDocs": "跳转到文档内容",
+    "decorativeImage": "",
+    "loading": "加载中",
+    "copiedToClipboard": "已复制到剪贴板",
+    "copyFailed": "复制失败"
+  },
+  "pricing": {
+    "proPlanActive": "Pro 套餐已启用",
+    "proDescription": "批量处理、语义对比和 CI/CD 集成均可通过 CLI 使用。",
+    "cicdSetup": "CI/CD 设置",
+    "usageGuide": "使用指南",
+    "upgradePrompt": "升级到 Pro，即可使用批量处理、语义对比和 CI/CD 集成。",
+    "seePlans": "查看套餐"
+  },
+  "pricingPage": {
+    "title": "价格",
+    "subtitle": "分析工具免费使用。付费用于工作流自动化。",
+    "recommended": "推荐",
+    "tierFreeName": "基础版",
+    "tierProName": "Pro",
+    "tierTeamName": "团队 / 企业版",
+    "tierFreePrice": "免费",
+    "tierProPrice": "$19",
+    "tierTeamPrice": "定制价格",
+    "priceSuffix": "/月每席位",
+    "featureUnlimitedWeb": "无限制使用网页工具",
+    "featureSingleFile": "单文件 CLI 分析",
+    "featureAllScreenReaders": "全部屏幕阅读器（NVDA、JAWS、VoiceOver、Narrator）",
+    "featureAuditReport": "生成审计报告",
+    "featureExtension": "浏览器扩展",
+    "featureRuntimePlayground": "运行时无障碍实验场",
+    "featureTimelineViewer": "无障碍时间线查看器",
+    "featureEverythingFree": "包含免费版全部功能",
+    "featureBatch": "批量处理（多个文件）",
+    "featureSemanticDiff": "语义无障碍对比",
+    "featureCicd": "支持 JSON 输出的 CI/CD 集成",
+    "featureStorybook": "Storybook 集成",
+    "featureRuntimeAnalysis": "运行时无障碍分析",
+    "featureBaselines": "无障碍行为基线",
+    "featureTimelineHistory": "时间线历史与导出",
+    "featurePrioritySupport": "优先支持",
+    "featureEverythingPro": "包含 Pro 版全部功能",
+    "featureTeamDashboards": "共享团队仪表板与报告",
+    "featureCustomRules": "自定义规则配置",
+    "featureRuntimeRegression": "运行时回归检测",
+    "featureAutoBaselines": "自动化基线管理",
+    "featurePrEnforcement": "拉取请求强制检查",
+    "featureOrgStorybook": "组织级 Storybook 分析",
+    "featureSso": "SSO/SAML 身份验证",
+    "featureSla": "SLA 与专属支持",
+    "featureVolume": "批量定价",
+    "ctaFree": "开始使用",
+    "ctaPro": "开始 Pro 试用",
+    "ctaTeam": "联系销售",
+    "loading": "加载中…",
+    "screenReaderInfo": "无障碍分析对所有人开放。付费套餐可解锁工作流自动化、Storybook 集成、CI/CD 工具以及回归防护。"
+  },
+  "landing": {
+    "hero": {
+      "badge": "版本 {version} 现已推出",
+      "title": "无需启动四款屏幕阅读器即可进行屏幕阅读器测试",
+      "description": "Speakable 预测 NVDA、JAWS、VoiceOver 和 Narrator 将如何解读您的 HTML，帮助团队在开发早期发现无障碍问题和回归。",
+      "ctaTool": "试用分析器",
+      "ctaDocs": "查看文档"
+    },
+    "features": {
+      "heading": "以开发者为先的无障碍工具",
+      "subheading": "超越基于规则的检查。了解辅助技术如何真正解读您的标记，并在问题触及用户之前将其捕获。",
+      "0": {
+        "title": "跨平台模拟",
+        "description": "用一款工具模拟 NVDA、JAWS、VoiceOver 和 Narrator 的输出。减少屏幕阅读器测试对多种操作系统和硬件设备的依赖。"
+      },
+      "1": {
+        "title": "无障碍审计报告",
+        "description": "生成符合 WCAG 指南的详细审计报告。每份报告都会呈现地标问题、标题层级问题以及缺失的可访问名称，并提供可执行的修复步骤。"
+      },
+      "2": {
+        "title": "语义对比",
+        "description": "对比修改前后的 HTML，尽早发现无障碍回归。在合并之前查看 DOM 变更如何影响屏幕阅读器输出。"
+      },
+      "3": {
+        "title": "运行时无障碍分析",
+        "description": "超越静态标记。追踪组件交互过程中的焦点移动、播报和状态变化。借助 Storybook 集成，检测各次构建间无障碍行为的回归。"
+      }
+    },
+    "workflow": {
+      "heading": "Speakable 如何融入您的工作流",
+      "subheading": "通过将屏幕阅读器模拟直接嵌入现有的开发生命周期，弥合代码与无障碍之间的差距。",
+      "steps": {
+        "0": {
+          "stage": "阶段 01",
+          "title": "本地开发",
+          "description": "在本地针对 HTML 运行 Speakable，在提交前预览屏幕阅读器输出。从源头捕获问题。"
+        },
+        "1": {
+          "stage": "阶段 02",
+          "title": "拉取请求",
+          "description": "通过语义对比进行回归检测。在代码评审阶段、合并之前捕获无障碍变更。"
+        },
+        "2": {
+          "stage": "阶段 03",
+          "title": "CI/CD 流水线",
+          "description": "在构建流水线中自动运行 Speakable，一旦出现回归即使构建失败，以维持质量。"
+        },
+        "3": {
+          "stage": "阶段 04",
+          "title": "持续监控",
+          "description": "长期防止回归。在每次生产发布中保持无障碍标准。"
+        }
+      },
+      "speedUp": {
+        "title": "加速评审",
+        "description": "无需手动检查，让 Speakable 生成语义对比。查看不同版本之间屏幕阅读器体验的变化。",
+        "cta": "阅读文档"
+      },
+      "disclaimer": "Speakable 是对人工屏幕阅读器测试的补充，而非替代。用它尽早发现问题并减轻人工测试负担。"
+    },
+    "enterprise": {
+      "badge": "企业级",
+      "heading": "为大规模无障碍工作流而构建",
+      "description": "屏幕阅读器可用性问题是无障碍投诉的主要原因之一。Speakable 的 CLI 直接集成到您的 CI/CD 工作流中，帮助团队在整个应用范围内更早地发现这些问题。",
+      "points": {
+        "0": "零延迟本地模拟引擎",
+        "1": "对整个代码库进行批量处理",
+        "2": "通过语义对比进行回归检测"
+      },
+      "stat1": {
+        "value": "高保真",
+        "label": "对齐规范的模拟"
+      },
+      "stat2": {
+        "value": "4 款阅读器",
+        "label": "NVDA · JAWS · VoiceOver · Narrator"
+      },
+      "imageAlt": "Speakable CLI 审计报告，显示带颜色的无障碍分析，包括地标结构、标题层级和问题严重程度指示"
+    },
+    "teams": {
+      "0": {
+        "title": "统一标准",
+        "description": "所有人都针对同一套模拟进行验证。不同开发环境之间不再出现“在我机器上没问题”的无障碍差异。"
+      },
+      "1": {
+        "title": "一致的验证",
+        "description": "在本地 CLI、PR 评审以及 CI/CD 流水线中运行完全相同的检查，实现端到端的可靠性。"
+      },
+      "2": {
+        "title": "减少回归",
+        "description": "在大型代码库中屏幕阅读器问题累积之前将其捕获。随着工程团队规模扩大，持续保持无障碍健康度。"
+      },
+      "3": {
+        "title": "工作流集成",
+        "description": "原生支持 PR 评审和自动化构建流水线，并提供集中式团队仪表板，实现组织级可见性。"
+      },
+      "heading": "为团队而非仅为个人打造",
+      "subheading": "建立统一的无障碍标准，确保整个工程组织的验证保持一致。",
+      "cta": "阅读文档"
+    },
+    "whyItMatters": {
+      "heading": "为什么屏幕阅读器问题很重要",
+      "paragraph1": "屏幕阅读器可用性问题是网页无障碍失败最常见的来源之一。这些问题往往直到开发后期，或直到用户反馈时才被发现。",
+      "paragraph2": "人工屏幕阅读器测试耗时且难以在大型应用中扩展。Speakable 帮助团队在开发周期的更早阶段发现这些问题，避免它们进入生产环境。",
+      "legal": "随着 ADA 等法律对无障碍的要求不断提高，尽早发现不仅是良好实践，更是风险规避。",
+      "challenge": {
+        "label": "挑战",
+        "title": "人工测试是瓶颈。",
+        "description": "标准无障碍工具能捕获语法问题，却会遗漏用户体验。自动化模拟弥合了原始代码与真实人类交互之间的差距。"
+      }
+    },
+    "cta": {
+      "heading": "准备好改进您的无障碍工作流了吗？",
+      "description": "尽早发现屏幕阅读器问题，防止回归，为辅助技术用户打造更好的体验。",
+      "pricing": "查看价格",
+      "docs": "阅读文档"
+    }
+  },
+  "usageGuide": {
+    "breadcrumb": "使用指南",
+    "title": "使用指南",
+    "subtitle": "使用 Speakable 分析 HTML 无障碍所需的一切，从安装到 CI/CD 集成。",
+    "installation": {
+      "heading": "安装",
+      "description": "将其作为项目依赖安装以用于程序化调用和 CI 流水线，或全局安装以便在任意位置使用 CLI。"
+    },
+    "cliCommands": {
+      "heading": "CLI 命令",
+      "description": "speakable 可执行文件接受 HTML 文件路径作为参数。所有选项均为标志，没有子命令。"
+    },
+    "outputFormats": {
+      "heading": "输出格式",
+      "description": "Speakable 支持四种输出格式，分别适用于不同的工作流。"
+    },
+    "proFeatures": {
+      "heading": "Pro 功能",
+      "batch": {
+        "title": "批量处理",
+        "description": "在一次运行中分析多个文件。批量模式即使个别文件失败也会继续处理，并在结束时报告汇总结果。"
+      },
+      "diff": {
+        "title": "语义对比",
+        "description": "对比修改前后的 HTML 以检测无障碍回归。对比会识别新增、删除和变更的节点，并给出属性级别的细节（名称、角色、状态、焦点）。"
+      },
+      "cicd": {
+        "title": "CI/CD 集成",
+        "description": "利用退出码和 JSON 输出进行自动化流水线检查。退出码 0 = 成功，1 = 用户错误，2 = 内容问题或对比有变更，3 = 系统错误。"
+      }
+    },
+    "webAnalyzer": {
+      "heading": "网页分析器",
+      "description": "位于 /tool 的网页分析器让您可以直接粘贴 HTML 并即时查看结果，无需安装。",
+      "steps": {
+        "0": "将您的 HTML 粘贴到文本框中",
+        "1": "选择一款屏幕阅读器（NVDA、JAWS、VoiceOver、Narrator 或全部）",
+        "2": "可选：输入 CSS 选择器以聚焦特定元素",
+        "3": "点击“分析”查看预测输出"
+      },
+      "diffNote": "开启对比模式即可并排比较两段 HTML 片段。Speakable 会准确显示两个版本之间新增、删除或变更了哪些无障碍树节点。",
+      "voiceNote": "分析后，点击输出工具栏中的 🔊 图标即可听取朗读结果，或切换到逐行模式，使用键盘快捷键逐条浏览输出。"
+    },
+    "voiceAnnouncer": {
+      "heading": "语音播报器",
+      "description": "网页分析器和浏览器扩展内置语音播报器，使用浏览器原生的 SpeechSynthesis API 朗读分析输出。",
+      "playAll": {
+        "title": "全部播放",
+        "description": "依次朗读整段输出，行与行之间有停顿，屏幕阅读器各部分之间停顿更长。"
+      },
+      "lineByLine": {
+        "title": "逐行浏览",
+        "description": "模拟屏幕阅读器用户的实际浏览方式：一次一个元素。"
+      },
+      "voiceSpeed": {
+        "title": "语音与速度控制",
+        "description": "语音下拉菜单包含语音选择器和从 0.5x 到 2.0x 的速度滑块。"
+      }
+    },
+    "bestPractices": {
+      "heading": "最佳实践",
+      "0": {
+        "title": "在 CI 中运行以检测回归",
+        "description": "将 Speakable 加入构建流水线，让每个 PR 都接受无障碍变更检查。"
+      },
+      "1": {
+        "title": "使用选择器进行组件级分析",
+        "description": "使用 --selector 聚焦特定组件，而非分析整个页面。"
+      },
+      "2": {
+        "title": "检查全部四款阅读器",
+        "description": "使用 -s all 查看跨平台差异。NVDA、JAWS、VoiceOver 和 Narrator 各有独特的播报模式。"
+      },
+      "3": {
+        "title": "保存 JSON 基线用于快照测试",
+        "description": "将 JSON 输出保存为基线，然后使用 --diff 检测不同版本之间的变化。"
+      },
+      "4": {
+        "title": "从审计报告入手",
+        "description": "使用 -f audit 快速概览无障碍健康状况，再深入研究特定阅读器的输出。"
+      }
+    }
+  }
+}

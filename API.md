@@ -678,6 +678,212 @@ Speakable is written in TypeScript and includes full type definitions. Enable st
 }
 ```
 
+## Runtime Module
+
+Capture and compare accessibility behavior over the course of an interaction, not just a static snapshot. Exposed as a namespace on the main entry point.
+
+```typescript
+import { runtime } from '@reticular/speakable';
+```
+
+### `runtime.createTimelineGenerator(options): TimelineGenerator`
+
+Creates a generator that attaches the runtime engine to a document, runs an interaction sequence, and returns an `AccessibilityTimeline`.
+
+**Options (`TimelineGeneratorOptions`):**
+- `document: Document` - the document (or iframe document) to attach to
+- `componentName: string` - name recorded in timeline metadata
+- `storyName?: string` - variant/story name recorded in metadata
+- `settlePeriod?: number` - ms to wait after the last action (default: 500)
+- `loadTimeout?: number` - max ms to wait for the document body (default: 10000)
+- `heuristics?: boolean` - enable heuristic warnings (default: true)
+
+**Returns** a `TimelineGenerator` with:
+- `capture(sequence: InteractionSequence): Promise<AccessibilityTimeline>`
+- `abort(): void`
+
+**Example:**
+
+```typescript
+const generator = runtime.createTimelineGenerator({
+  document,
+  componentName: 'ConfirmDialog',
+});
+
+const sequence = runtime.getBuiltinPattern('modal-dialog', {
+  trigger: 'button.open-dialog',
+});
+
+const timeline = await generator.capture(sequence);
+
+for (const event of timeline.events) {
+  console.log(`${event.type}: ${event.target.accessibleName}`);
+}
+```
+
+### `runtime.getBuiltinPattern(name, selectors?): InteractionSequence`
+
+Returns a predefined interaction sequence for a common ARIA widget.
+
+**Parameters:**
+- `name: 'modal-dialog' | 'combobox' | 'tabs' | 'accordion'`
+- `selectors?: PatternSelectorMap` - optional overrides: `{ trigger?, container?, content?, items?, input? }`
+
+### `runtime.executeSequence(sequence, document, onEvent, getTimestamp, settleTime?)`
+
+Executes an `InteractionSequence` against a document, dispatching real DOM events and emitting `KEYBOARD_ACTION` events per action. Missing click targets emit a `WARNING` event and execution continues. `runtime.executeAction(action, ...)` runs a single action.
+
+### `runtime.diffTimelines(baseline, current): BehaviorDiffReport`
+
+Compares two timelines and returns `{ added, removed, modified, summary }`. Events match on `type` + target selector; timestamp differences alone are not modifications.
+
+### `runtime.classifyDiff(report): ClassifiedDiffReport`
+
+Assigns a severity (`critical | high | medium | low`) to each diff entry and returns `{ entries, highestSeverity, criticalCount, highCount, mediumCount, lowCount }`.
+
+```typescript
+const diff = runtime.diffTimelines(baselineTimeline, currentTimeline);
+const classified = runtime.classifyDiff(diff);
+if (classified.highestSeverity === 'critical') {
+  throw new Error('Accessibility behavior regression detected');
+}
+```
+
+### `runtime.createBaselineStorage(baseDir): BaselineStorage`
+
+Filesystem-backed baseline storage for CLI/CI use. Provides `save`, `load`, `exists`, and `getBaselinePath`, keyed by component + story. (For in-browser baselines, the Storybook addon uses its own `localStorage`-backed store.)
+
+### Other runtime exports
+
+- `runtime.createEngine(options)` - low-level engine that collects timestamped events while attached
+- `runtime.createHeuristicAnalyzer(config?)` - detects anti-patterns (focus escape, live-region flooding, unlabeled keyboard actions) without a baseline
+- `runtime.analyzeVerbosity(timeline, config?)` / `runtime.formatVerbosityReport(report)` - flags redundant/duplicate announcements
+- `runtime.serializeTimeline` / `runtime.deserializeTimeline` - round-trip a timeline to JSON
+- `runtime.generateSelector(element)` - stable CSS selector for an element
+
+## Browser Module
+
+Real-browser static analysis and interaction capture, decoupled from Node.js and jsdom. Runs against live DOM in the current page. This is the engine shared by the Storybook addon, the iframe harness, and the browser extension.
+
+```typescript
+import {
+  analyzeElement,
+  analyzeElementWithUpgrade,
+  captureTimeline,
+  awaitCustomElementsReady,
+} from '@reticular/speakable/browser';
+```
+
+### `analyzeElement(root, extraWarnings?): AnalysisResult`
+
+Analyzes a live DOM element and returns per-reader output plus audit findings, stats, and warnings. Never throws on empty or detached input: it returns a well-formed empty result instead.
+
+**Parameters:**
+- `root: Element | null | undefined` - the element to analyze
+- `extraWarnings?: string[]` - optional warnings to fold into the result
+
+**Returns `AnalysisResult`:**
+
+```typescript
+interface AnalysisResult {
+  nvda: string[];
+  jaws: string[];
+  voiceover: string[];
+  narrator: string[];
+  audit: AuditFinding[];   // { severity: 'error' | 'warning' | 'info'; message: string; selector: string }
+  stats: {
+    totalElements: number;
+    interactiveElements: number;
+    landmarks: number;
+    headings: number;
+  };
+  warnings: string[];
+}
+```
+
+**Example:**
+
+```typescript
+const result = analyzeElement(document.querySelector('#widget'));
+console.log(result.nvda);       // ["Save changes, button", ...]
+console.log(result.stats);      // { totalElements, interactiveElements, ... }
+```
+
+### `analyzeElementWithUpgrade(root, upgradeTimeoutMs?): Promise<AnalysisResult>`
+
+Awaits custom-element upgrade (see below) before analyzing, then folds any upgrade warnings into `result.warnings`. Use this for web components that hydrate asynchronously.
+
+### `captureTimeline(document, options): Promise<AccessibilityTimeline>`
+
+Attaches the runtime engine to a live document, runs an interaction sequence, and returns a serializable timeline.
+
+**Options (`CaptureOptions`):**
+- `componentName: string`
+- `storyName?: string`
+- `sequence: InteractionSequence`
+- `settlePeriod?: number`
+- `awaitUpgrade?: boolean` - await custom-element upgrade first (default: true)
+- `upgradeTimeoutMs?: number`
+
+When `awaitUpgrade` is enabled, upgrade timeouts are folded into the timeline as `WARNING` events at timestamp 0.
+
+**Example:**
+
+```typescript
+const timeline = await captureTimeline(document, {
+  componentName: 'Menu',
+  sequence: {
+    description: 'open and arrow down',
+    actions: [{ type: 'click', selector: '#menu-btn' }, { type: 'arrowDown' }],
+  },
+});
+```
+
+### `awaitCustomElementsReady(root, timeoutMs?): Promise<UpgradeWarning[]>`
+
+Waits for custom elements under `root` to be defined (`customElements.whenDefined`) and, where present, to finish rendering (a Lit-style `updateComplete` promise). Bounded by `timeoutMs` (default 2000). Returns one `UpgradeWarning` (`{ tag, message }`) per element that did not upgrade in time. Never blocks indefinitely; a no-op when `customElements` is unavailable.
+
+## Harness Module
+
+Mount a component into an iframe and drive analysis over `postMessage`. This is the Storybook-independent way to test any component, including web components, in a real browser.
+
+```typescript
+import { createHarness } from '@reticular/speakable/harness';
+```
+
+### `createHarness(options): Harness`
+
+**Options (`HarnessOptions`):**
+- `target: HTMLIFrameElement | { container: HTMLElement }` - an existing iframe to drive, or a container to create one inside (the harness then owns and removes it on `destroy()`)
+- `timeoutMs?: number` - load, inject, and request timeout (default: 10000)
+- `allowedOrigins?: string[]` - origins allowed for `postMessage` (defaults to same-origin only; `'*'` disables the check)
+- `bundleUrl?: string` - URL of the injectable IIFE bundle (`speakable-browser.global.js`). Omit if the bundle is already present in the iframe.
+
+**Returns `Harness`:**
+- `load(source: { url: string } | { html: string }): Promise<void>` - mount content and inject the bundle
+- `analyze(selector?: string): Promise<AnalysisResult>` - static analysis in the iframe (awaits upgrade)
+- `captureTimeline(options): Promise<AccessibilityTimeline>` - run a sequence in the iframe
+- `destroy(): void` - remove listeners and any harness-owned iframe
+
+**Example:**
+
+```typescript
+const harness = createHarness({
+  target: { container: document.body },
+  bundleUrl: '/speakable-browser.global.js',
+});
+
+await harness.load({ html: '<my-widget>Content</my-widget>' });
+const result = await harness.analyze('my-widget');
+const timeline = await harness.captureTimeline({
+  componentName: 'MyWidget',
+  sequence: { description: 'toggle', actions: [{ type: 'click', selector: 'my-widget' }] },
+});
+harness.destroy();
+```
+
+> The harness supports same-origin content only (`srcdoc` HTML or a same-origin URL). Cross-origin URLs are rejected with a descriptive error, because a script cannot be injected across origins.
+
 ## Node.js Version
 
 Requires Node.js 18 or higher.

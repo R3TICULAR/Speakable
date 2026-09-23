@@ -59,8 +59,15 @@ export default function StorybookAddonPage() {
           <div className="p-4 border border-slate-200 rounded-xl bg-white">
             <h3 className="text-sm font-bold text-slate-900 mb-2">Live Updates on Interaction</h3>
             <p className="text-sm text-slate-600">
-              Click a button, expand a dropdown, or toggle a checkbox in your story. The predicted
-              output updates immediately to reflect the new ARIA states.
+              Change a control or toggle a state in your story. The predicted output updates
+              immediately to reflect the new ARIA states.
+            </p>
+          </div>
+          <div className="p-4 border border-slate-200 rounded-xl bg-white">
+            <h3 className="text-sm font-bold text-slate-900 mb-2">Interaction Timeline and Diff</h3>
+            <p className="text-sm text-slate-600">
+              Declare an interaction sequence and the Timeline tab records focus moves, ARIA
+              state changes, and announcements. The Diff tab flags regressions against a saved baseline.
             </p>
           </div>
           <div className="p-4 border border-slate-200 rounded-xl bg-white">
@@ -238,6 +245,10 @@ export default config;`}
           </div>
           <div className="flex gap-4 p-4 rounded-lg bg-slate-50 border border-slate-200">
             <span className="text-blue-600 font-bold text-lg shrink-0">5.</span>
+            <p>If the story declares a <code className="rounded bg-slate-100 px-1 py-0.5 text-xs font-mono">parameters.speakable</code> sequence, the decorator runs it, attaches the runtime engine, and records an accessibility event timeline. When a baseline exists, it diffs against it and populates the Timeline and Diff tabs.</p>
+          </div>
+          <div className="flex gap-4 p-4 rounded-lg bg-slate-50 border border-slate-200">
+            <span className="text-blue-600 font-bold text-lg shrink-0">6.</span>
             <p>The audit engine runs concurrently, checking heading hierarchy, landmark structure, and interactive elements for missing accessible names.</p>
           </div>
         </div>
@@ -315,6 +326,134 @@ export default config;`}
         </p>
       </section>
 
+      {/* Interaction Timeline and Diff */}
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold text-slate-900 mb-4">How to Capture an Interaction Timeline in Storybook</h2>
+        <p className="text-slate-600 mb-6 leading-relaxed">
+          The per-reader tabs analyze the story at a point in time. The <strong>Timeline</strong> tab goes
+          further: it runs an interaction sequence against the rendered story and records the accessibility
+          events that result, in order. That includes focus transitions, ARIA state changes, live region
+          announcements, and dialog open and close events. This is how you verify dynamic behavior, such as a
+          modal moving focus on open and restoring it on close, directly in Storybook.
+        </p>
+        <p className="text-slate-600 mb-6 leading-relaxed">
+          Timeline capture is opt-in per story. Add a <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm font-mono">parameters.speakable</code> block
+          with either a full <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm font-mono">sequence</code> or a
+          named built-in <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm font-mono">pattern</code>. The sequence runs
+          automatically once after the story renders, so the Timeline reflects that scripted run rather than
+          manual clicking in the preview.
+        </p>
+
+        <h3 className="text-lg font-bold text-slate-900 mb-3">Option 1: Use a built-in interaction pattern</h3>
+        <p className="text-slate-600 mb-3 text-sm">
+          Built-in patterns cover common ARIA widgets. Override the selectors to match your markup:
+        </p>
+        <div className="rounded-xl overflow-hidden bg-slate-900 shadow-2xl mb-8">
+          <div className="px-4 py-2 bg-white/5 border-b border-white/10">
+            <span className="text-xs font-mono text-slate-400 uppercase tracking-wider">Dialog.stories.ts</span>
+          </div>
+          <div className="p-6 overflow-x-auto">
+            <pre className="text-sm font-mono leading-relaxed text-slate-300">
+{`export const Dialog = {
+  render: () => renderDialog(),
+  parameters: {
+    speakable: {
+      // 'modal-dialog' | 'combobox' | 'tabs' | 'accordion'
+      pattern: 'modal-dialog',
+      selectors: { trigger: 'button.open', container: '[role="dialog"]' },
+    },
+  },
+};`}
+            </pre>
+          </div>
+        </div>
+
+        <h3 className="text-lg font-bold text-slate-900 mb-3">Option 2: Write a custom sequence</h3>
+        <p className="text-slate-600 mb-3 text-sm">
+          When a built-in pattern does not match your component, declare the actions yourself. Supported
+          actions include <code className="rounded bg-slate-100 px-1 py-0.5 text-xs font-mono">tab</code>, <code className="rounded bg-slate-100 px-1 py-0.5 text-xs font-mono">shiftTab</code>, <code className="rounded bg-slate-100 px-1 py-0.5 text-xs font-mono">click</code> (with a <code className="rounded bg-slate-100 px-1 py-0.5 text-xs font-mono">selector</code>), <code className="rounded bg-slate-100 px-1 py-0.5 text-xs font-mono">enter</code>, <code className="rounded bg-slate-100 px-1 py-0.5 text-xs font-mono">space</code>, <code className="rounded bg-slate-100 px-1 py-0.5 text-xs font-mono">escape</code>, the arrow keys, <code className="rounded bg-slate-100 px-1 py-0.5 text-xs font-mono">key</code> (with a <code className="rounded bg-slate-100 px-1 py-0.5 text-xs font-mono">combo</code>), and <code className="rounded bg-slate-100 px-1 py-0.5 text-xs font-mono">wait</code> (with <code className="rounded bg-slate-100 px-1 py-0.5 text-xs font-mono">ms</code>).
+        </p>
+        <div className="rounded-xl overflow-hidden bg-slate-900 shadow-2xl mb-8">
+          <div className="px-4 py-2 bg-white/5 border-b border-white/10">
+            <span className="text-xs font-mono text-slate-400 uppercase tracking-wider">Disclosure.stories.ts</span>
+          </div>
+          <div className="p-6 overflow-x-auto">
+            <pre className="text-sm font-mono leading-relaxed text-slate-300">
+{`export const Disclosure = {
+  render: () => renderDisclosure(),
+  parameters: {
+    speakable: {
+      sequence: {
+        description: 'Tab to the toggle and open it',
+        actions: [{ type: 'tab' }, { type: 'enter' }],
+      },
+    },
+  },
+};
+
+// Opt a story out of timeline capture (static tabs still work)
+export const StaticOnly = {
+  render: () => renderThing(),
+  parameters: { speakable: { timeline: false } },
+};`}
+            </pre>
+          </div>
+        </div>
+
+        <h3 className="text-lg font-bold text-slate-900 mb-3">parameters.speakable reference</h3>
+        <div className="overflow-x-auto mb-6">
+          <table className="w-full text-sm text-left border border-slate-200 rounded-xl overflow-hidden">
+            <thead className="bg-slate-50">
+              <tr>
+                <th className="py-3 px-4 font-bold text-slate-900">Field</th>
+                <th className="py-3 px-4 font-bold text-slate-900">Type</th>
+                <th className="py-3 px-4 font-bold text-slate-900">Description</th>
+              </tr>
+            </thead>
+            <tbody className="text-slate-600">
+              <tr className="border-t border-slate-100">
+                <td className="py-3 px-4 font-mono text-xs">sequence</td>
+                <td className="py-3 px-4 font-mono text-xs">&#123; description, actions[] &#125;</td>
+                <td className="py-3 px-4">An explicit interaction sequence. Highest priority.</td>
+              </tr>
+              <tr className="border-t border-slate-100">
+                <td className="py-3 px-4 font-mono text-xs">pattern</td>
+                <td className="py-3 px-4 font-mono text-xs">&apos;modal-dialog&apos; | &apos;combobox&apos; | &apos;tabs&apos; | &apos;accordion&apos;</td>
+                <td className="py-3 px-4">A named built-in interaction pattern.</td>
+              </tr>
+              <tr className="border-t border-slate-100">
+                <td className="py-3 px-4 font-mono text-xs">selectors</td>
+                <td className="py-3 px-4 font-mono text-xs">&#123; trigger?, container?, content?, items?, input? &#125;</td>
+                <td className="py-3 px-4">Selector overrides for the chosen built-in pattern.</td>
+              </tr>
+              <tr className="border-t border-slate-100">
+                <td className="py-3 px-4 font-mono text-xs">timeline</td>
+                <td className="py-3 px-4 font-mono text-xs">false</td>
+                <td className="py-3 px-4">Disables timeline capture for the story.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 className="text-lg font-bold text-slate-900 mb-3">Set a baseline and catch regressions with the Diff tab</h3>
+        <p className="text-slate-600 mb-4 leading-relaxed">
+          On the Timeline tab, click <strong>Set baseline</strong> to store the current timeline for that story.
+          Baselines persist in the browser, keyed per component and story. On later renders, the <strong>Diff</strong> tab
+          compares the current timeline against the baseline and classifies each change by severity (critical,
+          high, medium, low). A broken focus trap or a dropped announcement then surfaces as a regression instead
+          of a silent behavior change.
+        </p>
+        <div className="rounded-xl border border-blue-200 bg-blue-50 p-5">
+          <div className="flex gap-3">
+            <span className="material-symbols-outlined text-blue-600 mt-0.5 shrink-0" aria-hidden="true">info</span>
+            <p className="text-sm text-slate-600 leading-relaxed">
+              For headless, whole-library regression runs in CI, use the CLI instead. See <Link href="/docs/runtime-analysis" className="text-blue-600 hover:text-blue-800 underline">Runtime Analysis</Link> for
+              the <code className="bg-blue-100 px-1.5 py-0.5 rounded text-blue-800 text-xs">speakable runtime --storybook</code> pipeline with snapshot baselines and CI mode.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Comparison with addon-a11y */}
       <section className="mb-16">
         <h2 className="text-2xl font-bold text-slate-900 mb-4">Speakable Addon vs @storybook/addon-a11y</h2>
@@ -368,8 +507,9 @@ export default config;`}
         </p>
         <ul className="space-y-3 text-sm text-slate-600 list-disc pl-5">
           <li>Predictions approximate common screen reader behavior. Real output varies by reader version, user settings, and verbosity level.</li>
-          <li>Dynamic focus management (focus trapping, focus restore) is not fully modeled. The addon shows the DOM state, not the focus sequence.</li>
-          <li>Live region announcements are shown as static output. The timing and interruption behavior of live regions differs across readers.</li>
+          <li>The per-reader tabs show the DOM state at a point in time. To capture focus management (focus trapping, focus restore) and live region announcements over time, add a <code className="rounded bg-slate-100 px-1 py-0.5 text-xs font-mono">parameters.speakable</code> sequence and read the Timeline tab.</li>
+          <li>Timelines run the scripted sequence you declare, executed once after render. They do not record free-form manual interaction in the preview.</li>
+          <li>Live region timing and interruption behavior differs across readers. The Timeline records that an announcement occurred, not each reader&apos;s exact interruption model.</li>
           <li>CSS-based hiding (<code className="rounded bg-slate-100 px-1 py-0.5 text-xs font-mono">display: none</code>, <code className="rounded bg-slate-100 px-1 py-0.5 text-xs font-mono">visibility: hidden</code>) is detected, but complex CSS state transitions may not be captured on initial render.</li>
         </ul>
         <div className="mt-6 bg-amber-50 border border-amber-200 rounded-xl p-6">
