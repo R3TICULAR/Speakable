@@ -4,6 +4,7 @@ import { useUser, useClerk } from '@clerk/nextjs';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useState, useEffect, Suspense } from 'react';
 import { PageFadeIn } from '../../components/ScrollReveal';
+import { trackSubscriptionAction } from '../../lib/analytics';
 
 function SettingsContent() {
   const { user, isLoaded } = useUser();
@@ -67,6 +68,7 @@ function SettingsContent() {
   const hasActiveSubscription = metadata.stripeCustomerId && status === 'active';
 
   const handleManageSubscription = async () => {
+    trackSubscriptionAction('manage_billing');
     setPortalLoading(true);
     try {
       const res = await fetch('/api/portal', { method: 'POST' });
@@ -80,6 +82,7 @@ function SettingsContent() {
   };
 
   const handleCancelSubscription = async () => {
+    trackSubscriptionAction('cancel_intent');
     if (!confirm('Are you sure you want to cancel your subscription? You will lose access to Pro features at the end of your billing period.')) {
       return;
     }
@@ -207,7 +210,7 @@ function SettingsContent() {
                   </p>
                 </div>
                 <button
-                  onClick={() => router.push('/pricing')}
+                  onClick={() => { trackSubscriptionAction('resubscribe'); router.push('/pricing'); }}
                   className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded font-semibold hover:bg-blue-700 transition-colors"
                 >
                   Resubscribe to Pro
@@ -221,7 +224,7 @@ function SettingsContent() {
                   </p>
                 </div>
                 <button
-                  onClick={() => router.push('/pricing')}
+                  onClick={() => { trackSubscriptionAction('upgrade_intent'); router.push('/pricing'); }}
                   className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded font-semibold hover:bg-blue-700 transition-colors"
                 >
                   Upgrade to Pro

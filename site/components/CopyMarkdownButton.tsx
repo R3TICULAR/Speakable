@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useCallback } from 'react';
+import { usePathname } from 'next/navigation';
+import { trackCopyMarkdown } from '../lib/analytics';
 
 /**
  * Converts a DOM element's content to a simplified Markdown string.
@@ -183,12 +185,14 @@ function htmlToMarkdown(el: HTMLElement): string {
 
 export function CopyMarkdownButton() {
   const [copied, setCopied] = useState(false);
+  const pathname = usePathname();
 
   const handleCopy = useCallback(async () => {
     const contentEl = document.getElementById('docs-content');
     if (!contentEl) return;
 
     const markdown = htmlToMarkdown(contentEl);
+    trackCopyMarkdown(pathname);
 
     try {
       await navigator.clipboard.writeText(markdown);
@@ -207,7 +211,7 @@ export function CopyMarkdownButton() {
       setCopied(true);
       setTimeout(() => setCopied(false), 2500);
     }
-  }, []);
+  }, [pathname]);
 
   return (
     <button

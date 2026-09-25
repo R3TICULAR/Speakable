@@ -101,6 +101,36 @@ export function trackCopyMarkdown(page: string): void {
   trackEvent('copy_markdown', { page });
 }
 
+/** Track FAQ accordion open */
+export function trackFaqOpen(question: string): void {
+  trackEvent('faq_open', { question });
+}
+
+/** Track screen reader selection change in the analyzer */
+export function trackScreenReaderChange(screenReader: string): void {
+  trackEvent('screen_reader_change', { screen_reader: screenReader });
+}
+
+/** Track analyzer output tab switch (announcements / audit / json / diff) */
+export function trackTabSwitch(tab: string): void {
+  trackEvent('tab_switch', { tab });
+}
+
+/** Track analyzer mode toggle (static / runtime) */
+export function trackToolModeChange(mode: string): void {
+  trackEvent('tool_mode_change', { mode });
+}
+
+/** Track locale/language change */
+export function trackLocaleChange(locale: string): void {
+  trackEvent('locale_change', { locale });
+}
+
+/** Track subscription management actions (settings page) */
+export function trackSubscriptionAction(action: string): void {
+  trackEvent('subscription_action', { action });
+}
+
 /** Track cookie consent response */
 export function trackConsent(accepted: boolean): void {
   // This one fires regardless of consent state since it IS the consent action

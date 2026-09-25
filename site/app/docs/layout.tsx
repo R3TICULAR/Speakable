@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { CopyMarkdownButton } from '../../components/CopyMarkdownButton';
+import { trackDocsView } from '../../lib/analytics';
 
 const DOCS_GROUPS: { label: string; sections: { label: string; href: string }[] }[] = [
   {
@@ -115,6 +116,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
                       key={section.href}
                       href={section.href}
                       aria-current={isActive(pathname, section.href) ? 'page' : undefined}
+                      onClick={() => trackDocsView(section.href)}
                       className={`flex items-center px-3 py-2 text-sm rounded-md transition-colors ${
                         isActive(pathname, section.href)
                           ? 'font-semibold bg-blue-50 text-blue-600'
@@ -163,6 +165,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
                       key={section.href}
                       href={section.href}
                       aria-current={isActive(pathname, section.href) ? 'page' : undefined}
+                      onClick={() => trackDocsView(section.href)}
                       className={`flex items-center px-3 py-2 text-sm rounded-md transition-colors ${
                         isActive(pathname, section.href)
                           ? 'font-semibold bg-blue-50 text-blue-600'

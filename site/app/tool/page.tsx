@@ -13,7 +13,7 @@ import { describeChange } from '@core/diff/diff-algorithm';
 import { SIZE_LIMIT_BYTES } from '@core/../web/src/constants';
 import { PageFadeIn } from '../../components/ScrollReveal';
 import { VoiceControls, type VoiceControlsHandle, type SpeechMode } from '../../components/VoiceControls';
-import { trackAnalyze, trackCopy, trackDownload, trackFileUpload, trackDiffToggle, trackVoicePlay } from '../../lib/analytics';
+import { trackAnalyze, trackCopy, trackDownload, trackFileUpload, trackDiffToggle, trackVoicePlay, trackScreenReaderChange, trackTabSwitch, trackToolModeChange } from '../../lib/analytics';
 import { useAuth, useUser } from '@clerk/nextjs';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
@@ -260,7 +260,7 @@ export default function AnalyzerPage() {
       {/* Mode toggle: Static / Runtime */}
       <div className="flex items-center gap-1 bg-slate-100 rounded-lg p-1 w-fit mb-8">
         <button
-          onClick={() => setToolMode('static')}
+          onClick={() => { setToolMode('static'); trackToolModeChange('static'); }}
           className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
             toolMode === 'static'
               ? 'bg-white text-slate-900 shadow-sm'
@@ -271,7 +271,7 @@ export default function AnalyzerPage() {
           Static Analysis
         </button>
         <button
-          onClick={() => setToolMode('runtime')}
+          onClick={() => { setToolMode('runtime'); trackToolModeChange('runtime'); }}
           className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
             toolMode === 'runtime'
               ? 'bg-white text-slate-900 shadow-sm'
@@ -375,7 +375,7 @@ export default function AnalyzerPage() {
                 <div>
                   <label htmlFor="sr-select" className="sr-only">Screen reader</label>
                   <select id="sr-select" className="w-full h-10 text-sm border border-gray-300 ring-1 ring-gray-200 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500 pl-3 pr-10"
-                    value={screenReader} onChange={(e) => setScreenReader(e.target.value as ScreenReaderOption)}>
+                    value={screenReader} onChange={(e) => { const v = e.target.value as ScreenReaderOption; setScreenReader(v); trackScreenReaderChange(v); }}>
                     <option value="NVDA">NVDA</option>
                     <option value="JAWS">JAWS</option>
                     <option value="VoiceOver">VoiceOver</option>
@@ -391,7 +391,7 @@ export default function AnalyzerPage() {
                 <div className="flex items-center gap-2">
                   <span className="text-sm font-medium text-gray-600" id="diff-label">{t('diffMode')}</span>
                   <button type="button" role="switch" aria-checked={diffMode} aria-labelledby="diff-label"
-                    onClick={() => setDiffMode(!diffMode)}
+                    onClick={() => { const next = !diffMode; setDiffMode(next); trackDiffToggle(next); }}
                     className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${diffMode ? 'bg-blue-600' : 'bg-gray-200'}`}>
                     <span className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${diffMode ? 'translate-x-5' : 'translate-x-0'}`} />
                   </button>
@@ -446,7 +446,7 @@ export default function AnalyzerPage() {
                 return (
                   <button key={tab.id} role="tab" id={`tab-${tab.id}`}
                     aria-selected={activeTab === tab.id} aria-controls={`panel-${tab.id}`}
-                    onClick={() => setActiveTab(tab.id)}
+                    onClick={() => { setActiveTab(tab.id); trackTabSwitch(tab.id); }}
                     className={`px-5 py-3 text-sm font-medium transition-colors ${
                       activeTab === tab.id
                         ? 'font-semibold border-b-2 border-blue-600 text-blue-600 bg-white'

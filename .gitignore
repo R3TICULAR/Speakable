@@ -37,3 +37,6 @@ storybook-static/
 # Addon build output
 addon-speakable/dist/
 addon-speakable/node_modules/
+
+# Planning
+SPEAKABLE_PILOT_PLAN.md

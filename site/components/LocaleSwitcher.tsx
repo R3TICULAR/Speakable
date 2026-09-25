@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, useTransition, useCallback } from 'react';
 import { useLocale } from 'next-intl';
+import { trackLocaleChange } from '../lib/analytics';
 
 const LOCALE_LABELS: Record<string, string> = {
   en: 'English',
@@ -25,6 +26,7 @@ export function LocaleSwitcher() {
   function handleChange(newLocale: string) {
     setOpen(false);
     if (newLocale === locale) return;
+    trackLocaleChange(newLocale);
     startTransition(() => {
       document.cookie = `NEXT_LOCALE=${newLocale};path=/;max-age=${60 * 60 * 24 * 365};samesite=lax`;
       window.location.reload();

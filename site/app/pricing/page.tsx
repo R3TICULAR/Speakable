@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { ScrollReveal } from '../../components/ScrollReveal';
+import { trackPricingClick, trackFaqOpen, trackSignUpIntent } from '../../lib/analytics';
 
 type TierFeature = {
   textKey: string;
@@ -110,6 +111,7 @@ export default function PricingPage() {
   const t = useTranslations('pricingPage');
 
   const handleCta = async (tierId: string) => {
+    trackPricingClick(tierId);
     if (tierId === 'free') {
       router.push('/tool');
       return;
@@ -122,6 +124,7 @@ export default function PricingPage() {
 
     // Pro tier: need auth
     if (!isSignedIn) {
+      trackSignUpIntent('pricing_pro_cta');
       router.push('/sign-up');
       return;
     }
@@ -217,7 +220,11 @@ export default function PricingPage() {
             >
               <dt>
                 <button
-                  onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                  onClick={() => {
+                    const willOpen = openFaq !== index;
+                    setOpenFaq(willOpen ? index : null);
+                    if (willOpen) trackFaqOpen(item.question);
+                  }}
                   aria-expanded={openFaq === index}
                   className="w-full flex items-center justify-between gap-4 px-6 py-4 text-left hover:bg-slate-50 transition-colors"
                 >

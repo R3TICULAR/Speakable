@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { initializeGA } from '../lib/analytics';
+import { initializeGA, trackConsent } from '../lib/analytics';
 
 const NOTICE_COOKIE = 'cookie_notice_dismissed';
 const NOTICE_MAX_AGE = 60 * 60 * 24 * 365; // 1 year
@@ -37,6 +37,7 @@ export function CookieConsent() {
 
   const handleDismiss = () => {
     document.cookie = `${NOTICE_COOKIE}=true;path=/;max-age=${NOTICE_MAX_AGE};samesite=lax`;
+    trackConsent(true);
     setVisible(false);
   };
 

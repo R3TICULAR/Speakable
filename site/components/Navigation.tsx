@@ -84,6 +84,7 @@ export function Navigation() {
                 <Link
                   href={route.href}
                   aria-current={isActive(pathname, route.href) ? 'page' : undefined}
+                  onClick={() => trackNavClick(route.href)}
                   className={`transition-colors focus:outline-none focus:ring-2 focus:ring-blue-600 rounded px-1 ${
                     route.labelKey === 'analyzer'
                       ? 'bg-gradient-to-r from-blue-600 via-violet-600 to-purple-600 bg-clip-text text-transparent font-semibold'
@@ -112,13 +113,14 @@ export function Navigation() {
             <div className="hidden md:flex items-center gap-3">
               <span className="text-sm text-slate-600">{user?.firstName || user?.primaryEmailAddress?.emailAddress}</span>
               <button
-                onClick={() => signOut({ redirectUrl: '/' })}
+                onClick={() => { trackNavClick('/sign-out'); signOut({ redirectUrl: '/' }); }}
                 className="text-sm font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 px-4 py-2 rounded transition-colors"
               >
                 {t('signOut')}
               </button>
               <Link
                 href="/tool"
+                onClick={() => trackCTAClick('analyzer', 'nav_desktop')}
                 className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded font-medium text-sm transition-all active:scale-95"
               >
                 {t('analyzer')}
@@ -128,12 +130,14 @@ export function Navigation() {
             <div className="hidden md:flex items-center gap-3">
               <Link
                 href="/sign-in"
+                onClick={() => trackCTAClick('sign_in', 'nav_desktop')}
                 className="text-sm font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 px-4 py-2 rounded transition-colors"
               >
                 {t('signIn')}
               </Link>
               <Link
                 href="/sign-up"
+                onClick={() => trackCTAClick('sign_up', 'nav_desktop')}
                 className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded font-medium text-sm transition-all active:scale-95"
               >
                 {t('signUp')}
@@ -175,6 +179,7 @@ export function Navigation() {
                 ref={index === 0 ? firstLinkRef : undefined}
                 href={route.href}
                 aria-current={isActive(pathname, route.href) ? 'page' : undefined}
+                onClick={() => trackNavClick(route.href)}
                 className={`block rounded px-2 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-600 ${
                   isActive(pathname, route.href)
                     ? 'text-blue-600 font-semibold'
@@ -189,7 +194,7 @@ export function Navigation() {
             <li className="pt-3 mt-3 border-t border-slate-200 flex flex-col gap-2">
               <span className="text-sm text-slate-600 px-2">{user?.firstName || user?.primaryEmailAddress?.emailAddress}</span>
               <button
-                onClick={() => signOut({ redirectUrl: '/' })}
+                onClick={() => { trackNavClick('/sign-out'); signOut({ redirectUrl: '/' }); }}
                 className="block w-full text-left rounded px-4 py-2 text-sm font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 transition-colors"
               >
                 {t('signOut')}
@@ -199,12 +204,14 @@ export function Navigation() {
             <li className="pt-3 mt-3 border-t border-slate-200 flex flex-col gap-2">
               <Link
                 href="/sign-in"
+                onClick={() => trackCTAClick('sign_in', 'nav_mobile')}
                 className="block text-center rounded px-4 py-2 text-sm font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 transition-colors"
               >
                 {t('signIn')}
               </Link>
               <Link
                 href="/sign-up"
+                onClick={() => trackCTAClick('sign_up', 'nav_mobile')}
                 className="block text-center rounded px-4 py-2 text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 transition-colors"
               >
                 {t('signUp')}
