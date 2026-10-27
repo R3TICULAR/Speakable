@@ -1,0 +1,29 @@
+{
+  "id": "aria-current-step",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "current step link Cart",
+    "link Payment",
+    "end of Checkout navigation",
+    "",
+    "",
+    "",
+    "",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "current step link cart",
+      "name": "current step link cart"
+    },
+    {
+      "raw": "link payment",
+      "role": "link",
+      "name": "payment"
+    }
+  ]
+}

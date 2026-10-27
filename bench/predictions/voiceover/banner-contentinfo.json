@@ -1,0 +1,30 @@
+{
+  "id": "banner-contentinfo",
+  "reader": "voiceover",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "banner",
+    "Site header",
+    "content information",
+    "Site footer"
+  ],
+  "normalized": [
+    {
+      "raw": "banner",
+      "role": "banner"
+    },
+    {
+      "raw": "site header",
+      "name": "site header"
+    },
+    {
+      "raw": "content information",
+      "role": "contentinfo"
+    },
+    {
+      "raw": "site footer",
+      "name": "site footer"
+    }
+  ]
+}

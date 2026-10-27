@@ -1,0 +1,19 @@
+{
+  "id": "button-disabled",
+  "reader": "voiceover",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Submit order, button, dimmed"
+  ],
+  "normalized": [
+    {
+      "raw": "submit order, button, dimmed",
+      "role": "button",
+      "name": "submit order",
+      "state": [
+        "disabled:true"
+      ]
+    }
+  ]
+}

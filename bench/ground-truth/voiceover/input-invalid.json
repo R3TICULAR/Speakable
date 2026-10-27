@@ -1,0 +1,29 @@
+{
+  "id": "input-invalid",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "Email Enter a valid email. invalid data edit text email",
+    "Enter a valid email.",
+    "",
+    "Enter a valid email.",
+    "",
+    "Enter a valid email.",
+    "",
+    "Enter a valid email."
+  ],
+  "normalized": [
+    {
+      "raw": "email enter a valid email. invalid data edit text email",
+      "role": "textbox",
+      "name": "email enter a valid email. invalid data"
+    },
+    {
+      "raw": "enter a valid email",
+      "name": "enter a valid email"
+    }
+  ]
+}

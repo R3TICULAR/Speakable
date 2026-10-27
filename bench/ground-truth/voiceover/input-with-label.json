@@ -1,0 +1,25 @@
+{
+  "id": "input-with-label",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "Email address edit text email",
+    "",
+    "Email address edit text email",
+    "",
+    "Email address edit text email",
+    "",
+    "Email address edit text email",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "email address edit text email",
+      "role": "textbox",
+      "name": "email address"
+    }
+  ]
+}

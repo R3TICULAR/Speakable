@@ -1,0 +1,30 @@
+{
+  "id": "headings-h1-h2-h3",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "heading level 2 Install",
+    "heading level 3 npm",
+    "",
+    "heading level 3 npm",
+    "",
+    "heading level 3 npm",
+    "",
+    "heading level 3 npm"
+  ],
+  "normalized": [
+    {
+      "raw": "heading level 2 install",
+      "role": "heading",
+      "name": "level 2 install"
+    },
+    {
+      "raw": "heading level 3 npm",
+      "role": "heading",
+      "name": "level 3 npm"
+    }
+  ]
+}

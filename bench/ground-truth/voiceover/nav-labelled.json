@@ -1,0 +1,30 @@
+{
+  "id": "nav-labelled",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "link Home",
+    "link Docs",
+    "end of Primary navigation",
+    "",
+    "",
+    "",
+    "",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "link home",
+      "role": "link",
+      "name": "home"
+    },
+    {
+      "raw": "link docs",
+      "role": "link",
+      "name": "docs"
+    }
+  ]
+}

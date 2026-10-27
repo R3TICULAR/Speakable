@@ -1,0 +1,16 @@
+{
+  "id": "link-new-window",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Download report, link"
+  ],
+  "normalized": [
+    {
+      "raw": "download report, link",
+      "role": "link",
+      "name": "download report"
+    }
+  ]
+}

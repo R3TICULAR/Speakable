@@ -1,0 +1,25 @@
+{
+  "id": "link-plain",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "link View pricing",
+    "",
+    "link View pricing",
+    "",
+    "link View pricing",
+    "",
+    "link View pricing",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "link view pricing",
+      "role": "link",
+      "name": "view pricing"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "id": "button-disabled",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "Submit order dimmed button",
+    "",
+    "Submit order dimmed button",
+    "",
+    "Submit order dimmed button",
+    "",
+    "Submit order dimmed button",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "submit order dimmed button",
+      "role": "button",
+      "name": "submit order",
+      "state": [
+        "disabled:true"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "id": "checkbox-checked",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Subscribe to newsletter, checkbox, checked"
+  ],
+  "normalized": [
+    {
+      "raw": "subscribe to newsletter, checkbox, checked",
+      "role": "checkbox",
+      "name": "subscribe to newsletter",
+      "state": [
+        "checked:true"
+      ]
+    }
+  ]
+}

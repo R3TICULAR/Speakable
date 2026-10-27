@@ -1,0 +1,36 @@
+{
+  "id": "runtime-combobox",
+  "reader": "voiceover",
+  "mode": "runtime",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "Fruit list box pop up expanded combo box",
+    "Apple selected (1 of 3)",
+    "Banana selected (2 of 3)",
+    "Banana"
+  ],
+  "normalized": [
+    {
+      "raw": "fruit list box pop up expanded combo box",
+      "role": "combobox",
+      "name": "fruit list box pop up",
+      "state": [
+        "expanded:true"
+      ]
+    },
+    {
+      "raw": "apple selected (1 of 3)",
+      "name": "apple selected (1 of 3)"
+    },
+    {
+      "raw": "banana selected (2 of 3)",
+      "name": "banana selected (2 of 3)"
+    },
+    {
+      "raw": "banana",
+      "name": "banana"
+    }
+  ]
+}

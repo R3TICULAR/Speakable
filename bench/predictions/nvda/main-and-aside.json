@@ -1,0 +1,31 @@
+{
+  "id": "main-and-aside",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "main landmark",
+    "Primary content.",
+    "Related links, complementary landmark",
+    "Sidebar content."
+  ],
+  "normalized": [
+    {
+      "raw": "main landmark",
+      "role": "main"
+    },
+    {
+      "raw": "primary content",
+      "name": "primary content"
+    },
+    {
+      "raw": "related links, complementary landmark",
+      "role": "complementary",
+      "name": "related links"
+    },
+    {
+      "raw": "sidebar content",
+      "name": "sidebar content"
+    }
+  ]
+}

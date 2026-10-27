@@ -1,0 +1,28 @@
+{
+  "id": "switch-role",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "Dark mode on switch",
+    "",
+    "Dark mode on switch",
+    "",
+    "Dark mode on switch",
+    "",
+    "Dark mode on switch",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "dark mode on switch",
+      "role": "switch",
+      "name": "dark mode",
+      "state": [
+        "checked:true"
+      ]
+    }
+  ]
+}

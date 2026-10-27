@@ -1,0 +1,28 @@
+{
+  "id": "aria-required-input",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "Full name required edit text",
+    "",
+    "Full name required edit text",
+    "",
+    "Full name required edit text",
+    "",
+    "Full name required edit text",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "full name required edit text",
+      "role": "textbox",
+      "name": "full name",
+      "state": [
+        "required:true"
+      ]
+    }
+  ]
+}

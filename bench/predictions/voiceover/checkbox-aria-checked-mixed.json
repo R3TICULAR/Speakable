@@ -1,0 +1,23 @@
+{
+  "id": "checkbox-aria-checked-mixed",
+  "reader": "voiceover",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "checkbox, mixed",
+    "Select all"
+  ],
+  "normalized": [
+    {
+      "raw": "checkbox, mixed",
+      "role": "checkbox",
+      "state": [
+        "checked:mixed"
+      ]
+    },
+    {
+      "raw": "select all",
+      "name": "select all"
+    }
+  ]
+}

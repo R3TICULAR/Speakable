@@ -1,0 +1,16 @@
+{
+  "id": "input-aria-label",
+  "reader": "voiceover",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Search, edit text"
+  ],
+  "normalized": [
+    {
+      "raw": "search, edit text",
+      "role": "textbox",
+      "name": "search"
+    }
+  ]
+}

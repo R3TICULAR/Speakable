@@ -1,0 +1,24 @@
+{
+  "id": "tab-selected",
+  "reader": "voiceover",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Overview, button, selected",
+    "Details, button, unselected"
+  ],
+  "normalized": [
+    {
+      "raw": "overview, button, selected",
+      "role": "button",
+      "name": "overview",
+      "state": [
+        "selected:true"
+      ]
+    },
+    {
+      "raw": "details, button, unselected",
+      "name": "details, button, unselected"
+    }
+  ]
+}

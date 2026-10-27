@@ -1,0 +1,28 @@
+{
+  "id": "select-single",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "United States Country menu pop up collapsed button",
+    "",
+    "United States Country menu pop up collapsed button",
+    "",
+    "United States Country menu pop up collapsed button",
+    "",
+    "United States Country menu pop up collapsed button",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "united states country menu pop up collapsed button",
+      "role": "button",
+      "name": "united states country menu pop up",
+      "state": [
+        "expanded:false"
+      ]
+    }
+  ]
+}

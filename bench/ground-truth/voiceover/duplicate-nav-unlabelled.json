@@ -1,0 +1,34 @@
+{
+  "id": "duplicate-nav-unlabelled",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "link A",
+    "end of navigation",
+    "navigation",
+    "link B",
+    "end of navigation",
+    "",
+    "",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "link a",
+      "role": "link",
+      "name": "a"
+    },
+    {
+      "raw": "navigation",
+      "role": "navigation"
+    },
+    {
+      "raw": "link b",
+      "role": "link",
+      "name": "b"
+    }
+  ]
+}

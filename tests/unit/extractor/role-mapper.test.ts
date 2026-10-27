@@ -144,10 +144,16 @@ describe('computeRole', () => {
       expect(result.role).toBe('textbox');
     });
 
-    test('input type=number has textbox role', () => {
+    test('input type=number has spinbutton role (per ARIA implicit role)', () => {
       const element = createElement('<input type="number" />');
       const result = computeRole(element);
-      expect(result.role).toBe('textbox');
+      expect(result.role).toBe('spinbutton');
+    });
+
+    test('input type=range has slider role (per ARIA implicit role)', () => {
+      const element = createElement('<input type="range" />');
+      const result = computeRole(element);
+      expect(result.role).toBe('slider');
     });
 
     test('input type=button has button role', () => {

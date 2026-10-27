@@ -1,0 +1,15 @@
+{
+  "id": "live-assertive-attr",
+  "reader": "voiceover",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Connection lost."
+  ],
+  "normalized": [
+    {
+      "raw": "connection lost",
+      "name": "connection lost"
+    }
+  ]
+}

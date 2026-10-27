@@ -1,0 +1,380 @@
+{
+  "version": "v1",
+  "generatedAt": "2026-10-27T22:40:41.680Z",
+  "pins": {
+    "voiceover": {
+      "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+      "osVersion": "macOS 15.6.1",
+      "browserVersion": "os-default"
+    }
+  },
+  "coverage": {
+    "totalCases": 67,
+    "readers": {
+      "nvda": {
+        "predicted": 67,
+        "groundTruth": 0,
+        "scored": 0
+      },
+      "voiceover": {
+        "predicted": 67,
+        "groundTruth": 57,
+        "scored": 57
+      }
+    },
+    "incomplete": [
+      "button-plain (nvda): prediction present, ground truth missing",
+      "button-aria-label (nvda): prediction present, ground truth missing",
+      "button-disabled (nvda): prediction present, ground truth missing",
+      "link-plain (nvda): prediction present, ground truth missing",
+      "input-placeholder-only (nvda): prediction present, ground truth missing",
+      "input-with-label (nvda): prediction present, ground truth missing",
+      "input-required-describedby (nvda): prediction present, ground truth missing",
+      "checkbox-unchecked (nvda): prediction present, ground truth missing",
+      "radio-group (nvda): prediction present, ground truth missing",
+      "heading-h1 (nvda): prediction present, ground truth missing",
+      "heading-role-arialevel (nvda): prediction present, ground truth missing",
+      "nav-labelled (nvda): prediction present, ground truth missing",
+      "main-and-aside (nvda): prediction present, ground truth missing",
+      "button-aria-expanded (nvda): prediction present, ground truth missing",
+      "checkbox-aria-checked-mixed (nvda): prediction present, ground truth missing",
+      "button-aria-pressed (nvda): prediction present, ground truth missing",
+      "link-aria-current (nvda): prediction present, ground truth missing",
+      "status-polite (nvda): prediction present, ground truth missing",
+      "empty-accessible-name-button (nvda): prediction present, ground truth missing",
+      "redundant-role (nvda): prediction present, ground truth missing",
+      "link-new-window (nvda): prediction present, ground truth missing",
+      "link-image-only (nvda): prediction present, ground truth missing",
+      "link-image-empty-alt (nvda): prediction present, ground truth missing",
+      "button-submit (nvda): prediction present, ground truth missing",
+      "input-aria-label (nvda): prediction present, ground truth missing",
+      "select-single (nvda): prediction present, ground truth missing",
+      "textarea-labelled (nvda): prediction present, ground truth missing",
+      "input-invalid (nvda): prediction present, ground truth missing",
+      "input-readonly (nvda): prediction present, ground truth missing",
+      "checkbox-checked (nvda): prediction present, ground truth missing",
+      "fieldset-group (nvda): prediction present, ground truth missing",
+      "input-number-spin (nvda): prediction present, ground truth missing",
+      "switch-role (nvda): prediction present, ground truth missing",
+      "headings-h1-h2-h3 (nvda): prediction present, ground truth missing",
+      "heading-skipped-level (nvda): prediction present, ground truth missing",
+      "paragraph-text (nvda): prediction present, ground truth missing",
+      "ordered-list (nvda): prediction present, ground truth missing",
+      "definition-list (nvda): prediction present, ground truth missing",
+      "blockquote (nvda): prediction present, ground truth missing",
+      "banner-contentinfo (nvda): prediction present, ground truth missing",
+      "search-landmark (nvda): prediction present, ground truth missing",
+      "region-labelled (nvda): prediction present, ground truth missing",
+      "duplicate-nav-unlabelled (nvda): prediction present, ground truth missing",
+      "form-landmark (nvda): prediction present, ground truth missing",
+      "tab-selected (nvda): prediction present, ground truth missing",
+      "option-selected (nvda): prediction present, ground truth missing",
+      "aria-disabled-link (nvda): prediction present, ground truth missing",
+      "aria-required-input (nvda): prediction present, ground truth missing",
+      "aria-current-step (nvda): prediction present, ground truth missing",
+      "progressbar (nvda): prediction present, ground truth missing",
+      "slider (nvda): prediction present, ground truth missing",
+      "alert-assertive (nvda): prediction present, ground truth missing",
+      "live-assertive-attr (nvda): prediction present, ground truth missing",
+      "live-atomic (nvda): prediction present, ground truth missing",
+      "log-role (nvda): prediction present, ground truth missing",
+      "aria-hidden-content (nvda): prediction present, ground truth missing",
+      "conflicting-role-presentation (nvda): prediction present, ground truth missing",
+      "hidden-but-focusable (nvda): prediction present, ground truth missing",
+      "empty-heading (nvda): prediction present, ground truth missing",
+      "nested-interactive (nvda): prediction present, ground truth missing",
+      "runtime-disclosure (nvda): prediction present, ground truth missing",
+      "runtime-modal-dialog (nvda): prediction present, ground truth missing",
+      "runtime-tabs (nvda): prediction present, ground truth missing",
+      "runtime-accordion (nvda): prediction present, ground truth missing",
+      "runtime-combobox (nvda): prediction present, ground truth missing",
+      "button-aria-labelledby (nvda): prediction present, ground truth missing",
+      "button-icon-title (nvda): prediction present, ground truth missing",
+      "button-plain (voiceover): ground truth quarantined — cursor read Chrome tab strip (open tabs + memory readout), never entered the page",
+      "heading-h1 (voiceover): ground truth quarantined — capture recorded only 'Welcome to Speakable' with no role/level; VoiceOver announces h1 as a heading. Engine output ('heading level 1, Welcome to Speakable') is correct; capture under-reported.",
+      "heading-role-arialevel (voiceover): ground truth quarantined — HTML is aria-level=2 but capture recorded 'level 1'. Engine ('level 2') is correct; capture mis-read the level.",
+      "select-single (voiceover): ground truth quarantined — cursor parked on browser toolbar ('menu pop up collapsed button')",
+      "headings-h1-h2-h3 (voiceover): ground truth quarantined — capture dropped the h1 ('Docs') and over-walked the h3 ('npm' x4); only h2+h3 recorded. Incomplete walk.",
+      "heading-skipped-level (voiceover): ground truth quarantined — HTML has h1+h3 but capture recorded only the h3; the h1 ('Title') was skipped. Incomplete walk.",
+      "empty-heading (voiceover): ground truth quarantined — cursor walked past the empty h2 to the next element ('After empty heading'); the heading itself was not captured.",
+      "runtime-disclosure (voiceover): ground truth quarantined — focus left the page into browser toolbar after Tab/interaction ('Leaving ...')",
+      "runtime-modal-dialog (voiceover): ground truth quarantined — focus left the page into browser toolbar after Escape/Tab ('Leaving ...')",
+      "runtime-accordion (voiceover): ground truth quarantined — focus left the page into browser toolbar after Tab/interaction ('Leaving ...')"
+    ]
+  },
+  "overall": {
+    "voiceover": {
+      "cases": 57,
+      "role": {
+        "applicable": 41,
+        "matched": 23,
+        "rate": 0.5609756097560976
+      },
+      "name": {
+        "applicable": 56,
+        "matched": 25,
+        "rate": 0.44642857142857145
+      },
+      "state": {
+        "applicable": 11,
+        "matched": 10,
+        "rate": 0.9090909090909091
+      },
+      "value": {
+        "applicable": 0,
+        "matched": 0,
+        "rate": 0
+      },
+      "falsePositives": 10,
+      "falseNegatives": 11,
+      "falsePositiveRate": 0.043859649122807015,
+      "falseNegativeRate": 0.04824561403508772,
+      "timeline": {
+        "precision": 0.05555555555555555,
+        "recall": 0.14285714285714285
+      }
+    }
+  },
+  "byCategory": {
+    "buttons-links": {
+      "voiceover": {
+        "cases": 9,
+        "role": {
+          "applicable": 9,
+          "matched": 5,
+          "rate": 0.5555555555555556
+        },
+        "name": {
+          "applicable": 9,
+          "matched": 3,
+          "rate": 0.3333333333333333
+        },
+        "state": {
+          "applicable": 1,
+          "matched": 1,
+          "rate": 1
+        },
+        "value": {
+          "applicable": 0,
+          "matched": 0,
+          "rate": 0
+        },
+        "falsePositives": 0,
+        "falseNegatives": 2,
+        "falsePositiveRate": 0,
+        "falseNegativeRate": 0.05555555555555555
+      }
+    },
+    "form-controls": {
+      "voiceover": {
+        "cases": 13,
+        "role": {
+          "applicable": 12,
+          "matched": 8,
+          "rate": 0.6666666666666666
+        },
+        "name": {
+          "applicable": 13,
+          "matched": 6,
+          "rate": 0.46153846153846156
+        },
+        "state": {
+          "applicable": 3,
+          "matched": 3,
+          "rate": 1
+        },
+        "value": {
+          "applicable": 0,
+          "matched": 0,
+          "rate": 0
+        },
+        "falsePositives": 0,
+        "falseNegatives": 5,
+        "falsePositiveRate": 0,
+        "falseNegativeRate": 0.09615384615384616
+      }
+    },
+    "headings-structure": {
+      "voiceover": {
+        "cases": 4,
+        "role": {
+          "applicable": 0,
+          "matched": 0,
+          "rate": 0
+        },
+        "name": {
+          "applicable": 4,
+          "matched": 1,
+          "rate": 0.25
+        },
+        "state": {
+          "applicable": 0,
+          "matched": 0,
+          "rate": 0
+        },
+        "value": {
+          "applicable": 0,
+          "matched": 0,
+          "rate": 0
+        },
+        "falsePositives": 2,
+        "falseNegatives": 0,
+        "falsePositiveRate": 0.125,
+        "falseNegativeRate": 0
+      }
+    },
+    "landmarks": {
+      "voiceover": {
+        "cases": 7,
+        "role": {
+          "applicable": 5,
+          "matched": 2,
+          "rate": 0.4
+        },
+        "name": {
+          "applicable": 7,
+          "matched": 3,
+          "rate": 0.42857142857142855
+        },
+        "state": {
+          "applicable": 0,
+          "matched": 0,
+          "rate": 0
+        },
+        "value": {
+          "applicable": 0,
+          "matched": 0,
+          "rate": 0
+        },
+        "falsePositives": 2,
+        "falseNegatives": 0,
+        "falsePositiveRate": 0.07142857142857142,
+        "falseNegativeRate": 0
+      }
+    },
+    "aria-states": {
+      "voiceover": {
+        "cases": 11,
+        "role": {
+          "applicable": 9,
+          "matched": 5,
+          "rate": 0.5555555555555556
+        },
+        "name": {
+          "applicable": 11,
+          "matched": 5,
+          "rate": 0.45454545454545453
+        },
+        "state": {
+          "applicable": 6,
+          "matched": 6,
+          "rate": 1
+        },
+        "value": {
+          "applicable": 0,
+          "matched": 0,
+          "rate": 0
+        },
+        "falsePositives": 3,
+        "falseNegatives": 2,
+        "falsePositiveRate": 0.06818181818181818,
+        "falseNegativeRate": 0.045454545454545456
+      }
+    },
+    "live-regions": {
+      "voiceover": {
+        "cases": 5,
+        "role": {
+          "applicable": 0,
+          "matched": 0,
+          "rate": 0
+        },
+        "name": {
+          "applicable": 5,
+          "matched": 4,
+          "rate": 0.8
+        },
+        "state": {
+          "applicable": 0,
+          "matched": 0,
+          "rate": 0
+        },
+        "value": {
+          "applicable": 0,
+          "matched": 0,
+          "rate": 0
+        },
+        "falsePositives": 1,
+        "falseNegatives": 0,
+        "falsePositiveRate": 0.05,
+        "falseNegativeRate": 0
+      }
+    },
+    "edge-cases": {
+      "voiceover": {
+        "cases": 6,
+        "role": {
+          "applicable": 5,
+          "matched": 2,
+          "rate": 0.4
+        },
+        "name": {
+          "applicable": 5,
+          "matched": 3,
+          "rate": 0.6
+        },
+        "state": {
+          "applicable": 0,
+          "matched": 0,
+          "rate": 0
+        },
+        "value": {
+          "applicable": 0,
+          "matched": 0,
+          "rate": 0
+        },
+        "falsePositives": 0,
+        "falseNegatives": 1,
+        "falsePositiveRate": 0,
+        "falseNegativeRate": 0.041666666666666664
+      }
+    },
+    "interactive-components": {
+      "voiceover": {
+        "cases": 2,
+        "role": {
+          "applicable": 1,
+          "matched": 1,
+          "rate": 1
+        },
+        "name": {
+          "applicable": 2,
+          "matched": 0,
+          "rate": 0
+        },
+        "state": {
+          "applicable": 1,
+          "matched": 0,
+          "rate": 0
+        },
+        "value": {
+          "applicable": 0,
+          "matched": 0,
+          "rate": 0
+        },
+        "falsePositives": 2,
+        "falseNegatives": 1,
+        "falsePositiveRate": 0.25,
+        "falseNegativeRate": 0.125,
+        "timeline": {
+          "precision": 0.05555555555555555,
+          "recall": 0.14285714285714285
+        }
+      }
+    }
+  },
+  "headline": {
+    "metric": "role+name+state accuracy on static cases",
+    "value": 0.5480769230769231
+  }
+}

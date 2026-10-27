@@ -1,0 +1,28 @@
+{
+  "id": "checkbox-checked",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "Subscribe to newsletter checked checkbox",
+    "",
+    "Subscribe to newsletter checked checkbox",
+    "",
+    "Subscribe to newsletter checked checkbox",
+    "",
+    "Subscribe to newsletter checked checkbox",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "subscribe to newsletter checked checkbox",
+      "role": "checkbox",
+      "name": "subscribe to newsletter",
+      "state": [
+        "checked:true"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "id": "definition-list",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "Role term (1 of 2) 1 of 2",
+    "Role",
+    "end of Role term (1 of 2)",
+    "The type of an element. 2 of 2",
+    "end of definition list",
+    "",
+    "",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "role term (1 of 2) 1 of 2",
+      "name": "role term (1 of 2) 1 of 2"
+    },
+    {
+      "raw": "role",
+      "name": "role"
+    },
+    {
+      "raw": "the type of an element. 2 of 2",
+      "name": "the type of an element. 2 of 2"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "id": "input-required-describedby",
+  "reader": "voiceover",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Password, edit text, required, Must be at least 8 characters.",
+    "Must be at least 8 characters."
+  ],
+  "normalized": [
+    {
+      "raw": "password, edit text, required, must be at least 8 characters",
+      "name": "password, edit text, required, must be at least 8 characters"
+    },
+    {
+      "raw": "must be at least 8 characters",
+      "name": "must be at least 8 characters"
+    }
+  ]
+}

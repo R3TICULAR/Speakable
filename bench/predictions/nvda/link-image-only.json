@@ -1,0 +1,21 @@
+{
+  "id": "link-image-only",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "link",
+    "Speakable home, graphic"
+  ],
+  "normalized": [
+    {
+      "raw": "link",
+      "role": "link"
+    },
+    {
+      "raw": "speakable home, graphic",
+      "role": "img",
+      "name": "speakable home"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "id": "runtime-combobox",
+  "reader": "voiceover",
+  "mode": "runtime",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Fruit, combobox",
+    "Apple, option, selected true",
+    "Banana, option, selected false",
+    "Cherry, option, selected false",
+    "Apple, option, selected true",
+    "Apple",
+    "Apple, option, selected false",
+    "Banana, option, selected true",
+    "Banana, option, selected true",
+    "Banana"
+  ],
+  "normalized": [
+    {
+      "raw": "fruit, combobox",
+      "role": "combobox",
+      "name": "fruit"
+    },
+    {
+      "raw": "apple, option, selected true",
+      "name": "apple, option, selected true"
+    },
+    {
+      "raw": "banana, option, selected false",
+      "name": "banana, option, selected false"
+    },
+    {
+      "raw": "cherry, option, selected false",
+      "name": "cherry, option, selected false"
+    },
+    {
+      "raw": "apple, option, selected true",
+      "name": "apple, option, selected true"
+    },
+    {
+      "raw": "apple",
+      "name": "apple"
+    },
+    {
+      "raw": "apple, option, selected false",
+      "name": "apple, option, selected false"
+    },
+    {
+      "raw": "banana, option, selected true",
+      "name": "banana, option, selected true"
+    },
+    {
+      "raw": "banana",
+      "name": "banana"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "id": "aria-disabled-link",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "dimmed link Next step",
+    "",
+    "dimmed link Next step",
+    "",
+    "dimmed link Next step",
+    "",
+    "dimmed link Next step",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "dimmed link next step",
+      "role": "link",
+      "name": "next step",
+      "state": [
+        "disabled:true"
+      ]
+    }
+  ]
+}

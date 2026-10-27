@@ -1,0 +1,64 @@
+{
+  "id": "runtime-tabs",
+  "reader": "voiceover",
+  "mode": "runtime",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Profile, tab",
+    "Billing, tab",
+    "Profile, tab, selected false",
+    "Billing, tab, selected true",
+    "Billing selected",
+    "Alerts, tab",
+    "Billing, tab, selected false",
+    "Alerts, tab, selected true",
+    "Alerts selected"
+  ],
+  "normalized": [
+    {
+      "raw": "profile, tab",
+      "role": "tab",
+      "name": "profile"
+    },
+    {
+      "raw": "billing, tab",
+      "role": "tab",
+      "name": "billing"
+    },
+    {
+      "raw": "profile, tab, selected false",
+      "name": "profile, tab, selected false"
+    },
+    {
+      "raw": "billing, tab, selected true",
+      "name": "billing, tab, selected true"
+    },
+    {
+      "raw": "billing selected",
+      "name": "billing",
+      "state": [
+        "selected:true"
+      ]
+    },
+    {
+      "raw": "alerts, tab",
+      "role": "tab",
+      "name": "alerts"
+    },
+    {
+      "raw": "billing, tab, selected false",
+      "name": "billing, tab, selected false"
+    },
+    {
+      "raw": "alerts, tab, selected true",
+      "name": "alerts, tab, selected true"
+    },
+    {
+      "raw": "alerts selected",
+      "name": "alerts",
+      "state": [
+        "selected:true"
+      ]
+    }
+  ]
+}

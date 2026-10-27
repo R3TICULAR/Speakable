@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>runtime-disclosure</title></head>
+<body>
+<button id="t" aria-expanded="false" aria-controls="p">Shipping details</button>
+<div id="p" hidden><p>Ships in 2 to 3 business days.</p></div>
+<div id="s" role="status" aria-live="polite" style="position:absolute;left:-9999px"></div>
+<script>
+var t=document.getElementById('t'),p=document.getElementById('p'),s=document.getElementById('s');
+t.addEventListener('click',function(){var o=t.getAttribute('aria-expanded')==='true';t.setAttribute('aria-expanded',String(!o));p.hidden=o;s.textContent=o?'collapsed':'expanded';});
+</script>
+</body></html>

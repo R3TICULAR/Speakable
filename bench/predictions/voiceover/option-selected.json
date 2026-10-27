@@ -1,0 +1,26 @@
+{
+  "id": "option-selected",
+  "reader": "voiceover",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Colors, list box",
+    "Red, option, selected, 1 of 2",
+    "Blue, option, unselected, 2 of 2"
+  ],
+  "normalized": [
+    {
+      "raw": "colors, list box",
+      "role": "listbox",
+      "name": "colors"
+    },
+    {
+      "raw": "red, option, selected, 1 of 2",
+      "name": "red, option, selected, 1 of 2"
+    },
+    {
+      "raw": "blue, option, unselected, 2 of 2",
+      "name": "blue, option, unselected, 2 of 2"
+    }
+  ]
+}

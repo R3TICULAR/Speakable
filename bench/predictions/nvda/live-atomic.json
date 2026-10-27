@@ -1,0 +1,20 @@
+{
+  "id": "live-atomic",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Saved",
+    "at 10:04"
+  ],
+  "normalized": [
+    {
+      "raw": "saved",
+      "name": "saved"
+    },
+    {
+      "raw": "at 10:04",
+      "name": "at 10:04"
+    }
+  ]
+}

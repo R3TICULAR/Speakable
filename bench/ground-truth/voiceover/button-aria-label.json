@@ -1,0 +1,25 @@
+{
+  "id": "button-aria-label",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "Close dialog button",
+    "",
+    "Close dialog button",
+    "",
+    "Close dialog button",
+    "",
+    "Close dialog button",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "close dialog button",
+      "role": "button",
+      "name": "close dialog"
+    }
+  ]
+}

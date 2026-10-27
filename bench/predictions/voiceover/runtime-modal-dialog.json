@@ -1,0 +1,16 @@
+{
+  "id": "runtime-modal-dialog",
+  "reader": "voiceover",
+  "mode": "runtime",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Open settings, button"
+  ],
+  "normalized": [
+    {
+      "raw": "open settings, button",
+      "role": "button",
+      "name": "open settings"
+    }
+  ]
+}

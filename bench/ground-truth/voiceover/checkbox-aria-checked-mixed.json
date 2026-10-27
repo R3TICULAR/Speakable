@@ -1,0 +1,28 @@
+{
+  "id": "checkbox-aria-checked-mixed",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "Select all mixed checkbox",
+    "",
+    "Select all mixed checkbox",
+    "",
+    "Select all mixed checkbox",
+    "",
+    "Select all mixed checkbox",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "select all mixed checkbox",
+      "role": "checkbox",
+      "name": "select all",
+      "state": [
+        "checked:mixed"
+      ]
+    }
+  ]
+}

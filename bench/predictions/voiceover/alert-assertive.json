@@ -1,0 +1,15 @@
+{
+  "id": "alert-assertive",
+  "reader": "voiceover",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Payment failed. Try again."
+  ],
+  "normalized": [
+    {
+      "raw": "payment failed. try again",
+      "name": "payment failed. try again"
+    }
+  ]
+}

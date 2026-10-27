@@ -1,0 +1,32 @@
+{
+  "id": "ordered-list",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "1. First 1 of 3",
+    "2. Second 2 of 3",
+    "3. Third 3 of 3",
+    "end of list",
+    "",
+    "",
+    "",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "1. first 1 of 3",
+      "name": "1. first 1 of 3"
+    },
+    {
+      "raw": "2. second 2 of 3",
+      "name": "2. second 2 of 3"
+    },
+    {
+      "raw": "3. third 3 of 3",
+      "name": "3. third 3 of 3"
+    }
+  ]
+}

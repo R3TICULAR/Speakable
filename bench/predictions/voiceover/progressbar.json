@@ -1,0 +1,20 @@
+{
+  "id": "progressbar",
+  "reader": "voiceover",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Upload, progress indicator, 60",
+    "60%"
+  ],
+  "normalized": [
+    {
+      "raw": "upload, progress indicator, 60",
+      "name": "upload, progress indicator, 60"
+    },
+    {
+      "raw": "60%",
+      "name": "60%"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "input-number-spin",
+  "reader": "voiceover",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Quantity, stepper, 2"
+  ],
+  "normalized": [
+    {
+      "raw": "quantity, stepper, 2",
+      "name": "quantity, stepper, 2"
+    }
+  ]
+}

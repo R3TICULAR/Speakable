@@ -1,0 +1,66 @@
+{
+  "$comment": "Ground-truth cases excluded from scoring because the CAPTURE is unreliable, not because the engine is wrong. Two classes: (1) 'chrome' — the cursor read browser UI (tab strip, toolbar, menus) instead of the page; (2) 'cursor-walk' — the cursor walk dropped, duplicated, or mis-read page content (e.g. skipped a heading, recorded the wrong aria-level), so the recorded phrases do not reflect what VoiceOver actually announces for the element. Each entry is scored as INCOMPLETE (quarantined), never silently dropped, so the report stays honest. Integrity rule: we quarantine bad captures; we NEVER degrade a correct engine to match them. Re-capture with the force-into-web-content fix, re-run triage, and remove from this list once the capture is clean.",
+  "version": "v1",
+  "quarantined": [
+    {
+      "reader": "voiceover",
+      "id": "button-plain",
+      "class": "chrome",
+      "reason": "cursor read Chrome tab strip (open tabs + memory readout), never entered the page"
+    },
+    {
+      "reader": "voiceover",
+      "id": "select-single",
+      "class": "chrome",
+      "reason": "cursor parked on browser toolbar ('menu pop up collapsed button')"
+    },
+    {
+      "reader": "voiceover",
+      "id": "runtime-accordion",
+      "class": "chrome",
+      "reason": "focus left the page into browser toolbar after Tab/interaction ('Leaving ...')"
+    },
+    {
+      "reader": "voiceover",
+      "id": "runtime-disclosure",
+      "class": "chrome",
+      "reason": "focus left the page into browser toolbar after Tab/interaction ('Leaving ...')"
+    },
+    {
+      "reader": "voiceover",
+      "id": "runtime-modal-dialog",
+      "class": "chrome",
+      "reason": "focus left the page into browser toolbar after Escape/Tab ('Leaving ...')"
+    },
+    {
+      "reader": "voiceover",
+      "id": "heading-h1",
+      "class": "cursor-walk",
+      "reason": "capture recorded only 'Welcome to Speakable' with no role/level; VoiceOver announces h1 as a heading. Engine output ('heading level 1, Welcome to Speakable') is correct; capture under-reported."
+    },
+    {
+      "reader": "voiceover",
+      "id": "heading-role-arialevel",
+      "class": "cursor-walk",
+      "reason": "HTML is aria-level=2 but capture recorded 'level 1'. Engine ('level 2') is correct; capture mis-read the level."
+    },
+    {
+      "reader": "voiceover",
+      "id": "headings-h1-h2-h3",
+      "class": "cursor-walk",
+      "reason": "capture dropped the h1 ('Docs') and over-walked the h3 ('npm' x4); only h2+h3 recorded. Incomplete walk."
+    },
+    {
+      "reader": "voiceover",
+      "id": "heading-skipped-level",
+      "class": "cursor-walk",
+      "reason": "HTML has h1+h3 but capture recorded only the h3; the h1 ('Title') was skipped. Incomplete walk."
+    },
+    {
+      "reader": "voiceover",
+      "id": "empty-heading",
+      "class": "cursor-walk",
+      "reason": "cursor walked past the empty h2 to the next element ('After empty heading'); the heading itself was not captured."
+    }
+  ]
+}

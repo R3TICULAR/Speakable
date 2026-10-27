@@ -1,0 +1,20 @@
+{
+  "id": "blockquote",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "block quote",
+    "Accessibility is not a feature."
+  ],
+  "normalized": [
+    {
+      "raw": "block quote",
+      "name": "block quote"
+    },
+    {
+      "raw": "accessibility is not a feature",
+      "name": "accessibility is not a feature"
+    }
+  ]
+}

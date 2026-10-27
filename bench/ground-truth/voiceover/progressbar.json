@@ -1,0 +1,25 @@
+{
+  "id": "progressbar",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "Upload 60% progress indicator",
+    "",
+    "Upload 60% progress indicator",
+    "",
+    "Upload 60% progress indicator",
+    "",
+    "Upload 60% progress indicator",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "upload 60% progress indicator",
+      "role": "progressbar",
+      "name": "upload 60%"
+    }
+  ]
+}

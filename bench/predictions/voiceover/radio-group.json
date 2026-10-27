@@ -1,0 +1,25 @@
+{
+  "id": "radio-group",
+  "reader": "voiceover",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Shipping speed",
+    "Standard, radio button, selected, 1 of 2",
+    "Express, radio button, 2 of 2"
+  ],
+  "normalized": [
+    {
+      "raw": "shipping speed",
+      "name": "shipping speed"
+    },
+    {
+      "raw": "standard, radio button, selected, 1 of 2",
+      "name": "standard, radio button, selected, 1 of 2"
+    },
+    {
+      "raw": "express, radio button, 2 of 2",
+      "name": "express, radio button, 2 of 2"
+    }
+  ]
+}

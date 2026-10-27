@@ -1,0 +1,19 @@
+{
+  "id": "button-disabled",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Submit order, button, unavailable"
+  ],
+  "normalized": [
+    {
+      "raw": "submit order, button, unavailable",
+      "role": "button",
+      "name": "submit order",
+      "state": [
+        "disabled:true"
+      ]
+    }
+  ]
+}

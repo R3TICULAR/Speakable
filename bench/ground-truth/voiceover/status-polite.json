@@ -1,0 +1,24 @@
+{
+  "id": "status-polite",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "3 items added to cart",
+    "",
+    "3 items added to cart",
+    "",
+    "3 items added to cart",
+    "",
+    "3 items added to cart",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "3 items added to cart",
+      "name": "3 items added to cart"
+    }
+  ]
+}

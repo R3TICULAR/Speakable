@@ -1,0 +1,27 @@
+{
+  "id": "fieldset-group",
+  "reader": "voiceover",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Billing address",
+    "Street, edit text",
+    "City, edit text"
+  ],
+  "normalized": [
+    {
+      "raw": "billing address",
+      "name": "billing address"
+    },
+    {
+      "raw": "street, edit text",
+      "role": "textbox",
+      "name": "street"
+    },
+    {
+      "raw": "city, edit text",
+      "role": "textbox",
+      "name": "city"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "id": "main-and-aside",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "Primary content.",
+    "end of main",
+    "Related links complementary",
+    "Sidebar content.",
+    "end of Related links complementary",
+    "",
+    "",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "primary content",
+      "name": "primary content"
+    },
+    {
+      "raw": "related links complementary",
+      "role": "complementary",
+      "name": "related links"
+    },
+    {
+      "raw": "sidebar content",
+      "name": "sidebar content"
+    }
+  ]
+}

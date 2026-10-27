@@ -1,0 +1,25 @@
+{
+  "id": "redundant-role",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "Delete button",
+    "",
+    "Delete button",
+    "",
+    "Delete button",
+    "",
+    "Delete button",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "delete button",
+      "role": "button",
+      "name": "delete"
+    }
+  ]
+}

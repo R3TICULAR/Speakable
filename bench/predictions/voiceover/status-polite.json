@@ -1,0 +1,20 @@
+{
+  "id": "status-polite",
+  "reader": "voiceover",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "status",
+    "3 items added to cart"
+  ],
+  "normalized": [
+    {
+      "raw": "status",
+      "role": "status"
+    },
+    {
+      "raw": "3 items added to cart",
+      "name": "3 items added to cart"
+    }
+  ]
+}

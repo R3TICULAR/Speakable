@@ -1,0 +1,19 @@
+{
+  "id": "runtime-disclosure",
+  "reader": "voiceover",
+  "mode": "runtime",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "Leaving runtime-disclosure. Tab Search menu pop up pop up button",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "leaving runtime-disclosure. tab search menu pop up pop up button",
+      "role": "button",
+      "name": "leaving runtime-disclosure. tab search menu pop up pop up"
+    }
+  ]
+}

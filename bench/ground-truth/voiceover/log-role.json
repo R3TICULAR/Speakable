@@ -1,0 +1,24 @@
+{
+  "id": "log-role",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "User joined.",
+    "",
+    "User joined.",
+    "",
+    "User joined.",
+    "",
+    "User joined.",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "user joined",
+      "name": "user joined"
+    }
+  ]
+}

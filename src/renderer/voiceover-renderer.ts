@@ -99,6 +99,13 @@ function formatNodeVoiceOver(node: AccessibleNode, c: ColorFunctions): string {
     }
   }
   
+  // Add set position ("N of M"). VoiceOver announces an item's position within a
+  // set (radios, options, tabs, list items), e.g. "Standard, selected, radio
+  // button, 1 of 2". Only when both position and size are known.
+  if (node.state.posinset !== undefined && node.state.setsize !== undefined) {
+    parts.push(`${node.state.posinset} of ${node.state.setsize}`);
+  }
+  
   // Add description (if present)
   if (node.description) {
     parts.push(c.description(node.description));
@@ -257,6 +264,16 @@ function formatRoleVoiceOver(node: AccessibleNode): string {
     case 'status':
       return 'status';
     
+    case 'switch':
+      return 'switch';
+    
+    case 'slider':
+      return 'slider';
+    
+    case 'spinbutton':
+      // VoiceOver announces a number input / spinbutton as "stepper".
+      return 'stepper';
+    
     case 'group':
       return node.name ? 'group' : '';
     
@@ -288,21 +305,31 @@ function formatStatesVoiceOver(node: AccessibleNode): string {
     states.push(node.state.expanded ? 'expanded' : 'collapsed');
   }
   
-  // Checked state (checkbox/radio)
+  // Checked state. VoiceOver speaks it differently by role:
+  //   switch   → "on"/"off"
+  //   radio    → "selected" (only when on; VoiceOver stays silent when off),
+  //              confirmed by GT "Standard selected radio button, 1 of 2"
+  //   checkbox → "checked"/"unchecked"
   if (node.state.checked !== undefined) {
     if (node.state.checked === 'mixed') {
       states.push('mixed');
+    } else if (node.role === 'switch') {
+      states.push(node.state.checked ? 'on' : 'off');
+    } else if (node.role === 'radio') {
+      if (node.state.checked) states.push('selected');
     } else {
       states.push(node.state.checked ? 'checked' : 'unchecked');
     }
   }
   
-  // Pressed state (toggle button)
+  // Pressed state (toggle button). VoiceOver announces a pressed toggle button
+  // as "selected"/"unselected" (not "pressed"), confirmed against real VoiceOver
+  // ground truth ("Bold selected toggle button"). NVDA/JAWS say "pressed".
   if (node.state.pressed !== undefined) {
     if (node.state.pressed === 'mixed') {
       states.push('mixed');
     } else {
-      states.push(node.state.pressed ? 'pressed' : 'not pressed');
+      states.push(node.state.pressed ? 'selected' : 'unselected');
     }
   }
   

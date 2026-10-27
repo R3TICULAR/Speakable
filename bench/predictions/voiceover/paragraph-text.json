@@ -1,0 +1,15 @@
+{
+  "id": "paragraph-text",
+  "reader": "voiceover",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Speakable predicts screen reader output."
+  ],
+  "normalized": [
+    {
+      "raw": "speakable predicts screen reader output",
+      "name": "speakable predicts screen reader output"
+    }
+  ]
+}

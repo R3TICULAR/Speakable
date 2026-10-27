@@ -1,0 +1,25 @@
+{
+  "id": "definition-list",
+  "reader": "voiceover",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "list",
+    "Role",
+    "The type of an element."
+  ],
+  "normalized": [
+    {
+      "raw": "list",
+      "role": "list"
+    },
+    {
+      "raw": "role",
+      "name": "role"
+    },
+    {
+      "raw": "the type of an element",
+      "name": "the type of an element"
+    }
+  ]
+}

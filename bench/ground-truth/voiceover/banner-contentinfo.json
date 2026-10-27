@@ -1,0 +1,32 @@
+{
+  "id": "banner-contentinfo",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "Site header",
+    "end of banner",
+    "footer",
+    "Site footer",
+    "end of footer",
+    "",
+    "",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "site header",
+      "name": "site header"
+    },
+    {
+      "raw": "footer",
+      "name": "footer"
+    },
+    {
+      "raw": "site footer",
+      "name": "site footer"
+    }
+  ]
+}

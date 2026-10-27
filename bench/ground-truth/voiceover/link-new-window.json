@@ -1,0 +1,25 @@
+{
+  "id": "link-new-window",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "link Download report",
+    "",
+    "link Download report",
+    "",
+    "link Download report",
+    "",
+    "link Download report",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "link download report",
+      "role": "link",
+      "name": "download report"
+    }
+  ]
+}

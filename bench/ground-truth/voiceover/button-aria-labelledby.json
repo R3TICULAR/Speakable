@@ -1,0 +1,25 @@
+{
+  "id": "button-aria-labelledby",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "Delete item button",
+    "",
+    "Delete item button",
+    "",
+    "Delete item button",
+    "",
+    "Delete item button",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "delete item button",
+      "role": "button",
+      "name": "delete item"
+    }
+  ]
+}

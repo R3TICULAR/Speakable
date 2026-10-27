@@ -39,14 +39,16 @@ describe('renderVoiceOver', () => {
       expect(announcement).toContain('Menu, button, collapsed');
     });
 
-    it('should announce button with pressed state', () => {
+    it('should announce a pressed toggle button as "selected" (VoiceOver wording, per real-SR ground truth)', () => {
       const dom = new JSDOM('<button aria-pressed="true">Toggle</button>');
       const button = dom.window.document.querySelector('button')!;
       const result = buildAccessibilityTree(button);
       
       const announcement = renderVoiceOver(result.model);
       
-      expect(announcement).toContain('Toggle, button, pressed');
+      // Real VoiceOver announces a pressed toggle button as "selected", not
+      // "pressed" (confirmed by benchmark ground truth: "Bold selected toggle button").
+      expect(announcement).toContain('Toggle, button, selected');
     });
 
     it('should announce disabled button', () => {
@@ -312,7 +314,8 @@ describe('renderVoiceOver', () => {
       
       const announcement = renderVoiceOver(result.model);
       
-      expect(announcement).toContain('Toggle Menu, button, expanded, pressed');
+      // VoiceOver says "selected" for a pressed toggle button (not "pressed").
+      expect(announcement).toContain('Toggle Menu, button, expanded, selected');
     });
 
     it('should announce textbox with multiple states', () => {
@@ -356,7 +359,9 @@ describe('renderVoiceOver', () => {
       
       const announcement = renderVoiceOver(result.model);
       
-      expect(announcement).toBe('Option A, radio button, checked');
+      // VoiceOver announces a selected radio as "selected", not "checked"
+      // (confirmed by benchmark ground truth: "Standard selected radio button").
+      expect(announcement).toBe('Option A, radio button, selected');
     });
   });
 

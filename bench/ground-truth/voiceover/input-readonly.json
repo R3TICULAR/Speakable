@@ -1,0 +1,25 @@
+{
+  "id": "input-readonly",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "ACC-1024 Account ID clickable text",
+    "",
+    "ACC-1024 Account ID clickable text",
+    "",
+    "ACC-1024 Account ID clickable text",
+    "",
+    "ACC-1024 Account ID clickable text",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "acc-1024 account id clickable text",
+      "role": "textbox",
+      "name": "acc-1024 account id"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "id": "radio-group",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Shipping speed",
+    "Standard, radio button, checked",
+    "Express, radio button, not checked"
+  ],
+  "normalized": [
+    {
+      "raw": "shipping speed",
+      "name": "shipping speed"
+    },
+    {
+      "raw": "standard, radio button, checked",
+      "role": "radio",
+      "name": "standard",
+      "state": [
+        "checked:true"
+      ]
+    },
+    {
+      "raw": "express, radio button, not checked",
+      "role": "radio",
+      "name": "express",
+      "state": [
+        "checked:false"
+      ]
+    }
+  ]
+}

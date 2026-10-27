@@ -1,0 +1,28 @@
+{
+  "id": "tab-selected",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Overview, button, selected",
+    "Details, button, not selected"
+  ],
+  "normalized": [
+    {
+      "raw": "overview, button, selected",
+      "role": "button",
+      "name": "overview",
+      "state": [
+        "selected:true"
+      ]
+    },
+    {
+      "raw": "details, button, not selected",
+      "role": "button",
+      "name": "details",
+      "state": [
+        "selected:false"
+      ]
+    }
+  ]
+}

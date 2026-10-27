@@ -1,0 +1,25 @@
+{
+  "id": "heading-skipped-level",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "heading level 3 Subsection",
+    "",
+    "heading level 3 Subsection",
+    "",
+    "heading level 3 Subsection",
+    "",
+    "heading level 3 Subsection",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "heading level 3 subsection",
+      "role": "heading",
+      "name": "level 3 subsection"
+    }
+  ]
+}

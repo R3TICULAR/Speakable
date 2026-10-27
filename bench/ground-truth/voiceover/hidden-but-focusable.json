@@ -1,0 +1,25 @@
+{
+  "id": "hidden-but-focusable",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "Real button",
+    "",
+    "Real button",
+    "",
+    "Real button",
+    "",
+    "Real button",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "real button",
+      "role": "button",
+      "name": "real"
+    }
+  ]
+}

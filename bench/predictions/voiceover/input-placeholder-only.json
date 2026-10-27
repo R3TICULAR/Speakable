@@ -1,0 +1,15 @@
+{
+  "id": "input-placeholder-only",
+  "reader": "voiceover",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "edit text"
+  ],
+  "normalized": [
+    {
+      "raw": "edit text",
+      "role": "textbox"
+    }
+  ]
+}

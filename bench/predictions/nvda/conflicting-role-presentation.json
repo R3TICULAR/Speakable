@@ -1,0 +1,15 @@
+{
+  "id": "conflicting-role-presentation",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Styled thing"
+  ],
+  "normalized": [
+    {
+      "raw": "styled thing",
+      "name": "styled thing"
+    }
+  ]
+}

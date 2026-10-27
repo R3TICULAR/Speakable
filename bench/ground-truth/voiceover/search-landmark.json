@@ -1,0 +1,29 @@
+{
+  "id": "search-landmark",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "Search",
+    "search text field blank",
+    "end of search",
+    "",
+    "",
+    "",
+    "",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "search",
+      "name": "search"
+    },
+    {
+      "raw": "search text field blank",
+      "role": "textbox",
+      "name": "search"
+    }
+  ]
+}

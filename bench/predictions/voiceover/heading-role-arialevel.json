@@ -1,0 +1,19 @@
+{
+  "id": "heading-role-arialevel",
+  "reader": "voiceover",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "heading level 2, Billing settings"
+  ],
+  "normalized": [
+    {
+      "raw": "heading level 2, billing settings",
+      "role": "heading",
+      "name": "billing settings",
+      "state": [
+        "level:2"
+      ]
+    }
+  ]
+}

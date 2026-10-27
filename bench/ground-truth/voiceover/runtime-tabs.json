@@ -1,0 +1,27 @@
+{
+  "id": "runtime-tabs",
+  "reader": "voiceover",
+  "mode": "runtime",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "Profile selected tab, 1 of 3 Account tab group",
+    "Billing selected tab, 2 of 3",
+    "Alerts selected tab, 3 of 3"
+  ],
+  "normalized": [
+    {
+      "raw": "profile selected tab, 1 of 3 account tab group",
+      "name": "profile selected tab, 1 of 3 account tab group"
+    },
+    {
+      "raw": "billing selected tab, 2 of 3",
+      "name": "billing selected tab, 2 of 3"
+    },
+    {
+      "raw": "alerts selected tab, 3 of 3",
+      "name": "alerts selected tab, 3 of 3"
+    }
+  ]
+}

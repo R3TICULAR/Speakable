@@ -1,0 +1,15 @@
+{
+  "id": "empty-accessible-name-button",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "button"
+  ],
+  "normalized": [
+    {
+      "raw": "button",
+      "role": "button"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "id": "link-image-empty-alt",
+  "reader": "voiceover",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "link",
+    "image"
+  ],
+  "normalized": [
+    {
+      "raw": "link",
+      "role": "link"
+    },
+    {
+      "raw": "image",
+      "role": "img"
+    }
+  ]
+}

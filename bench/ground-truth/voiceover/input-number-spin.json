@@ -1,0 +1,25 @@
+{
+  "id": "input-number-spin",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "12.5% Quantity stepper",
+    "",
+    "12.5% Quantity stepper",
+    "",
+    "12.5% Quantity stepper",
+    "",
+    "12.5% Quantity stepper",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "12.5% quantity stepper",
+      "role": "spinbutton",
+      "name": "12.5% quantity"
+    }
+  ]
+}

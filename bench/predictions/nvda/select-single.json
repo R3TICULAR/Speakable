@@ -1,0 +1,25 @@
+{
+  "id": "select-single",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Country, list box, United States",
+    "United States",
+    "Canada"
+  ],
+  "normalized": [
+    {
+      "raw": "country, list box, united states",
+      "name": "country, list box, united states"
+    },
+    {
+      "raw": "united states",
+      "name": "united states"
+    },
+    {
+      "raw": "canada",
+      "name": "canada"
+    }
+  ]
+}

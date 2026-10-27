@@ -1,0 +1,15 @@
+{
+  "id": "input-number-spin",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Quantity, spinbutton, 2"
+  ],
+  "normalized": [
+    {
+      "raw": "quantity, spinbutton, 2",
+      "name": "quantity, spinbutton, 2"
+    }
+  ]
+}

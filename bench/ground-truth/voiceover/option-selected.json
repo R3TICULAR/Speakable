@@ -1,0 +1,24 @@
+{
+  "id": "option-selected",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "Blue (2 of 2)",
+    "",
+    "Blue (2 of 2)",
+    "",
+    "Blue (2 of 2)",
+    "",
+    "Blue (2 of 2)",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "blue (2 of 2)",
+      "name": "blue (2 of 2)"
+    }
+  ]
+}

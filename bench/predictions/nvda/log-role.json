@@ -1,0 +1,15 @@
+{
+  "id": "log-role",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "User joined."
+  ],
+  "normalized": [
+    {
+      "raw": "user joined",
+      "name": "user joined"
+    }
+  ]
+}

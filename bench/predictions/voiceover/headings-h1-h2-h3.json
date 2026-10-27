@@ -1,0 +1,37 @@
+{
+  "id": "headings-h1-h2-h3",
+  "reader": "voiceover",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "heading level 1, Docs",
+    "heading level 2, Install",
+    "heading level 3, npm"
+  ],
+  "normalized": [
+    {
+      "raw": "heading level 1, docs",
+      "role": "heading",
+      "name": "docs",
+      "state": [
+        "level:1"
+      ]
+    },
+    {
+      "raw": "heading level 2, install",
+      "role": "heading",
+      "name": "install",
+      "state": [
+        "level:2"
+      ]
+    },
+    {
+      "raw": "heading level 3, npm",
+      "role": "heading",
+      "name": "npm",
+      "state": [
+        "level:3"
+      ]
+    }
+  ]
+}

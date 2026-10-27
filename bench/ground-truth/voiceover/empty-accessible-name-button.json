@@ -1,0 +1,24 @@
+{
+  "id": "empty-accessible-name-button",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "button",
+    "",
+    "button",
+    "",
+    "button",
+    "",
+    "button",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "button",
+      "role": "button"
+    }
+  ]
+}

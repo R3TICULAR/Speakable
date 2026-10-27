@@ -1,0 +1,20 @@
+{
+  "id": "button-submit",
+  "reader": "voiceover",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "form",
+    "button"
+  ],
+  "normalized": [
+    {
+      "raw": "form",
+      "name": "form"
+    },
+    {
+      "raw": "button",
+      "role": "button"
+    }
+  ]
+}

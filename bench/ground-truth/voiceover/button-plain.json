@@ -1,0 +1,60 @@
+{
+  "id": "button-plain",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "Inbox (4,233) - ceciltoddhunter@gmail.com - Gmail - Memory usage - 305 MB tab, group",
+    "Stitch - Projects - Memory usage - 478 MB tab, group",
+    "1152+ Hero Components for React & Tailwind | 21st - Memory usage - 324 MB tab, group",
+    "Vercel - Memory usage - 574 MB tab, group",
+    "Dashboard | Clerk.com - Memory usage - 215 MB tab, group",
+    "Analytics | Home - Memory usage - 339 MB tab, group",
+    "Overview - Memory usage - 166 MB tab, group",
+    "runtime timeline functionality updates by R3TICULAR · Pull Request #11 · R3TICULAR/Speakable - Memory usage - 217 MB tab, group"
+  ],
+  "normalized": [
+    {
+      "raw": "inbox (4,233) - ceciltoddhunter@gmail.com - gmail - memory usage - 305 mb tab, group",
+      "role": "group",
+      "name": "inbox (4, 233) - ceciltoddhunter@gmail.com - gmail - memory usage - 305 mb tab"
+    },
+    {
+      "raw": "stitch - projects - memory usage - 478 mb tab, group",
+      "role": "group",
+      "name": "stitch - projects - memory usage - 478 mb tab"
+    },
+    {
+      "raw": "1152+ hero components for react & tailwind | 21st - memory usage - 324 mb tab, group",
+      "role": "group",
+      "name": "1152+ hero components for react & tailwind | 21st - memory usage - 324 mb tab"
+    },
+    {
+      "raw": "vercel - memory usage - 574 mb tab, group",
+      "role": "group",
+      "name": "vercel - memory usage - 574 mb tab"
+    },
+    {
+      "raw": "dashboard | clerk.com - memory usage - 215 mb tab, group",
+      "role": "group",
+      "name": "dashboard | clerk.com - memory usage - 215 mb tab"
+    },
+    {
+      "raw": "analytics | home - memory usage - 339 mb tab, group",
+      "role": "group",
+      "name": "analytics | home - memory usage - 339 mb tab"
+    },
+    {
+      "raw": "overview - memory usage - 166 mb tab, group",
+      "role": "group",
+      "name": "overview - memory usage - 166 mb tab"
+    },
+    {
+      "raw": "runtime timeline functionality updates by r3ticular · pull request #11 · r3ticular/speakable - memory usage - 217 mb tab, group",
+      "role": "group",
+      "name": "runtime timeline functionality updates by r3ticular · pull request #11 · r3ticular/speakable - memory usage - 217 mb tab"
+    }
+  ]
+}

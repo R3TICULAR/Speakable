@@ -1,0 +1,36 @@
+{
+  "id": "button-aria-expanded",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Options, button, collapsed",
+    "list",
+    "Edit, list item",
+    "Delete, list item"
+  ],
+  "normalized": [
+    {
+      "raw": "options, button, collapsed",
+      "role": "button",
+      "name": "options",
+      "state": [
+        "expanded:false"
+      ]
+    },
+    {
+      "raw": "list",
+      "role": "list"
+    },
+    {
+      "raw": "edit, list item",
+      "role": "listitem",
+      "name": "edit"
+    },
+    {
+      "raw": "delete, list item",
+      "role": "listitem",
+      "name": "delete"
+    }
+  ]
+}

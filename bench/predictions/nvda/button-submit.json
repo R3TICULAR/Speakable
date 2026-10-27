@@ -1,0 +1,20 @@
+{
+  "id": "button-submit",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "form landmark",
+    "button"
+  ],
+  "normalized": [
+    {
+      "raw": "form landmark",
+      "role": "form"
+    },
+    {
+      "raw": "button",
+      "role": "button"
+    }
+  ]
+}

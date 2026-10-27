@@ -8,7 +8,7 @@
  * capture as staticText nodes, shadow DOM traversal, and CSS hidden state.
  */
 
-import type { AccessibleNode, AnnouncementModel } from '../model/types.js';
+import type { AccessibleNode, AccessibleRole, AnnouncementModel } from '../model/types.js';
 import { CURRENT_MODEL_VERSION } from '../model/types.js';
 import { computeAccessibleName, computeAccessibleDescription } from './aria-name.js';
 import { computeRole, isAccessible } from './role-mapper.js';
@@ -101,6 +101,11 @@ function processChildNode(
   if (node.nodeType === 1) { // ELEMENT_NODE
     const element = node as Element;
     if (isHidden(element)) return;
+    // A <label> that labels a control is consumed as that control's accessible
+    // name and is NOT announced as separate text. Suppressing it prevents the
+    // label text appearing twice (once on the control, once as sibling text) —
+    // confirmed against VoiceOver ground truth for radio/checkbox groups.
+    if (isConsumedLabel(element)) return;
     if (!isAccessible(element)) {
       // Transparent traversal: collect children from role-less element
       const grandchildren = collectChildrenFromRolelessElement(element, warnings);
@@ -110,6 +115,45 @@ function processChildNode(
     const childNode = buildNodeRecursive(element, warnings);
     if (childNode) children.push(childNode);
   }
+}
+
+/**
+ * True for a <label> whose text is consumed as another control's accessible
+ * name, so it must not also surface as standalone text in the tree.
+ *
+ * Covers both association styles:
+ *   explicit:  <label for="id">  → references a control by id
+ *   implicit:  <label><input> …  → wraps a labelable control
+ *
+ * A bare <label> with no associated control (unusual) is left alone so its text
+ * is not silently dropped.
+ */
+function isConsumedLabel(element: Element): boolean {
+  if (element.tagName.toLowerCase() !== 'label') return false;
+
+  // Explicit association via for="controlId".
+  const forId = element.getAttribute('for');
+  if (forId) {
+    const doc = element.ownerDocument;
+    const target = doc?.getElementById(forId);
+    if (target && isLabelableControl(target)) return true;
+  }
+
+  // Implicit association: the label wraps a labelable control.
+  const wrapped = element.querySelector('input, select, textarea, button, meter, progress');
+  if (wrapped && isLabelableControl(wrapped)) return true;
+
+  return false;
+}
+
+/** Elements that a <label> can name (HTML "labelable" elements). */
+function isLabelableControl(element: Element): boolean {
+  const tag = element.tagName.toLowerCase();
+  if (tag === 'input') {
+    // <input type="hidden"> is not labelable.
+    return (element.getAttribute('type') || 'text').toLowerCase() !== 'hidden';
+  }
+  return tag === 'select' || tag === 'textarea' || tag === 'button' || tag === 'meter' || tag === 'progress';
 }
 
 /**
@@ -348,6 +392,49 @@ export function buildAccessibilityTreeWithSelector(
  * @param warnings - Array to collect warnings
  * @returns Accessible node or null if element is hidden or not accessible
  */
+/**
+ * Roles whose sibling members form a "set" that screen readers number as
+ * "N of M". Items are grouped by role among a single parent's direct children.
+ */
+const SET_MEMBER_ROLES: ReadonlySet<AccessibleRole> = new Set<AccessibleRole>([
+  'radio',
+  'option',
+  'listitem',
+]);
+
+/**
+ * Assigns implicit posinset/setsize to a parent's children that belong to a set.
+ *
+ * Mirrors how VoiceOver/NVDA announce set position (e.g. "1 of 2") for grouped
+ * controls even when the author did not supply aria-posinset/aria-setsize.
+ * Members are grouped by role; each role-group is numbered independently in DOM
+ * order. Explicit ARIA values already on a node are preserved (never clobbered).
+ */
+function assignImplicitSetPosition(children: AccessibleNode[]): void {
+  // Count set members per role first (the setsize).
+  const totals = new Map<AccessibleRole, number>();
+  for (const child of children) {
+    if (SET_MEMBER_ROLES.has(child.role)) {
+      totals.set(child.role, (totals.get(child.role) ?? 0) + 1);
+    }
+  }
+
+  // A singleton is not a meaningful "set" — skip to avoid "1 of 1" noise.
+  const seen = new Map<AccessibleRole, number>();
+  for (const child of children) {
+    if (!SET_MEMBER_ROLES.has(child.role)) continue;
+    const total = totals.get(child.role)!;
+    if (total < 2) continue;
+
+    const pos = (seen.get(child.role) ?? 0) + 1;
+    seen.set(child.role, pos);
+
+    // Respect author-provided ARIA; only fill in what is missing.
+    if (child.state.posinset === undefined) child.state.posinset = pos;
+    if (child.state.setsize === undefined) child.state.setsize = total;
+  }
+}
+
 function buildNodeRecursive(
   element: Element,
   warnings: TreeBuildWarning[]
@@ -407,6 +494,12 @@ function buildNodeRecursive(
   
   // Build children (slot-aware; shadow DOM handled centrally)
   const children = collectAccessibleChildren(element, warnings);
+
+  // Assign implicit set position (posinset/setsize) to grouped children.
+  // Screen readers compute "N of M" for members of a set even without explicit
+  // aria-posinset/aria-setsize (radios in a group, options in a listbox, tabs
+  // in a tablist, items in a list). Explicit ARIA values are never overwritten.
+  assignImplicitSetPosition(children);
   
   // Create the accessible node
   const node: AccessibleNode = {

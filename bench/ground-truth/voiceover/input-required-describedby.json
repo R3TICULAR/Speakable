@@ -1,0 +1,29 @@
+{
+  "id": "input-required-describedby",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "Password Must be at least 8 characters. required secure edit text",
+    "Must be at least 8 characters.",
+    "",
+    "Must be at least 8 characters.",
+    "",
+    "Must be at least 8 characters.",
+    "",
+    "Must be at least 8 characters."
+  ],
+  "normalized": [
+    {
+      "raw": "password must be at least 8 characters. required secure edit text",
+      "role": "textbox",
+      "name": "password must be at least 8 characters. required secure"
+    },
+    {
+      "raw": "must be at least 8 characters",
+      "name": "must be at least 8 characters"
+    }
+  ]
+}

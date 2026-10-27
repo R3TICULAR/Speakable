@@ -1,0 +1,32 @@
+{
+  "id": "radio-group",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "Shipping speed",
+    "Standard selected radio button, 1 of 2",
+    "Express radio button, 2 of 2",
+    "end of Shipping speed group",
+    "",
+    "",
+    "",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "shipping speed",
+      "name": "shipping speed"
+    },
+    {
+      "raw": "standard selected radio button, 1 of 2",
+      "name": "standard selected radio button, 1 of 2"
+    },
+    {
+      "raw": "express radio button, 2 of 2",
+      "name": "express radio button, 2 of 2"
+    }
+  ]
+}

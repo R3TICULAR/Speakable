@@ -1,0 +1,24 @@
+{
+  "id": "paragraph-text",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "Speakable predicts screen reader output.",
+    "",
+    "Speakable predicts screen reader output.",
+    "",
+    "Speakable predicts screen reader output.",
+    "",
+    "Speakable predicts screen reader output.",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "speakable predicts screen reader output",
+      "name": "speakable predicts screen reader output"
+    }
+  ]
+}

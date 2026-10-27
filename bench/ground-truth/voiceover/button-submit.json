@@ -1,0 +1,25 @@
+{
+  "id": "button-submit",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "Place order button",
+    "",
+    "Place order button",
+    "",
+    "Place order button",
+    "",
+    "Place order button",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "place order button",
+      "role": "button",
+      "name": "place order"
+    }
+  ]
+}

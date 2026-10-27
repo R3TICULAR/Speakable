@@ -1,0 +1,28 @@
+{
+  "id": "button-aria-expanded",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "Options collapsed button",
+    "",
+    "Options collapsed button",
+    "",
+    "Options collapsed button",
+    "",
+    "Options collapsed button",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "options collapsed button",
+      "role": "button",
+      "name": "options",
+      "state": [
+        "expanded:false"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "id": "checkbox-unchecked",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "Accept terms and conditions unchecked checkbox",
+    "",
+    "Accept terms and conditions unchecked checkbox",
+    "",
+    "Accept terms and conditions unchecked checkbox",
+    "",
+    "Accept terms and conditions unchecked checkbox",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "accept terms and conditions unchecked checkbox",
+      "role": "checkbox",
+      "name": "accept terms and conditions",
+      "state": [
+        "checked:false"
+      ]
+    }
+  ]
+}

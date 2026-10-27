@@ -1,0 +1,42 @@
+{
+  "id": "fieldset-group",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "Billing address",
+    "Street",
+    "Street edit text",
+    "City",
+    "City edit text",
+    "end of Billing address group",
+    "",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "billing address",
+      "name": "billing address"
+    },
+    {
+      "raw": "street",
+      "name": "street"
+    },
+    {
+      "raw": "street edit text",
+      "role": "textbox",
+      "name": "street"
+    },
+    {
+      "raw": "city",
+      "name": "city"
+    },
+    {
+      "raw": "city edit text",
+      "role": "textbox",
+      "name": "city"
+    }
+  ]
+}

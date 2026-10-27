@@ -1,0 +1,16 @@
+{
+  "id": "runtime-accordion",
+  "reader": "voiceover",
+  "mode": "runtime",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Section one, button"
+  ],
+  "normalized": [
+    {
+      "raw": "section one, button",
+      "role": "button",
+      "name": "section one"
+    }
+  ]
+}

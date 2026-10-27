@@ -1,0 +1,28 @@
+{
+  "id": "nav-labelled",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Primary, navigation landmark",
+    "Home, link",
+    "Docs, link"
+  ],
+  "normalized": [
+    {
+      "raw": "primary, navigation landmark",
+      "role": "navigation",
+      "name": "primary"
+    },
+    {
+      "raw": "home, link",
+      "role": "link",
+      "name": "home"
+    },
+    {
+      "raw": "docs, link",
+      "role": "link",
+      "name": "docs"
+    }
+  ]
+}

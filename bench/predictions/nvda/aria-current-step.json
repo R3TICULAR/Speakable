@@ -1,0 +1,27 @@
+{
+  "id": "aria-current-step",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Checkout, navigation landmark",
+    "Cart, link, current step",
+    "Payment, link"
+  ],
+  "normalized": [
+    {
+      "raw": "checkout, navigation landmark",
+      "role": "navigation",
+      "name": "checkout"
+    },
+    {
+      "raw": "cart, link, current step",
+      "name": "cart, link, current step"
+    },
+    {
+      "raw": "payment, link",
+      "role": "link",
+      "name": "payment"
+    }
+  ]
+}

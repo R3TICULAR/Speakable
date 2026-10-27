@@ -1,0 +1,21 @@
+{
+  "id": "search-landmark",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "search landmark",
+    "Search, edit"
+  ],
+  "normalized": [
+    {
+      "raw": "search landmark",
+      "role": "search"
+    },
+    {
+      "raw": "search, edit",
+      "role": "textbox",
+      "name": "search"
+    }
+  ]
+}

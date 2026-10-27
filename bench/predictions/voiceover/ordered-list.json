@@ -1,0 +1,30 @@
+{
+  "id": "ordered-list",
+  "reader": "voiceover",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "list",
+    "First, item, 1 of 3",
+    "Second, item, 2 of 3",
+    "Third, item, 3 of 3"
+  ],
+  "normalized": [
+    {
+      "raw": "list",
+      "role": "list"
+    },
+    {
+      "raw": "first, item, 1 of 3",
+      "name": "first, item, 1 of 3"
+    },
+    {
+      "raw": "second, item, 2 of 3",
+      "name": "second, item, 2 of 3"
+    },
+    {
+      "raw": "third, item, 3 of 3",
+      "name": "third, item, 3 of 3"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "id": "button-aria-pressed",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "Bold selected toggle button",
+    "",
+    "Bold selected toggle button",
+    "",
+    "Bold selected toggle button",
+    "",
+    "Bold selected toggle button",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "bold selected toggle button",
+      "role": "button",
+      "name": "bold",
+      "state": [
+        "selected:true"
+      ]
+    }
+  ]
+}

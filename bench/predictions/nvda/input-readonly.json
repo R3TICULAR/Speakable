@@ -1,0 +1,15 @@
+{
+  "id": "input-readonly",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Account ID, edit, read only, ACC-1024"
+  ],
+  "normalized": [
+    {
+      "raw": "account id, edit, read only, acc-1024",
+      "name": "account id, edit, read only, acc-1024"
+    }
+  ]
+}

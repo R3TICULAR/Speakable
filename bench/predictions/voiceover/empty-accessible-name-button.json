@@ -1,0 +1,15 @@
+{
+  "id": "empty-accessible-name-button",
+  "reader": "voiceover",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "button"
+  ],
+  "normalized": [
+    {
+      "raw": "button",
+      "role": "button"
+    }
+  ]
+}

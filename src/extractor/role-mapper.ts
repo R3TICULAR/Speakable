@@ -126,7 +126,10 @@ const INPUT_TYPE_ROLE_MAP: Record<string, AccessibleRole> = {
   'search': 'textbox',
   'tel': 'textbox',
   'url': 'textbox',
-  'number': 'textbox',
+  // Per ARIA, <input type="number"> has an implicit role of spinbutton
+  // (VoiceOver announces it as "stepper").
+  'number': 'spinbutton',
+  'range': 'slider',
 };
 
 /**

@@ -1,0 +1,24 @@
+{
+  "id": "aria-hidden-content",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "os-default",
+  "rawPhrases": [
+    "Visible text",
+    "",
+    "Visible text",
+    "",
+    "Visible text",
+    "",
+    "Visible text",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "visible text",
+      "name": "visible text"
+    }
+  ]
+}

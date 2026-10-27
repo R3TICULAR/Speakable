@@ -1,0 +1,19 @@
+{
+  "id": "aria-disabled-link",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Next step, link, unavailable"
+  ],
+  "normalized": [
+    {
+      "raw": "next step, link, unavailable",
+      "role": "link",
+      "name": "next step",
+      "state": [
+        "disabled:true"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "id": "aria-disabled-link",
+  "reader": "voiceover",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Next step, link, dimmed"
+  ],
+  "normalized": [
+    {
+      "raw": "next step, link, dimmed",
+      "role": "link",
+      "name": "next step",
+      "state": [
+        "disabled:true"
+      ]
+    }
+  ]
+}

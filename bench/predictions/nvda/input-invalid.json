@@ -1,0 +1,20 @@
+{
+  "id": "input-invalid",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Email, edit, invalid entry, Enter a valid email.",
+    "Enter a valid email."
+  ],
+  "normalized": [
+    {
+      "raw": "email, edit, invalid entry, enter a valid email",
+      "name": "email, edit, invalid entry, enter a valid email"
+    },
+    {
+      "raw": "enter a valid email",
+      "name": "enter a valid email"
+    }
+  ]
+}

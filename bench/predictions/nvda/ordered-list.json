@@ -1,0 +1,33 @@
+{
+  "id": "ordered-list",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "list",
+    "First, list item",
+    "Second, list item",
+    "Third, list item"
+  ],
+  "normalized": [
+    {
+      "raw": "list",
+      "role": "list"
+    },
+    {
+      "raw": "first, list item",
+      "role": "listitem",
+      "name": "first"
+    },
+    {
+      "raw": "second, list item",
+      "role": "listitem",
+      "name": "second"
+    },
+    {
+      "raw": "third, list item",
+      "role": "listitem",
+      "name": "third"
+    }
+  ]
+}

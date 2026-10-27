@@ -1,0 +1,35 @@
+{
+  "id": "button-aria-expanded",
+  "reader": "voiceover",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Options, button, collapsed",
+    "list",
+    "Edit, item, 1 of 2",
+    "Delete, item, 2 of 2"
+  ],
+  "normalized": [
+    {
+      "raw": "options, button, collapsed",
+      "role": "button",
+      "name": "options",
+      "state": [
+        "expanded:false"
+      ]
+    },
+    {
+      "raw": "list",
+      "role": "list"
+    },
+    {
+      "raw": "edit, item, 1 of 2",
+      "role": "textbox",
+      "name": "item, 1 of 2"
+    },
+    {
+      "raw": "delete, item, 2 of 2",
+      "name": "delete, item, 2 of 2"
+    }
+  ]
+}

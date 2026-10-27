@@ -1,0 +1,15 @@
+{
+  "id": "button-icon-title",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "⚙, button, Settings"
+  ],
+  "normalized": [
+    {
+      "raw": "⚙, button, settings",
+      "name": "⚙, button, settings"
+    }
+  ]
+}

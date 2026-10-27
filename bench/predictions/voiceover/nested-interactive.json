@@ -1,0 +1,27 @@
+{
+  "id": "nested-interactive",
+  "reader": "voiceover",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Outer Inner, link",
+    "Outer",
+    "Inner, button"
+  ],
+  "normalized": [
+    {
+      "raw": "outer inner, link",
+      "role": "link",
+      "name": "outer inner"
+    },
+    {
+      "raw": "outer",
+      "name": "outer"
+    },
+    {
+      "raw": "inner, button",
+      "role": "button",
+      "name": "inner"
+    }
+  ]
+}
