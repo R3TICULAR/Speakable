@@ -84,6 +84,12 @@ function buildMarkdown(result: BenchmarkResult): string {
     lines.push('');
   }
 
+  const divergences = result.coverage.divergences ?? [];
+  if (divergences.length) {
+    lines.push(`> **${divergences.length} intentional divergence(s)**, field-scoped and excluded from accuracy. These are places where Speakable deliberately gives MORE than a single screen-reader cursor pass — e.g. it announces every tab/option of a composite widget where a one-pass VoiceOver capture names only the current item. The engine is correct and more informative here; only the diverging field is set aside (other fields on the same case still score). Listed in full under "Intentional divergences" below.`);
+    lines.push('');
+  }
+
   if (!anyScored) {
     lines.push('> **No ground truth captured yet.** Predictions have been generated, but no real screen-reader ground truth is present, so no accuracy can be reported. Run `bench/harness/capture.ts` on macOS (VoiceOver) and Windows (NVDA) to capture ground truth, commit it, then regenerate this report. See `bench/README.md`.');
     lines.push('');
@@ -167,6 +173,15 @@ function buildMarkdown(result: BenchmarkResult): string {
     for (const w of weakest) lines.push(`- **${w.category}** (${w.reader}), ${w.field}: ${pct(w.rate)}`);
   }
   lines.push('');
+
+  if ((result.coverage.divergences ?? []).length) {
+    lines.push('## Intentional divergences');
+    lines.push('');
+    lines.push('Field-scoped, excluded from accuracy by design (not bugs, not capture errors). Each is a place where Speakable deliberately produces more complete output than a single-cursor screen-reader pass. Documented here so the headline measures directly-comparable output while the design choice stays fully visible.');
+    lines.push('');
+    for (const msg of result.coverage.divergences) lines.push(`- ${msg}`);
+    lines.push('');
+  }
 
   if (result.coverage.incomplete.length) {
     lines.push('## Incomplete pairs');

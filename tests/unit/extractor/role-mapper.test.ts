@@ -200,8 +200,20 @@ describe('computeRole', () => {
       expect(result.role).toBe('textbox');
     });
 
-    test('select has listbox role', () => {
+    test('single select has combobox role (per ARIA; VoiceOver "pop up button")', () => {
       const element = createElement('<select><option>Option</option></select>');
+      const result = computeRole(element);
+      expect(result.role).toBe('combobox');
+    });
+
+    test('multiple select has listbox role', () => {
+      const element = createElement('<select multiple><option>Option</option></select>');
+      const result = computeRole(element);
+      expect(result.role).toBe('listbox');
+    });
+
+    test('sized select (size>1) has listbox role', () => {
+      const element = createElement('<select size="4"><option>Option</option></select>');
       const result = computeRole(element);
       expect(result.role).toBe('listbox');
     });

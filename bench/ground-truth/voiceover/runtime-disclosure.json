@@ -4,16 +4,19 @@
   "mode": "runtime",
   "srVersion": "VoiceOver 0.0.1-VoiceOver4",
   "osVersion": "macOS 15.6.1",
-  "browserVersion": "os-default",
+  "browserVersion": "webkit",
   "rawPhrases": [
-    "Leaving runtime-disclosure. Tab Search menu pop up pop up button",
-    ""
+    "",
+    "Shipping details collapsed button"
   ],
   "normalized": [
     {
-      "raw": "leaving runtime-disclosure. tab search menu pop up pop up button",
+      "raw": "shipping details collapsed button",
       "role": "button",
-      "name": "leaving runtime-disclosure. tab search menu pop up pop up"
+      "name": "shipping details",
+      "state": [
+        "expanded:false"
+      ]
     }
   ]
 }

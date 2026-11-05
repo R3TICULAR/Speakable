@@ -4,25 +4,21 @@
   "mode": "static",
   "srVersion": "VoiceOver 0.0.1-VoiceOver4",
   "osVersion": "macOS 15.6.1",
-  "browserVersion": "os-default",
+  "browserVersion": "webkit",
   "rawPhrases": [
-    "Subscribe to newsletter checked checkbox",
+    "Subscribe to newsletter",
     "",
-    "Subscribe to newsletter checked checkbox",
+    "Subscribe to newsletter",
     "",
-    "Subscribe to newsletter checked checkbox",
+    "Subscribe to newsletter",
     "",
-    "Subscribe to newsletter checked checkbox",
+    "Subscribe to newsletter",
     ""
   ],
   "normalized": [
     {
-      "raw": "subscribe to newsletter checked checkbox",
-      "role": "checkbox",
-      "name": "subscribe to newsletter",
-      "state": [
-        "checked:true"
-      ]
+      "raw": "subscribe to newsletter",
+      "name": "subscribe to newsletter"
     }
   ]
 }

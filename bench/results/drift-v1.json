@@ -1,0 +1,1016 @@
+{
+  "version": "v1",
+  "generatedAt": "2026-11-04T23:27:37.323Z",
+  "reader": "voiceover",
+  "pins": {
+    "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+    "osVersion": "macOS 15.6.1",
+    "browserVersion": "webkit"
+  },
+  "totals": {
+    "scored": 63,
+    "quarantined": 4,
+    "candidates": 66
+  },
+  "bucketCounts": {
+    "name: mismatch": 31,
+    "name: missing": 2,
+    "role: missing": 5,
+    "state: extra": 5,
+    "role: mismatch": 15,
+    "state: mismatch": 3,
+    "role: extra": 2,
+    "state: missing": 3
+  },
+  "candidates": [
+    {
+      "id": "button-aria-label",
+      "category": "buttons-links",
+      "reader": "voiceover",
+      "field": "name",
+      "kind": "mismatch",
+      "groundTruth": [
+        "close dialog"
+      ],
+      "prediction": [
+        "close dialog",
+        "×"
+      ],
+      "bucket": "name: mismatch"
+    },
+    {
+      "id": "input-placeholder-only",
+      "category": "form-controls",
+      "reader": "voiceover",
+      "field": "name",
+      "kind": "missing",
+      "groundTruth": [
+        "search products"
+      ],
+      "prediction": [],
+      "bucket": "name: missing"
+    },
+    {
+      "id": "input-required-describedby",
+      "category": "form-controls",
+      "reader": "voiceover",
+      "field": "role",
+      "kind": "missing",
+      "groundTruth": [
+        "textbox"
+      ],
+      "prediction": [],
+      "bucket": "role: missing"
+    },
+    {
+      "id": "input-required-describedby",
+      "category": "form-controls",
+      "reader": "voiceover",
+      "field": "name",
+      "kind": "mismatch",
+      "groundTruth": [
+        "must be at least 8 characters",
+        "password must be at least 8 characters. required invalid data secure"
+      ],
+      "prediction": [
+        "must be at least 8 characters",
+        "password, edit text, required, must be at least 8 characters"
+      ],
+      "bucket": "name: mismatch"
+    },
+    {
+      "id": "radio-group",
+      "category": "form-controls",
+      "reader": "voiceover",
+      "field": "name",
+      "kind": "mismatch",
+      "groundTruth": [
+        "express",
+        "express",
+        "shipping speed",
+        "standard",
+        "standard"
+      ],
+      "prediction": [
+        "express",
+        "shipping speed",
+        "standard"
+      ],
+      "bucket": "name: mismatch"
+    },
+    {
+      "id": "heading-h1",
+      "category": "headings-structure",
+      "reader": "voiceover",
+      "field": "name",
+      "kind": "mismatch",
+      "groundTruth": [
+        "level 1 welcome to speakable"
+      ],
+      "prediction": [
+        "welcome to speakable"
+      ],
+      "bucket": "name: mismatch"
+    },
+    {
+      "id": "heading-h1",
+      "category": "headings-structure",
+      "reader": "voiceover",
+      "field": "state",
+      "kind": "extra",
+      "groundTruth": [],
+      "prediction": [
+        "level:1"
+      ],
+      "bucket": "state: extra"
+    },
+    {
+      "id": "heading-role-arialevel",
+      "category": "headings-structure",
+      "reader": "voiceover",
+      "field": "name",
+      "kind": "mismatch",
+      "groundTruth": [
+        "level 2 billing settings"
+      ],
+      "prediction": [
+        "billing settings"
+      ],
+      "bucket": "name: mismatch"
+    },
+    {
+      "id": "heading-role-arialevel",
+      "category": "headings-structure",
+      "reader": "voiceover",
+      "field": "state",
+      "kind": "extra",
+      "groundTruth": [],
+      "prediction": [
+        "level:2"
+      ],
+      "bucket": "state: extra"
+    },
+    {
+      "id": "nav-labelled",
+      "category": "landmarks",
+      "reader": "voiceover",
+      "field": "role",
+      "kind": "mismatch",
+      "groundTruth": [
+        "link",
+        "link"
+      ],
+      "prediction": [
+        "link",
+        "link",
+        "navigation"
+      ],
+      "bucket": "role: mismatch"
+    },
+    {
+      "id": "nav-labelled",
+      "category": "landmarks",
+      "reader": "voiceover",
+      "field": "name",
+      "kind": "mismatch",
+      "groundTruth": [
+        "docs",
+        "home"
+      ],
+      "prediction": [
+        "docs",
+        "home",
+        "primary"
+      ],
+      "bucket": "name: mismatch"
+    },
+    {
+      "id": "main-and-aside",
+      "category": "landmarks",
+      "reader": "voiceover",
+      "field": "role",
+      "kind": "mismatch",
+      "groundTruth": [
+        "complementary"
+      ],
+      "prediction": [
+        "complementary",
+        "main"
+      ],
+      "bucket": "role: mismatch"
+    },
+    {
+      "id": "button-aria-expanded",
+      "category": "aria-states",
+      "reader": "voiceover",
+      "field": "role",
+      "kind": "mismatch",
+      "groundTruth": [
+        "button"
+      ],
+      "prediction": [
+        "button",
+        "textbox"
+      ],
+      "bucket": "role: mismatch"
+    },
+    {
+      "id": "button-aria-expanded",
+      "category": "aria-states",
+      "reader": "voiceover",
+      "field": "name",
+      "kind": "mismatch",
+      "groundTruth": [
+        "options"
+      ],
+      "prediction": [
+        "delete",
+        "options"
+      ],
+      "bucket": "name: mismatch"
+    },
+    {
+      "id": "button-aria-expanded",
+      "category": "aria-states",
+      "reader": "voiceover",
+      "field": "state",
+      "kind": "mismatch",
+      "groundTruth": [
+        "expanded:false"
+      ],
+      "prediction": [
+        "expanded:false",
+        "position:1/2",
+        "position:2/2"
+      ],
+      "bucket": "state: mismatch"
+    },
+    {
+      "id": "link-image-only",
+      "category": "buttons-links",
+      "reader": "voiceover",
+      "field": "role",
+      "kind": "mismatch",
+      "groundTruth": [
+        "link"
+      ],
+      "prediction": [
+        "img",
+        "link"
+      ],
+      "bucket": "role: mismatch"
+    },
+    {
+      "id": "link-image-only",
+      "category": "buttons-links",
+      "reader": "voiceover",
+      "field": "name",
+      "kind": "mismatch",
+      "groundTruth": [
+        "image speakable home"
+      ],
+      "prediction": [
+        "speakable home"
+      ],
+      "bucket": "name: mismatch"
+    },
+    {
+      "id": "link-image-empty-alt",
+      "category": "buttons-links",
+      "reader": "voiceover",
+      "field": "role",
+      "kind": "mismatch",
+      "groundTruth": [
+        "link"
+      ],
+      "prediction": [
+        "img",
+        "link"
+      ],
+      "bucket": "role: mismatch"
+    },
+    {
+      "id": "link-image-empty-alt",
+      "category": "buttons-links",
+      "reader": "voiceover",
+      "field": "name",
+      "kind": "missing",
+      "groundTruth": [
+        "http://127.0.0.1:49309/"
+      ],
+      "prediction": [],
+      "bucket": "name: missing"
+    },
+    {
+      "id": "button-submit",
+      "category": "buttons-links",
+      "reader": "voiceover",
+      "field": "name",
+      "kind": "mismatch",
+      "groundTruth": [
+        "place order"
+      ],
+      "prediction": [
+        "form"
+      ],
+      "bucket": "name: mismatch"
+    },
+    {
+      "id": "select-single",
+      "category": "form-controls",
+      "reader": "voiceover",
+      "field": "name",
+      "kind": "mismatch",
+      "groundTruth": [
+        "united states country"
+      ],
+      "prediction": [
+        "united states, country"
+      ],
+      "bucket": "name: mismatch"
+    },
+    {
+      "id": "input-invalid",
+      "category": "form-controls",
+      "reader": "voiceover",
+      "field": "role",
+      "kind": "missing",
+      "groundTruth": [
+        "textbox"
+      ],
+      "prediction": [],
+      "bucket": "role: missing"
+    },
+    {
+      "id": "input-invalid",
+      "category": "form-controls",
+      "reader": "voiceover",
+      "field": "name",
+      "kind": "mismatch",
+      "groundTruth": [
+        "email enter a valid email. invalid data",
+        "enter a valid email"
+      ],
+      "prediction": [
+        "email, edit text, invalid data, enter a valid email",
+        "enter a valid email"
+      ],
+      "bucket": "name: mismatch"
+    },
+    {
+      "id": "input-readonly",
+      "category": "form-controls",
+      "reader": "voiceover",
+      "field": "role",
+      "kind": "missing",
+      "groundTruth": [
+        "textbox"
+      ],
+      "prediction": [],
+      "bucket": "role: missing"
+    },
+    {
+      "id": "input-readonly",
+      "category": "form-controls",
+      "reader": "voiceover",
+      "field": "name",
+      "kind": "mismatch",
+      "groundTruth": [
+        "acc-1024 account id"
+      ],
+      "prediction": [
+        "account id, edit text, read only, acc-1024"
+      ],
+      "bucket": "name: mismatch"
+    },
+    {
+      "id": "fieldset-group",
+      "category": "form-controls",
+      "reader": "voiceover",
+      "field": "name",
+      "kind": "mismatch",
+      "groundTruth": [
+        "billing address",
+        "city",
+        "city",
+        "street",
+        "street"
+      ],
+      "prediction": [
+        "billing address",
+        "city",
+        "street"
+      ],
+      "bucket": "name: mismatch"
+    },
+    {
+      "id": "input-number-spin",
+      "category": "form-controls",
+      "reader": "voiceover",
+      "field": "role",
+      "kind": "mismatch",
+      "groundTruth": [
+        "textbox"
+      ],
+      "prediction": [
+        "spinbutton"
+      ],
+      "bucket": "role: mismatch"
+    },
+    {
+      "id": "input-number-spin",
+      "category": "form-controls",
+      "reader": "voiceover",
+      "field": "name",
+      "kind": "mismatch",
+      "groundTruth": [
+        "2 insertion on word: 2 quantity incrementable"
+      ],
+      "prediction": [
+        "quantity"
+      ],
+      "bucket": "name: mismatch"
+    },
+    {
+      "id": "ordered-list",
+      "category": "headings-structure",
+      "reader": "voiceover",
+      "field": "name",
+      "kind": "mismatch",
+      "groundTruth": [
+        "1. first 1 of 3",
+        "2. second 2 of 3",
+        "3. third 3 of 3"
+      ],
+      "prediction": [
+        "first",
+        "second",
+        "third"
+      ],
+      "bucket": "name: mismatch"
+    },
+    {
+      "id": "ordered-list",
+      "category": "headings-structure",
+      "reader": "voiceover",
+      "field": "state",
+      "kind": "extra",
+      "groundTruth": [],
+      "prediction": [
+        "position:1/3",
+        "position:2/3",
+        "position:3/3"
+      ],
+      "bucket": "state: extra"
+    },
+    {
+      "id": "definition-list",
+      "category": "headings-structure",
+      "reader": "voiceover",
+      "field": "name",
+      "kind": "mismatch",
+      "groundTruth": [
+        "role 1 of 2",
+        "the type of an element. 2 of 2"
+      ],
+      "prediction": [
+        "role",
+        "the type of an element"
+      ],
+      "bucket": "name: mismatch"
+    },
+    {
+      "id": "blockquote",
+      "category": "headings-structure",
+      "reader": "voiceover",
+      "field": "name",
+      "kind": "mismatch",
+      "groundTruth": [
+        "accessibility is not a feature"
+      ],
+      "prediction": [
+        "accessibility is not a feature",
+        "blockquote"
+      ],
+      "bucket": "name: mismatch"
+    },
+    {
+      "id": "banner-contentinfo",
+      "category": "landmarks",
+      "reader": "voiceover",
+      "field": "role",
+      "kind": "mismatch",
+      "groundTruth": [
+        "contentinfo"
+      ],
+      "prediction": [
+        "banner",
+        "contentinfo"
+      ],
+      "bucket": "role: mismatch"
+    },
+    {
+      "id": "region-labelled",
+      "category": "landmarks",
+      "reader": "voiceover",
+      "field": "role",
+      "kind": "extra",
+      "groundTruth": [],
+      "prediction": [
+        "region"
+      ],
+      "bucket": "role: extra"
+    },
+    {
+      "id": "region-labelled",
+      "category": "landmarks",
+      "reader": "voiceover",
+      "field": "name",
+      "kind": "mismatch",
+      "groundTruth": [
+        "plans and pricing"
+      ],
+      "prediction": [
+        "plans and pricing",
+        "pricing"
+      ],
+      "bucket": "name: mismatch"
+    },
+    {
+      "id": "duplicate-nav-unlabelled",
+      "category": "landmarks",
+      "reader": "voiceover",
+      "field": "role",
+      "kind": "mismatch",
+      "groundTruth": [
+        "link",
+        "link",
+        "navigation"
+      ],
+      "prediction": [
+        "link",
+        "link",
+        "navigation",
+        "navigation"
+      ],
+      "bucket": "role: mismatch"
+    },
+    {
+      "id": "form-landmark",
+      "category": "landmarks",
+      "reader": "voiceover",
+      "field": "name",
+      "kind": "mismatch",
+      "groundTruth": [
+        "name",
+        "name"
+      ],
+      "prediction": [
+        "form, contact",
+        "name"
+      ],
+      "bucket": "name: mismatch"
+    },
+    {
+      "id": "tab-selected",
+      "category": "aria-states",
+      "reader": "voiceover",
+      "field": "role",
+      "kind": "mismatch",
+      "groundTruth": [
+        "tab"
+      ],
+      "prediction": [
+        "tab",
+        "tab",
+        "tablist"
+      ],
+      "bucket": "role: mismatch"
+    },
+    {
+      "id": "tab-selected",
+      "category": "aria-states",
+      "reader": "voiceover",
+      "field": "name",
+      "kind": "mismatch",
+      "groundTruth": [
+        "details"
+      ],
+      "prediction": [
+        "details",
+        "overview"
+      ],
+      "bucket": "name: mismatch"
+    },
+    {
+      "id": "tab-selected",
+      "category": "aria-states",
+      "reader": "voiceover",
+      "field": "state",
+      "kind": "mismatch",
+      "groundTruth": [
+        "position:2/2"
+      ],
+      "prediction": [
+        "position:1/2",
+        "position:2/2"
+      ],
+      "bucket": "state: mismatch"
+    },
+    {
+      "id": "option-selected",
+      "category": "aria-states",
+      "reader": "voiceover",
+      "field": "role",
+      "kind": "extra",
+      "groundTruth": [],
+      "prediction": [
+        "listbox"
+      ],
+      "bucket": "role: extra"
+    },
+    {
+      "id": "option-selected",
+      "category": "aria-states",
+      "reader": "voiceover",
+      "field": "name",
+      "kind": "mismatch",
+      "groundTruth": [
+        "colors list box 1 item selected. red red selected (1 of 2)"
+      ],
+      "prediction": [
+        "blue, option, unselected",
+        "colors",
+        "red, option"
+      ],
+      "bucket": "name: mismatch"
+    },
+    {
+      "id": "option-selected",
+      "category": "aria-states",
+      "reader": "voiceover",
+      "field": "state",
+      "kind": "extra",
+      "groundTruth": [],
+      "prediction": [
+        "position:1/2",
+        "position:2/2",
+        "selected:true"
+      ],
+      "bucket": "state: extra"
+    },
+    {
+      "id": "aria-current-step",
+      "category": "aria-states",
+      "reader": "voiceover",
+      "field": "role",
+      "kind": "mismatch",
+      "groundTruth": [
+        "link"
+      ],
+      "prediction": [
+        "link",
+        "navigation"
+      ],
+      "bucket": "role: mismatch"
+    },
+    {
+      "id": "aria-current-step",
+      "category": "aria-states",
+      "reader": "voiceover",
+      "field": "name",
+      "kind": "mismatch",
+      "groundTruth": [
+        "current step link cart",
+        "payment"
+      ],
+      "prediction": [
+        "cart, link, current step",
+        "checkout",
+        "payment"
+      ],
+      "bucket": "name: mismatch"
+    },
+    {
+      "id": "progressbar",
+      "category": "aria-states",
+      "reader": "voiceover",
+      "field": "name",
+      "kind": "mismatch",
+      "groundTruth": [
+        "upload"
+      ],
+      "prediction": [
+        "60%",
+        "upload"
+      ],
+      "bucket": "name: mismatch"
+    },
+    {
+      "id": "live-atomic",
+      "category": "live-regions",
+      "reader": "voiceover",
+      "field": "name",
+      "kind": "mismatch",
+      "groundTruth": [
+        "saved at 10:04"
+      ],
+      "prediction": [
+        "at 10:04",
+        "saved"
+      ],
+      "bucket": "name: mismatch"
+    },
+    {
+      "id": "conflicting-role-presentation",
+      "category": "edge-cases",
+      "reader": "voiceover",
+      "field": "role",
+      "kind": "missing",
+      "groundTruth": [
+        "button"
+      ],
+      "prediction": [],
+      "bucket": "role: missing"
+    },
+    {
+      "id": "hidden-but-focusable",
+      "category": "edge-cases",
+      "reader": "voiceover",
+      "field": "role",
+      "kind": "mismatch",
+      "groundTruth": [
+        "button"
+      ],
+      "prediction": [
+        "button",
+        "button"
+      ],
+      "bucket": "role: mismatch"
+    },
+    {
+      "id": "hidden-but-focusable",
+      "category": "edge-cases",
+      "reader": "voiceover",
+      "field": "name",
+      "kind": "mismatch",
+      "groundTruth": [
+        "real"
+      ],
+      "prediction": [
+        "ghost",
+        "real"
+      ],
+      "bucket": "name: mismatch"
+    },
+    {
+      "id": "empty-heading",
+      "category": "edge-cases",
+      "reader": "voiceover",
+      "field": "role",
+      "kind": "mismatch",
+      "groundTruth": [
+        "heading"
+      ],
+      "prediction": [
+        "heading",
+        "heading"
+      ],
+      "bucket": "role: mismatch"
+    },
+    {
+      "id": "empty-heading",
+      "category": "edge-cases",
+      "reader": "voiceover",
+      "field": "state",
+      "kind": "extra",
+      "groundTruth": [],
+      "prediction": [
+        "level:2"
+      ],
+      "bucket": "state: extra"
+    },
+    {
+      "id": "nested-interactive",
+      "category": "edge-cases",
+      "reader": "voiceover",
+      "field": "role",
+      "kind": "mismatch",
+      "groundTruth": [
+        "link"
+      ],
+      "prediction": [
+        "button",
+        "link"
+      ],
+      "bucket": "role: mismatch"
+    },
+    {
+      "id": "nested-interactive",
+      "category": "edge-cases",
+      "reader": "voiceover",
+      "field": "name",
+      "kind": "mismatch",
+      "groundTruth": [
+        "outer inner"
+      ],
+      "prediction": [
+        "inner",
+        "outer",
+        "outer inner"
+      ],
+      "bucket": "name: mismatch"
+    },
+    {
+      "id": "runtime-disclosure",
+      "category": "interactive-components",
+      "reader": "voiceover",
+      "field": "state",
+      "kind": "missing",
+      "groundTruth": [
+        "expanded:false"
+      ],
+      "prediction": [],
+      "bucket": "state: missing"
+    },
+    {
+      "id": "runtime-tabs",
+      "category": "interactive-components",
+      "reader": "voiceover",
+      "field": "role",
+      "kind": "mismatch",
+      "groundTruth": [
+        "tab",
+        "tab"
+      ],
+      "prediction": [
+        "tab",
+        "tab",
+        "tab"
+      ],
+      "bucket": "role: mismatch"
+    },
+    {
+      "id": "runtime-tabs",
+      "category": "interactive-components",
+      "reader": "voiceover",
+      "field": "name",
+      "kind": "mismatch",
+      "groundTruth": [
+        "alerts",
+        "billing",
+        "profile selected tab, 1 of 3 account tab group"
+      ],
+      "prediction": [
+        "alerts",
+        "alerts",
+        "alerts, tab, selected true",
+        "billing",
+        "billing",
+        "billing, tab, selected false",
+        "billing, tab, selected true",
+        "profile",
+        "profile, tab, selected false"
+      ],
+      "bucket": "name: mismatch"
+    },
+    {
+      "id": "runtime-tabs",
+      "category": "interactive-components",
+      "reader": "voiceover",
+      "field": "state",
+      "kind": "mismatch",
+      "groundTruth": [
+        "position:2/3",
+        "position:3/3",
+        "selected:true",
+        "selected:true"
+      ],
+      "prediction": [
+        "selected:true",
+        "selected:true"
+      ],
+      "bucket": "state: mismatch"
+    },
+    {
+      "id": "runtime-accordion",
+      "category": "interactive-components",
+      "reader": "voiceover",
+      "field": "name",
+      "kind": "mismatch",
+      "groundTruth": [
+        "heading level 3 section one"
+      ],
+      "prediction": [
+        "section one"
+      ],
+      "bucket": "name: mismatch"
+    },
+    {
+      "id": "runtime-accordion",
+      "category": "interactive-components",
+      "reader": "voiceover",
+      "field": "state",
+      "kind": "missing",
+      "groundTruth": [
+        "expanded:false"
+      ],
+      "prediction": [],
+      "bucket": "state: missing"
+    },
+    {
+      "id": "runtime-combobox",
+      "category": "interactive-components",
+      "reader": "voiceover",
+      "field": "name",
+      "kind": "mismatch",
+      "groundTruth": [
+        "apple apple selected (1 of 3)",
+        "banana",
+        "banana banana selected (2 of 3)",
+        "fruit list box pop up"
+      ],
+      "prediction": [
+        "apple",
+        "apple, option, selected false",
+        "apple, option, selected true",
+        "apple, option, selected true",
+        "banana",
+        "banana, option, selected false",
+        "banana, option, selected true",
+        "cherry, option, selected false",
+        "fruit"
+      ],
+      "bucket": "name: mismatch"
+    },
+    {
+      "id": "runtime-combobox",
+      "category": "interactive-components",
+      "reader": "voiceover",
+      "field": "state",
+      "kind": "missing",
+      "groundTruth": [
+        "expanded:true"
+      ],
+      "prediction": [],
+      "bucket": "state: missing"
+    },
+    {
+      "id": "button-aria-labelledby",
+      "category": "buttons-links",
+      "reader": "voiceover",
+      "field": "role",
+      "kind": "mismatch",
+      "groundTruth": [
+        "button"
+      ],
+      "prediction": [
+        "button",
+        "listitem"
+      ],
+      "bucket": "role: mismatch"
+    },
+    {
+      "id": "button-aria-labelledby",
+      "category": "buttons-links",
+      "reader": "voiceover",
+      "field": "name",
+      "kind": "mismatch",
+      "groundTruth": [
+        "delete item"
+      ],
+      "prediction": [
+        "delete",
+        "delete item",
+        "🗑"
+      ],
+      "bucket": "name: mismatch"
+    },
+    {
+      "id": "button-icon-title",
+      "category": "buttons-links",
+      "reader": "voiceover",
+      "field": "role",
+      "kind": "missing",
+      "groundTruth": [
+        "button"
+      ],
+      "prediction": [],
+      "bucket": "role: missing"
+    },
+    {
+      "id": "button-icon-title",
+      "category": "buttons-links",
+      "reader": "voiceover",
+      "field": "name",
+      "kind": "mismatch",
+      "groundTruth": [
+        "⚙"
+      ],
+      "prediction": [
+        "⚙, button, settings"
+      ],
+      "bucket": "name: mismatch"
+    }
+  ]
+}

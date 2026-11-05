@@ -4,27 +4,31 @@
   "mode": "static",
   "speakableVersion": "1.7.0",
   "rawPhrases": [
-    "list",
-    "First, item, 1 of 3",
-    "Second, item, 2 of 3",
-    "Third, item, 3 of 3"
+    "First, 1 of 3",
+    "Second, 2 of 3",
+    "Third, 3 of 3"
   ],
   "normalized": [
     {
-      "raw": "list",
-      "role": "list"
+      "raw": "first, 1 of 3",
+      "name": "first",
+      "state": [
+        "position:1/3"
+      ]
     },
     {
-      "raw": "first, item, 1 of 3",
-      "name": "first, item, 1 of 3"
+      "raw": "second, 2 of 3",
+      "name": "second",
+      "state": [
+        "position:2/3"
+      ]
     },
     {
-      "raw": "second, item, 2 of 3",
-      "name": "second, item, 2 of 3"
-    },
-    {
-      "raw": "third, item, 3 of 3",
-      "name": "third, item, 3 of 3"
+      "raw": "third, 3 of 3",
+      "name": "third",
+      "state": [
+        "position:3/3"
+      ]
     }
   ]
 }

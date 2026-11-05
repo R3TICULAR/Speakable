@@ -173,6 +173,33 @@ describe('VoiceOver space-delimited phrasing (no commas)', () => {
     expect(p.role).toBeUndefined();
     expect(p.name).toBe('welcome to speakable');
   });
+
+  it('strips the VoiceOver "edit text <type> field" decoration', () => {
+    expect(parsePhrase('Email address edit text email field')).toMatchObject({
+      role: 'textbox',
+      name: 'email address',
+    });
+    expect(parsePhrase('Search products edit text blank')).toMatchObject({
+      role: 'textbox',
+      name: 'search products',
+    });
+  });
+
+  it('parses a native select as "pop up button" → combobox with expanded state', () => {
+    expect(parsePhrase('United States Country collapsed pop up button')).toMatchObject({
+      role: 'combobox',
+      name: 'united states country',
+      state: ['expanded:false'],
+    });
+  });
+
+  it('parses a tab with set position and no selection wording', () => {
+    expect(parsePhrase('Details tab, 2 of 2')).toMatchObject({
+      role: 'tab',
+      name: 'details',
+      state: ['position:2/2'],
+    });
+  });
 });
 
 describe('normalizePhrases', () => {

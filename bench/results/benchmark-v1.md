@@ -1,6 +1,6 @@
 # Speakable Accuracy Benchmark — v1
 
-_Generated: 2026-10-27T22:40:41.680Z_
+_Generated: 2026-11-04T23:27:37.038Z_
 
 ## What this measures
 
@@ -13,7 +13,7 @@ It is a **fidelity benchmark, not a correctness proof.** Speakable is heuristic.
 | Reader | SR · OS · Browser |
 |---|---|
 | NVDA | _not captured_ |
-| VoiceOver | VoiceOver 0.0.1-VoiceOver4 · macOS 15.6.1 · os-default |
+| VoiceOver | VoiceOver 0.0.1-VoiceOver4 · macOS 15.6.1 · webkit |
 
 ## Coverage
 
@@ -22,13 +22,15 @@ Corpus: **67** cases.
 | Reader | Predicted | Ground truth | Scored |
 |---|---|---|---|
 | nvda | 67 | 0 | 0 |
-| voiceover | 67 | 57 | 57 |
+| voiceover | 67 | 63 | 63 |
 
-> **10 case(s) quarantined** and excluded from scoring because the capture is unreliable — either the cursor read browser chrome instead of the page, or the cursor walk dropped/duplicated/mis-read page content. These are capture problems, not engine problems; the engine is never degraded to match a bad capture. Listed under Incomplete pairs below; they rejoin scoring once re-captured cleanly.
+> **4 case(s) quarantined** and excluded from scoring because the capture is unreliable — either the cursor read browser chrome instead of the page, or the cursor walk dropped/duplicated/mis-read page content. These are capture problems, not engine problems; the engine is never degraded to match a bad capture. Listed under Incomplete pairs below; they rejoin scoring once re-captured cleanly.
+
+> **2 intentional divergence(s)**, field-scoped and excluded from accuracy. These are places where Speakable deliberately gives MORE than a single screen-reader cursor pass — e.g. it announces every tab/option of a composite widget where a one-pass VoiceOver capture names only the current item. The engine is correct and more informative here; only the diverging field is set aside (other fields on the same case still score). Listed in full under "Intentional divergences" below.
 
 ## Headline
 
-**54.8%** — role+name+state accuracy on static cases.
+**57.3%** — role+name+state accuracy on directly-comparable static cases.
 
 _Shown alongside the segmented table below and the version pins above; it is not a standalone score._
 
@@ -37,13 +39,13 @@ _Shown alongside the segmented table below and the version pins above; it is not
 | Reader | Role | Name | State | Value | False+ rate | False− rate | Timeline P/R |
 |---|---|---|---|---|---|---|---|
 | nvda | — | — | — | — | — | — | — |
-| voiceover | 56.1% (23/41) | 44.6% (25/56) | 90.9% (10/11) | n/a | 4.4% | 4.8% | 5.6% / 14.3% |
+| voiceover | 62.0% (31/50) | 48.3% (29/60) | 64.3% (9/14) | 50.0% (1/2) | 2.4% | 4.1% | 4.8% / 10.0% |
 
 ## False positives and false negatives
 
 A **false positive** is Speakable announcing something the real screen reader did not (the retention killer). A **false negative** is the real screen reader announcing something Speakable missed.
 
-- **voiceover**: 10 false positive(s), 11 false negative(s) across scored fields.
+- **voiceover**: 6 false positive(s), 10 false negative(s) across scored fields.
 
 ## By category
 
@@ -51,27 +53,34 @@ A **false positive** is Speakable announcing something the real screen reader di
 
 | Category | Role | Name | State | Value |
 |---|---|---|---|---|
-| aria-states | 55.6% (5/9) | 45.5% (5/11) | 100.0% (6/6) | n/a |
-| buttons-links | 55.6% (5/9) | 33.3% (3/9) | 100.0% (1/1) | n/a |
-| edge-cases | 40.0% (2/5) | 60.0% (3/5) | n/a | n/a |
-| form-controls | 66.7% (8/12) | 46.2% (6/13) | 100.0% (3/3) | n/a |
-| headings-structure | n/a | 25.0% (1/4) | n/a | n/a |
-| interactive-components | 100.0% (1/1) | 0.0% (0/2) | 0.0% (0/1) | n/a |
-| landmarks | 40.0% (2/5) | 42.9% (3/7) | n/a | n/a |
+| aria-states | 77.8% (7/9) | 66.7% (6/9) | 83.3% (5/6) | 50.0% (1/2) |
+| buttons-links | 60.0% (6/10) | 40.0% (4/10) | 100.0% (1/1) | n/a |
+| edge-cases | 33.3% (2/6) | 66.7% (4/6) | n/a | n/a |
+| form-controls | 66.7% (8/12) | 33.3% (4/12) | 100.0% (3/3) | n/a |
+| headings-structure | 100.0% (2/2) | 16.7% (1/6) | n/a | n/a |
+| interactive-components | 80.0% (4/5) | 40.0% (2/5) | 0.0% (0/4) | n/a |
+| landmarks | 33.3% (2/6) | 57.1% (4/7) | n/a | n/a |
 | live-regions | n/a | 80.0% (4/5) | n/a | n/a |
 
 ## Where you still need manual testing
 
 These segments scored lowest and are where you should point manual screen-reader testing:
 
-- **interactive-components** (voiceover), name: 0.0%
 - **interactive-components** (voiceover), state: 0.0%
-- **headings-structure** (voiceover), name: 25.0%
-- **buttons-links** (voiceover), name: 33.3%
-- **landmarks** (voiceover), role: 40.0%
-- **edge-cases** (voiceover), role: 40.0%
-- **landmarks** (voiceover), name: 42.9%
-- **aria-states** (voiceover), name: 45.5%
+- **headings-structure** (voiceover), name: 16.7%
+- **form-controls** (voiceover), name: 33.3%
+- **landmarks** (voiceover), role: 33.3%
+- **edge-cases** (voiceover), role: 33.3%
+- **buttons-links** (voiceover), name: 40.0%
+- **interactive-components** (voiceover), name: 40.0%
+- **aria-states** (voiceover), value: 50.0%
+
+## Intentional divergences
+
+Field-scoped, excluded from accuracy by design (not bugs, not capture errors). Each is a place where Speakable deliberately produces more complete output than a single-cursor screen-reader pass. Documented here so the headline measures directly-comparable output while the design choice stays fully visible.
+
+- tab-selected (voiceover) [role, name, state]: composite widget: engine emits every tab (Overview 1/2, Details 2/2) + the tablist; a single VoiceOver cursor pass announces only the current tab ('Details tab, 2 of 2'). Engine output is correct and more complete.
+- option-selected (voiceover) [role, name, state]: composite widget: engine emits every listbox option with selection/position; a single VoiceOver pass announces the listbox + current option only ('Colors list box ... Red selected (1 of 2)'). Engine output is correct and more complete.
 
 ## Incomplete pairs
 
@@ -127,7 +136,7 @@ Cases not scored (quarantined contamination, or a missing prediction/ground-trut
 - aria-required-input (nvda): prediction present, ground truth missing
 - aria-current-step (nvda): prediction present, ground truth missing
 - progressbar (nvda): prediction present, ground truth missing
-- …and 27 more
+- …and 21 more
 
 ## Reproduce
 

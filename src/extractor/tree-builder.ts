@@ -400,6 +400,7 @@ const SET_MEMBER_ROLES: ReadonlySet<AccessibleRole> = new Set<AccessibleRole>([
   'radio',
   'option',
   'listitem',
+  'tab',
 ]);
 
 /**
@@ -493,7 +494,20 @@ function buildNodeRecursive(
   const focusInfo = extractFocusInfo(element);
   
   // Build children (slot-aware; shadow DOM handled centrally)
-  const children = collectAccessibleChildren(element, warnings);
+  let children = collectAccessibleChildren(element, warnings);
+
+  // Native collapsed <select> (combobox): screen readers announce it as a
+  // collapsed pop-up with the selected value inline, and DO NOT announce the
+  // <option> children until it is opened. Suppress the option children and mark
+  // it collapsed so the static tree reflects the real announced experience.
+  const isNativeSelect = element.tagName.toLowerCase() === 'select';
+  if (isNativeSelect && roleResult.role === 'combobox') {
+    children = [];
+    // A closed native select is collapsed; screen readers announce "collapsed".
+    if (stateResult.state.expanded === undefined) {
+      stateResult.state.expanded = false;
+    }
+  }
 
   // Assign implicit set position (posinset/setsize) to grouped children.
   // Screen readers compute "N of M" for members of a set even without explicit

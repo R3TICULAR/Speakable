@@ -31,6 +31,12 @@ yarn-error.log*
 # Testing
 .vitest/
 
+# Playwright (benchmark capture + POC)
+test-results/
+playwright-report/
+.playwright/
+blob-report/
+
 # Storybook
 storybook-static/
 

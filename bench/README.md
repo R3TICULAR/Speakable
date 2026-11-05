@@ -84,22 +84,59 @@ All commands run from the repo root.
 # 1. Generate Speakable predictions for every case (no AT; runs anywhere)
 npx tsx bench/harness/predict.ts
 
-# 2. Capture real screen-reader ground truth (run on the matching OS)
-#    macOS captures VoiceOver; Windows captures NVDA. Commit the output.
-npx tsx bench/harness/capture.ts
+# 2. Capture real screen-reader ground truth.
+#    PREFERRED (v2): Playwright-driven, isolated browser — cannot read browser
+#    chrome, anchors the cursor in the page via navigateToWebContent().
+#      VoiceOver (macOS):  npx playwright test -c bench/harness/playwright.config.ts --project=webkit
+#      NVDA (Windows):     npx playwright test -c bench/harness/playwright.config.ts --project=chromium
+#    This also writes CO-LOCATED predictions (same live page) for the captured reader.
+#
+#    FALLBACK (v1): OS `open` + Guidepup singleton. Retained while VoiceOver-on-CI
+#    stabilizes; prone to the chrome contamination the triage flags.
+#      npx tsx bench/harness/capture.ts
 
 # 3. Triage the capture: flag any case where the SR cursor read browser
 #    chrome (tab strip, toolbar) instead of the page. Review before scoring.
-npx tsx bench/harness/triage.ts voiceover
+npx tsx bench/harness/triage.ts voiceover    # or: nvda
 
-# 4. Score + generate the report (reads committed predictions + ground truth)
+# 4. Score + generate the accuracy report (committed predictions + ground truth)
 npx tsx bench/harness/report.ts
+
+# 5. Generate the drift / correction report (engine-improvement signal)
+npx tsx bench/harness/drift.ts voiceover     # or: nvda
 
 # Unit tests for the harness (normalize + score)
 npx vitest run tests/bench/
 ```
 
-Outputs land in `bench/results/benchmark-v1.json` and `benchmark-v1.md`.
+Outputs:
+- `bench/results/benchmark-v1.{json,md}` — accuracy report (the trust answer).
+- `bench/results/drift-v1.{json,md}` — correction candidates where Speakable
+  diverges from real screen-reader output, pinned to the captured versions.
+  Advisory only; a human reviews them (the engine is never auto-mutated, and
+  divergences caused by bad captures are quarantined, not chased).
+
+## Playwright capture (v2, preferred)
+
+`bench/harness/capture.spec.ts` drives the real screen reader over a
+Playwright-launched **isolated** browser (VoiceOver↔WebKit, NVDA↔Chromium). This
+structurally removes the browser-chrome contamination class and uses
+`navigateToWebContent()` to anchor the cursor in the page deterministically. It
+also runs Speakable's analyzer against the same live page (co-located
+prediction), so ground truth and prediction describe one render.
+
+Prereqs: the same screen-reader permissions below, plus Playwright browsers
+(`npx playwright install webkit` on macOS, `chromium` on Windows). NVDA capture
+is automated in CI (`.github/workflows/benchmark-capture.yml`); VoiceOver capture
+runs locally on a Mac.
+
+## Matcher (product surface)
+
+The companion package `@reticular/speakable-playwright` promotes this prediction
+logic into a reusable Playwright matcher
+(`expect(locator).toAnnounce({ role, name, state })`) consumers drop into their
+own CI — prediction-only, no screen reader required. See
+`packages/speakable-playwright/README.md`.
 
 ## Triage and quarantine (capture quality gate)
 

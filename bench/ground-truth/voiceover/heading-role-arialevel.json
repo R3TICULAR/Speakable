@@ -4,21 +4,22 @@
   "mode": "static",
   "srVersion": "VoiceOver 0.0.1-VoiceOver4",
   "osVersion": "macOS 15.6.1",
-  "browserVersion": "os-default",
+  "browserVersion": "webkit",
   "rawPhrases": [
-    "Billing settings level 1",
     "",
-    "Billing settings level 1",
+    "heading level 2 Billing settings",
     "",
-    "Billing settings level 1",
+    "heading level 2 Billing settings",
     "",
-    "Billing settings level 1",
-    ""
+    "heading level 2 Billing settings",
+    "",
+    "heading level 2 Billing settings"
   ],
   "normalized": [
     {
-      "raw": "billing settings level 1",
-      "name": "billing settings level 1"
+      "raw": "heading level 2 billing settings",
+      "role": "heading",
+      "name": "level 2 billing settings"
     }
   ]
 }

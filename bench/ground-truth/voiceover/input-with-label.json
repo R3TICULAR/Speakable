@@ -4,20 +4,20 @@
   "mode": "static",
   "srVersion": "VoiceOver 0.0.1-VoiceOver4",
   "osVersion": "macOS 15.6.1",
-  "browserVersion": "os-default",
+  "browserVersion": "webkit",
   "rawPhrases": [
-    "Email address edit text email",
+    "Email address edit text email field",
     "",
-    "Email address edit text email",
+    "Email address edit text email field",
     "",
-    "Email address edit text email",
+    "Email address edit text email field",
     "",
-    "Email address edit text email",
+    "Email address edit text email field",
     ""
   ],
   "normalized": [
     {
-      "raw": "email address edit text email",
+      "raw": "email address edit text email field",
       "role": "textbox",
       "name": "email address"
     }

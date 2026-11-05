@@ -4,21 +4,30 @@
   "mode": "static",
   "speakableVersion": "1.7.0",
   "rawPhrases": [
-    "Overview, button, selected",
-    "Details, button, unselected"
+    "tab group",
+    "Overview, tab, 1 of 2",
+    "Details, tab, 2 of 2"
   ],
   "normalized": [
     {
-      "raw": "overview, button, selected",
-      "role": "button",
+      "raw": "tab group",
+      "role": "tablist"
+    },
+    {
+      "raw": "overview, tab, 1 of 2",
+      "role": "tab",
       "name": "overview",
       "state": [
-        "selected:true"
+        "position:1/2"
       ]
     },
     {
-      "raw": "details, button, unselected",
-      "name": "details, button, unselected"
+      "raw": "details, tab, 2 of 2",
+      "role": "tab",
+      "name": "details",
+      "state": [
+        "position:2/2"
+      ]
     }
   ]
 }

@@ -4,22 +4,22 @@
   "mode": "static",
   "srVersion": "VoiceOver 0.0.1-VoiceOver4",
   "osVersion": "macOS 15.6.1",
-  "browserVersion": "os-default",
+  "browserVersion": "webkit",
   "rawPhrases": [
-    "12.5% Quantity stepper",
+    "2 Insertion on word: 2 Quantity incrementable edit text number field",
     "",
-    "12.5% Quantity stepper",
+    "2 Insertion on word: 2 Quantity incrementable edit text number field",
     "",
-    "12.5% Quantity stepper",
+    "2 Insertion on word: 2 Quantity incrementable edit text number field",
     "",
-    "12.5% Quantity stepper",
+    "2 Insertion on word: 2 Quantity incrementable edit text number field",
     ""
   ],
   "normalized": [
     {
-      "raw": "12.5% quantity stepper",
-      "role": "spinbutton",
-      "name": "12.5% quantity"
+      "raw": "2 insertion on word: 2 quantity incrementable edit text number field",
+      "role": "textbox",
+      "name": "2 insertion on word: 2 quantity incrementable"
     }
   ]
 }

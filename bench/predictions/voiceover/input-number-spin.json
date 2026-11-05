@@ -4,12 +4,14 @@
   "mode": "static",
   "speakableVersion": "1.7.0",
   "rawPhrases": [
-    "Quantity, stepper, 2"
+    "2, Quantity, stepper"
   ],
   "normalized": [
     {
-      "raw": "quantity, stepper, 2",
-      "name": "quantity, stepper, 2"
+      "raw": "2, quantity, stepper",
+      "role": "spinbutton",
+      "name": "quantity",
+      "value": "2"
     }
   ]
 }

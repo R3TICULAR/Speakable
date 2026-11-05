@@ -59,7 +59,9 @@
     "url": "https://github.com/R3TICULAR/AnnounceKit/issues"
   },
   "devDependencies": {
-    "@guidepup/guidepup": "^0.36.4",
+    "@guidepup/guidepup": "^0.38.0",
+    "@guidepup/playwright": "^0.21.0",
+    "@playwright/test": "^1.64.1",
     "@storybook/addon-a11y": "^8.6.18",
     "@storybook/addon-essentials": "^8.6.14",
     "@storybook/html": "^8.6.18",

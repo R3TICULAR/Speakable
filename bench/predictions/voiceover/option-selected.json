@@ -16,11 +16,18 @@
     },
     {
       "raw": "red, option, selected, 1 of 2",
-      "name": "red, option, selected, 1 of 2"
+      "name": "red, option",
+      "state": [
+        "selected:true",
+        "position:1/2"
+      ]
     },
     {
       "raw": "blue, option, unselected, 2 of 2",
-      "name": "blue, option, unselected, 2 of 2"
+      "name": "blue, option, unselected",
+      "state": [
+        "position:2/2"
+      ]
     }
   ]
 }

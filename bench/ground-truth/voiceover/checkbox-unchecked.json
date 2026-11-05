@@ -4,25 +4,21 @@
   "mode": "static",
   "srVersion": "VoiceOver 0.0.1-VoiceOver4",
   "osVersion": "macOS 15.6.1",
-  "browserVersion": "os-default",
+  "browserVersion": "webkit",
   "rawPhrases": [
-    "Accept terms and conditions unchecked checkbox",
+    "Accept terms and conditions",
     "",
-    "Accept terms and conditions unchecked checkbox",
+    "Accept terms and conditions",
     "",
-    "Accept terms and conditions unchecked checkbox",
+    "Accept terms and conditions",
     "",
-    "Accept terms and conditions unchecked checkbox",
+    "Accept terms and conditions",
     ""
   ],
   "normalized": [
     {
-      "raw": "accept terms and conditions unchecked checkbox",
-      "role": "checkbox",
-      "name": "accept terms and conditions",
-      "state": [
-        "checked:false"
-      ]
+      "raw": "accept terms and conditions",
+      "name": "accept terms and conditions"
     }
   ]
 }

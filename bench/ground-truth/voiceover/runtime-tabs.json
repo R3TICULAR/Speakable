@@ -4,7 +4,7 @@
   "mode": "runtime",
   "srVersion": "VoiceOver 0.0.1-VoiceOver4",
   "osVersion": "macOS 15.6.1",
-  "browserVersion": "os-default",
+  "browserVersion": "webkit",
   "rawPhrases": [
     "Profile selected tab, 1 of 3 Account tab group",
     "Billing selected tab, 2 of 3",
@@ -17,11 +17,21 @@
     },
     {
       "raw": "billing selected tab, 2 of 3",
-      "name": "billing selected tab, 2 of 3"
+      "role": "tab",
+      "name": "billing",
+      "state": [
+        "selected:true",
+        "position:2/3"
+      ]
     },
     {
       "raw": "alerts selected tab, 3 of 3",
-      "name": "alerts selected tab, 3 of 3"
+      "role": "tab",
+      "name": "alerts",
+      "state": [
+        "selected:true",
+        "position:3/3"
+      ]
     }
   ]
 }

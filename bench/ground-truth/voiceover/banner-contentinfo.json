@@ -4,13 +4,13 @@
   "mode": "static",
   "srVersion": "VoiceOver 0.0.1-VoiceOver4",
   "osVersion": "macOS 15.6.1",
-  "browserVersion": "os-default",
+  "browserVersion": "webkit",
   "rawPhrases": [
     "Site header",
     "end of banner",
-    "footer",
+    "content information",
     "Site footer",
-    "end of footer",
+    "end of content information",
     "",
     "",
     ""
@@ -21,8 +21,8 @@
       "name": "site header"
     },
     {
-      "raw": "footer",
-      "name": "footer"
+      "raw": "content information",
+      "role": "contentinfo"
     },
     {
       "raw": "site footer",

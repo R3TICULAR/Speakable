@@ -4,21 +4,22 @@
   "mode": "static",
   "srVersion": "VoiceOver 0.0.1-VoiceOver4",
   "osVersion": "macOS 15.6.1",
-  "browserVersion": "os-default",
+  "browserVersion": "webkit",
   "rawPhrases": [
-    "Welcome to Speakable",
     "",
-    "Welcome to Speakable",
+    "heading level 1 Welcome to Speakable",
     "",
-    "Welcome to Speakable",
+    "heading level 1 Welcome to Speakable",
     "",
-    "Welcome to Speakable",
-    ""
+    "heading level 1 Welcome to Speakable",
+    "",
+    "heading level 1 Welcome to Speakable"
   ],
   "normalized": [
     {
-      "raw": "welcome to speakable",
-      "name": "welcome to speakable"
+      "raw": "heading level 1 welcome to speakable",
+      "role": "heading",
+      "name": "level 1 welcome to speakable"
     }
   ]
 }

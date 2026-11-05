@@ -4,21 +4,26 @@
   "mode": "static",
   "speakableVersion": "1.7.0",
   "rawPhrases": [
-    "Overview, button, selected",
-    "Details, button, not selected"
+    "tablist",
+    "Overview, tab, selected",
+    "Details, tab, not selected"
   ],
   "normalized": [
     {
-      "raw": "overview, button, selected",
-      "role": "button",
+      "raw": "tablist",
+      "role": "tablist"
+    },
+    {
+      "raw": "overview, tab, selected",
+      "role": "tab",
       "name": "overview",
       "state": [
         "selected:true"
       ]
     },
     {
-      "raw": "details, button, not selected",
-      "role": "button",
+      "raw": "details, tab, not selected",
+      "role": "tab",
       "name": "details",
       "state": [
         "selected:false"

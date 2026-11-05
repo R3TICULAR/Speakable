@@ -46,22 +46,43 @@ function renderStatic(reader: Reader, model: ReturnType<typeof buildAccessibilit
   return reader === 'nvda' ? renderNVDA(model, false) : renderVoiceOver(model, false);
 }
 
-/** Produce a prediction CaseRecord for one static case + reader. */
-function predictStatic(entry: ManifestEntry, reader: Reader, version: string): CaseRecord {
-  const html = readFileSync(join(CORPUS_DIR, entry.file), 'utf-8');
+/**
+ * Produce a static prediction CaseRecord from an HTML string. Exported so the
+ * co-located Playwright capture (v2) can predict against the SAME live page
+ * markup the screen reader navigated, guaranteeing both sides describe one
+ * render (v2 R2.1). The standalone stage reads the corpus file; co-located
+ * capture passes `page.content()`.
+ */
+export function predictStaticFromHtml(
+  id: string,
+  html: string,
+  reader: Reader,
+  version: string
+): CaseRecord {
   const { document } = parseHTML(html);
   const root = document.body ?? document.documentElement;
   const { model } = buildAccessibilityTree(root as unknown as Element);
   const output = renderStatic(reader, model);
   const rawPhrases = output.split('\n').map((l) => l.trim()).filter(Boolean);
   return {
-    id: entry.id,
+    id,
     reader,
     mode: 'static',
     speakableVersion: version,
     rawPhrases,
     normalized: normalizePhrases(rawPhrases),
   };
+}
+
+/** The Speakable package version, for stamping prediction records. */
+export function getSpeakableVersion(): string {
+  return speakableVersion();
+}
+
+/** Produce a prediction CaseRecord for one static corpus case + reader. */
+function predictStatic(entry: ManifestEntry, reader: Reader, version: string): CaseRecord {
+  const html = readFileSync(join(CORPUS_DIR, entry.file), 'utf-8');
+  return predictStaticFromHtml(entry.id, html, reader, version);
 }
 
 function writeRecord(record: CaseRecord): void {

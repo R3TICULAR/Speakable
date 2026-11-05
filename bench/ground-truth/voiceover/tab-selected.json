@@ -4,7 +4,7 @@
   "mode": "static",
   "srVersion": "VoiceOver 0.0.1-VoiceOver4",
   "osVersion": "macOS 15.6.1",
-  "browserVersion": "os-default",
+  "browserVersion": "webkit",
   "rawPhrases": [
     "Details tab, 2 of 2",
     "",
@@ -18,7 +18,11 @@
   "normalized": [
     {
       "raw": "details tab, 2 of 2",
-      "name": "details tab, 2 of 2"
+      "role": "tab",
+      "name": "details",
+      "state": [
+        "position:2/2"
+      ]
     }
   ]
 }

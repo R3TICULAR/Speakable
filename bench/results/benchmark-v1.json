@@ -1,11 +1,11 @@
 {
   "version": "v1",
-  "generatedAt": "2026-10-27T22:40:41.680Z",
+  "generatedAt": "2026-11-04T23:27:37.038Z",
   "pins": {
     "voiceover": {
       "srVersion": "VoiceOver 0.0.1-VoiceOver4",
       "osVersion": "macOS 15.6.1",
-      "browserVersion": "os-default"
+      "browserVersion": "webkit"
     }
   },
   "coverage": {
@@ -18,8 +18,8 @@
       },
       "voiceover": {
         "predicted": 67,
-        "groundTruth": 57,
-        "scored": 57
+        "groundTruth": 63,
+        "scored": 63
       }
     },
     "incomplete": [
@@ -90,64 +90,62 @@
       "runtime-combobox (nvda): prediction present, ground truth missing",
       "button-aria-labelledby (nvda): prediction present, ground truth missing",
       "button-icon-title (nvda): prediction present, ground truth missing",
-      "button-plain (voiceover): ground truth quarantined — cursor read Chrome tab strip (open tabs + memory readout), never entered the page",
-      "heading-h1 (voiceover): ground truth quarantined — capture recorded only 'Welcome to Speakable' with no role/level; VoiceOver announces h1 as a heading. Engine output ('heading level 1, Welcome to Speakable') is correct; capture under-reported.",
-      "heading-role-arialevel (voiceover): ground truth quarantined — HTML is aria-level=2 but capture recorded 'level 1'. Engine ('level 2') is correct; capture mis-read the level.",
-      "select-single (voiceover): ground truth quarantined — cursor parked on browser toolbar ('menu pop up collapsed button')",
-      "headings-h1-h2-h3 (voiceover): ground truth quarantined — capture dropped the h1 ('Docs') and over-walked the h3 ('npm' x4); only h2+h3 recorded. Incomplete walk.",
-      "heading-skipped-level (voiceover): ground truth quarantined — HTML has h1+h3 but capture recorded only the h3; the h1 ('Title') was skipped. Incomplete walk.",
-      "empty-heading (voiceover): ground truth quarantined — cursor walked past the empty h2 to the next element ('After empty heading'); the heading itself was not captured.",
-      "runtime-disclosure (voiceover): ground truth quarantined — focus left the page into browser toolbar after Tab/interaction ('Leaving ...')",
-      "runtime-modal-dialog (voiceover): ground truth quarantined — focus left the page into browser toolbar after Escape/Tab ('Leaving ...')",
-      "runtime-accordion (voiceover): ground truth quarantined — focus left the page into browser toolbar after Tab/interaction ('Leaving ...')"
+      "checkbox-unchecked (voiceover): ground truth quarantined — same as checkbox-checked: capture recorded only the label text ('Accept terms and conditions'), missing the checkbox role+state the engine correctly emits.",
+      "checkbox-checked (voiceover): ground truth quarantined — capture landed on the <label> sibling text only ('Subscribe to newsletter') — no 'checkbox'/'checked' role+state. The engine ('checkbox, checked') is correct; VoiceOver does announce the role+state. Capture under-reported the control.",
+      "headings-h1-h2-h3 (voiceover): ground truth quarantined — multi-element walk skips the first heading: HTML is h1 'Docs' / h2 'Install' / h3 'npm', but capture records only h2+h3. The h1 'Docs' is dropped because navigateToWebContent()+next() advances past the landing element. Engine output is correct; capture is incomplete.",
+      "heading-skipped-level (voiceover): ground truth quarantined — same multi-element walk limitation: HTML has h1 'Title' + h3 'Subsection' but capture records only the h3. The h1 is dropped. Engine output is correct; capture is incomplete."
+    ],
+    "divergences": [
+      "tab-selected (voiceover) [role, name, state]: composite widget: engine emits every tab (Overview 1/2, Details 2/2) + the tablist; a single VoiceOver cursor pass announces only the current tab ('Details tab, 2 of 2'). Engine output is correct and more complete.",
+      "option-selected (voiceover) [role, name, state]: composite widget: engine emits every listbox option with selection/position; a single VoiceOver pass announces the listbox + current option only ('Colors list box ... Red selected (1 of 2)'). Engine output is correct and more complete."
     ]
   },
   "overall": {
     "voiceover": {
-      "cases": 57,
+      "cases": 63,
       "role": {
-        "applicable": 41,
-        "matched": 23,
-        "rate": 0.5609756097560976
+        "applicable": 50,
+        "matched": 31,
+        "rate": 0.62
       },
       "name": {
-        "applicable": 56,
-        "matched": 25,
-        "rate": 0.44642857142857145
+        "applicable": 60,
+        "matched": 29,
+        "rate": 0.48333333333333334
       },
       "state": {
-        "applicable": 11,
-        "matched": 10,
-        "rate": 0.9090909090909091
+        "applicable": 14,
+        "matched": 9,
+        "rate": 0.6428571428571429
       },
       "value": {
-        "applicable": 0,
-        "matched": 0,
-        "rate": 0
+        "applicable": 2,
+        "matched": 1,
+        "rate": 0.5
       },
-      "falsePositives": 10,
-      "falseNegatives": 11,
-      "falsePositiveRate": 0.043859649122807015,
-      "falseNegativeRate": 0.04824561403508772,
+      "falsePositives": 6,
+      "falseNegatives": 10,
+      "falsePositiveRate": 0.024390243902439025,
+      "falseNegativeRate": 0.04065040650406504,
       "timeline": {
-        "precision": 0.05555555555555555,
-        "recall": 0.14285714285714285
+        "precision": 0.047619047619047616,
+        "recall": 0.1
       }
     }
   },
   "byCategory": {
     "buttons-links": {
       "voiceover": {
-        "cases": 9,
+        "cases": 10,
         "role": {
-          "applicable": 9,
-          "matched": 5,
-          "rate": 0.5555555555555556
+          "applicable": 10,
+          "matched": 6,
+          "rate": 0.6
         },
         "name": {
-          "applicable": 9,
-          "matched": 3,
-          "rate": 0.3333333333333333
+          "applicable": 10,
+          "matched": 4,
+          "rate": 0.4
         },
         "state": {
           "applicable": 1,
@@ -162,21 +160,21 @@
         "falsePositives": 0,
         "falseNegatives": 2,
         "falsePositiveRate": 0,
-        "falseNegativeRate": 0.05555555555555555
+        "falseNegativeRate": 0.05
       }
     },
     "form-controls": {
       "voiceover": {
-        "cases": 13,
+        "cases": 12,
         "role": {
           "applicable": 12,
           "matched": 8,
           "rate": 0.6666666666666666
         },
         "name": {
-          "applicable": 13,
-          "matched": 6,
-          "rate": 0.46153846153846156
+          "applicable": 12,
+          "matched": 4,
+          "rate": 0.3333333333333333
         },
         "state": {
           "applicable": 3,
@@ -188,24 +186,24 @@
           "matched": 0,
           "rate": 0
         },
-        "falsePositives": 0,
-        "falseNegatives": 5,
-        "falsePositiveRate": 0,
-        "falseNegativeRate": 0.09615384615384616
+        "falsePositives": 1,
+        "falseNegatives": 4,
+        "falsePositiveRate": 0.020833333333333332,
+        "falseNegativeRate": 0.08333333333333333
       }
     },
     "headings-structure": {
       "voiceover": {
-        "cases": 4,
+        "cases": 6,
         "role": {
-          "applicable": 0,
-          "matched": 0,
-          "rate": 0
+          "applicable": 2,
+          "matched": 2,
+          "rate": 1
         },
         "name": {
-          "applicable": 4,
+          "applicable": 6,
           "matched": 1,
-          "rate": 0.25
+          "rate": 0.16666666666666666
         },
         "state": {
           "applicable": 0,
@@ -217,7 +215,7 @@
           "matched": 0,
           "rate": 0
         },
-        "falsePositives": 2,
+        "falsePositives": 3,
         "falseNegatives": 0,
         "falsePositiveRate": 0.125,
         "falseNegativeRate": 0
@@ -227,14 +225,14 @@
       "voiceover": {
         "cases": 7,
         "role": {
-          "applicable": 5,
+          "applicable": 6,
           "matched": 2,
-          "rate": 0.4
+          "rate": 0.3333333333333333
         },
         "name": {
           "applicable": 7,
-          "matched": 3,
-          "rate": 0.42857142857142855
+          "matched": 4,
+          "rate": 0.5714285714285714
         },
         "state": {
           "applicable": 0,
@@ -246,9 +244,9 @@
           "matched": 0,
           "rate": 0
         },
-        "falsePositives": 2,
+        "falsePositives": 1,
         "falseNegatives": 0,
-        "falsePositiveRate": 0.07142857142857142,
+        "falsePositiveRate": 0.03571428571428571,
         "falseNegativeRate": 0
       }
     },
@@ -257,28 +255,28 @@
         "cases": 11,
         "role": {
           "applicable": 9,
-          "matched": 5,
-          "rate": 0.5555555555555556
+          "matched": 7,
+          "rate": 0.7777777777777778
         },
         "name": {
-          "applicable": 11,
-          "matched": 5,
-          "rate": 0.45454545454545453
+          "applicable": 9,
+          "matched": 6,
+          "rate": 0.6666666666666666
         },
         "state": {
           "applicable": 6,
-          "matched": 6,
-          "rate": 1
+          "matched": 5,
+          "rate": 0.8333333333333334
         },
         "value": {
-          "applicable": 0,
-          "matched": 0,
-          "rate": 0
+          "applicable": 2,
+          "matched": 1,
+          "rate": 0.5
         },
-        "falsePositives": 3,
-        "falseNegatives": 2,
-        "falsePositiveRate": 0.06818181818181818,
-        "falseNegativeRate": 0.045454545454545456
+        "falsePositives": 0,
+        "falseNegatives": 0,
+        "falsePositiveRate": 0,
+        "falseNegativeRate": 0
       }
     },
     "live-regions": {
@@ -304,27 +302,56 @@
           "matched": 0,
           "rate": 0
         },
-        "falsePositives": 1,
+        "falsePositives": 0,
         "falseNegatives": 0,
-        "falsePositiveRate": 0.05,
+        "falsePositiveRate": 0,
         "falseNegativeRate": 0
       }
     },
     "edge-cases": {
       "voiceover": {
-        "cases": 6,
+        "cases": 7,
         "role": {
+          "applicable": 6,
+          "matched": 2,
+          "rate": 0.3333333333333333
+        },
+        "name": {
+          "applicable": 6,
+          "matched": 4,
+          "rate": 0.6666666666666666
+        },
+        "state": {
+          "applicable": 0,
+          "matched": 0,
+          "rate": 0
+        },
+        "value": {
+          "applicable": 0,
+          "matched": 0,
+          "rate": 0
+        },
+        "falsePositives": 1,
+        "falseNegatives": 1,
+        "falsePositiveRate": 0.03571428571428571,
+        "falseNegativeRate": 0.03571428571428571
+      }
+    },
+    "interactive-components": {
+      "voiceover": {
+        "cases": 5,
+        "role": {
+          "applicable": 5,
+          "matched": 4,
+          "rate": 0.8
+        },
+        "name": {
           "applicable": 5,
           "matched": 2,
           "rate": 0.4
         },
-        "name": {
-          "applicable": 5,
-          "matched": 3,
-          "rate": 0.6
-        },
         "state": {
-          "applicable": 0,
+          "applicable": 4,
           "matched": 0,
           "rate": 0
         },
@@ -334,47 +361,18 @@
           "rate": 0
         },
         "falsePositives": 0,
-        "falseNegatives": 1,
+        "falseNegatives": 3,
         "falsePositiveRate": 0,
-        "falseNegativeRate": 0.041666666666666664
-      }
-    },
-    "interactive-components": {
-      "voiceover": {
-        "cases": 2,
-        "role": {
-          "applicable": 1,
-          "matched": 1,
-          "rate": 1
-        },
-        "name": {
-          "applicable": 2,
-          "matched": 0,
-          "rate": 0
-        },
-        "state": {
-          "applicable": 1,
-          "matched": 0,
-          "rate": 0
-        },
-        "value": {
-          "applicable": 0,
-          "matched": 0,
-          "rate": 0
-        },
-        "falsePositives": 2,
-        "falseNegatives": 1,
-        "falsePositiveRate": 0.25,
-        "falseNegativeRate": 0.125,
+        "falseNegativeRate": 0.15,
         "timeline": {
-          "precision": 0.05555555555555555,
-          "recall": 0.14285714285714285
+          "precision": 0.047619047619047616,
+          "recall": 0.1
         }
       }
     }
   },
   "headline": {
-    "metric": "role+name+state accuracy on static cases",
-    "value": 0.5480769230769231
+    "metric": "role+name+state accuracy on directly-comparable static cases",
+    "value": 0.5727272727272728
   }
 }

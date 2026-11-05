@@ -4,25 +4,21 @@
   "mode": "static",
   "srVersion": "VoiceOver 0.0.1-VoiceOver4",
   "osVersion": "macOS 15.6.1",
-  "browserVersion": "os-default",
+  "browserVersion": "webkit",
   "rawPhrases": [
-    "Role term (1 of 2) 1 of 2",
-    "Role",
-    "end of Role term (1 of 2)",
+    "Role 1 of 2",
     "The type of an element. 2 of 2",
-    "end of definition list",
+    "end of description list",
+    "",
+    "",
     "",
     "",
     ""
   ],
   "normalized": [
     {
-      "raw": "role term (1 of 2) 1 of 2",
-      "name": "role term (1 of 2) 1 of 2"
-    },
-    {
-      "raw": "role",
-      "name": "role"
+      "raw": "role 1 of 2",
+      "name": "role 1 of 2"
     },
     {
       "raw": "the type of an element. 2 of 2",

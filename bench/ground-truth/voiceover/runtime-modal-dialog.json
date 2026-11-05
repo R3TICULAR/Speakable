@@ -4,17 +4,17 @@
   "mode": "runtime",
   "srVersion": "VoiceOver 0.0.1-VoiceOver4",
   "osVersion": "macOS 15.6.1",
-  "browserVersion": "os-default",
+  "browserVersion": "webkit",
   "rawPhrases": [
-    "Leaving runtime-modal-dialog. Tab Search menu pop up pop up button",
     "",
-    "Leaving runtime-modal-dialog. Tab Search menu pop up pop up button"
+    "Open settings button",
+    ""
   ],
   "normalized": [
     {
-      "raw": "leaving runtime-modal-dialog. tab search menu pop up pop up button",
+      "raw": "open settings button",
       "role": "button",
-      "name": "leaving runtime-modal-dialog. tab search menu pop up pop up"
+      "name": "open settings"
     }
   ]
 }

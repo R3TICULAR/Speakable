@@ -4,22 +4,16 @@
   "mode": "static",
   "speakableVersion": "1.7.0",
   "rawPhrases": [
-    "Country, list box, United States",
-    "United States",
-    "Canada"
+    "United States, Country, combo box, collapsed"
   ],
   "normalized": [
     {
-      "raw": "country, list box, united states",
-      "name": "country, list box, united states"
-    },
-    {
-      "raw": "united states",
-      "name": "united states"
-    },
-    {
-      "raw": "canada",
-      "name": "canada"
+      "raw": "united states, country, combo box, collapsed",
+      "role": "combobox",
+      "name": "united states, country",
+      "state": [
+        "expanded:false"
+      ]
     }
   ]
 }

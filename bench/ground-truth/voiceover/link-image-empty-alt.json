@@ -4,22 +4,22 @@
   "mode": "static",
   "srVersion": "VoiceOver 0.0.1-VoiceOver4",
   "osVersion": "macOS 15.6.1",
-  "browserVersion": "os-default",
+  "browserVersion": "webkit",
   "rawPhrases": [
-    "link http://127.0.0.1:62698/",
     "",
-    "link http://127.0.0.1:62698/",
+    "link http://127.0.0.1:49309/",
     "",
-    "link http://127.0.0.1:62698/",
+    "link http://127.0.0.1:49309/",
     "",
-    "link http://127.0.0.1:62698/",
-    ""
+    "link http://127.0.0.1:49309/",
+    "",
+    "link http://127.0.0.1:49309/"
   ],
   "normalized": [
     {
-      "raw": "link http://127.0.0.1:62698/",
+      "raw": "link http://127.0.0.1:49309/",
       "role": "link",
-      "name": "http://127.0.0.1:62698/"
+      "name": "http://127.0.0.1:49309/"
     }
   ]
 }

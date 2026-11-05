@@ -4,12 +4,14 @@
   "mode": "static",
   "speakableVersion": "1.7.0",
   "rawPhrases": [
-    "Volume, slider, 7"
+    "7, Volume, slider"
   ],
   "normalized": [
     {
-      "raw": "volume, slider, 7",
-      "name": "volume, slider, 7"
+      "raw": "7, volume, slider",
+      "role": "slider",
+      "name": "volume",
+      "value": "7"
     }
   ]
 }

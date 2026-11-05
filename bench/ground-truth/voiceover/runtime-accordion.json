@@ -4,16 +4,19 @@
   "mode": "runtime",
   "srVersion": "VoiceOver 0.0.1-VoiceOver4",
   "osVersion": "macOS 15.6.1",
-  "browserVersion": "os-default",
+  "browserVersion": "webkit",
   "rawPhrases": [
-    "Leaving runtime-accordion. Tab Search menu pop up pop up button",
-    ""
+    "",
+    "heading level 3 Section one collapsed button"
   ],
   "normalized": [
     {
-      "raw": "leaving runtime-accordion. tab search menu pop up pop up button",
+      "raw": "heading level 3 section one collapsed button",
       "role": "button",
-      "name": "leaving runtime-accordion. tab search menu pop up pop up"
+      "name": "heading level 3 section one",
+      "state": [
+        "expanded:false"
+      ]
     }
   ]
 }

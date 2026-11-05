@@ -57,6 +57,13 @@ export const ROLE_SYNONYMS: Record<string, string> = {
   'combo box': 'combobox',
   // switch (VoiceOver speaks "switch"; state on/off handled separately)
   'switch': 'switch',
+  // tab (VoiceOver: "tab"; container "tab group")
+  'tab': 'tab',
+  'tab group': 'tablist',
+  'tablist': 'tablist',
+  // native <select> (VoiceOver: "pop up button"; the engine models it as combobox)
+  'pop up button': 'combobox',
+  'popup button': 'combobox',
   // slider / progress (VoiceOver: "slider", "progress indicator")
   'slider': 'slider',
   'progress indicator': 'progressbar',
@@ -202,29 +209,37 @@ function peelTrailingTokens(seg: string): {
     return null;
   };
 
-  // (0) VoiceOver appends "blank" to an empty text field ("... edit text blank",
-  // "... text field blank"). It is an empty-value marker, not name content; drop
-  // it so the role below is at the tail. Only when a role precedes it.
-  if (words.length >= 2 && words[words.length - 1] === 'blank') {
-    const beforeBlank = words.slice(0, words.length - 1).join(' ');
+  // VoiceOver decorates text inputs with a trailing shape of:
+  //   "<name> edit text [<type>] [field|blank]"
+  // e.g. "Email address edit text email field", "Search products edit text blank",
+  // "Quantity ... edit text number field". Peel these decorations from the END —
+  // "field"/"blank" marker, then the input-type word — so the "edit text"/"text
+  // field" role lands at the tail for the role match below. Only peel when a
+  // textbox-family role actually precedes the decoration (conservative).
+
+  const endsInTextboxRole = (ws: string[]): boolean => {
+    const tail = ws.join(' ');
     for (const phrase of ROLE_PHRASES_BY_LEN) {
-      if (beforeBlank.endsWith(phrase)) {
-        words = words.slice(0, words.length - 1);
-        break;
-      }
+      if (ROLE_SYNONYMS[phrase] === 'textbox' && tail.endsWith(phrase)) return true;
+    }
+    return false;
+  };
+
+  // (0) Trailing "field" / "blank" marker (empty-value or decoration), only when
+  // a type word or textbox role sits before it.
+  if (words.length >= 2 && (words[words.length - 1] === 'field' || words[words.length - 1] === 'blank')) {
+    const before = words.slice(0, words.length - 1);
+    const beforeLast = before[before.length - 1];
+    if (VO_INPUT_TYPES.has(beforeLast) || endsInTextboxRole(before)) {
+      words = before; // drop "field"/"blank"
     }
   }
 
-  // (1) VoiceOver appends an input TYPE after "edit text" ("... edit text email").
-  // Peel a single known type word so the role match below can see "edit text".
-  if (words.length >= 1 && VO_INPUT_TYPES.has(words[words.length - 1])) {
-    const maybeRoleTail = words.slice(0, words.length - 1).join(' ');
-    // Only treat the trailing word as a type if what precedes it ends in a role.
-    for (const phrase of ROLE_PHRASES_BY_LEN) {
-      if (maybeRoleTail.endsWith(phrase) && ROLE_SYNONYMS[phrase] === 'textbox') {
-        words = words.slice(0, words.length - 1); // drop the type word
-        break;
-      }
+  // (1) Input TYPE after "edit text" ("... edit text email"). Peel the type word
+  // so the role match below can see "edit text".
+  if (words.length >= 2 && VO_INPUT_TYPES.has(words[words.length - 1])) {
+    if (endsInTextboxRole(words.slice(0, words.length - 1))) {
+      words = words.slice(0, words.length - 1); // drop the type word
     }
   }
 
@@ -309,6 +324,10 @@ function classifySegment(seg: string): { kind: 'role'; value: string } | { kind:
   // Heading level, e.g. "heading level 2" → role heading + state level:2
   const lvl = seg.match(/^heading level (\d)$/);
   if (lvl) return { kind: 'role', value: 'heading' }; // level captured by caller
+  // Set position "N of M" → canonical position state, so it is stripped from the
+  // name identically on both sides (GT "tab, 2 of 2" vs pred "tab, 2 of 2").
+  const pos = seg.match(/^(\d+) of (\d+)$/);
+  if (pos) return { kind: 'state', value: `position:${pos[1]}/${pos[2]}` };
   if (Object.prototype.hasOwnProperty.call(ROLE_SYNONYMS, seg)) {
     return { kind: 'role', value: ROLE_SYNONYMS[seg] };
   }
@@ -402,6 +421,24 @@ export function parsePhrase(rawInput: string): NormalizedPhrase {
 
   if (role) result.role = role;
   if (remaining.length > 0) result.name = remaining.join(', ');
+
+  // Range widgets (slider/progressbar/spinbutton/meter): VoiceOver speaks a bare
+  // numeric value adjacent to the name ("7 Volume slider", "Upload 60%"). Pull a
+  // leading OR trailing bare number/percentage out of the name into `value`, so
+  // "7 volume" and "7, volume" both parse to value=7, name=volume — regardless
+  // of which side comma-joined its parts.
+  const RANGE_ROLES = new Set(['slider', 'progressbar', 'spinbutton', 'meter']);
+  if (result.role && RANGE_ROLES.has(result.role) && result.name && result.value === undefined) {
+    const m = result.name.match(/^(\d+%?)[,\s]+(.+)$/) || result.name.match(/^(.+?)[,\s]+(\d+%?)$/);
+    if (m) {
+      const [a, b] = [m[1], m[2]];
+      const num = /^\d+%?$/.test(a) ? a : b;
+      const rest = num === a ? b : a;
+      result.value = num;
+      result.name = rest.trim();
+    }
+  }
+
   if (states.length > 0) result.state = states;
   return result;
 }

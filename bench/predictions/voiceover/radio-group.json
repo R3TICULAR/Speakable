@@ -15,11 +15,20 @@
     },
     {
       "raw": "standard, radio button, selected, 1 of 2",
-      "name": "standard, radio button, selected, 1 of 2"
+      "role": "radio",
+      "name": "standard",
+      "state": [
+        "selected:true",
+        "position:1/2"
+      ]
     },
     {
       "raw": "express, radio button, 2 of 2",
-      "name": "express, radio button, 2 of 2"
+      "role": "radio",
+      "name": "express",
+      "state": [
+        "position:2/2"
+      ]
     }
   ]
 }

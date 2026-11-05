@@ -4,11 +4,11 @@
   "mode": "runtime",
   "srVersion": "VoiceOver 0.0.1-VoiceOver4",
   "osVersion": "macOS 15.6.1",
-  "browserVersion": "os-default",
+  "browserVersion": "webkit",
   "rawPhrases": [
     "Fruit list box pop up expanded combo box",
-    "Apple selected (1 of 3)",
-    "Banana selected (2 of 3)",
+    "Apple Apple selected (1 of 3)",
+    "Banana Banana selected (2 of 3)",
     "Banana"
   ],
   "normalized": [
@@ -21,12 +21,12 @@
       ]
     },
     {
-      "raw": "apple selected (1 of 3)",
-      "name": "apple selected (1 of 3)"
+      "raw": "apple apple selected (1 of 3)",
+      "name": "apple apple selected (1 of 3)"
     },
     {
-      "raw": "banana selected (2 of 3)",
-      "name": "banana selected (2 of 3)"
+      "raw": "banana banana selected (2 of 3)",
+      "name": "banana banana selected (2 of 3)"
     },
     {
       "raw": "banana",

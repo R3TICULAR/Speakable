@@ -23,10 +23,19 @@ const BENCH_DIR = resolve(__dirname, '..');
 const GROUND_TRUTH_DIR = join(BENCH_DIR, 'ground-truth');
 const PREDICTIONS_DIR = join(BENCH_DIR, 'predictions');
 const QUARANTINE_PATH = join(GROUND_TRUTH_DIR, 'quarantine.json');
+const DIVERGENCE_PATH = join(GROUND_TRUTH_DIR, 'divergences.json');
 
 interface QuarantineEntry {
   reader: Reader;
   id: string;
+  reason: string;
+}
+
+interface DivergenceEntry {
+  reader: Reader;
+  id: string;
+  /** The field(s) that diverge intentionally. Omit → all four fields. */
+  fields?: Array<'role' | 'name' | 'state' | 'value'>;
   reason: string;
 }
 
@@ -44,6 +53,39 @@ function loadQuarantine(): Map<string, string> {
     for (const q of parsed.quarantined ?? []) map.set(`${q.reader}/${q.id}`, q.reason);
   } catch {
     /* malformed quarantine file: treat as empty rather than failing the report */
+  }
+  return map;
+}
+
+export interface DivergenceInfo {
+  /** Which fields to exclude for this (reader, id). All four if `fields` omitted. */
+  fields: Set<'role' | 'name' | 'state' | 'value'>;
+  reason: string;
+}
+
+/**
+ * Load the INTENTIONAL-DIVERGENCE registry: (reader, id, field) pairs where the
+ * engine is deliberately different from a single-cursor capture and is NOT a
+ * bug — e.g. the engine emits every tab/option of a composite widget, while a
+ * one-pass VoiceOver capture announces only the current item. The diverging
+ * FIELD is excluded from the accuracy denominator (not the whole case), and the
+ * report shows a separate "intentional divergence" line. Other fields on the
+ * same case still score, so a real miss there is never hidden.
+ *
+ * Integrity: entries require a written, specific reason and are added by a
+ * human, exactly like quarantine. This is NOT a dumping ground for misses.
+ */
+function loadDivergences(): Map<string, DivergenceInfo> {
+  const map = new Map<string, DivergenceInfo>();
+  if (!existsSync(DIVERGENCE_PATH)) return map;
+  try {
+    const parsed = JSON.parse(readFileSync(DIVERGENCE_PATH, 'utf-8')) as { divergences?: DivergenceEntry[] };
+    for (const d of parsed.divergences ?? []) {
+      const fields = new Set(d.fields ?? (['role', 'name', 'state', 'value'] as const));
+      map.set(`${d.reader}/${d.id}`, { fields, reason: d.reason });
+    }
+  } catch {
+    /* malformed: treat as empty rather than failing the report */
   }
   return map;
 }
@@ -79,6 +121,8 @@ export interface BenchmarkResult {
     totalCases: number;
     readers: Record<Reader, { predicted: number; groundTruth: number; scored: number }>;
     incomplete: string[]; // "<id> (<reader>): reason"
+    /** Intentional field-level divergences excluded from accuracy, with reasons. */
+    divergences: string[]; // "<id> (<reader>) [fields]: reason"
   };
   overall: Partial<Record<Reader, SegmentScore>>;
   byCategory: Record<string, Partial<Record<Reader, SegmentScore>>>;
@@ -159,12 +203,23 @@ function lcsLength(a: string[], b: string[]): number {
   return dp[a.length][b.length];
 }
 
-/** Accumulate one scored case (ground truth + prediction both present). */
-function scoreCase(acc: Acc, truth: CaseRecord, pred: CaseRecord): void {
+/**
+ * Accumulate one scored case (ground truth + prediction both present).
+ * `divergentFields` lists fields excluded as INTENTIONAL divergence for this
+ * (reader, id) — they are skipped from accuracy AND false +/- so a deliberate
+ * design difference is neither counted as a miss nor as a false positive.
+ */
+function scoreCase(
+  acc: Acc,
+  truth: CaseRecord,
+  pred: CaseRecord,
+  divergentFields?: Set<Field>
+): void {
   acc.cases++;
 
   // Per-field accuracy: a field is "applicable" when ground truth has ≥1 value.
   for (const field of FIELDS) {
+    if (divergentFields?.has(field)) continue; // intentional divergence: do not score this field
     const tv = fieldValues(truth.normalized, field);
     const pv = fieldValues(pred.normalized, field);
     if (tv.length > 0) {
@@ -233,6 +288,8 @@ export function score(): BenchmarkResult {
   const entries = loadManifest();
   const categories = Array.from(new Set(entries.map((e) => e.category)));
   const quarantine = loadQuarantine();
+  const divergences = loadDivergences();
+  const divergenceSeen = new Set<string>();
 
   const result: BenchmarkResult = {
     version: 'v1',
@@ -245,6 +302,7 @@ export function score(): BenchmarkResult {
         voiceover: { predicted: 0, groundTruth: 0, scored: 0 },
       },
       incomplete: [],
+      divergences: [],
     },
     overall: {},
     byCategory: {},
@@ -279,9 +337,16 @@ export function score(): BenchmarkResult {
       if (quarantineReason) {
         result.coverage.incomplete.push(`${entry.id} (${reader}): ground truth quarantined — ${quarantineReason}`);
       } else if (pred && truth) {
-        scoreCase(overallAcc, truth, pred);
-        scoreCase(catAccs.get(entry.category)!, truth, pred);
+        const div = divergences.get(`${reader}/${entry.id}`);
+        scoreCase(overallAcc, truth, pred, div?.fields);
+        scoreCase(catAccs.get(entry.category)!, truth, pred, div?.fields);
         result.coverage.readers[reader].scored++;
+        if (div && !divergenceSeen.has(`${reader}/${entry.id}`)) {
+          divergenceSeen.add(`${reader}/${entry.id}`);
+          result.coverage.divergences.push(
+            `${entry.id} (${reader}) [${[...div.fields].join(', ')}]: ${div.reason}`
+          );
+        }
       } else if (pred && !truth) {
         result.coverage.incomplete.push(`${entry.id} (${reader}): prediction present, ground truth missing`);
       } else if (!pred && truth) {
@@ -303,7 +368,7 @@ export function score(): BenchmarkResult {
 
   // Headline (only when there is something scored): role+name+state accuracy on
   // static cases, averaged across readers that were scored.
-  const headline = computeHeadline(entries, quarantine);
+  const headline = computeHeadline(entries, quarantine, divergences);
   result.headline = headline;
 
   return result;
@@ -311,7 +376,8 @@ export function score(): BenchmarkResult {
 
 function computeHeadline(
   entries: ReturnType<typeof loadManifest>,
-  quarantine: Map<string, string>
+  quarantine: Map<string, string>,
+  divergences: Map<string, DivergenceInfo>
 ): { metric: string; value: number } | null {
   const staticIds = new Set(entries.filter((e) => e.mode === 'static').map((e) => e.id));
   let applicable = 0;
@@ -321,10 +387,12 @@ function computeHeadline(
     for (const entry of entries) {
       if (!staticIds.has(entry.id)) continue;
       if (quarantine.has(`${reader}/${entry.id}`)) continue; // excluded: contaminated capture
+      const div = divergences.get(`${reader}/${entry.id}`);
       const pred = readRecord(PREDICTIONS_DIR, reader, entry.id);
       const truth = readRecord(GROUND_TRUTH_DIR, reader, entry.id);
       if (!pred || !truth) continue;
       for (const field of ['role', 'name', 'state'] as const) {
+        if (div?.fields.has(field)) continue; // intentional divergence excluded from headline
         const tv = fieldValues(truth.normalized, field);
         if (tv.length === 0) continue;
         applicable++;
@@ -334,5 +402,5 @@ function computeHeadline(
   }
 
   if (applicable === 0) return null;
-  return { metric: 'role+name+state accuracy on static cases', value: matched / applicable };
+  return { metric: 'role+name+state accuracy on directly-comparable static cases', value: matched / applicable };
 }

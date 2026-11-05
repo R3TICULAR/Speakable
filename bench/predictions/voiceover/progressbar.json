@@ -4,13 +4,15 @@
   "mode": "static",
   "speakableVersion": "1.7.0",
   "rawPhrases": [
-    "Upload, progress indicator, 60",
+    "Upload, 60, progress indicator",
     "60%"
   ],
   "normalized": [
     {
-      "raw": "upload, progress indicator, 60",
-      "name": "upload, progress indicator, 60"
+      "raw": "upload, 60, progress indicator",
+      "role": "progressbar",
+      "name": "upload",
+      "value": "60"
     },
     {
       "raw": "60%",
