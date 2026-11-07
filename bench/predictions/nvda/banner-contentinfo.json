@@ -1,0 +1,30 @@
+{
+  "id": "banner-contentinfo",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "banner landmark",
+    "Site header",
+    "content information landmark",
+    "Site footer"
+  ],
+  "normalized": [
+    {
+      "raw": "banner landmark",
+      "role": "banner"
+    },
+    {
+      "raw": "site header",
+      "name": "site header"
+    },
+    {
+      "raw": "content information landmark",
+      "role": "contentinfo"
+    },
+    {
+      "raw": "site footer",
+      "name": "site footer"
+    }
+  ]
+}

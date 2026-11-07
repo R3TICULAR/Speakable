@@ -1,0 +1,21 @@
+{
+  "id": "region-labelled",
+  "reader": "voiceover",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "region, Pricing",
+    "Plans and pricing."
+  ],
+  "normalized": [
+    {
+      "raw": "region, pricing",
+      "role": "region",
+      "name": "pricing"
+    },
+    {
+      "raw": "plans and pricing",
+      "name": "plans and pricing"
+    }
+  ]
+}

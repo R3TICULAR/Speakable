@@ -1,0 +1,46 @@
+{
+  "name": "@reticular/speakable-playwright",
+  "version": "0.1.0",
+  "description": "Playwright matcher for Speakable — assert screen-reader-aware expectations in your own CI, no screen reader required.",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts --clean",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "playwright",
+    "accessibility",
+    "a11y",
+    "screen-reader",
+    "voiceover",
+    "nvda",
+    "testing",
+    "matcher"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/R3TICULAR/AnnounceKit.git",
+    "directory": "packages/speakable-playwright"
+  },
+  "peerDependencies": {
+    "@playwright/test": ">=1.40.0",
+    "@reticular/speakable": ">=1.7.0"
+  },
+  "devDependencies": {
+    "@playwright/test": ">=1.40.0",
+    "@reticular/speakable": "*"
+  }
+}

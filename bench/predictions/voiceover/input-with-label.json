@@ -1,0 +1,16 @@
+{
+  "id": "input-with-label",
+  "reader": "voiceover",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Email address, edit text"
+  ],
+  "normalized": [
+    {
+      "raw": "email address, edit text",
+      "role": "textbox",
+      "name": "email address"
+    }
+  ]
+}

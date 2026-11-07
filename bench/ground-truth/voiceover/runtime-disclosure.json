@@ -1,0 +1,22 @@
+{
+  "id": "runtime-disclosure",
+  "reader": "voiceover",
+  "mode": "runtime",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "webkit",
+  "rawPhrases": [
+    "",
+    "Shipping details collapsed button"
+  ],
+  "normalized": [
+    {
+      "raw": "shipping details collapsed button",
+      "role": "button",
+      "name": "shipping details",
+      "state": [
+        "expanded:false"
+      ]
+    }
+  ]
+}

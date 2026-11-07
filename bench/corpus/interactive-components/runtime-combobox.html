@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>runtime-combobox</title></head>
+<body>
+<label id="lbl">Fruit</label>
+<input role="combobox" aria-expanded="true" aria-controls="lb" aria-labelledby="lbl" aria-activedescendant="" />
+<ul id="lb" role="listbox">
+<li id="o1" role="option">Apple</li><li id="o2" role="option">Banana</li><li id="o3" role="option">Cherry</li></ul>
+<div id="s" role="status" aria-live="polite" style="position:absolute;left:-9999px"></div>
+<script>
+var cb=document.querySelector('[role=combobox]'),opts=[].slice.call(document.querySelectorAll('[role=option]')),i=-1,s=document.getElementById('s');
+cb.addEventListener('keydown',function(e){if(e.key==='ArrowDown'){e.preventDefault();i=Math.min(i+1,opts.length-1);cb.setAttribute('aria-activedescendant',opts[i].id);opts.forEach(function(o){o.setAttribute('aria-selected','false');});opts[i].setAttribute('aria-selected','true');s.textContent=opts[i].textContent;}});
+</script>
+</body></html>

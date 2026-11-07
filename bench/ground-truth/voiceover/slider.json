@@ -1,0 +1,26 @@
+{
+  "id": "slider",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "webkit",
+  "rawPhrases": [
+    "",
+    "7 Volume slider",
+    "",
+    "7 Volume slider",
+    "",
+    "7 Volume slider",
+    "",
+    "7 Volume slider"
+  ],
+  "normalized": [
+    {
+      "raw": "7 volume slider",
+      "role": "slider",
+      "name": "volume",
+      "value": "7"
+    }
+  ]
+}

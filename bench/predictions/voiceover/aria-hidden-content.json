@@ -1,0 +1,15 @@
+{
+  "id": "aria-hidden-content",
+  "reader": "voiceover",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Visible text"
+  ],
+  "normalized": [
+    {
+      "raw": "visible text",
+      "name": "visible text"
+    }
+  ]
+}

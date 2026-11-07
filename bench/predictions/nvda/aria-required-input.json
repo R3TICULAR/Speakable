@@ -1,0 +1,19 @@
+{
+  "id": "aria-required-input",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Full name, edit, required"
+  ],
+  "normalized": [
+    {
+      "raw": "full name, edit, required",
+      "role": "textbox",
+      "name": "full name",
+      "state": [
+        "required:true"
+      ]
+    }
+  ]
+}

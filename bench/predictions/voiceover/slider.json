@@ -1,0 +1,17 @@
+{
+  "id": "slider",
+  "reader": "voiceover",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "7, Volume, slider"
+  ],
+  "normalized": [
+    {
+      "raw": "7, volume, slider",
+      "role": "slider",
+      "name": "volume",
+      "value": "7"
+    }
+  ]
+}

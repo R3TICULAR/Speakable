@@ -39,14 +39,16 @@ describe('renderVoiceOver', () => {
       expect(announcement).toContain('Menu, button, collapsed');
     });
 
-    it('should announce button with pressed state', () => {
+    it('should announce a pressed toggle button as "selected" (VoiceOver wording, per real-SR ground truth)', () => {
       const dom = new JSDOM('<button aria-pressed="true">Toggle</button>');
       const button = dom.window.document.querySelector('button')!;
       const result = buildAccessibilityTree(button);
       
       const announcement = renderVoiceOver(result.model);
       
-      expect(announcement).toContain('Toggle, button, pressed');
+      // Real VoiceOver announces a pressed toggle button as "selected", not
+      // "pressed" (confirmed by benchmark ground truth: "Bold selected toggle button").
+      expect(announcement).toContain('Toggle, button, selected');
     });
 
     it('should announce disabled button', () => {
@@ -260,11 +262,16 @@ describe('renderVoiceOver', () => {
       
       const announcement = renderVoiceOver(result.model);
       
-      expect(announcement).toContain('list');
-      // VoiceOver says "item" not "list item"
-      expect(announcement).toContain('Item 1, item');
-      expect(announcement).toContain('Item 2, item');
-      expect(announcement).toContain('Item 3, item');
+      // VoiceOver's continuous reading emits NO standalone "list" entry line for
+      // an unnamed list (only an "end of list" boundary on exit, which we don't
+      // model); and it does NOT speak "item" for a list item — just the text
+      // with set position "N of M". Confirmed by benchmark GT "1. First 1 of 3".
+      // (NVDA DOES announce "list"; that behavior is unchanged in its renderer.)
+      expect(announcement).not.toContain('list');
+      expect(announcement).toContain('Item 1, 1 of 3');
+      expect(announcement).toContain('Item 2, 2 of 3');
+      expect(announcement).toContain('Item 3, 3 of 3');
+      expect(announcement).not.toContain(', item');
     });
   });
 
@@ -312,7 +319,8 @@ describe('renderVoiceOver', () => {
       
       const announcement = renderVoiceOver(result.model);
       
-      expect(announcement).toContain('Toggle Menu, button, expanded, pressed');
+      // VoiceOver says "selected" for a pressed toggle button (not "pressed").
+      expect(announcement).toContain('Toggle Menu, button, expanded, selected');
     });
 
     it('should announce textbox with multiple states', () => {
@@ -356,7 +364,66 @@ describe('renderVoiceOver', () => {
       
       const announcement = renderVoiceOver(result.model);
       
-      expect(announcement).toBe('Option A, radio button, checked');
+      // VoiceOver announces a selected radio as "selected", not "checked"
+      // (confirmed by benchmark ground truth: "Standard selected radio button").
+      expect(announcement).toBe('Option A, radio button, selected');
+    });
+  });
+
+  describe('tab announcements', () => {
+    it('announces role=tab as "tab" with set position, no selection wording', () => {
+      // VoiceOver says "Details, tab, 2 of 2" — role "tab", position, and it does
+      // NOT speak "selected"/"unselected" for tabs (confirmed by benchmark GT).
+      const dom = new JSDOM(
+        '<div role="tablist"><button role="tab" aria-selected="true">Overview</button>' +
+          '<button role="tab" aria-selected="false">Details</button></div>'
+      );
+      const result = buildAccessibilityTree(dom.window.document.querySelector('[role=tablist]')!);
+      const announcement = renderVoiceOver(result.model);
+
+      expect(announcement).toContain('Overview, tab, 1 of 2');
+      expect(announcement).toContain('Details, tab, 2 of 2');
+      expect(announcement).not.toContain('selected');
+      expect(announcement).not.toContain('unselected');
+    });
+  });
+
+  describe('silent structural containers (VoiceOver-only)', () => {
+    it('suppresses the standalone list/status container line in VoiceOver', () => {
+      const dom = new JSDOM('<ol><li>First</li><li>Second</li></ol>');
+      const result = buildAccessibilityTree(dom.window.document.querySelector('ol')!);
+      const vo = renderVoiceOver(result.model);
+      // VoiceOver reads the items; no "list" entry line (only an exit boundary).
+      expect(vo).not.toContain('list');
+      expect(vo).toContain('First');
+      expect(vo).toContain('Second');
+    });
+
+    it('still announces a NAMED container (suppression is for unnamed only)', () => {
+      const dom = new JSDOM('<section role="status" aria-label="Cart status">1 item</section>');
+      const result = buildAccessibilityTree(dom.window.document.querySelector('[role=status]')!);
+      const vo = renderVoiceOver(result.model);
+      // A named status still surfaces its name.
+      expect(vo).toContain('Cart status');
+    });
+  });
+
+  describe('native select announcements', () => {
+    it('announces a single <select> as a collapsed pop-up (combobox), value-first, no options', () => {
+      // VoiceOver: "United States, Country, combo box, collapsed" — the selected
+      // value leads, options are NOT announced until opened (confirmed by GT
+      // "United States Country collapsed pop up button").
+      const dom = new JSDOM(
+        '<label for="c">Country</label><select id="c"><option>United States</option><option>Canada</option></select>'
+      );
+      const result = buildAccessibilityTree(dom.window.document.body);
+      const announcement = renderVoiceOver(result.model);
+
+      expect(announcement).toContain('combo box');
+      expect(announcement).toContain('collapsed');
+      expect(announcement).toContain('United States');
+      // Options are not surfaced in the collapsed static view.
+      expect(announcement).not.toContain('Canada');
     });
   });
 
@@ -439,15 +506,16 @@ describe('renderVoiceOver', () => {
       expect(announcement).not.toContain('graphic');
     });
 
-    it('should say "item" not "list item"', () => {
+    it('does not speak the word "item" for a list item (per VoiceOver ground truth)', () => {
       const dom = new JSDOM('<ul><li>Test</li></ul>');
       const list = dom.window.document.querySelector('ul')!;
       const result = buildAccessibilityTree(list);
       
       const announcement = renderVoiceOver(result.model);
       
-      expect(announcement).toContain('Test, item');
-      expect(announcement).not.toContain('list item');
+      // VoiceOver announces the item's text, not "item"/"list item".
+      expect(announcement).toContain('Test');
+      expect(announcement).not.toContain('item');
     });
 
     it('should announce heading role before name', () => {

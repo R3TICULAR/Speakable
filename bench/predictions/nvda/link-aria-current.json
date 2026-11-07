@@ -1,0 +1,19 @@
+{
+  "id": "link-aria-current",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Docs, link, current page"
+  ],
+  "normalized": [
+    {
+      "raw": "docs, link, current page",
+      "role": "link",
+      "name": "docs",
+      "state": [
+        "current:page"
+      ]
+    }
+  ]
+}

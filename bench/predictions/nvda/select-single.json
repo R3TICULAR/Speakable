@@ -1,0 +1,15 @@
+{
+  "id": "select-single",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Country, combo box, collapsed, United States"
+  ],
+  "normalized": [
+    {
+      "raw": "country, combo box, collapsed, united states",
+      "name": "country, combo box, collapsed, united states"
+    }
+  ]
+}

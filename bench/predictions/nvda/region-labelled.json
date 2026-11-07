@@ -1,0 +1,21 @@
+{
+  "id": "region-labelled",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Pricing, region landmark",
+    "Plans and pricing."
+  ],
+  "normalized": [
+    {
+      "raw": "pricing, region landmark",
+      "role": "region",
+      "name": "pricing"
+    },
+    {
+      "raw": "plans and pricing",
+      "name": "plans and pricing"
+    }
+  ]
+}

@@ -126,7 +126,10 @@ const INPUT_TYPE_ROLE_MAP: Record<string, AccessibleRole> = {
   'search': 'textbox',
   'tel': 'textbox',
   'url': 'textbox',
-  'number': 'textbox',
+  // Per ARIA, <input type="number"> has an implicit role of spinbutton
+  // (VoiceOver announces it as "stepper").
+  'number': 'spinbutton',
+  'range': 'slider',
 };
 
 /**
@@ -208,6 +211,16 @@ function computeImplicitRole(
   // Special case: input elements vary by type
   if (tagName === 'input') {
     return computeInputRole(element as HTMLInputElement);
+  }
+
+  // Special case: <select>. Per ARIA, a single-select (no `multiple`, size ≤ 1)
+  // has the implicit role COMBOBOX — VoiceOver announces it as a "pop up button"
+  // and does not announce the options until opened. A multiple/sized select is a
+  // listbox.
+  if (tagName === 'select') {
+    const multiple = element.hasAttribute('multiple');
+    const size = parseInt(element.getAttribute('size') || '0', 10);
+    return multiple || size > 1 ? 'listbox' : 'combobox';
   }
   
   // Special case: links only have link role if href present

@@ -1,0 +1,30 @@
+{
+  "$comment": "Ground-truth cases excluded from scoring because the CAPTURE is unreliable, not because the engine is wrong. The v2 Playwright capture (isolated browser) eliminated the entire 'chrome' contamination class and most 'cursor-walk' artifacts — 8 of the original 10 quarantined cases now capture cleanly and have been removed from this list. What remains is the multi-element forward-walk limitation: on a page with several siblings, navigateToWebContent() + next() can skip the first element. Each entry is scored as INCOMPLETE (quarantined), never silently dropped. Integrity rule: we quarantine bad captures; we NEVER degrade a correct engine to match them. Re-run triage and remove entries once the capture is clean.",
+  "version": "v1",
+  "quarantined": [
+    {
+      "reader": "voiceover",
+      "id": "checkbox-checked",
+      "class": "cursor-walk",
+      "reason": "capture landed on the <label> sibling text only ('Subscribe to newsletter') — no 'checkbox'/'checked' role+state. The engine ('checkbox, checked') is correct; VoiceOver does announce the role+state. Capture under-reported the control."
+    },
+    {
+      "reader": "voiceover",
+      "id": "checkbox-unchecked",
+      "class": "cursor-walk",
+      "reason": "same as checkbox-checked: capture recorded only the label text ('Accept terms and conditions'), missing the checkbox role+state the engine correctly emits."
+    },
+    {
+      "reader": "voiceover",
+      "id": "headings-h1-h2-h3",
+      "class": "cursor-walk",
+      "reason": "multi-element walk skips the first heading: HTML is h1 'Docs' / h2 'Install' / h3 'npm', but capture records only h2+h3. The h1 'Docs' is dropped because navigateToWebContent()+next() advances past the landing element. Engine output is correct; capture is incomplete."
+    },
+    {
+      "reader": "voiceover",
+      "id": "heading-skipped-level",
+      "class": "cursor-walk",
+      "reason": "same multi-element walk limitation: HTML has h1 'Title' + h3 'Subsection' but capture records only the h3. The h1 is dropped. Engine output is correct; capture is incomplete."
+    }
+  ]
+}

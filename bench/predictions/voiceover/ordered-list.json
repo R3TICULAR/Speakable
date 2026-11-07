@@ -1,0 +1,34 @@
+{
+  "id": "ordered-list",
+  "reader": "voiceover",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "First, 1 of 3",
+    "Second, 2 of 3",
+    "Third, 3 of 3"
+  ],
+  "normalized": [
+    {
+      "raw": "first, 1 of 3",
+      "name": "first",
+      "state": [
+        "position:1/3"
+      ]
+    },
+    {
+      "raw": "second, 2 of 3",
+      "name": "second",
+      "state": [
+        "position:2/3"
+      ]
+    },
+    {
+      "raw": "third, 3 of 3",
+      "name": "third",
+      "state": [
+        "position:3/3"
+      ]
+    }
+  ]
+}

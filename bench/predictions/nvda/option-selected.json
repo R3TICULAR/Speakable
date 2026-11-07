@@ -1,0 +1,32 @@
+{
+  "id": "option-selected",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Colors, list box",
+    "Red, option, selected",
+    "Blue, option, not selected"
+  ],
+  "normalized": [
+    {
+      "raw": "colors, list box",
+      "role": "listbox",
+      "name": "colors"
+    },
+    {
+      "raw": "red, option, selected",
+      "name": "red, option",
+      "state": [
+        "selected:true"
+      ]
+    },
+    {
+      "raw": "blue, option, not selected",
+      "name": "blue, option",
+      "state": [
+        "selected:false"
+      ]
+    }
+  ]
+}

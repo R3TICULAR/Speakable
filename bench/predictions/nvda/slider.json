@@ -1,0 +1,15 @@
+{
+  "id": "slider",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Volume, slider, 7"
+  ],
+  "normalized": [
+    {
+      "raw": "volume, slider, 7",
+      "name": "volume, slider, 7"
+    }
+  ]
+}

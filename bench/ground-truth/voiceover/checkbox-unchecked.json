@@ -1,0 +1,24 @@
+{
+  "id": "checkbox-unchecked",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "webkit",
+  "rawPhrases": [
+    "Accept terms and conditions",
+    "",
+    "Accept terms and conditions",
+    "",
+    "Accept terms and conditions",
+    "",
+    "Accept terms and conditions",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "accept terms and conditions",
+      "name": "accept terms and conditions"
+    }
+  ]
+}

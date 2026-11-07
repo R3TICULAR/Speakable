@@ -1,0 +1,32 @@
+{
+  "id": "duplicate-nav-unlabelled",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "navigation landmark",
+    "A, link",
+    "navigation landmark",
+    "B, link"
+  ],
+  "normalized": [
+    {
+      "raw": "navigation landmark",
+      "role": "navigation"
+    },
+    {
+      "raw": "a, link",
+      "role": "link",
+      "name": "a"
+    },
+    {
+      "raw": "navigation landmark",
+      "role": "navigation"
+    },
+    {
+      "raw": "b, link",
+      "role": "link",
+      "name": "b"
+    }
+  ]
+}

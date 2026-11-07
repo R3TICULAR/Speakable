@@ -1,0 +1,19 @@
+{
+  "id": "switch-role",
+  "reader": "voiceover",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Dark mode, switch, on"
+  ],
+  "normalized": [
+    {
+      "raw": "dark mode, switch, on",
+      "role": "switch",
+      "name": "dark mode",
+      "state": [
+        "checked:true"
+      ]
+    }
+  ]
+}

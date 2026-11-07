@@ -1,0 +1,21 @@
+{
+  "id": "link-image-only",
+  "reader": "voiceover",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "link",
+    "Speakable home, image"
+  ],
+  "normalized": [
+    {
+      "raw": "link",
+      "role": "link"
+    },
+    {
+      "raw": "speakable home, image",
+      "role": "img",
+      "name": "speakable home"
+    }
+  ]
+}

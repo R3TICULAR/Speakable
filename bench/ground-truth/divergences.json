@@ -1,0 +1,18 @@
+{
+  "$comment": "INTENTIONAL-DIVERGENCE registry. Each entry marks field(s) where Speakable deliberately diverges from a single-cursor screen-reader capture and is CORRECT + more informative — NOT a bug and NOT a bad capture. The named fields are excluded from the accuracy denominator (field-scoped, never the whole case), and the report shows them under 'Intentional divergences'. Integrity rules: (1) every entry needs a specific written reason tied to a known behavioral difference; (2) only the diverging field is excluded, so a real miss on another field of the same case still counts; (3) entries are added by a human after review, exactly like quarantine — never auto-generated. The composite-widget cases below: VoiceOver's default reading cursor treats a tablist/listbox as a single composite stop and announces only the current item, while Speakable announces every tab/option with its state/position (more useful to a developer). We keep the fuller engine output (product choice) and document the divergence rather than degrade the engine.",
+  "version": "v1",
+  "divergences": [
+    {
+      "reader": "voiceover",
+      "id": "tab-selected",
+      "fields": ["role", "name", "state"],
+      "reason": "composite widget: engine emits every tab (Overview 1/2, Details 2/2) + the tablist; a single VoiceOver cursor pass announces only the current tab ('Details tab, 2 of 2'). Engine output is correct and more complete."
+    },
+    {
+      "reader": "voiceover",
+      "id": "option-selected",
+      "fields": ["role", "name", "state"],
+      "reason": "composite widget: engine emits every listbox option with selection/position; a single VoiceOver pass announces the listbox + current option only ('Colors list box ... Red selected (1 of 2)'). Engine output is correct and more complete."
+    }
+  ]
+}

@@ -233,12 +233,12 @@
         "description": "En lugar de inspección manual, deje que Speakable genere un diff semántico. Vea cómo cambia la experiencia del lector de pantalla entre versiones.",
         "cta": "Leer la documentación"
       },
-      "disclaimer": "Speakable complementa las pruebas manuales de lector de pantalla — no las reemplaza. Úselo para detectar problemas tempranamente y reducir la carga de pruebas manuales."
+      "disclaimer": "Speakable complementa las pruebas manuales de lector de pantalla. No las reemplaza. Úselo para detectar problemas tempranamente y reducir la carga de pruebas manuales."
     },
     "enterprise": {
       "badge": "Nivel empresarial",
       "heading": "Diseñado para soportar flujos de accesibilidad a escala",
-      "description": "Los problemas de usabilidad del lector de pantalla son una causa principal de quejas de accesibilidad. La CLI de Speakable se integra directamente en sus flujos de trabajo CI/CD, ayudando a los equipos a identificar estos problemas más temprano en el desarrollo — en toda su aplicación.",
+      "description": "Los problemas de usabilidad del lector de pantalla son una causa principal de quejas de accesibilidad. La CLI de Speakable se integra directamente en sus flujos de trabajo CI/CD, ayudando a los equipos a identificar estos problemas más temprano en el desarrollo, en toda su aplicación.",
       "points": {
         "0": "Motor de simulación local sin latencia",
         "1": "Procesamiento por lotes en bases de código completas",
@@ -277,9 +277,9 @@
     },
     "whyItMatters": {
       "heading": "Por qué importan los problemas de lector de pantalla",
-      "paragraph1": "Los problemas de usabilidad del lector de pantalla se encuentran entre las fuentes más comunes de fallos de accesibilidad en la web. Estos problemas a menudo pasan desapercibidos hasta las últimas etapas del desarrollo — o hasta que los usuarios los reportan.",
+      "paragraph1": "Los problemas de usabilidad del lector de pantalla se encuentran entre las fuentes más comunes de fallos de accesibilidad en la web. Estos problemas a menudo pasan desapercibidos hasta las últimas etapas del desarrollo, o hasta que los usuarios los reportan.",
       "paragraph2": "Las pruebas manuales de lector de pantalla son lentas y difíciles de escalar en aplicaciones grandes. Speakable ayuda a los equipos a identificar estos problemas más temprano en el ciclo de desarrollo, antes de que lleguen a producción.",
-      "legal": "Con las crecientes expectativas de accesibilidad bajo leyes como la ADA, la detección temprana no es solo una buena práctica — es mitigación de riesgos.",
+      "legal": "Con las crecientes expectativas de accesibilidad bajo leyes como la ADA, la detección temprana no es solo una buena práctica. Es mitigación de riesgos.",
       "challenge": {
         "label": "El desafío",
         "title": "Las pruebas manuales son un cuello de botella.",

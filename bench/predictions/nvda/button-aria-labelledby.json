@@ -1,0 +1,27 @@
+{
+  "id": "button-aria-labelledby",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Delete item",
+    "Delete item, button",
+    "🗑"
+  ],
+  "normalized": [
+    {
+      "raw": "delete item",
+      "role": "listitem",
+      "name": "delete"
+    },
+    {
+      "raw": "delete item, button",
+      "role": "button",
+      "name": "delete item"
+    },
+    {
+      "raw": "🗑",
+      "name": "🗑"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "id": "blockquote",
+  "reader": "voiceover",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "blockquote",
+    "Accessibility is not a feature."
+  ],
+  "normalized": [
+    {
+      "raw": "blockquote",
+      "name": "blockquote"
+    },
+    {
+      "raw": "accessibility is not a feature",
+      "name": "accessibility is not a feature"
+    }
+  ]
+}

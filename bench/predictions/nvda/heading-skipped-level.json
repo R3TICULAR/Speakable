@@ -1,0 +1,28 @@
+{
+  "id": "heading-skipped-level",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Title, heading level 1",
+    "Subsection, heading level 3"
+  ],
+  "normalized": [
+    {
+      "raw": "title, heading level 1",
+      "role": "heading",
+      "name": "title",
+      "state": [
+        "level:1"
+      ]
+    },
+    {
+      "raw": "subsection, heading level 3",
+      "role": "heading",
+      "name": "subsection",
+      "state": [
+        "level:3"
+      ]
+    }
+  ]
+}

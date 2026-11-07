@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>runtime-tabs</title></head>
+<body>
+<div role="tablist" aria-label="Account">
+<button role="tab" id="t1" aria-selected="true" tabindex="0">Profile</button>
+<button role="tab" id="t2" aria-selected="false" tabindex="-1">Billing</button>
+<button role="tab" id="t3" aria-selected="false" tabindex="-1">Alerts</button></div>
+<div id="s" role="status" aria-live="polite" style="position:absolute;left:-9999px"></div>
+<script>
+var tabs=[].slice.call(document.querySelectorAll('[role=tab]')),s=document.getElementById('s');
+function sel(i){tabs.forEach(function(t,j){var on=i===j;t.setAttribute('aria-selected',String(on));t.tabIndex=on?0:-1;});tabs[i].focus();s.textContent=tabs[i].textContent+' selected';}
+tabs.forEach(function(t,i){t.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){e.preventDefault();sel((i+1)%tabs.length);}if(e.key==='ArrowLeft'){e.preventDefault();sel((i-1+tabs.length)%tabs.length);}});});
+</script>
+</body></html>

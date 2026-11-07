@@ -1,0 +1,21 @@
+{
+  "id": "form-landmark",
+  "reader": "voiceover",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "form, Contact",
+    "Name, edit text"
+  ],
+  "normalized": [
+    {
+      "raw": "form, contact",
+      "name": "form, contact"
+    },
+    {
+      "raw": "name, edit text",
+      "role": "textbox",
+      "name": "name"
+    }
+  ]
+}

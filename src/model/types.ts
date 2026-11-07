@@ -68,6 +68,12 @@ export type AccessibleRole =
   | 'meter'
   | 'progressbar'
   | 'status'
+  | 'switch'
+  | 'slider'
+  | 'spinbutton'
+  | 'tab'
+  | 'tablist'
+  | 'tabpanel'
   // Embedded content (new)
   | 'document'
   | 'application'
@@ -244,6 +250,12 @@ export const SUPPORTED_ROLES: readonly AccessibleRole[] = [
   'meter',
   'progressbar',
   'status',
+  'switch',
+  'slider',
+  'spinbutton',
+  'tab',
+  'tablist',
+  'tabpanel',
   'document',
   'application',
   'separator',

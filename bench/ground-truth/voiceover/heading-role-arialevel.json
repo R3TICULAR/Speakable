@@ -1,0 +1,25 @@
+{
+  "id": "heading-role-arialevel",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "webkit",
+  "rawPhrases": [
+    "",
+    "heading level 2 Billing settings",
+    "",
+    "heading level 2 Billing settings",
+    "",
+    "heading level 2 Billing settings",
+    "",
+    "heading level 2 Billing settings"
+  ],
+  "normalized": [
+    {
+      "raw": "heading level 2 billing settings",
+      "role": "heading",
+      "name": "level 2 billing settings"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "id": "progressbar",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Upload, progress bar, 60",
+    "60%"
+  ],
+  "normalized": [
+    {
+      "raw": "upload, progress bar, 60",
+      "name": "upload, progress bar, 60"
+    },
+    {
+      "raw": "60%",
+      "name": "60%"
+    }
+  ]
+}

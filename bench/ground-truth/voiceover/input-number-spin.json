@@ -1,0 +1,25 @@
+{
+  "id": "input-number-spin",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "webkit",
+  "rawPhrases": [
+    "2 Insertion on word: 2 Quantity incrementable edit text number field",
+    "",
+    "2 Insertion on word: 2 Quantity incrementable edit text number field",
+    "",
+    "2 Insertion on word: 2 Quantity incrementable edit text number field",
+    "",
+    "2 Insertion on word: 2 Quantity incrementable edit text number field",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "2 insertion on word: 2 quantity incrementable edit text number field",
+      "role": "textbox",
+      "name": "2 insertion on word: 2 quantity incrementable"
+    }
+  ]
+}

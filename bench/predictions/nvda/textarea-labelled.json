@@ -1,0 +1,16 @@
+{
+  "id": "textarea-labelled",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Message, edit"
+  ],
+  "normalized": [
+    {
+      "raw": "message, edit",
+      "role": "textbox",
+      "name": "message"
+    }
+  ]
+}

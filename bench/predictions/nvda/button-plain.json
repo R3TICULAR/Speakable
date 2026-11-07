@@ -1,0 +1,16 @@
+{
+  "id": "button-plain",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Save changes, button"
+  ],
+  "normalized": [
+    {
+      "raw": "save changes, button",
+      "role": "button",
+      "name": "save changes"
+    }
+  ]
+}

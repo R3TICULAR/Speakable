@@ -1,0 +1,19 @@
+{
+  "id": "button-aria-pressed",
+  "reader": "voiceover",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Bold, button, selected"
+  ],
+  "normalized": [
+    {
+      "raw": "bold, button, selected",
+      "role": "button",
+      "name": "bold",
+      "state": [
+        "selected:true"
+      ]
+    }
+  ]
+}

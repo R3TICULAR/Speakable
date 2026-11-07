@@ -55,9 +55,81 @@ function renderNodeVoiceOver(node: AccessibleNode, announcements: string[], c: C
  * @param c - Color functions for formatting
  * @returns Formatted announcement string or empty string if node should not be announced
  */
+/**
+ * Widgets whose VALUE VoiceOver announces FIRST, e.g. "7 Volume slider".
+ * Sliders and spinbuttons lead with the value.
+ */
+function isValueFirstWidget(role: AccessibleNode['role']): boolean {
+  // slider/spinbutton lead with the numeric value; a combobox (native <select>,
+  // "pop up button") leads with its selected value: "United States Country ...".
+  return role === 'slider' || role === 'spinbutton' || role === 'combobox';
+}
+
+/**
+ * Widgets whose VALUE VoiceOver announces AFTER the name but BEFORE the role,
+ * e.g. "Upload 60% progress indicator". The normal path puts value after role.
+ */
+function isValueBeforeRoleWidget(role: AccessibleNode['role']): boolean {
+  return role === 'progressbar' || role === 'meter';
+}
+
+/**
+ * Pure structural containers for which VoiceOver's continuous reading cursor
+ * emits NO standalone entry announcement — it reads the content and marks only
+ * an "end of <container>" boundary on exit. Confirmed against ground truth:
+ * a `<ol>`/`<dl>` and a role="status" produce no "list"/"status" entry line in
+ * a single VoiceOver pass. We therefore suppress the role-only container line
+ * for these in VoiceOver (NVDA/JAWS DO announce them, so this is strictly a
+ * VoiceOver-renderer behavior).
+ *
+ * Scoped deliberately narrow: landmarks (region/navigation/main/etc.) are NOT
+ * included — they are navigationally meaningful and announced differently.
+ */
+function isSilentContainerVoiceOver(node: AccessibleNode): boolean {
+  if (node.role !== 'list' && node.role !== 'status') return false;
+  // Only suppress when the container itself carries no accessible name; a named
+  // container still announces its name.
+  if (node.name) return false;
+  // Only suppress a true container (it has children to carry the content).
+  return node.children.length > 0;
+}
+
 function formatNodeVoiceOver(node: AccessibleNode, c: ColorFunctions): string {
+  // Silent structural containers: emit no standalone line (see helper).
+  if (isSilentContainerVoiceOver(node)) {
+    return '';
+  }
+
   const parts: string[] = [];
   
+  // Value-first widgets: VoiceOver leads with the value ("7 Volume slider"),
+  // then name, then role — unlike form controls where the value trails.
+  const valueFirst = isValueFirstWidget(node.role) && node.value !== undefined;
+  if (valueFirst) {
+    const valueText = node.value!.text || String(node.value!.current);
+    if (valueText) parts.push(valueText);
+    if (node.name) parts.push(c.elementName(node.name));
+    const roleText = formatRoleVoiceOver(node);
+    if (roleText) parts.push(c.roleName(roleText));
+    const stateText = formatStatesVoiceOver(node);
+    if (stateText) parts.push(c.stateName(stateText));
+    if (node.description) parts.push(c.description(node.description));
+    return parts.join(', ');
+  }
+
+  // Value-before-role widgets: "Upload 60% progress indicator" → name, value, role.
+  if (isValueBeforeRoleWidget(node.role) && node.value !== undefined) {
+    if (node.name) parts.push(c.elementName(node.name));
+    const valueText = node.value.text || String(node.value.current);
+    if (valueText) parts.push(valueText);
+    const roleText = formatRoleVoiceOver(node);
+    if (roleText) parts.push(c.roleName(roleText));
+    const stateText = formatStatesVoiceOver(node);
+    if (stateText) parts.push(c.stateName(stateText));
+    if (node.description) parts.push(c.description(node.description));
+    return parts.join(', ');
+  }
+
   // VoiceOver often announces role before name for some elements
   const roleFirst = shouldAnnounceRoleFirst(node.role);
   
@@ -97,6 +169,13 @@ function formatNodeVoiceOver(node: AccessibleNode, c: ColorFunctions): string {
     if (valueText) {
       parts.push(valueText);
     }
+  }
+  
+  // Add set position ("N of M"). VoiceOver announces an item's position within a
+  // set (radios, options, tabs, list items), e.g. "Standard, selected, radio
+  // button, 1 of 2". Only when both position and size are known.
+  if (node.state.posinset !== undefined && node.state.setsize !== undefined) {
+    parts.push(`${node.state.posinset} of ${node.state.setsize}`);
   }
   
   // Add description (if present)
@@ -176,7 +255,10 @@ function formatRoleVoiceOver(node: AccessibleNode): string {
       return 'list';
     
     case 'listitem':
-      return 'item';
+      // VoiceOver does NOT speak "item" for a list item; it announces the item's
+      // text with its set position (confirmed by GT "1. First 1 of 3"). The
+      // position is rendered as the "N of M" suffix elsewhere.
+      return '';
     
     case 'navigation':
       return 'navigation';
@@ -257,6 +339,26 @@ function formatRoleVoiceOver(node: AccessibleNode): string {
     case 'status':
       return 'status';
     
+    case 'switch':
+      return 'switch';
+    
+    case 'slider':
+      return 'slider';
+    
+    case 'spinbutton':
+      // VoiceOver announces a number input / spinbutton as "stepper".
+      return 'stepper';
+    
+    case 'tab':
+      return 'tab';
+    
+    case 'tablist':
+      // VoiceOver announces the container as "tab group".
+      return node.name ? 'tab group' : 'tab group';
+    
+    case 'tabpanel':
+      return 'tab panel';
+    
     case 'group':
       return node.name ? 'group' : '';
     
@@ -288,26 +390,38 @@ function formatStatesVoiceOver(node: AccessibleNode): string {
     states.push(node.state.expanded ? 'expanded' : 'collapsed');
   }
   
-  // Checked state (checkbox/radio)
+  // Checked state. VoiceOver speaks it differently by role:
+  //   switch   → "on"/"off"
+  //   radio    → "selected" (only when on; VoiceOver stays silent when off),
+  //              confirmed by GT "Standard selected radio button, 1 of 2"
+  //   checkbox → "checked"/"unchecked"
   if (node.state.checked !== undefined) {
     if (node.state.checked === 'mixed') {
       states.push('mixed');
+    } else if (node.role === 'switch') {
+      states.push(node.state.checked ? 'on' : 'off');
+    } else if (node.role === 'radio') {
+      if (node.state.checked) states.push('selected');
     } else {
       states.push(node.state.checked ? 'checked' : 'unchecked');
     }
   }
   
-  // Pressed state (toggle button)
+  // Pressed state (toggle button). VoiceOver announces a pressed toggle button
+  // as "selected"/"unselected" (not "pressed"), confirmed against real VoiceOver
+  // ground truth ("Bold selected toggle button"). NVDA/JAWS say "pressed".
   if (node.state.pressed !== undefined) {
     if (node.state.pressed === 'mixed') {
       states.push('mixed');
     } else {
-      states.push(node.state.pressed ? 'pressed' : 'not pressed');
+      states.push(node.state.pressed ? 'selected' : 'unselected');
     }
   }
   
-  // Selected state
-  if (node.state.selected !== undefined) {
+  // Selected state. VoiceOver omits spoken selection wording for TABS (the
+  // position "N of M" and which tab is current convey it); it speaks "selected"
+  // for options and other selectable widgets. Confirmed by GT "Details tab, 2 of 2".
+  if (node.state.selected !== undefined && node.role !== 'tab') {
     states.push(node.state.selected ? 'selected' : 'unselected');
   }
   

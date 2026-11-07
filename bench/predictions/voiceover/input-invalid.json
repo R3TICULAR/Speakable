@@ -1,0 +1,20 @@
+{
+  "id": "input-invalid",
+  "reader": "voiceover",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Email, edit text, invalid data, Enter a valid email.",
+    "Enter a valid email."
+  ],
+  "normalized": [
+    {
+      "raw": "email, edit text, invalid data, enter a valid email",
+      "name": "email, edit text, invalid data, enter a valid email"
+    },
+    {
+      "raw": "enter a valid email",
+      "name": "enter a valid email"
+    }
+  ]
+}

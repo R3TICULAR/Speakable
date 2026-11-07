@@ -1,0 +1,595 @@
+[
+  {
+    "id": "button-plain",
+    "category": "buttons-links",
+    "file": "buttons-links/button-plain.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "plain button, name from text content"
+  },
+  {
+    "id": "button-aria-label",
+    "category": "buttons-links",
+    "file": "buttons-links/button-aria-label.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "icon-only button, name from aria-label overriding text"
+  },
+  {
+    "id": "button-disabled",
+    "category": "buttons-links",
+    "file": "buttons-links/button-disabled.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "disabled button announces unavailable/dimmed state"
+  },
+  {
+    "id": "link-plain",
+    "category": "buttons-links",
+    "file": "buttons-links/link-plain.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "anchor with href, link role and name from text"
+  },
+  {
+    "id": "input-placeholder-only",
+    "category": "form-controls",
+    "file": "form-controls/input-placeholder-only.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "text input with only a placeholder (no proper label)"
+  },
+  {
+    "id": "input-with-label",
+    "category": "form-controls",
+    "file": "form-controls/input-with-label.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "input with associated label element"
+  },
+  {
+    "id": "input-required-describedby",
+    "category": "form-controls",
+    "file": "form-controls/input-required-describedby.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "required input with aria-describedby hint"
+  },
+  {
+    "id": "checkbox-unchecked",
+    "category": "form-controls",
+    "file": "form-controls/checkbox-unchecked.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "native checkbox, unchecked, labelled"
+  },
+  {
+    "id": "radio-group",
+    "category": "form-controls",
+    "file": "form-controls/radio-group.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "grouped radios in a fieldset with legend, one checked"
+  },
+  {
+    "id": "heading-h1",
+    "category": "headings-structure",
+    "file": "headings-structure/heading-h1.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "h1 heading, level 1"
+  },
+  {
+    "id": "heading-role-arialevel",
+    "category": "headings-structure",
+    "file": "headings-structure/heading-role-arialevel.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "role=heading with aria-level=2"
+  },
+  {
+    "id": "nav-labelled",
+    "category": "landmarks",
+    "file": "landmarks/nav-labelled.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "navigation landmark labelled via aria-label"
+  },
+  {
+    "id": "main-and-aside",
+    "category": "landmarks",
+    "file": "landmarks/main-and-aside.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "main and labelled complementary landmarks"
+  },
+  {
+    "id": "button-aria-expanded",
+    "category": "aria-states",
+    "file": "aria-states/button-aria-expanded.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "button with aria-expanded=false (collapsed)"
+  },
+  {
+    "id": "checkbox-aria-checked-mixed",
+    "category": "aria-states",
+    "file": "aria-states/checkbox-aria-checked-mixed.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "role=checkbox with aria-checked=mixed (half checked)"
+  },
+  {
+    "id": "button-aria-pressed",
+    "category": "aria-states",
+    "file": "aria-states/button-aria-pressed.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "toggle button with aria-pressed=true"
+  },
+  {
+    "id": "link-aria-current",
+    "category": "aria-states",
+    "file": "aria-states/link-aria-current.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "link with aria-current=page"
+  },
+  {
+    "id": "status-polite",
+    "category": "live-regions",
+    "file": "live-regions/status-polite.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "role=status polite live region with initial content"
+  },
+  {
+    "id": "empty-accessible-name-button",
+    "category": "edge-cases",
+    "file": "edge-cases/empty-accessible-name-button.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "button whose only content is an aria-hidden svg (empty name)"
+  },
+  {
+    "id": "redundant-role",
+    "category": "edge-cases",
+    "file": "edge-cases/redundant-role.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "button with redundant explicit role=button"
+  },
+  {
+    "id": "link-new-window",
+    "category": "buttons-links",
+    "file": "buttons-links/link-new-window.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "link that opens a new window via target=_blank"
+  },
+  {
+    "id": "link-image-only",
+    "category": "buttons-links",
+    "file": "buttons-links/link-image-only.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "link whose only content is an image with alt text"
+  },
+  {
+    "id": "link-image-empty-alt",
+    "category": "buttons-links",
+    "file": "buttons-links/link-image-empty-alt.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "link wrapping an image with empty alt (name from nothing)"
+  },
+  {
+    "id": "button-submit",
+    "category": "buttons-links",
+    "file": "buttons-links/button-submit.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "input type=submit, name from value"
+  },
+  {
+    "id": "input-aria-label",
+    "category": "form-controls",
+    "file": "form-controls/input-aria-label.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "text input named by aria-label"
+  },
+  {
+    "id": "select-single",
+    "category": "form-controls",
+    "file": "form-controls/select-single.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "single select with options, first selected"
+  },
+  {
+    "id": "textarea-labelled",
+    "category": "form-controls",
+    "file": "form-controls/textarea-labelled.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "textarea with associated label"
+  },
+  {
+    "id": "input-invalid",
+    "category": "form-controls",
+    "file": "form-controls/input-invalid.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "input marked aria-invalid=true with error message"
+  },
+  {
+    "id": "input-readonly",
+    "category": "form-controls",
+    "file": "form-controls/input-readonly.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "read-only text input"
+  },
+  {
+    "id": "checkbox-checked",
+    "category": "form-controls",
+    "file": "form-controls/checkbox-checked.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "native checkbox, checked"
+  },
+  {
+    "id": "fieldset-group",
+    "category": "form-controls",
+    "file": "form-controls/fieldset-group.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "fieldset/legend grouping two inputs"
+  },
+  {
+    "id": "input-number-spin",
+    "category": "form-controls",
+    "file": "form-controls/input-number-spin.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "number input (spinbutton)"
+  },
+  {
+    "id": "switch-role",
+    "category": "form-controls",
+    "file": "form-controls/switch-role.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "role=switch with aria-checked"
+  },
+  {
+    "id": "headings-h1-h2-h3",
+    "category": "headings-structure",
+    "file": "headings-structure/headings-h1-h2-h3.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "nested heading levels 1-2-3"
+  },
+  {
+    "id": "heading-skipped-level",
+    "category": "headings-structure",
+    "file": "headings-structure/heading-skipped-level.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "h1 then h3 (skipped level 2)"
+  },
+  {
+    "id": "paragraph-text",
+    "category": "headings-structure",
+    "file": "headings-structure/paragraph-text.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "plain paragraph of body text"
+  },
+  {
+    "id": "ordered-list",
+    "category": "headings-structure",
+    "file": "headings-structure/ordered-list.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "ordered list with three items"
+  },
+  {
+    "id": "definition-list",
+    "category": "headings-structure",
+    "file": "headings-structure/definition-list.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "description list term/definition"
+  },
+  {
+    "id": "blockquote",
+    "category": "headings-structure",
+    "file": "headings-structure/blockquote.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "blockquote element"
+  },
+  {
+    "id": "banner-contentinfo",
+    "category": "landmarks",
+    "file": "landmarks/banner-contentinfo.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "header (banner) and footer (contentinfo) landmarks"
+  },
+  {
+    "id": "search-landmark",
+    "category": "landmarks",
+    "file": "landmarks/search-landmark.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "role=search landmark"
+  },
+  {
+    "id": "region-labelled",
+    "category": "landmarks",
+    "file": "landmarks/region-labelled.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "section with aria-label becomes a region landmark"
+  },
+  {
+    "id": "duplicate-nav-unlabelled",
+    "category": "landmarks",
+    "file": "landmarks/duplicate-nav-unlabelled.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "two nav landmarks without distinguishing labels"
+  },
+  {
+    "id": "form-landmark",
+    "category": "landmarks",
+    "file": "landmarks/form-landmark.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "form with accessible name becomes a form landmark"
+  },
+  {
+    "id": "tab-selected",
+    "category": "aria-states",
+    "file": "aria-states/tab-selected.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "role=tab with aria-selected=true"
+  },
+  {
+    "id": "option-selected",
+    "category": "aria-states",
+    "file": "aria-states/option-selected.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "listbox option with aria-selected"
+  },
+  {
+    "id": "aria-disabled-link",
+    "category": "aria-states",
+    "file": "aria-states/aria-disabled-link.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "link with aria-disabled=true"
+  },
+  {
+    "id": "aria-required-input",
+    "category": "aria-states",
+    "file": "aria-states/aria-required-input.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "input with aria-required=true"
+  },
+  {
+    "id": "aria-current-step",
+    "category": "aria-states",
+    "file": "aria-states/aria-current-step.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "aria-current=step in a process nav"
+  },
+  {
+    "id": "progressbar",
+    "category": "aria-states",
+    "file": "aria-states/progressbar.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "role=progressbar with aria-valuenow"
+  },
+  {
+    "id": "slider",
+    "category": "aria-states",
+    "file": "aria-states/slider.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "role=slider with value"
+  },
+  {
+    "id": "alert-assertive",
+    "category": "live-regions",
+    "file": "live-regions/alert-assertive.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "role=alert (assertive) with content"
+  },
+  {
+    "id": "live-assertive-attr",
+    "category": "live-regions",
+    "file": "live-regions/live-assertive-attr.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "aria-live=assertive region"
+  },
+  {
+    "id": "live-atomic",
+    "category": "live-regions",
+    "file": "live-regions/live-atomic.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "aria-live polite with aria-atomic=true"
+  },
+  {
+    "id": "log-role",
+    "category": "live-regions",
+    "file": "live-regions/log-role.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "role=log region"
+  },
+  {
+    "id": "aria-hidden-content",
+    "category": "edge-cases",
+    "file": "edge-cases/aria-hidden-content.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "content hidden via aria-hidden=true should be ignored"
+  },
+  {
+    "id": "conflicting-role-presentation",
+    "category": "edge-cases",
+    "file": "edge-cases/conflicting-role-presentation.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "button with role=presentation (conflicting)"
+  },
+  {
+    "id": "hidden-but-focusable",
+    "category": "edge-cases",
+    "file": "edge-cases/hidden-but-focusable.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "element with tabindex but display:none"
+  },
+  {
+    "id": "empty-heading",
+    "category": "edge-cases",
+    "file": "edge-cases/empty-heading.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "heading with no text content"
+  },
+  {
+    "id": "nested-interactive",
+    "category": "edge-cases",
+    "file": "edge-cases/nested-interactive.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "button nested inside a link (invalid)"
+  },
+  {
+    "id": "runtime-disclosure",
+    "category": "interactive-components",
+    "file": "interactive-components/runtime-disclosure.html",
+    "mode": "runtime",
+    "interaction": {
+      "actions": [
+        {
+          "type": "tab"
+        },
+        {
+          "type": "enter"
+        }
+      ]
+    },
+    "notes": "disclosure button toggling aria-expanded and revealing a region"
+  },
+  {
+    "id": "runtime-modal-dialog",
+    "category": "interactive-components",
+    "file": "interactive-components/runtime-modal-dialog.html",
+    "mode": "runtime",
+    "interaction": {
+      "actions": [
+        {
+          "type": "tab"
+        },
+        {
+          "type": "enter"
+        },
+        {
+          "type": "escape"
+        }
+      ]
+    },
+    "notes": "modal dialog: open moves focus in, Escape closes and restores focus"
+  },
+  {
+    "id": "runtime-tabs",
+    "category": "interactive-components",
+    "file": "interactive-components/runtime-tabs.html",
+    "mode": "runtime",
+    "interaction": {
+      "actions": [
+        {
+          "type": "tab"
+        },
+        {
+          "type": "arrowRight"
+        },
+        {
+          "type": "arrowRight"
+        }
+      ]
+    },
+    "notes": "tablist with arrow-key roving tabindex and aria-selected updates"
+  },
+  {
+    "id": "runtime-accordion",
+    "category": "interactive-components",
+    "file": "interactive-components/runtime-accordion.html",
+    "mode": "runtime",
+    "interaction": {
+      "actions": [
+        {
+          "type": "tab"
+        },
+        {
+          "type": "enter"
+        }
+      ]
+    },
+    "notes": "accordion header toggling aria-expanded"
+  },
+  {
+    "id": "runtime-combobox",
+    "category": "interactive-components",
+    "file": "interactive-components/runtime-combobox.html",
+    "mode": "runtime",
+    "interaction": {
+      "actions": [
+        {
+          "type": "tab"
+        },
+        {
+          "type": "arrowDown"
+        },
+        {
+          "type": "arrowDown"
+        },
+        {
+          "type": "enter"
+        }
+      ]
+    },
+    "notes": "combobox arrow-navigation through options with aria-activedescendant"
+  },
+  {
+    "id": "button-aria-labelledby",
+    "category": "buttons-links",
+    "file": "buttons-links/button-aria-labelledby.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "icon button named via aria-labelledby"
+  },
+  {
+    "id": "button-icon-title",
+    "category": "buttons-links",
+    "file": "buttons-links/button-icon-title.html",
+    "mode": "static",
+    "interaction": null,
+    "notes": "icon button named via title attribute fallback"
+  }
+]

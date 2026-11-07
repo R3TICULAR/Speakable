@@ -233,12 +233,12 @@
         "description": "Instead of manual inspection, let Speakable generate a semantic diff. See how the screen reader experience changes between versions.",
         "cta": "Read the Docs"
       },
-      "disclaimer": "Speakable complements manual screen reader testing — it doesn't replace it. Use it to catch issues early and reduce the manual testing burden."
+      "disclaimer": "Speakable complements manual screen reader testing. It doesn't replace it. Use it to catch issues early and reduce the manual testing burden."
     },
     "enterprise": {
       "badge": "Enterprise Grade",
       "heading": "Built to support accessibility workflows at scale",
-      "description": "Screen reader usability issues are a leading cause of accessibility complaints. Speakable's CLI integrates directly into your CI/CD workflows, helping teams identify these issues earlier in development — across your entire application.",
+      "description": "Screen reader usability issues are a leading cause of accessibility complaints. Speakable's CLI integrates directly into your CI/CD workflows, helping teams identify these issues earlier in development, across your entire application.",
       "points": {
         "0": "Zero-latency local simulation engine",
         "1": "Batch processing across entire codebases",
@@ -277,9 +277,9 @@
     },
     "whyItMatters": {
       "heading": "Why screen reader issues matter",
-      "paragraph1": "Screen reader usability issues are among the most common sources of accessibility failures on the web. These issues often go undetected until late in development — or until users report them.",
+      "paragraph1": "Screen reader usability issues are among the most common sources of accessibility failures on the web. These issues often go undetected until late in development, or until users report them.",
       "paragraph2": "Manual screen reader testing is time-consuming and difficult to scale across large applications. Speakable helps teams identify these issues earlier in the development cycle, before they reach production.",
-      "legal": "With growing accessibility expectations under laws like the ADA, early detection isn't just good practice — it's risk mitigation.",
+      "legal": "With growing accessibility expectations under laws like the ADA, early detection isn't just good practice. It's risk mitigation.",
       "challenge": {
         "label": "The Challenge",
         "title": "Manual testing is a bottleneck.",

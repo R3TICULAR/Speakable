@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>runtime-modal-dialog</title></head>
+<body>
+<button id="open">Open settings</button>
+<div id="d" role="dialog" aria-modal="true" aria-label="Settings" hidden>
+<h2>Settings</h2><button id="close">Close</button></div>
+<div id="s" role="status" aria-live="polite" style="position:absolute;left:-9999px"></div>
+<script>
+var open=document.getElementById('open'),d=document.getElementById('d'),close=document.getElementById('close'),s=document.getElementById('s');
+open.addEventListener('click',function(){d.hidden=false;open.setAttribute('aria-expanded','true');close.focus();s.textContent='Settings dialog opened';});
+close.addEventListener('click',function(){d.hidden=true;open.setAttribute('aria-expanded','false');open.focus();s.textContent='Settings dialog closed';});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!d.hidden)close.click();});
+</script>
+</body></html>

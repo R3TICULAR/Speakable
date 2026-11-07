@@ -1,0 +1,16 @@
+{
+  "id": "runtime-disclosure",
+  "reader": "voiceover",
+  "mode": "runtime",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Shipping details, button"
+  ],
+  "normalized": [
+    {
+      "raw": "shipping details, button",
+      "role": "button",
+      "name": "shipping details"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "id": "input-with-label",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Email address, edit"
+  ],
+  "normalized": [
+    {
+      "raw": "email address, edit",
+      "role": "textbox",
+      "name": "email address"
+    }
+  ]
+}

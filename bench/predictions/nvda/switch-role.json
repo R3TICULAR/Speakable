@@ -1,0 +1,19 @@
+{
+  "id": "switch-role",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Dark mode, switch, checked"
+  ],
+  "normalized": [
+    {
+      "raw": "dark mode, switch, checked",
+      "role": "switch",
+      "name": "dark mode",
+      "state": [
+        "checked:true"
+      ]
+    }
+  ]
+}

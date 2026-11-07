@@ -1,0 +1,24 @@
+{
+  "id": "checkbox-checked",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "webkit",
+  "rawPhrases": [
+    "Subscribe to newsletter",
+    "",
+    "Subscribe to newsletter",
+    "",
+    "Subscribe to newsletter",
+    "",
+    "Subscribe to newsletter",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "subscribe to newsletter",
+      "name": "subscribe to newsletter"
+    }
+  ]
+}

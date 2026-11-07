@@ -1,0 +1,19 @@
+{
+  "id": "button-aria-pressed",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Bold, button, pressed"
+  ],
+  "normalized": [
+    {
+      "raw": "bold, button, pressed",
+      "role": "button",
+      "name": "bold",
+      "state": [
+        "pressed:true"
+      ]
+    }
+  ]
+}

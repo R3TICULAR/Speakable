@@ -1,0 +1,25 @@
+{
+  "id": "link-image-empty-alt",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "webkit",
+  "rawPhrases": [
+    "",
+    "link http://127.0.0.1:49309/",
+    "",
+    "link http://127.0.0.1:49309/",
+    "",
+    "link http://127.0.0.1:49309/",
+    "",
+    "link http://127.0.0.1:49309/"
+  ],
+  "normalized": [
+    {
+      "raw": "link http://127.0.0.1:49309/",
+      "role": "link",
+      "name": "http://127.0.0.1:49309/"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "id": "form-landmark",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Contact, form landmark",
+    "Name, edit"
+  ],
+  "normalized": [
+    {
+      "raw": "contact, form landmark",
+      "role": "form",
+      "name": "contact"
+    },
+    {
+      "raw": "name, edit",
+      "role": "textbox",
+      "name": "name"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "id": "checkbox-unchecked",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Accept terms and conditions, checkbox, not checked"
+  ],
+  "normalized": [
+    {
+      "raw": "accept terms and conditions, checkbox, not checked",
+      "role": "checkbox",
+      "name": "accept terms and conditions",
+      "state": [
+        "checked:false"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "id": "search-landmark",
+  "reader": "voiceover",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "search",
+    "Search, edit text"
+  ],
+  "normalized": [
+    {
+      "raw": "search",
+      "name": "search"
+    },
+    {
+      "raw": "search, edit text",
+      "role": "textbox",
+      "name": "search"
+    }
+  ]
+}

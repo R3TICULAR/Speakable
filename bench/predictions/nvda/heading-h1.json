@@ -1,0 +1,19 @@
+{
+  "id": "heading-h1",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Welcome to Speakable, heading level 1"
+  ],
+  "normalized": [
+    {
+      "raw": "welcome to speakable, heading level 1",
+      "role": "heading",
+      "name": "welcome to speakable",
+      "state": [
+        "level:1"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "id": "runtime-accordion",
+  "reader": "voiceover",
+  "mode": "runtime",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "webkit",
+  "rawPhrases": [
+    "",
+    "heading level 3 Section one collapsed button"
+  ],
+  "normalized": [
+    {
+      "raw": "heading level 3 section one collapsed button",
+      "role": "button",
+      "name": "heading level 3 section one",
+      "state": [
+        "expanded:false"
+      ]
+    }
+  ]
+}

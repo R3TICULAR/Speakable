@@ -1,0 +1,89 @@
+name: Benchmark Capture (NVDA)
+
+# Captures real NVDA ground truth on a Windows runner via Playwright + Guidepup,
+# scores Speakable's predictions against it, and publishes the accuracy report
+# plus the drift / correction report as job artifacts.
+#
+# NVDA-on-Windows is the stable automated reader (v2 R4.2). VoiceOver-on-macOS CI
+# is a later staged addition; local VoiceOver capture remains fully supported.
+#
+# Trigger: manual for now (workflow_dispatch). A schedule is added once this is
+# green (v2 Phase 3c); the cadence is decided then.
+
+on:
+  workflow_dispatch:
+    inputs:
+      commit_results:
+        description: 'Commit regenerated ground truth + reports back to a branch'
+        type: boolean
+        default: false
+  # schedule:
+  #   - cron: '0 6 * * 1'   # enabled in Phase 3c once stable; cadence TBD
+
+permissions:
+  contents: read
+
+jobs:
+  capture-nvda:
+    name: Capture NVDA ground truth
+    runs-on: windows-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Speakable (predictions need the built engine)
+        run: npm run build
+
+      - name: Set up Guidepup (portable NVDA)
+        # Installs a Guidepup-compatible portable NVDA to a temp dir, recorded in
+        # the registry. See bench/README.md.
+        run: |
+          npx @guidepup/setup setup
+          npx @guidepup/setup install
+
+      - name: Install Playwright Chromium (NVDA drives Chromium)
+        run: npx playwright install --with-deps chromium
+
+      - name: Generate Speakable predictions
+        run: npx tsx bench/harness/predict.ts
+
+      - name: Capture NVDA ground truth (Playwright-driven)
+        run: npx playwright test -c bench/harness/playwright.config.ts --project=chromium
+
+      - name: Triage the capture (flag contamination)
+        run: npx tsx bench/harness/triage.ts nvda
+
+      - name: Score + generate accuracy report
+        run: npx tsx bench/harness/report.ts
+
+      - name: Generate drift / correction report
+        run: npx tsx bench/harness/drift.ts nvda
+
+      - name: Upload reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: benchmark-nvda-reports
+          path: |
+            bench/results/benchmark-v1.json
+            bench/results/benchmark-v1.md
+            bench/results/drift-v1.json
+            bench/results/drift-v1.md
+          retention-days: 30
+
+      - name: Upload captured ground truth
+        uses: actions/upload-artifact@v4
+        with:
+          name: benchmark-nvda-ground-truth
+          path: bench/ground-truth/nvda/
+          retention-days: 30

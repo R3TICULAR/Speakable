@@ -1,0 +1,16 @@
+{
+  "id": "link-plain",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "View pricing, link"
+  ],
+  "normalized": [
+    {
+      "raw": "view pricing, link",
+      "role": "link",
+      "name": "view pricing"
+    }
+  ]
+}

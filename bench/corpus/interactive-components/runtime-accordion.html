@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>runtime-accordion</title></head>
+<body>
+<h3><button id="h" aria-expanded="false" aria-controls="panel">Section one</button></h3>
+<div id="panel" hidden><p>Panel content.</p></div>
+<div id="s" role="status" aria-live="polite" style="position:absolute;left:-9999px"></div>
+<script>
+var h=document.getElementById('h'),panel=document.getElementById('panel'),s=document.getElementById('s');
+h.addEventListener('click',function(){var o=h.getAttribute('aria-expanded')==='true';h.setAttribute('aria-expanded',String(!o));panel.hidden=o;s.textContent=o?'collapsed':'expanded';});
+</script>
+</body></html>

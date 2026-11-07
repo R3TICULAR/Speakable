@@ -1,0 +1,28 @@
+{
+  "id": "select-single",
+  "reader": "voiceover",
+  "mode": "static",
+  "srVersion": "VoiceOver 0.0.1-VoiceOver4",
+  "osVersion": "macOS 15.6.1",
+  "browserVersion": "webkit",
+  "rawPhrases": [
+    "United States Country collapsed pop up button",
+    "",
+    "United States Country collapsed pop up button",
+    "",
+    "United States Country collapsed pop up button",
+    "",
+    "United States Country collapsed pop up button",
+    ""
+  ],
+  "normalized": [
+    {
+      "raw": "united states country collapsed pop up button",
+      "role": "combobox",
+      "name": "united states country",
+      "state": [
+        "expanded:false"
+      ]
+    }
+  ]
+}

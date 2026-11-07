@@ -1,0 +1,24 @@
+{
+  "id": "empty-heading",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "heading level 2",
+    "After empty heading"
+  ],
+  "normalized": [
+    {
+      "raw": "heading level 2",
+      "role": "heading",
+      "state": [
+        "level:2"
+      ]
+    },
+    {
+      "raw": "after empty heading",
+      "role": "heading",
+      "name": "after empty"
+    }
+  ]
+}

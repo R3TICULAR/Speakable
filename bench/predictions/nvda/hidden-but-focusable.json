@@ -1,0 +1,22 @@
+{
+  "id": "hidden-but-focusable",
+  "reader": "nvda",
+  "mode": "static",
+  "speakableVersion": "1.7.0",
+  "rawPhrases": [
+    "Ghost, button",
+    "Real, button"
+  ],
+  "normalized": [
+    {
+      "raw": "ghost, button",
+      "role": "button",
+      "name": "ghost"
+    },
+    {
+      "raw": "real, button",
+      "role": "button",
+      "name": "real"
+    }
+  ]
+}

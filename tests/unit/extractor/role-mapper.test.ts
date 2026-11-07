@@ -144,10 +144,16 @@ describe('computeRole', () => {
       expect(result.role).toBe('textbox');
     });
 
-    test('input type=number has textbox role', () => {
+    test('input type=number has spinbutton role (per ARIA implicit role)', () => {
       const element = createElement('<input type="number" />');
       const result = computeRole(element);
-      expect(result.role).toBe('textbox');
+      expect(result.role).toBe('spinbutton');
+    });
+
+    test('input type=range has slider role (per ARIA implicit role)', () => {
+      const element = createElement('<input type="range" />');
+      const result = computeRole(element);
+      expect(result.role).toBe('slider');
     });
 
     test('input type=button has button role', () => {
@@ -194,8 +200,20 @@ describe('computeRole', () => {
       expect(result.role).toBe('textbox');
     });
 
-    test('select has listbox role', () => {
+    test('single select has combobox role (per ARIA; VoiceOver "pop up button")', () => {
       const element = createElement('<select><option>Option</option></select>');
+      const result = computeRole(element);
+      expect(result.role).toBe('combobox');
+    });
+
+    test('multiple select has listbox role', () => {
+      const element = createElement('<select multiple><option>Option</option></select>');
+      const result = computeRole(element);
+      expect(result.role).toBe('listbox');
+    });
+
+    test('sized select (size>1) has listbox role', () => {
+      const element = createElement('<select size="4"><option>Option</option></select>');
       const result = computeRole(element);
       expect(result.role).toBe('listbox');
     });
