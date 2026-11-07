@@ -7,6 +7,54 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.8.0] - 2026-11-07
+
+Accuracy pass for the VoiceOver renderer, driven by a new ground-truth benchmark
+that captures real VoiceOver output (via Guidepup) and scores Speakable against
+it. On the benchmarked corpus this raised role+name+state accuracy on
+directly-comparable static cases from ~53% to ~57%, and cut the false-positive
+rate (announcing something VoiceOver does not) from ~6.2% to ~2.4%.
+
+> **Note:** several element types now produce **different (more accurate)
+> VoiceOver output**. If you assert on exact VoiceOver strings, review the
+> Changed section below. NVDA and JAWS output is unchanged. No exports were
+> removed and no public signatures changed.
+
+### Added
+- New roles in the public `AccessibleRole` type: `switch`, `slider`,
+  `spinbutton`, `tab`, `tablist`, `tabpanel`
+- Implicit set-position (`posinset`/`setsize`) is now computed for grouped
+  children — radios in a group, options in a listbox, tabs in a tablist, and
+  list items — even without author-supplied `aria-posinset`/`aria-setsize`.
+  VoiceOver renders this as "N of M". Author-provided ARIA values are preserved.
+
+### Changed
+- **Role mapping (ARIA-correct):** `<input type="number">` now maps to
+  `spinbutton` (was `textbox`), `<input type="range">` to `slider`, and a
+  single-select `<select>` to `combobox` (was `listbox`); a `multiple`/sized
+  `<select>` remains `listbox`
+- **VoiceOver: native `<select>`** is rendered as a collapsed pop-up button
+  (combobox) with the selected value announced first; its `<option>` children
+  are no longer announced until opened, matching real VoiceOver
+- **VoiceOver: range widgets** lead with their value — e.g. "7 Volume slider"
+  (slider/spinbutton) and "Upload 60% progress indicator" (progressbar/meter)
+- **VoiceOver state wording:** a pressed toggle button and a selected radio are
+  announced as "selected" (not "pressed"/"checked"); a `switch` is announced as
+  "switch" with "on"/"off"; tabs announce position without spoken selection
+  wording. NVDA/JAWS wording is unchanged.
+- **VoiceOver: list items** no longer include the word "item"; they are read as
+  the item text plus set position
+- **VoiceOver: structural containers** (`list`, `status`) with no accessible
+  name no longer emit a standalone entry line, matching VoiceOver's continuous
+  reading (NVDA/JAWS still announce them)
+
+### Fixed
+- A `<label>` associated with a control (via `for` or by wrapping it) is now
+  consumed as that control's accessible name and no longer announced a second
+  time as standalone sibling text
+- VoiceOver renderer type error (`role === 'log'` compared against a role that
+  is not in `AccessibleRole`) that broke the declaration (`.d.ts`) build
+
 ## [1.7.0] - 2026-09-02
 
 ### Added
