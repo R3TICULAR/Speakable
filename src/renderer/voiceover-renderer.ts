@@ -77,16 +77,16 @@ function isValueBeforeRoleWidget(role: AccessibleNode['role']): boolean {
  * Pure structural containers for which VoiceOver's continuous reading cursor
  * emits NO standalone entry announcement — it reads the content and marks only
  * an "end of <container>" boundary on exit. Confirmed against ground truth:
- * a `<ol>`/`<dl>`, a role="status", and a role="log" produce no "list"/"status"
- * entry line in a single VoiceOver pass. We therefore suppress the role-only
- * container line for these in VoiceOver (NVDA/JAWS DO announce them, so this is
- * strictly a VoiceOver-renderer behavior).
+ * a `<ol>`/`<dl>` and a role="status" produce no "list"/"status" entry line in
+ * a single VoiceOver pass. We therefore suppress the role-only container line
+ * for these in VoiceOver (NVDA/JAWS DO announce them, so this is strictly a
+ * VoiceOver-renderer behavior).
  *
  * Scoped deliberately narrow: landmarks (region/navigation/main/etc.) are NOT
  * included — they are navigationally meaningful and announced differently.
  */
 function isSilentContainerVoiceOver(node: AccessibleNode): boolean {
-  if (node.role !== 'list' && node.role !== 'status' && node.role !== 'log') return false;
+  if (node.role !== 'list' && node.role !== 'status') return false;
   // Only suppress when the container itself carries no accessible name; a named
   // container still announces its name.
   if (node.name) return false;
